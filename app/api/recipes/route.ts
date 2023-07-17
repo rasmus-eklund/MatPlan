@@ -8,21 +8,13 @@ import {
 import { FilterParams, SearchRecipeParams } from "@/types";
 import { searchForWorkspaceRoot } from "vite";
 
-type GetParams = {
-  q: string;
-  filter: FilterParams;
-};
-
-export const GET = async (
-  req: NextApiRequest,
-  context: { params: GetParams }
-) => {
+export const GET = async (req: NextApiRequest) => {
   let data;
   const urlParams = new URLSearchParams(req.url!.split("?")[1]);
   const q = urlParams.get("q");
   const filter = urlParams.get("filter");
-  console.log(q, filter);
-  if (!q || !filter) {
+  console.log("wrong very wrong");
+  if (!q || !["name", "ingredients", "instruction"].some((i) => i === filter)) {
     return NextResponse.json(
       {
         message: "missing queries!",
@@ -49,6 +41,5 @@ export const GET = async (
     default:
       break;
   }
-  console.log(data);
   return NextResponse.json(data);
 };
