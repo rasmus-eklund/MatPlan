@@ -26,15 +26,15 @@ export const GET = async (req: NextRequest) => {
   }
   switch (filter) {
     case 'ingredients':
-      data = await getRecipeByIngredient(q);
+      data = await getRecipeByIngredient(q, 'Rasmus');
       break;
 
     case 'name':
-      data = await getRecipeByName(q);
+      data = await getRecipeByName(q, 'Rasmus');
       break;
 
     case 'instruction':
-      data = await getRecipeByInstructions(q);
+      data = await getRecipeByInstructions(q, 'Rasmus');
       break;
 
     default:

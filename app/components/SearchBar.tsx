@@ -2,7 +2,12 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'usehooks-ts';
 import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from '@/types';
-import { searchRecipes, getRecipeById } from '@/client/recipes';
+import {
+  searchRecipes,
+  getRecipeById,
+  addRecipeToMenu,
+  deleteRecipeFromMenu,
+} from '@/client/recipes';
 
 const Recipes = () => {
   const [search, setSearch] = useState('');
@@ -64,6 +69,16 @@ const Recipes = () => {
         </ul>
         {selectedRecipe && (
           <section>
+            <button
+              onClick={() => addRecipeToMenu(selectedRecipe.id, 'Rasmus')}
+            >
+              add
+            </button>
+            <button
+              onClick={() => deleteRecipeFromMenu(selectedRecipe.id, 'Rasmus')}
+            >
+              delete
+            </button>
             <h3>{selectedRecipe.name}</h3>
             <p>{selectedRecipe.portions}</p>
             <ul>

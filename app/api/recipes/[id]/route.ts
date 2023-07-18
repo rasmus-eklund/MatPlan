@@ -10,9 +10,7 @@ export const GET = async (
   context: { params: GetParams }
 ) => {
   const { id } = context.params;
-  console.log(id);
-  const recipe = await getRecipeById(id);
-  console.log(recipe);
+  const recipe = await getRecipeById(id, 'Rasmus');
 
   return NextResponse.json(recipe, {
     status: 200,

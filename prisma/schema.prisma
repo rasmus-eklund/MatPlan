@@ -73,7 +73,8 @@ model recipe_ingredient {
 }
 
 model menu {
-  recipeId String @id @unique
+  id       String @id @default(uuid())
+  recipeId String @unique
   userId   String
   recipe   recipe @relation(fields: [recipeId], references: [id])
   user     user   @relation(fields: [userId], references: [id])
