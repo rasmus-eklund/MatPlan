@@ -1,23 +1,21 @@
-import { NextResponse, NextRequest } from "next/server";
-import { NextApiRequest } from "next";
+import { NextResponse, NextRequest } from 'next/server';
+import { NextApiRequest } from 'next';
 import {
   getRecipeByIngredient,
   getRecipeByInstructions,
   getRecipeByName,
-} from "@/app/recipes/prisma";
-import { FilterParams, SearchRecipeParams } from "@/types";
-import { searchForWorkspaceRoot } from "vite";
+} from '@/app/recipes/prisma';
 
 export const GET = async (req: NextApiRequest) => {
   let data;
-  const urlParams = new URLSearchParams(req.url!.split("?")[1]);
-  const q = urlParams.get("q");
-  const filter = urlParams.get("filter");
-  console.log("wrong very wrong");
-  if (!q || !["name", "ingredients", "instruction"].some((i) => i === filter)) {
+  const urlParams = new URLSearchParams(req.url!.split('?')[1]);
+  const q = urlParams.get('q');
+  const filter = urlParams.get('filter');
+  console.log('wrong very wrong');
+  if (!q || !['name', 'ingredients', 'instruction'].some(i => i === filter)) {
     return NextResponse.json(
       {
-        message: "missing queries!",
+        message: 'missing queries!',
       },
       {
         status: 400,
@@ -25,16 +23,16 @@ export const GET = async (req: NextApiRequest) => {
     );
   }
   switch (filter) {
-    case "ingredients":
+    case 'ingredients':
       data = await getRecipeByIngredient(q);
 
       break;
 
-    case "name":
+    case 'name':
       data = await getRecipeByName(q);
       break;
 
-    case "instruction":
+    case 'instruction':
       data = await getRecipeByInstructions(q);
       break;
 
