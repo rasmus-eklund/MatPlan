@@ -6,6 +6,23 @@ export type Recipe = {
   userId: string;
 };
 
+export type Recipe_ingredient = {
+  id: string;
+  recipeId: string;
+  quantity: number;
+  unit: string;
+  ingredientName: string;
+};
+
+export type FullRecipe = {
+  id: string;
+  instruction: string;
+  name: string;
+  portions: number;
+  userId: string;
+  public_recipe_ingredient: Recipe_ingredient[];
+};
+
 export type FilterParams = "name" | "ingredients" | "instruction";
 export type SearchRecipeParams = {
   filter: FilterParams;

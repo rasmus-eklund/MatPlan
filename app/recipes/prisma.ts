@@ -13,7 +13,16 @@ export const getRecipeByInstructions = async (search: string) =>
   });
 
 export const getRecipeByIngredient = async (search: string) =>
-  await prisma.public_recipe_ingredient.findMany({
-    where: { ingredientName: { contains: search } },
-    include: { public_recipe: { select: { name: true } } },
+  await prisma.public_recipe.findMany({
+    where: {
+      public_recipe_ingredient: {
+        some: { ingredientName: { contains: search } },
+      },
+    },
+  });
+
+export const getRecipeById = async (id: string) =>
+  await prisma.public_recipe.findUnique({
+    where: { id: id },
+    include: { public_recipe_ingredient: true },
   });

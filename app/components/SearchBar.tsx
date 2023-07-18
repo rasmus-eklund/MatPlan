@@ -1,34 +1,35 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
-import { FilterParams, Recipe, SearchRecipeParams } from "@/types";
-import { searchRecipes } from "@/client/recipes";
+import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from "@/types";
+import { searchRecipes, getRecipeById } from "@/client/recipes";
 
 const Recipes = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<FilterParams>("name");
   const [recipeResult, setRecipeResult] = useState<Recipe[]>([]);
+  const [selectedRecipe, setSelectedRecipe] = useState<FullRecipe | null>(null);
   const debouncedSearch = useDebounce(search, 500);
 
   const handleSearch = async ({ filter, search }: SearchRecipeParams) => {
     const recipes = await searchRecipes({ filter, search });
     setRecipeResult(recipes);
-    return recipes;
+  };
+
+  const handleShowRecipe = async (id: string) => {
+    const recipe = await getRecipeById(id);
+    setSelectedRecipe(recipe);
   };
 
   useEffect(() => {
-    handleSearch({ filter, search: debouncedSearch }).then(
-      (recipesFromServer) => {
-        console.log(recipesFromServer);
-        console.log({ search, filter });
-      }
-    );
-  }, [debouncedSearch]);
+    handleSearch({ filter, search: debouncedSearch }).then((r) => {
+      console.log(r);
+    });
+  }, [debouncedSearch, filter]);
   return (
     <>
       <main className="recipe">
         <h1 className="recipe__title">Lägg till maträtter</h1>
-        {/* {JSON.stringify(recipeResult)} */}
         <form
           className="recipe__form"
           onSubmit={(e) => {
@@ -53,7 +54,28 @@ const Recipes = () => {
             <option value="ingredients">Ingredient</option>
             <option value="instruction">Instruktion</option>
           </select>
-        </form>{" "}
+        </form>
+        <ul>
+          {recipeResult.map((r) => (
+            <li onClick={() => handleShowRecipe(r.id)}>{r.name}</li>
+          ))}
+        </ul>
+        {selectedRecipe && (
+          <section>
+            <h3>{selectedRecipe.name}</h3>
+            <p>{selectedRecipe.portions}</p>
+            <ul>
+              {selectedRecipe.public_recipe_ingredient.map((i) => (
+                <li>
+                  <span>{i.ingredientName}</span>
+                  <span>{i.quantity}</span>
+                  <span>{i.unit}</span>
+                </li>
+              ))}
+            </ul>
+            <p>{selectedRecipe.instruction}</p>
+          </section>
+        )}
       </main>
     </>
   );
