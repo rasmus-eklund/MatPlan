@@ -1,13 +1,12 @@
-import { getRecipeById } from "@/app/api/prisma";
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { getRecipeById } from '@/app/api/prisma';
+import { NextRequest, NextResponse } from 'next/server';
 
 type GetParams = {
   id: string;
 };
 
 export const GET = async (
-  req: NextApiRequest,
+  _req: NextRequest,
   context: { params: GetParams }
 ) => {
   const { id } = context.params;
@@ -17,4 +16,3 @@ export const GET = async (
 
   return NextResponse.json(recipe);
 };
-
