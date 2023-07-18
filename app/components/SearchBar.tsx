@@ -1,12 +1,12 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useDebounce } from "usehooks-ts";
-import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from "@/types";
-import { searchRecipes, getRecipeById } from "@/client/recipes";
+'use client';
+import { useEffect, useState } from 'react';
+import { useDebounce } from 'usehooks-ts';
+import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from '@/types';
+import { searchRecipes, getRecipeById } from '@/client/recipes';
 
 const Recipes = () => {
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState<FilterParams>("name");
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState<FilterParams>('name');
   const [recipeResult, setRecipeResult] = useState<Recipe[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<FullRecipe | null>(null);
   const debouncedSearch = useDebounce(search, 500);
@@ -22,7 +22,7 @@ const Recipes = () => {
   };
 
   useEffect(() => {
-    handleSearch({ filter, search: debouncedSearch }).then((r) => {
+    handleSearch({ filter, search: debouncedSearch }).then(r => {
       console.log(r);
     });
   }, [debouncedSearch, filter]);
@@ -32,7 +32,7 @@ const Recipes = () => {
         <h1 className="recipe__title">Lägg till maträtter</h1>
         <form
           className="recipe__form"
-          onSubmit={(e) => {
+          onSubmit={e => {
             e.preventDefault();
           }}
         >
@@ -41,14 +41,14 @@ const Recipes = () => {
             id="search"
             type="text"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={e => setSearch(e.target.value)}
           />
           <label htmlFor="filter">Filter</label>
           <select
             name="filter"
             id="filter"
             value={filter}
-            onChange={(e) => setFilter(e.target.value as FilterParams)}
+            onChange={e => setFilter(e.target.value as FilterParams)}
           >
             <option value="name">Namn</option>
             <option value="ingredients">Ingredient</option>
@@ -56,8 +56,10 @@ const Recipes = () => {
           </select>
         </form>
         <ul>
-          {recipeResult.map((r) => (
-            <li onClick={() => handleShowRecipe(r.id)}>{r.name}</li>
+          {recipeResult.map(r => (
+            <li key={r.id} onClick={() => handleShowRecipe(r.id)}>
+              {r.name}
+            </li>
           ))}
         </ul>
         {selectedRecipe && (
@@ -65,8 +67,8 @@ const Recipes = () => {
             <h3>{selectedRecipe.name}</h3>
             <p>{selectedRecipe.portions}</p>
             <ul>
-              {selectedRecipe.public_recipe_ingredient.map((i) => (
-                <li>
+              {selectedRecipe.recipe_ingredient.map(i => (
+                <li key={i.id}>
                   <span>{i.ingredientName}</span>
                   <span>{i.quantity}</span>
                   <span>{i.unit}</span>
@@ -81,29 +83,3 @@ const Recipes = () => {
   );
 };
 export default Recipes;
-
-/* 
-    
-      <ul className="recipe__list">
-        {query.status === 'loading' && <p>Loading...</p>}
-        {query.status === 'error' && <p>Error...</p>}
-        {query.status === 'success' &&
-          query.data.map(recipe => (
-            <ItemRecipe
-              key={recipe.id}
-              selected={recipe.id === display?.id}
-              recipe={recipe}
-              callback={handleSelected}
-            />
-          ))}
-      </ul>
-      {display && (
-        <section>
-          <DisplayRecipe recipe={display} />
-          <span>
-            <button>Edit</button>
-            <button onClick={() => setDisplay(null)}>x</button>
-          </span>
-        </section>
-      )}
-*/

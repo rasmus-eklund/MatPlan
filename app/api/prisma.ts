@@ -1,28 +1,28 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 export const getRecipeByName = async (search: string) =>
-  await prisma.public_recipe.findMany({
+  await prisma.recipe.findMany({
     where: { name: { contains: search } },
   });
 
 export const getRecipeByInstructions = async (search: string) =>
-  await prisma.public_recipe.findMany({
+  await prisma.recipe.findMany({
     where: { instruction: { contains: search } },
   });
 
 export const getRecipeByIngredient = async (search: string) =>
-  await prisma.public_recipe.findMany({
+  await prisma.recipe.findMany({
     where: {
-      public_recipe_ingredient: {
+      recipe_ingredient: {
         some: { ingredientName: { contains: search } },
       },
     },
   });
 
 export const getRecipeById = async (id: string) =>
-  await prisma.public_recipe.findUnique({
+  await prisma.recipe.findUnique({
     where: { id: id },
-    include: { public_recipe_ingredient: true },
+    include: { recipe_ingredient: true },
   });

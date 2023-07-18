@@ -3,90 +3,89 @@ generator client {
 }
 
 datasource db {
-  provider             = "postgresql"
-  url                  = env("DATABASE_URL")
-  
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model public_category {
-  name               String
-  id                 Int                  @id
-  public_ingredient  public_ingredient[]
-  public_subcategory public_subcategory[]
+model user {
+  id               String             @id
+  recipe           recipe[]
+  menu             menu[]
+  extra_ingredient extra_ingredient[]
 
-  @@map("public.category")
+  @@map("public.user")
 }
 
-model public_extra_ingredient {
+model recipe {
+  id                String              @id @default(uuid())
+  name              String
+  portions          Int
+  instruction       String
+  user              user                @relation(fields: [userId], references: [id])
   userId            String
-  name              String            @id
-  public_ingredient public_ingredient @relation(fields: [name], references: [name])
-  public_user       public_user       @relation(fields: [userId], references: [id])
-
-  @@map("public.extra_ingredient")
-}
-
-model public_ingredient {
-  name                     String                     @id
-  categoryId               Int
-  subcategoryId            Int
-  public_extra_ingredient  public_extra_ingredient?
-  public_category          public_category            @relation(fields: [categoryId], references: [id])
-  public_subcategory       public_subcategory         @relation(fields: [subcategoryId], references: [id])
-  public_recipe_ingredient public_recipe_ingredient[]
-
-  @@map("public.ingredient")
-}
-
-model public_menu {
-  recipeId      String        @id @unique
-  userId        String
-  public_recipe public_recipe @relation(fields: [recipeId], references: [id])
-  public_user   public_user   @relation(fields: [userId], references: [id])
-
-  @@map("public.menu")
-}
-
-model public_recipe {
-  id                       String                     @id
-  name                     String
-  portions                 Int
-  instruction              String
-  userId                   String
-  public_menu              public_menu?
-  public_user              public_user                @relation(fields: [userId], references: [id])
-  public_recipe_ingredient public_recipe_ingredient[]
+  recipe_ingredient recipe_ingredient[]
+  menu              menu?
 
   @@map("public.recipe")
 }
 
-model public_recipe_ingredient {
-  recipeId          String
-  quantity          Int?
-  unit              String?
-  ingredientName    String
-  id                String            @id
-  public_ingredient public_ingredient @relation(fields: [ingredientName], references: [name])
-  public_recipe     public_recipe     @relation(fields: [recipeId], references: [id])
+model category {
+  id          Int           @id
+  name        String
+  ingredient  ingredient[]
+  subcategory subcategory[]
 
-  @@map("public.recipe_ingredient")
+  @@map("public.category")
 }
 
-model public_subcategory {
-  name              String
-  id                Int                 @id
-  categoryId        Int
-  public_ingredient public_ingredient[]
-  public_category   public_category     @relation(fields: [categoryId], references: [id])
+model subcategory {
+  id         Int          @id
+  name       String
+  categoryId Int
+  ingredient ingredient[]
+  category   category     @relation(fields: [categoryId], references: [id])
 
   @@map("public.subcategory")
 }
 
-model public_user {
-  id                      String                    @id
-  public_extra_ingredient public_extra_ingredient[]
-  public_menu             public_menu[]
-  public_recipe           public_recipe[]
+model ingredient {
+  name              String              @id
+  categoryId        Int
+  subcategoryId     Int
+  extra_ingredient  extra_ingredient?
+  category          category            @relation(fields: [categoryId], references: [id])
+  subcategory       subcategory         @relation(fields: [subcategoryId], references: [id])
+  recipe_ingredient recipe_ingredient[]
 
-  @@map("public.user")
+  @@map("public.ingredient")
+}
+
+model recipe_ingredient {
+  id             String     @id @default(uuid())
+  recipeId       String
+  quantity       Decimal?   @db.Decimal(10, 2)
+  unit           String?
+  ingredientName String
+  ingredient     ingredient @relation(fields: [ingredientName], references: [name])
+  recipe         recipe     @relation(fields: [recipeId], references: [id])
+
+  @@map("public.recipe_ingredient")
+}
+
+model menu {
+  recipeId String @id @unique
+  userId   String
+  recipe   recipe @relation(fields: [recipeId], references: [id])
+  user     user   @relation(fields: [userId], references: [id])
+
+  @@map("public.menu")
+}
+
+model extra_ingredient {
+  name       String     @id
+  userId     String
+  ingredient ingredient @relation(fields: [name], references: [name])
+  user       user       @relation(fields: [userId], references: [id])
+
+  @@map("public.extra_ingredient")
 }

@@ -4,7 +4,7 @@ import {
   getRecipeByIngredient,
   getRecipeByInstructions,
   getRecipeByName,
-} from "@/app/recipes/prisma";
+} from "@/app/api/prisma";
 
 export const GET = async (req: NextApiRequest) => {
   let data;

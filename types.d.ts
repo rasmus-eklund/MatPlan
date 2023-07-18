@@ -20,7 +20,7 @@ export type FullRecipe = {
   name: string;
   portions: number;
   userId: string;
-  public_recipe_ingredient: Recipe_ingredient[];
+  recipe_ingredient: Recipe_ingredient[];
 };
 
 export type FilterParams = "name" | "ingredients" | "instruction";
