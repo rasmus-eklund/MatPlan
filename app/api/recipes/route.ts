@@ -40,5 +40,12 @@ export const GET = async (req: NextRequest) => {
     default:
       break;
   }
-  return NextResponse.json(data);
+  return NextResponse.json(data, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
+  });
 };
