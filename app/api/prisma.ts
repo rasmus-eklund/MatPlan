@@ -37,7 +37,7 @@ export const removeRecipeFromMenu = async (id: string, userId: string) => {
   await prisma.menu.delete({ where: { recipeId: id, userId } });
 };
 
-export const getMenuItems = async (userId: string) =>
-  await prisma.menu.findMany({ where: { userId } });
+// export const getMenuItems = async (userId: string) =>
+//   await prisma.menu.findMany({ where: { userId } });
 
 // sasd
