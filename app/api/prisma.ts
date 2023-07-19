@@ -36,4 +36,8 @@ export const addRecipeToMenu = async (id: string, userId: string) => {
 export const removeRecipeFromMenu = async (id: string, userId: string) => {
   await prisma.menu.delete({ where: { recipeId: id, userId } });
 };
+
+export const getMenuItems = async (userId: string) =>
+  await prisma.menu.findMany({ where: { userId } });
+
 // sasd
