@@ -14,23 +14,15 @@ const ShoppingList = async () => {
     getShoppingList('Rasmus').then(i => setIngredients(i));
   }, []);
 
-  // useEffect(() => {
-  //   if(filter.group){
-  //     ingredients.reduce((acc, cur) => {
-  //       acc[] = {} 
-  //     }, {})
-  //   }
-  // }, [filter]);
-
-  const storeOrder = await getStoreOrder('Rasmus');
-  const OrderId = storeOrder.map(s => s.id);
-  const sortedIngredient = ingredients.sort(
-    (a, b) => OrderId.indexOf(a.subCategory) - OrderId.indexOf(b.subCategory)
-  );
+  // const storeOrder = await getStoreOrder('Rasmus');
+  // const OrderId = storeOrder.map(s => s.id);
+  // const sortedIngredient = ingredients.sort(
+  //   (a, b) => OrderId.indexOf(a.subCategory) - OrderId.indexOf(b.subCategory)
+  // );
 
   return (
     <ul>
-      {sortedIngredient.map(i => (
+      {ingredients.map(i => (
         <li key={i.id}>{i.name}</li>
       ))}
     </ul>
