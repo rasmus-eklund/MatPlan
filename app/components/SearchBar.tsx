@@ -2,12 +2,13 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'usehooks-ts';
 import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from '@/types';
+
 import {
-  searchRecipes,
   getRecipeById,
-  addRecipeToMenu,
-  deleteRecipeFromMenu,
-} from '@/client/recipes';
+  getRecipeByIngredient,
+  getRecipeByInstructions,
+  getRecipeByName,
+} from '../api/prisma';
 
 const Recipes = () => {
   const [search, setSearch] = useState('');
@@ -17,12 +18,31 @@ const Recipes = () => {
   const debouncedSearch = useDebounce(search, 500);
 
   const handleSearch = async ({ filter, search }: SearchRecipeParams) => {
-    const recipes = await searchRecipes({ filter, search });
-    setRecipeResult(recipes);
+    let data: Recipe[];
+    switch (filter) {
+      case 'ingredients':
+        data = await getRecipeByIngredient(search, 'Rasmus');
+        setRecipeResult(data);
+        break;
+
+      case 'name':
+        data = await getRecipeByName(search, 'Rasmus');
+        setRecipeResult(data);
+        break;
+
+      case 'instruction':
+        data = await getRecipeByInstructions(search, 'Rasmus');
+        setRecipeResult(data);
+        break;
+
+      default:
+        break;
+    }
   };
 
   const handleShowRecipe = async (id: string) => {
-    const recipe = await getRecipeById(id);
+    const res = await getRecipeById(id, 'Rasmus');
+    const recipe: FullRecipe = JSON.parse(res);
     setSelectedRecipe(recipe);
   };
 
@@ -70,12 +90,12 @@ const Recipes = () => {
         {selectedRecipe && (
           <section>
             <button
-              onClick={() => addRecipeToMenu(selectedRecipe.id, 'Rasmus')}
+            // onClick={() => addRecipeToMenu(selectedRecipe.id, 'Rasmus')}
             >
               add
             </button>
             <button
-              onClick={() => deleteRecipeFromMenu(selectedRecipe.id, 'Rasmus')}
+            // onClick={() => deleteRecipeFromMenu(selectedRecipe.id, 'Rasmus')}
             >
               delete
             </button>

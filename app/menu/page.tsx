@@ -1,5 +1,5 @@
 'use client';
-import { getMenuItems } from '../api/prismaServer';
+import { getMenuItems } from '../api/prisma';
 import { Recipe, MenuItem } from '@/types';
 import React, { useEffect, useState } from 'react';
 

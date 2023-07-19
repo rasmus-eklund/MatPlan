@@ -1,7 +1,6 @@
-// import { PrismaClient } from '@prisma/client';
-import { prisma } from "./db";
-
-// const prisma = new PrismaClient();
+'use server';
+import { FullRecipe } from '@/types';
+import { prisma } from './db';
 
 export const getRecipeByName = async (search: string, userId: string) =>
   await prisma.recipe.findMany({
@@ -23,11 +22,13 @@ export const getRecipeByIngredient = async (search: string, userId: string) =>
     },
   });
 
-export const getRecipeById = async (id: string, userId: string) =>
-  await prisma.recipe.findUnique({
+export const getRecipeById = async (id: string, userId: string) => {
+  const data = await prisma.recipe.findUnique({
     where: { id: id, userId },
     include: { recipe_ingredient: true },
   });
+  return JSON.stringify(data);
+};
 
 export const addRecipeToMenu = async (id: string, userId: string) => {
   await prisma.menu.create({ data: { recipeId: id, userId } });
@@ -37,7 +38,5 @@ export const removeRecipeFromMenu = async (id: string, userId: string) => {
   await prisma.menu.delete({ where: { recipeId: id, userId } });
 };
 
-// export const getMenuItems = async (userId: string) =>
-//   await prisma.menu.findMany({ where: { userId } });
-
-// sasd
+export const getMenuItems = async (userId: string) =>
+  await prisma.menu.findMany({ where: { userId } });
