@@ -1,18 +1,20 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { useDebounce } from 'usehooks-ts';
-import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from '@/types';
+"use client";
+import { useEffect, useState } from "react";
+import { useDebounce } from "usehooks-ts";
+import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from "@/types";
 
 import {
+  addRecipeToMenu,
   getRecipeById,
   getRecipeByIngredient,
   getRecipeByInstructions,
   getRecipeByName,
-} from '../api/prisma';
+  removeRecipeFromMenu,
+} from "../db/prisma";
 
 const Recipes = () => {
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState<FilterParams>('name');
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState<FilterParams>("name");
   const [recipeResult, setRecipeResult] = useState<Recipe[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<FullRecipe | null>(null);
   const debouncedSearch = useDebounce(search, 500);
@@ -20,18 +22,18 @@ const Recipes = () => {
   const handleSearch = async ({ filter, search }: SearchRecipeParams) => {
     let data: Recipe[];
     switch (filter) {
-      case 'ingredients':
-        data = await getRecipeByIngredient(search, 'Rasmus');
+      case "ingredients":
+        data = await getRecipeByIngredient(search, "Rasmus");
         setRecipeResult(data);
         break;
 
-      case 'name':
-        data = await getRecipeByName(search, 'Rasmus');
+      case "name":
+        data = await getRecipeByName(search, "Rasmus");
         setRecipeResult(data);
         break;
 
-      case 'instruction':
-        data = await getRecipeByInstructions(search, 'Rasmus');
+      case "instruction":
+        data = await getRecipeByInstructions(search, "Rasmus");
         setRecipeResult(data);
         break;
 
@@ -41,13 +43,13 @@ const Recipes = () => {
   };
 
   const handleShowRecipe = async (id: string) => {
-    const res = await getRecipeById(id, 'Rasmus');
+    const res = await getRecipeById(id, "Rasmus");
     const recipe: FullRecipe = JSON.parse(res);
     setSelectedRecipe(recipe);
   };
 
   useEffect(() => {
-    handleSearch({ filter, search: debouncedSearch }).then(r => {
+    handleSearch({ filter, search: debouncedSearch }).then((r) => {
       console.log(r);
     });
   }, [debouncedSearch, filter]);
@@ -57,7 +59,7 @@ const Recipes = () => {
         <h1 className="recipe__title">Lägg till maträtter</h1>
         <form
           className="recipe__form"
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
           }}
         >
@@ -66,14 +68,14 @@ const Recipes = () => {
             id="search"
             type="text"
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <label htmlFor="filter">Filter</label>
           <select
             name="filter"
             id="filter"
             value={filter}
-            onChange={e => setFilter(e.target.value as FilterParams)}
+            onChange={(e) => setFilter(e.target.value as FilterParams)}
           >
             <option value="name">Namn</option>
             <option value="ingredients">Ingredient</option>
@@ -81,7 +83,7 @@ const Recipes = () => {
           </select>
         </form>
         <ul>
-          {recipeResult.map(r => (
+          {recipeResult.map((r) => (
             <li key={r.id} onClick={() => handleShowRecipe(r.id)}>
               {r.name}
             </li>
@@ -90,19 +92,19 @@ const Recipes = () => {
         {selectedRecipe && (
           <section>
             <button
-            // onClick={() => addRecipeToMenu(selectedRecipe.id, 'Rasmus')}
+              onClick={() => addRecipeToMenu(selectedRecipe.id, "Rasmus")}
             >
               add
             </button>
             <button
-            // onClick={() => deleteRecipeFromMenu(selectedRecipe.id, 'Rasmus')}
+              onClick={() => removeRecipeFromMenu(selectedRecipe.id, "Rasmus")}
             >
               delete
             </button>
             <h3>{selectedRecipe.name}</h3>
             <p>{selectedRecipe.portions}</p>
             <ul>
-              {selectedRecipe.recipe_ingredient.map(i => (
+              {selectedRecipe.recipe_ingredient.map((i) => (
                 <li key={i.id}>
                   <span>{i.ingredientName}</span>
                   <span>{i.quantity}</span>

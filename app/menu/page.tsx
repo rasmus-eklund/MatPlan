@@ -1,17 +1,24 @@
-'use client';
-import { getMenuItems } from '../api/prisma';
-import { Recipe, MenuItem } from '@/types';
-import React, { useEffect, useState } from 'react';
+"use client";
+import { getMenuItems } from "../db/prisma";
+import { Recipe, MenuItem as MenuItemType } from "@/types";
+import React, { useEffect, useState } from "react";
+import MenuItem from "./MenuItem";
 
 type Props = {};
 
 const page = (props: Props) => {
-  const [menu, setMenu] = useState<MenuItem[]>([]);
+  const [menu, setMenu] = useState<MenuItemType[]>([]);
 
   useEffect(() => {
-    getMenuItems('Rasmus').then(res => console.log(res));
+    getMenuItems("Rasmus").then((data) => setMenu(data));
   }, []);
-  return;
+  return (
+    <ul>
+      {menu.map((r) => (
+        <MenuItem recipe={r.recipe} key={r.id} />
+      ))}
+    </ul>
+  );
 };
 
 export default page;

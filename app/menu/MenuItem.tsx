@@ -1,7 +1,7 @@
 import { Recipe } from "@/types";
 import React from "react";
 
-const MenuItem = (recipe: Recipe) => {
+const MenuItem = ({ recipe }: { recipe: Recipe }) => {
   return (
     <li>
       <p>{recipe.name}</p>
