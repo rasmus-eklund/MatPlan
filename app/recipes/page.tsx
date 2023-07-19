@@ -1,5 +1,5 @@
 import React from "react";
-import Recipes from "../components/SearchBar";
+import Recipes from "./SearchBar";
 
 type Props = {};
 

@@ -50,7 +50,6 @@ const Recipes = () => {
 
   useEffect(() => {
     handleSearch({ filter, search: debouncedSearch }).then((r) => {
-      console.log(r);
     });
   }, [debouncedSearch, filter]);
   return (

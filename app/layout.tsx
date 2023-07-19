@@ -1,4 +1,5 @@
 import ProvidersWrapper from './ProvidersWrapper';
+import Navbar from './components/Navbar';
 
 export const metadata = {
   title: 'Next.js',
@@ -13,6 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+      <Navbar />
         <ProvidersWrapper>
           {children}
           </ProvidersWrapper>
