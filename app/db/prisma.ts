@@ -1,5 +1,5 @@
-"use server";
-import { prisma } from "./db";
+'use server';
+import { prisma } from './db';
 
 export const getRecipeByName = async (search: string, userId: string) =>
   await prisma.recipe.findMany({
@@ -40,8 +40,8 @@ export const removeRecipeFromMenu = async (id: string, userId: string) => {
 export const getMenuItems = async (userId: string) =>
   await prisma.menu.findMany({ where: { userId }, include: { recipe: true } });
 
-export const getShoppingList = async (userId: string) =>
-  prisma.menu.findMany({
+export const getShoppingList = async (userId: string) => {
+  const queryRes = await prisma.menu.findMany({
     where: { userId },
     include: {
       recipe: {
@@ -53,6 +53,17 @@ export const getShoppingList = async (userId: string) =>
       },
     },
   });
+  return queryRes.flatMap(r =>
+    r.recipe.recipe_ingredient.map(i => ({
+      name: i.ingredientName,
+      quantity: i.quantity,
+      unit: i.unit,
+      subCategory: i.ingredient.subcategoryId,
+      id: i.id,
+      recipe: r.recipe.name,
+    }))
+  );
+};
 
 export const getStoreOrder = async (userId: string) =>
   await prisma.subcategory.findMany();

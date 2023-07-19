@@ -23,7 +23,7 @@ export type FullRecipe = {
   recipe_ingredient: Recipe_ingredient[];
 };
 
-export type FilterParams = "name" | "ingredients" | "instruction";
+export type FilterParams = 'name' | 'ingredients' | 'instruction';
 export type SearchRecipeParams = {
   filter: FilterParams;
   search: string;
@@ -34,4 +34,13 @@ export type MenuItem = {
   recipe: Recipe;
   recipeId: string;
   userId: string;
+};
+
+export type ShoppingListType = {
+  name: string;
+  quantity: Decimal | null;
+  unit: string | null;
+  subCategory: number;
+  id: string;
+  recipe: string;
 };
