@@ -16,7 +16,7 @@ const Navbar = (props: Props) => {
         <Link href={'/'}>
           <li>Varor</li>
         </Link>
-        <Link href={'/'}>
+        <Link href={'/shoppingList'}>
           <li>Inköpslista</li>
         </Link>
         <Link href={'/'}>
