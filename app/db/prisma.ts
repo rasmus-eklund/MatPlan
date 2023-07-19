@@ -1,5 +1,5 @@
-'use server';
-import { prisma } from './db';
+"use server";
+import { prisma } from "./db";
 
 export const getRecipeByName = async (search: string, userId: string) =>
   await prisma.recipe.findMany({
@@ -53,3 +53,6 @@ export const getShoppingList = async (userId: string) =>
       },
     },
   });
+
+export const getStoreOrder = async (userId: string) =>
+  await prisma.subcategory.findMany();
