@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getShoppingList, getStoreOrder } from '../db/prisma';
 import { ShoppingListType } from '@/types';
 
-const ShoppingList = async () => {
+const ShoppingList = () => {
   const [ingredients, setIngredients] = useState<ShoppingListType[]>([]);
   const [sortedIngredients, setSortedIngredients] = useState<
     ShoppingListType[]
