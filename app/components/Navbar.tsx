@@ -18,27 +18,30 @@ const Navbar = (props: Props) => {
   
   return (
     <>
-   <h1 data-value='RECIPE JAR' className="bg-black text-white p-4 text-5xl font-mono text-center">RECIPE JAR</h1>
-    <nav>
-      <ul className='flex flex-row justify-around'>
-        <Link href={'/menu'}>
-          <li className='font-bold m-4 '>Meny</li>
-        </Link>
-        <Link href={'/recipes'}>
-          <li className='font-bold m-4'>Maträtter</li>
-        </Link>
-        <Link href={'/ingredients'}>
-          <li className='font-bold m-4'>Varor</li>
-        </Link>
-        <Link href={'/shoppingList'}>
-          <li className='font-bold m-4'>Inköpslista</li>
-        </Link>
-        <Link href={'/'}>
-          <li className='font-bold m-4'>Butiker</li>
-        </Link>
-      </ul>
-    </nav></>
+      <h1 data-value='RECIPE JAR' className="bg-black text-white font-mono text-center w-full py-4">
+        RECIPE JAR
+      </h1>
+      <nav>
+        <ul className='flex flex-row m-0 justify-around'>
+          <Link href={'/menu'}>
+            <li className='font-bold py-2 underline'>Meny</li>
+          </Link>
+          <Link href={'/recipes'}>
+            <li className='font-bold py-2 underline'>Maträtter</li>
+          </Link>
+          <Link href={'/ingredients'}>
+            <li className='font-bold py-2 underline'>Varor</li>
+          </Link>
+          <Link href={'/shoppingList'}>
+            <li className='font-bold py-2 underline'>Inköpslista</li>
+          </Link>
+          <Link href={'/'}>
+            <li className='font-bold py-2 underline'>Butiker</li>
+          </Link>
+        </ul>
+      </nav>
+    </>
   );
 };
 
-export default Navbar;
+export default Navbar
