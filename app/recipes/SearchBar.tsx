@@ -49,8 +49,7 @@ const Recipes = () => {
   };
 
   useEffect(() => {
-    handleSearch({ filter, search: debouncedSearch }).then((r) => {
-    });
+    handleSearch({ filter, search: debouncedSearch }).then((r) => {});
   }, [debouncedSearch, filter]);
   return (
     <>
@@ -100,18 +99,21 @@ const Recipes = () => {
             >
               delete
             </button>
-            <h3>{selectedRecipe.name}</h3>
-            <p>{selectedRecipe.portions}</p>
-            <ul>
-              {selectedRecipe.recipe_ingredient.map((i) => (
-                <li key={i.id}>
-                  <span>{i.ingredientName}</span>
-                  <span>{i.quantity}</span>
-                  <span>{i.unit}</span>
-                </li>
-              ))}
-            </ul>
-            <p>{selectedRecipe.instruction}</p>
+            <form>
+              <h3>{selectedRecipe.name}</h3>
+              <p>{selectedRecipe.portions}</p>
+              <ul>
+                {selectedRecipe.recipe_ingredient.map((i) => (
+                  <li key={i.id}>
+                    <span>{i.ingredientName}</span>
+                    <span>{i.quantity}</span>
+                    <span>{i.unit}</span>
+                  </li>
+                ))}
+              </ul>
+              <p>{selectedRecipe.instruction}</p>
+              <button>Edit</button>
+            </form>
           </section>
         )}
       </main>
