@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import SearchIngredients from '../components/SearchIngredient';
 import { getExtraIngredients, upsertIngredient } from '../db/prisma';
 import { ExtraIngredient } from '@/types';
+import Ingredient from './Ingredient';
 
 const Ingredients = () => {
   const [ingredients, setIngredients] = useState<ExtraIngredient[]>();
@@ -18,6 +19,7 @@ const Ingredients = () => {
       userId: 'Rasmus',
     };
     await upsertIngredient(ingredient);
+    await getExtraIngredients().then(ings => setIngredients(ings));
   };
 
   return (
@@ -25,7 +27,7 @@ const Ingredients = () => {
       <SearchIngredients callback={addIngredient} />
       <ul>
         {ingredients?.map(i => (
-          <li key={i.name + '_extra'}>{i.name}</li>
+          <Ingredient ingredient={i} key={i.name + '_extra'} />
         ))}
       </ul>
     </>
