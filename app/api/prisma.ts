@@ -79,7 +79,6 @@ export const updateIngredient = async (ingredient: Recipe_ingredient) => {
   await prisma.recipe_ingredient.upsert({
     where: { id: ingredient.id },
     update: {
-      ingredientName: ingredient.ingredientName,
       quantity: ingredient.quantity,
       unit: ingredient.unit,
     },
