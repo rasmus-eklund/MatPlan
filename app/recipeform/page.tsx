@@ -1,49 +1,8 @@
-"use client";
-import { FullRecipe, Recipe_ingredient } from "@/types";
-import React, { useState } from "react";
-import { updateIngredient, updateRecipe } from "../api/prisma";
-
-const IngredientForm = ({ ingredient }: { ingredient: Recipe_ingredient }) => {
-  const [ingName, setIngname] = useState<string>(ingredient.ingredientName);
-  const [quantity, setQuantity] = useState<number>(ingredient.quantity);
-  const [unit, setUnit] = useState<string>(ingredient.unit);
-
-  const updatedIngredient: Recipe_ingredient = {
-    id: ingredient.id,
-    ingredientName: ingName,
-    quantity: quantity,
-    unit: unit,
-    recipeId: ingredient.recipeId,
-  };
-
-  return (
-    <>
-      <div>
-        <label>Ingredient Name:</label>
-        <input
-          type="text"
-          value={ingName}
-          onChange={(e) => setIngname(e.target.value)}
-        />
-        <label>Quantity:</label>
-        <input
-          type="number"
-          value={quantity}
-          onChange={(e) => setQuantity(parseInt(e.target.value))}
-        />
-        <label>Unit:</label>
-        <input
-          type="text"
-          value={unit}
-          onChange={(e) => setUnit(e.target.value)}
-        />
-        <button onClick={() => updateIngredient(updatedIngredient)}>
-          Update
-        </button>
-      </div>
-    </>
-  );
-};
+'use client';
+import { FullRecipe } from '@/types';
+import React, { useState } from 'react';
+import { updateRecipe } from '../api/prisma';
+import IngredientForm from './IngredientForm';
 
 const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
   const [recipeName, setRecipeName] = useState<string>(recipe.name);
@@ -67,17 +26,17 @@ const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
       <input
         type="text"
         value={recipeName}
-        onChange={(e) => setRecipeName(e.target.value)}
+        onChange={e => setRecipeName(e.target.value)}
       />
       <label>Portions:</label>
       <input
         type="number"
         value={recipePortions}
-        onChange={(e) => setRecipePortions(parseInt(e.target.value))}
+        onChange={e => setRecipePortions(parseInt(e.target.value))}
       />
       <label>Ingredients</label>
       <ul>
-        {recipe.recipe_ingredient.map((i) => (
+        {recipe.recipe_ingredient.map(i => (
           <li key={i.id}>
             <IngredientForm ingredient={i} />
           </li>
@@ -87,7 +46,7 @@ const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
       <input
         type="text"
         value={recipeInstructions}
-        onChange={(e) => setRecipeInstructions(e.target.value)}
+        onChange={e => setRecipeInstructions(e.target.value)}
       />
       <button onClick={() => updateRecipe(updatedRecipe)}>Modify</button>
     </form>
