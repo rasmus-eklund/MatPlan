@@ -85,7 +85,11 @@ const Recipes = () => {
         </form>
         <ul>
           {recipeResult.map(r => (
-            <li className="my-1 py-1 border-t-2 font-bold" key={r.id} onClick={() => handleShowRecipe(r.id)}>
+            <li
+              className="my-1 py-1 border-b-2 font-bold"
+              key={r.id}
+              onClick={() => handleShowRecipe(r.id)}
+            >
               {r.name}
             </li>
           ))}
@@ -93,27 +97,29 @@ const Recipes = () => {
         {selectedRecipe && (
           <section>
             <button
+              className="border-2 p-1.5 px-4 rounded-md border-red-400 m-2"
               onClick={() => addRecipeToMenu(selectedRecipe.id, 'Rasmus')}
             >
               add
             </button>
             <button
+              className="border-2 p-1.5 px-4 rounded-md border-red-400 m-2"
               onClick={() => removeRecipeFromMenu(selectedRecipe.id, 'Rasmus')}
             >
               delete
             </button>
             <h3>{selectedRecipe.name}</h3>
             <p>{selectedRecipe.portions}</p>
-            <ul>
+            <ul className='border-4 border-blue-400'>
               {selectedRecipe.recipe_ingredient.map(i => (
-                <li key={i.id}>
+                <li className='border-2 border-grey-200' key={i.id}>
                   <span>{i.ingredientName}</span>
                   <span>{i.quantity}</span>
                   <span>{i.unit}</span>
                 </li>
               ))}
             </ul>
-            <p>{selectedRecipe.instruction}</p>
+            <p className='py-4 border-4 border-red-400'>{selectedRecipe.instruction}</p>
           </section>
         )}
       </main>
