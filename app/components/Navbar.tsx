@@ -18,25 +18,25 @@ const Navbar = (props: Props) => {
   
   return (
     <>
-      <h1 data-value='RECIPE JAR' className="bg-black text-white font-mono text-center w-full py-4">
+      <h1 data-value='RECIPE JAR' className="bg-black text-white font-mono text-center text-4xl w-full py-6">
         RECIPE JAR
       </h1>
       <nav>
-        <ul className='flex flex-row m-0 justify-around'>
+        <ul className='flex flex-row m-0'>
           <Link href={'/menu'}>
-            <li className='font-bold py-2 underline'>Meny</li>
+            <li className='font-bold py-2 underline m-0.5'>Meny</li>
           </Link>
           <Link href={'/recipes'}>
-            <li className='font-bold py-2 underline'>Maträtter</li>
+            <li className='font-bold py-2 underline m-0.5'>Maträtter</li>
           </Link>
           <Link href={'/ingredients'}>
-            <li className='font-bold py-2 underline'>Varor</li>
+            <li className='font-bold py-2 underline m-0.5'>Varor</li>
           </Link>
           <Link href={'/shoppingList'}>
-            <li className='font-bold py-2 underline'>Inköpslista</li>
+            <li className='font-bold py-2 underline m-0.5'>Inköpslista</li>
           </Link>
           <Link href={'/'}>
-            <li className='font-bold py-2 underline'>Butiker</li>
+            <li className='font-bold py-2 underline m-0.5'>Butiker</li>
           </Link>
         </ul>
       </nav>
