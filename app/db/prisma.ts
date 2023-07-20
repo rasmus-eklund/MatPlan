@@ -1,4 +1,5 @@
 'use server';
+import { IngredientType } from '@/types';
 import { prisma } from './db';
 
 export const getRecipeByName = async (search: string, userId: string) =>
@@ -67,3 +68,5 @@ export const getShoppingList = async (userId: string) => {
 
 export const getStoreOrder = async (userId: string) =>
   await prisma.subcategory.findMany();
+
+export const getIngredients = async (): Promise<IngredientType[]> => await prisma.ingredient.findMany();
