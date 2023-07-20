@@ -12,6 +12,8 @@ model user {
   recipe           recipe[]
   menu             menu[]
   extra_ingredient extra_ingredient[]
+  store            store[]
+  home             String[]
 
   @@map("public.user")
 }
@@ -21,7 +23,7 @@ model recipe {
   name              String
   portions          Int
   instruction       String
-  user              user                @relation(fields: [userId], references: [id])
+  user              user                @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            String
   recipe_ingredient recipe_ingredient[]
   menu              menu?
@@ -63,11 +65,11 @@ model ingredient {
 model recipe_ingredient {
   id             String     @id @default(uuid())
   recipeId       String
-  quantity       Decimal?   @db.Decimal(10, 2)
-  unit           String?
+  quantity       Decimal
+  unit           String
   ingredientName String
   ingredient     ingredient @relation(fields: [ingredientName], references: [name])
-  recipe         recipe     @relation(fields: [recipeId], references: [id])
+  recipe         recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 
   @@map("public.recipe_ingredient")
 }
@@ -76,8 +78,9 @@ model menu {
   id       String @id @default(uuid())
   recipeId String @unique
   userId   String
-  recipe   recipe @relation(fields: [recipeId], references: [id])
-  user     user   @relation(fields: [userId], references: [id])
+  portions Int
+  recipe   recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user     user   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("public.menu")
 }
@@ -85,8 +88,20 @@ model menu {
 model extra_ingredient {
   name       String     @id
   userId     String
+  unit       String
+  quantity   Decimal
   ingredient ingredient @relation(fields: [name], references: [name])
-  user       user       @relation(fields: [userId], references: [id])
+  user       user       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("public.extra_ingredient")
+}
+
+model store {
+  id     String @id @default(uuid())
+  name   String
+  order  Int[]
+  user   user   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@map("public.store")
 }
