@@ -5,12 +5,12 @@ import { Prisma, extra_ingredient } from '@prisma/client';
 
 export const getRecipeByName = async (search: string, userId: string) =>
   await prisma.recipe.findMany({
-    where: { userId, name: { contains: search } },
+    where: { userId, name: { contains: search, mode: 'insensitive' } },
   });
 
 export const getRecipeByInstructions = async (search: string, userId: string) =>
   await prisma.recipe.findMany({
-    where: { userId, instruction: { contains: search } },
+    where: { userId, instruction: { contains: search, mode: 'insensitive' } },
   });
 
 export const getRecipeByIngredient = async (search: string, userId: string) =>
@@ -18,7 +18,7 @@ export const getRecipeByIngredient = async (search: string, userId: string) =>
     where: {
       userId,
       recipe_ingredient: {
-        some: { ingredientName: { contains: search } },
+        some: { ingredientName: { contains: search, mode: 'insensitive' } },
       },
     },
   });
