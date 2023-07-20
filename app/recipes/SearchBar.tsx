@@ -13,7 +13,6 @@ import {
 import RecipeForm from './RecipeForm';
 import Link from 'next/link';
 
-
 const Recipes = () => {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<FilterParams>('name');
@@ -87,12 +86,9 @@ const Recipes = () => {
         </form>
         <ul>
           {recipeResult.map(r => (
-            <li
-              className="my-1 py-1 border-b-2 font-bold"
-              key={r.id}
-            ><Link href={`/recipes/${r.id}`}>
-              {r.name}
-              </Link></li>
+            <li className="my-1 py-1 border-b-2 font-bold" key={r.id}>
+              <Link href={`/recipes/${r.id}`}>{r.name}</Link>
+            </li>
           ))}
         </ul>
         {selectedRecipe && (

@@ -2,6 +2,7 @@
 import { getRecipeById } from '@/app/db/prisma';
 import { FullRecipe } from '@/types';
 import React, { useEffect, useState } from 'react';
+import RecipeForm from '../RecipeForm';
 
 const Recipe = ({ params }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<FullRecipe | null>(null);
@@ -17,7 +18,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
   }, []);
   return (
     <>
-      {editMode && (
+      {!editMode && (
         <section>
           <h3>{recipe?.name}</h3>
           <p>{recipe?.portions}</p>
@@ -33,7 +34,9 @@ const Recipe = ({ params }: { params: { id: string } }) => {
           <p>{recipe?.instruction}</p>
         </section>
       )}
-    <button onClick={()=>setEditMode(false)}>Edit</button>
+      {editMode && (<RecipeForm recipe={recipe}/>)}
+    <button onClick={()=>{
+        setEditMode(false)}}>Edit</button>
     </>
   );
 };
