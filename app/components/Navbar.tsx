@@ -22,7 +22,7 @@ const Navbar = (props: Props) => {
         RECIPE JAR
       </h1>
       <nav>
-        <ul className='flex flex-row m-0 max-w-full'>
+        <ul className='flex flex-row m-0 max-w-full justify-start sm:justify-center'>
           <Link href={'/menu'}>
             <li className='font-bold py-2 underline m-0.5'>Meny</li>
           </Link>
