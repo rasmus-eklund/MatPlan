@@ -18,11 +18,11 @@ const Navbar = (props: Props) => {
   
   return (
     <>
-      <h1 data-value='RECIPE JAR' className="bg-black text-white font-mono text-center text-4xl w-full py-6">
+      <h1 data-value='RECIPE JAR' className="bg-black text-white font-mono text-left p-2 py-4 text-4xl">
         RECIPE JAR
       </h1>
       <nav>
-        <ul className='flex flex-row m-0'>
+        <ul className='flex flex-row m-0 max-w-full'>
           <Link href={'/menu'}>
             <li className='font-bold py-2 underline m-0.5'>Meny</li>
           </Link>
