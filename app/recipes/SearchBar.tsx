@@ -11,6 +11,7 @@ import {
   getRecipeByName,
   removeRecipeFromMenu,
 } from "../db/prisma";
+import RecipeForm from "../recipeform/page";
 
 const Recipes = () => {
   const [search, setSearch] = useState("");
@@ -99,21 +100,21 @@ const Recipes = () => {
             >
               delete
             </button>
-            <form>
-              <h3>{selectedRecipe.name}</h3>
-              <p>{selectedRecipe.portions}</p>
-              <ul>
-                {selectedRecipe.recipe_ingredient.map((i) => (
-                  <li key={i.id}>
-                    <span>{i.ingredientName}</span>
-                    <span>{i.quantity}</span>
-                    <span>{i.unit}</span>
-                  </li>
-                ))}
-              </ul>
-              <p>{selectedRecipe.instruction}</p>
-              <button>Edit</button>
-            </form>
+
+            <h3>{selectedRecipe.name}</h3>
+            <p>{selectedRecipe.portions}</p>
+            <ul>
+              {selectedRecipe.recipe_ingredient.map((i) => (
+                <li key={i.id}>
+                  <span>{i.ingredientName}</span>
+                  <span>{i.quantity}</span>
+                  <span>{i.unit}</span>
+                </li>
+              ))}
+            </ul>
+            <p>{selectedRecipe.instruction}</p>
+            <button>Edit</button>
+            <RecipeForm recipe={selectedRecipe} />
           </section>
         )}
       </main>

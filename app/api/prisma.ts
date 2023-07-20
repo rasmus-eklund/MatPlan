@@ -1,4 +1,5 @@
 "use server";
+import { FullRecipe, Recipe_ingredient } from "@/types";
 import { prisma } from "./db";
 
 export const getRecipeByName = async (search: string, userId: string) =>
@@ -56,3 +57,38 @@ export const getShoppingList = async (userId: string) =>
 
 export const getStoreOrder = async (userId: string) =>
   await prisma.subcategory.findMany();
+
+export const updateRecipe = async (recipe: FullRecipe) => {
+  await prisma.recipe.upsert({
+    where: { id: recipe.id },
+    update: {
+      name: recipe.name,
+      portions: recipe.portions,
+      instruction: recipe.instruction,
+    },
+    create: {
+      name: recipe.name,
+      portions: recipe.portions,
+      instruction: recipe.instruction,
+      userId: recipe.userId,
+    },
+  });
+};
+
+export const updateIngredient = async (ingredient: Recipe_ingredient) => {
+  await prisma.recipe_ingredient.upsert({
+    where: { id: ingredient.id },
+    update: {
+      ingredientName: ingredient.ingredientName,
+      quantity: ingredient.quantity,
+      unit: ingredient.unit,
+    },
+    create: {
+      ingredientName: ingredient.ingredientName,
+      quantity: ingredient.quantity,
+      unit: ingredient.unit,
+      recipeId: ingredient.recipeId,
+    },
+  });
+  console.log(ingredient);
+};
