@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'usehooks-ts';
 import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from '@/types';
-
 import {
   addRecipeToMenu,
   getRecipeById,
@@ -12,6 +11,8 @@ import {
   removeRecipeFromMenu,
 } from '../db/prisma';
 import RecipeForm from './RecipeForm';
+import Link from 'next/link';
+
 
 const Recipes = () => {
   const [search, setSearch] = useState('');
@@ -101,10 +102,9 @@ const Recipes = () => {
             <li
               className="border-2 p-1.5 px-4 rounded-md border-black m-4"
               key={r.id}
-              onClick={() => handleShowRecipe(r.id)}
-            >
+            ><Link href={`/recipes/${r.id}`}>
               {r.name}
-            </li>
+              </Link></li>
           ))}
         </ul>
         {selectedRecipe && (

@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { randomizeLetters } from './UIhelperfunctions';
 import 'tailwindcss/tailwind.css';
+import Login from './LoginButton';
 import Login from './Login';
 
 const Navbar = () => {
@@ -26,21 +27,25 @@ const Navbar = () => {
       </header>
       <nav>
         <ul className="flex flex-row m-0 max-w-full justify-center sm:justify-start">
-          <Link href={'/menu'}>
-            <li className="font-bold py-2 underline m-0.5">Meny</li>
-          </Link>
-          <Link href={'/recipes'}>
-            <li className="font-bold py-2 underline m-0.5">Maträtter</li>
-          </Link>
-          <Link href={'/ingredients'}>
-            <li className="font-bold py-2 underline m-0.5">Varor</li>
-          </Link>
-          <Link href={'/shoppingList'}>
-            <li className="font-bold py-2 underline m-0.5">Inköpslista</li>
-          </Link>
-          <Link href={'/'}>
-            <li className="font-bold py-2 underline m-0.5">Butiker</li>
-          </Link>
+          <li className="font-bold py-2 underline m-0.5">
+            <Link href={'/menu'}>Meny</Link>
+          </li>
+
+          <li className="font-bold py-2 underline m-0.5">
+            <Link href={'/recipes'}>Maträtter</Link>
+          </li>
+
+          <li className="font-bold py-2 underline m-0.5">
+            <Link href={'/ingredients'}>Varor</Link>
+          </li>
+
+          <li className="font-bold py-2 underline m-0.5">
+            <Link href={'/shoppingList'}>Inköpslista</Link>
+          </li>
+
+          <li className="font-bold py-2 underline m-0.5">
+            <Link href={'/'}>Butiker</Link>
+          </li>
         </ul>
       </nav>
     </>
