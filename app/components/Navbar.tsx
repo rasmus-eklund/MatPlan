@@ -22,7 +22,7 @@ const Navbar = (props: Props) => {
     <nav>
       <ul className='flex flex-row justify-around'>
         <Link href={'/menu'}>
-          <li className='font-bold m-4'>Meny</li>
+          <li className='font-bold m-4 '>Meny</li>
         </Link>
         <Link href={'/recipes'}>
           <li className='font-bold m-4'>Maträtter</li>
