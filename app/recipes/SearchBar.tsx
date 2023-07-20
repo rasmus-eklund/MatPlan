@@ -11,7 +11,7 @@ import {
   getRecipeByName,
   removeRecipeFromMenu,
 } from '../db/prisma';
-import RecipeForm from '../recipeform/page';
+import RecipeForm from '../recipeform/RecipeForm';
 
 const Recipes = () => {
   const [search, setSearch] = useState('');

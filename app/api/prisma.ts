@@ -1,6 +1,6 @@
-"use server";
-import { FullRecipe, Recipe_ingredient } from "@/types";
-import { prisma } from "./db";
+'use server';
+import { FullRecipe, Recipe_ingredient } from '@/types';
+import { prisma } from './db';
 
 export const getRecipeByName = async (search: string, userId: string) =>
   await prisma.recipe.findMany({
@@ -30,8 +30,12 @@ export const getRecipeById = async (id: string, userId: string) => {
   return JSON.stringify(data);
 };
 
-export const addRecipeToMenu = async (id: string, userId: string) => {
-  await prisma.menu.create({ data: { recipeId: id, userId } });
+export const addRecipeToMenu = async (
+  id: string,
+  userId: string,
+  portions: number
+) => {
+  await prisma.menu.create({ data: { recipeId: id, userId, portions } });
 };
 
 export const removeRecipeFromMenu = async (id: string, userId: string) => {

@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import { FullRecipe } from '@/types';
 import React, { useState } from 'react';
 import { updateRecipe } from '../api/prisma';
