@@ -44,3 +44,9 @@ export type ShoppingListType = {
   id: string;
   recipe: string;
 };
+
+export type IngredientType = {
+  name: string;
+  categoryId: number;
+  subcategoryId: number;
+};
