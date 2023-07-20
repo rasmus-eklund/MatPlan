@@ -2,6 +2,8 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { randomizeLetters } from './UIhelperfunctions';
+import 'tailwindcss/tailwind.css';
+
 
 type Props = {};
 
@@ -16,23 +18,23 @@ const Navbar = (props: Props) => {
   
   return (
     <>
-   <h1 data-value='RECIPE JAR' className="bg-black text-white p-4 text-5xl font-mono">RECIPE JAR</h1>
-    <nav className=''>
-      <ul>
+   <h1 data-value='RECIPE JAR' className="bg-black text-white p-4 text-5xl font-mono text-center">RECIPE JAR</h1>
+    <nav>
+      <ul className='flex flex-row justify-around'>
         <Link href={'/menu'}>
-          <li>Meny</li>
+          <li className='font-bold m-4'>Meny</li>
         </Link>
         <Link href={'/recipes'}>
-          <li>Maträtter</li>
+          <li className='font-bold m-4'>Maträtter</li>
         </Link>
         <Link href={'/ingredients'}>
-          <li>Varor</li>
+          <li className='font-bold m-4'>Varor</li>
         </Link>
         <Link href={'/shoppingList'}>
-          <li>Inköpslista</li>
+          <li className='font-bold m-4'>Inköpslista</li>
         </Link>
         <Link href={'/'}>
-          <li>Butiker</li>
+          <li className='font-bold m-4'>Butiker</li>
         </Link>
       </ul>
     </nav></>
