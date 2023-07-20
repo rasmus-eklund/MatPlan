@@ -1,14 +1,22 @@
-import React from 'react';
+'use client'
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { randomizeLetters } from './UIhelperfunctions';
 
 type Props = {};
 
 const Navbar = (props: Props) => {
+
+  useEffect(() => {
+    const h1Element = document.querySelector("h1");
+    if (h1Element) {
+      randomizeLetters(h1Element);
+    }
+  }, []);
   
   return (
     <>
-   <h1>Recipe JAR</h1>
+   <h1 data-value='RECIPE JAR' className="bg-black text-white p-4 text-5xl font-mono">Recipe JAR</h1>
     <nav className=''>
       <ul>
         <Link href={'/menu'}>
