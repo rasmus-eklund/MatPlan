@@ -1,42 +1,45 @@
-'use client'
+'use client';
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { randomizeLetters } from './UIhelperfunctions';
 import 'tailwindcss/tailwind.css';
+import Login from './login';
 
-
-type Props = {};
-
-const Navbar = (props: Props) => {
-
+const Navbar = () => {
   useEffect(() => {
-    const h1Element = document.querySelector("h1");
+    const h1Element = document.querySelector('h1');
     if (h1Element) {
       randomizeLetters(h1Element);
     }
   }, []);
-  
+
   return (
     <>
-      <h1 data-value='RECIPE JAR' className="bg-black text-white font-mono text-left p-2 py-4 text-4xl">
-        RECIPE JAR
-      </h1>
+      <header>
+        <h1
+          data-value="RECIPE JAR"
+          className="bg-black text-white font-mono text-left p-2 py-4 text-4xl"
+        >
+          RECIPE JAR
+        </h1>
+        <Login />
+      </header>
       <nav>
-        <ul className='flex flex-row m-0 max-w-full justify-start sm:justify-center'>
+        <ul className="flex flex-row m-0 max-w-full justify-center sm:justify-start">
           <Link href={'/menu'}>
-            <li className='font-bold py-2 underline m-0.5'>Meny</li>
+            <li className="font-bold py-2 underline m-0.5">Meny</li>
           </Link>
           <Link href={'/recipes'}>
-            <li className='font-bold py-2 underline m-0.5'>Maträtter</li>
+            <li className="font-bold py-2 underline m-0.5">Maträtter</li>
           </Link>
           <Link href={'/ingredients'}>
-            <li className='font-bold py-2 underline m-0.5'>Varor</li>
+            <li className="font-bold py-2 underline m-0.5">Varor</li>
           </Link>
           <Link href={'/shoppingList'}>
-            <li className='font-bold py-2 underline m-0.5'>Inköpslista</li>
+            <li className="font-bold py-2 underline m-0.5">Inköpslista</li>
           </Link>
           <Link href={'/'}>
-            <li className='font-bold py-2 underline m-0.5'>Butiker</li>
+            <li className="font-bold py-2 underline m-0.5">Butiker</li>
           </Link>
         </ul>
       </nav>
@@ -44,4 +47,4 @@ const Navbar = (props: Props) => {
   );
 };
 
-export default Navbar
+export default Navbar;

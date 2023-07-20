@@ -1,15 +1,16 @@
 'use server';
-import { IngredientType } from '@/types';
+import { ExtraIngredient, IngredientType } from '@/types';
 import { prisma } from './db';
+import { Prisma, extra_ingredient } from '@prisma/client';
 
 export const getRecipeByName = async (search: string, userId: string) =>
   await prisma.recipe.findMany({
-    where: { userId, name: { contains: search } },
+    where: { userId, name: { contains: search, mode: 'insensitive' } },
   });
 
 export const getRecipeByInstructions = async (search: string, userId: string) =>
   await prisma.recipe.findMany({
-    where: { userId, instruction: { contains: search } },
+    where: { userId, instruction: { contains: search, mode: 'insensitive' } },
   });
 
 export const getRecipeByIngredient = async (search: string, userId: string) =>
@@ -17,7 +18,7 @@ export const getRecipeByIngredient = async (search: string, userId: string) =>
     where: {
       userId,
       recipe_ingredient: {
-        some: { ingredientName: { contains: search } },
+        some: { ingredientName: { contains: search, mode: 'insensitive' } },
       },
     },
   });
@@ -30,8 +31,16 @@ export const getRecipeById = async (id: string, userId: string) => {
   return JSON.stringify(data);
 };
 
-export const addRecipeToMenu = async (id: string, userId: string) => {
-  await prisma.menu.create({ data: { recipeId: id, userId } });
+export const addRecipeToMenu = async ({
+  id,
+  userId,
+  portions,
+}: {
+  id: string;
+  userId: string;
+  portions: number;
+}) => {
+  await prisma.menu.create({ data: { recipeId: id, userId, portions } });
 };
 
 export const removeRecipeFromMenu = async (id: string, userId: string) => {
@@ -69,4 +78,23 @@ export const getShoppingList = async (userId: string) => {
 export const getStoreOrder = async (userId: string) =>
   await prisma.subcategory.findMany();
 
-export const getIngredients = async (): Promise<IngredientType[]> => await prisma.ingredient.findMany();
+export const getIngredients = async (): Promise<IngredientType[]> =>
+  await prisma.ingredient.findMany();
+
+export const getExtraIngredients = async () =>
+  (await prisma.extra_ingredient.findMany()).map(i => ({
+    ...i,
+    quantity: Number(i.quantity),
+  }));
+
+export const upsertIngredient = async (ing: ExtraIngredient) => {
+  const newIng: extra_ingredient = {
+    ...ing,
+    quantity: new Prisma.Decimal(ing.quantity),
+  };
+  await prisma.extra_ingredient.upsert({
+    where: { name: ing.name },
+    update: newIng,
+    create: newIng,
+  });
+};

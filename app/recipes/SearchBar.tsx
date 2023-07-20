@@ -11,6 +11,7 @@ import {
   getRecipeByName,
   removeRecipeFromMenu,
 } from '../db/prisma';
+import RecipeForm from './RecipeForm';
 
 const Recipes = () => {
   const [search, setSearch] = useState('');
@@ -97,8 +98,14 @@ const Recipes = () => {
         {selectedRecipe && (
           <section>
             <button
-              className="border-2 p-1.5 px-4 rounded-md border-black m-4"
-              onClick={() => addRecipeToMenu(selectedRecipe.id, 'Rasmus')}
+                   className="border-2 p-1.5 px-4 rounded-md border-black m-4"
+              onClick={() =>
+                addRecipeToMenu({
+                  id: selectedRecipe.id,
+                  userId: 'Rasmus',
+                  portions: selectedRecipe.portions,
+                })
+              }
             >
               add
             </button>
@@ -108,17 +115,24 @@ const Recipes = () => {
             >
               delete
             </button>
+
             <h3 className='m-4 font-bold '>{selectedRecipe.name} <br/> {selectedRecipe.portions}</h3>
             <ul className='py-4 border-2 border-black rounded-md m-4'>
               {selectedRecipe.recipe_ingredient.map(i => (
-                <li className='border-2 border-grey-200' key={i.id}>
-                  <span >{i.ingredientName}</span>
+                <li className='py-4 border-2 border-black rounded-md m-4' key={i.id}>
+                  <span>{i.ingredientName}</span>
                   <span>{i.quantity}</span>
                   <span>{i.unit}</span>
                 </li>
+
+      
               ))}
             </ul>
-            <p className='py-4 border-2 border-black rounded-md m-4'>{selectedRecipe.instruction}</p>
+            <p className='py-4 border-2 border-black rounded-md m-4'>
+              {selectedRecipe.instruction}
+            </p>
+            <button>Edit</button>
+            <RecipeForm recipe={selectedRecipe} />
           </section>
         )}
       </main>

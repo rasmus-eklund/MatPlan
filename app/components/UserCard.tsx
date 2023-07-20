@@ -1,6 +1,6 @@
 import { DefaultSession } from 'next-auth';
 
-export function UserCard({ user }: { user: DefaultSession['user'] }) {
+const UserCard = ({ user }: { user: DefaultSession['user'] }) => {
   return (
     <div className="card">
       <div className="card-body">
@@ -11,3 +11,5 @@ export function UserCard({ user }: { user: DefaultSession['user'] }) {
     </div>
   );
 }
+
+export default UserCard;
