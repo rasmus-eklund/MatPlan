@@ -34,7 +34,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
           <p>{recipe?.instruction}</p>
         </section>
       )}
-      {editMode && (<RecipeForm recipe={recipe}/>)}
+      {(editMode && recipe) && (<RecipeForm recipe={recipe}/>)}
     <button onClick={()=>{
         setEditMode(false)}}>Edit</button>
     </>
