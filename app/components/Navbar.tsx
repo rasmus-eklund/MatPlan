@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { randomizeLetters } from './UIhelperfunctions';
 import 'tailwindcss/tailwind.css';
-import Login from './login';
+import Login from './LoginButton';
 
 const Navbar = () => {
   useEffect(() => {
