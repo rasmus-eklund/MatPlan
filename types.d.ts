@@ -14,6 +14,13 @@ export type Recipe_ingredient = {
   ingredientName: string;
 };
 
+export type ExtraIngredient = {
+  name: string;
+  userId: string;
+  unit: string;
+  quantity: number;
+};
+
 export type FullRecipe = {
   id: string;
   instruction: string;
@@ -38,8 +45,8 @@ export type MenuItem = {
 
 export type ShoppingListType = {
   name: string;
-  quantity: Decimal | null;
-  unit: string | null;
+  quantity: Decimal;
+  unit: string;
   subCategory: number;
   id: string;
   recipe: string;
