@@ -10,7 +10,8 @@ import {
   getRecipeByInstructions,
   getRecipeByName,
   removeRecipeFromMenu,
-} from '../db/prisma';
+} from "../db/prisma";
+import RecipeForm from "../recipeform/page";
 
 const Recipes = () => {
   const [search, setSearch] = useState('');
@@ -49,7 +50,7 @@ const Recipes = () => {
   };
 
   useEffect(() => {
-    handleSearch({ filter, search: debouncedSearch }).then(r => {});
+    handleSearch({ filter, search: debouncedSearch }).then((r) => {});
   }, [debouncedSearch, filter]);
   return (
     <>
@@ -108,6 +109,7 @@ const Recipes = () => {
             >
               delete
             </button>
+
             <h3>{selectedRecipe.name}</h3>
             <p>{selectedRecipe.portions}</p>
             <ul className='border-4 border-blue-400'>
@@ -120,6 +122,8 @@ const Recipes = () => {
               ))}
             </ul>
             <p className='py-4 border-4 border-red-400'>{selectedRecipe.instruction}</p>
+            <button>Edit</button>
+            <RecipeForm recipe={selectedRecipe} />
           </section>
         )}
       </main>
