@@ -1,5 +1,7 @@
 'use server';
+import { ExtraIngredient, IngredientType } from '@/types';
 import { prisma } from './db';
+import { Prisma, extra_ingredient } from '@prisma/client';
 
 export const getRecipeByName = async (search: string, userId: string) =>
   await prisma.recipe.findMany({
@@ -29,8 +31,12 @@ export const getRecipeById = async (id: string, userId: string) => {
   return JSON.stringify(data);
 };
 
-export const addRecipeToMenu = async (id: string, userId: string) => {
-  await prisma.menu.create({ data: { recipeId: id, userId } });
+export const addRecipeToMenu = async (
+  id: string,
+  userId: string,
+  portions: number
+) => {
+  await prisma.menu.create({ data: { recipeId: id, userId, portions } });
 };
 
 export const removeRecipeFromMenu = async (id: string, userId: string) => {
@@ -67,3 +73,24 @@ export const getShoppingList = async (userId: string) => {
 
 export const getStoreOrder = async (userId: string) =>
   await prisma.subcategory.findMany();
+
+export const getIngredients = async (): Promise<IngredientType[]> =>
+  await prisma.ingredient.findMany();
+
+export const getExtraIngredients = async () =>
+  (await prisma.extra_ingredient.findMany()).map(i => ({
+    ...i,
+    quantity: Number(i.quantity),
+  }));
+
+export const upsertIngredient = async (ing: ExtraIngredient) => {
+  const newIng: extra_ingredient = {
+    ...ing,
+    quantity: new Prisma.Decimal(ing.quantity),
+  };
+  await prisma.extra_ingredient.upsert({
+    where: { name: ing.name },
+    update: newIng,
+    create: newIng,
+  });
+};
