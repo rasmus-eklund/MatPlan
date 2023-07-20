@@ -6,7 +6,7 @@ import RecipeForm from '../RecipeForm';
 
 const Recipe = ({ params }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<FullRecipe | null>(null);
-  const [editMode, setEditMode] = useState<Boolean>(true);
+  const [editMode, setEditMode] = useState<Boolean>(false);
   const handleGetRecipe = async (id: string) => {
     const res = await getRecipeById(id, 'Rasmus');
     const data: FullRecipe = JSON.parse(res);
@@ -36,7 +36,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
       )}
       {(editMode && recipe) && (<RecipeForm recipe={recipe}/>)}
     <button onClick={()=>{
-        setEditMode(false)}}>Edit</button>
+        setEditMode(true)}}>Edit</button>
     </>
   );
 };
