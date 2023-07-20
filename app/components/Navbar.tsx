@@ -16,7 +16,7 @@ const Navbar = (props: Props) => {
   
   return (
     <>
-   <h1 data-value='RECIPE JAR' className="bg-black text-white p-4 text-5xl font-mono">Recipe JAR</h1>
+   <h1 data-value='RECIPE JAR' className="bg-black text-white p-4 text-5xl font-mono">RECIPE JAR</h1>
     <nav className=''>
       <ul>
         <Link href={'/menu'}>

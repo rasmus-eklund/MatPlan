@@ -1,6 +1,6 @@
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-export function randomizeLetters(target: HTMLHeadingElement, intervalTime: number = 30): void {
+export function randomizeLetters(target: HTMLHeadingElement, intervalTime: number = 40): void {
   let interval: NodeJS.Timeout | null = null;
   let iteration = 0;
 
