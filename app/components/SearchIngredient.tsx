@@ -5,7 +5,7 @@ import { getIngredients } from '../db/prisma';
 import { IngredientType } from '@/types';
 import { useDebounce } from 'usehooks-ts';
 
-type Prop = { callback: (ingredient: string) => void };
+type Prop = { callback: (ingredient: string) => Promise<void> };
 const SearchIngredients = ({ callback }: Prop) => {
   const [allIngredients, setAllIngredients] = useState<IngredientType[]>([]);
   const [search, setSearch] = useState('');
@@ -33,7 +33,13 @@ const SearchIngredients = ({ callback }: Prop) => {
             .filter(({ name }) => name.includes(debouncedSearch))
             .map(({ name }) => (
               <li key={name + '_search'}>
-                <p onClick={() => callback(name)}>{name}</p>
+                <p
+                  onClick={() => {
+                    callback(name).then(() => setSearch(''));
+                  }}
+                >
+                  {name}
+                </p>
               </li>
             ))}
       </ul>
