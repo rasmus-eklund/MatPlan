@@ -3,7 +3,6 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
-  secret: 'jarisawesome'
 };
 
 module.exports = nextConfig;

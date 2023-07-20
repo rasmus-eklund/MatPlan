@@ -5,7 +5,7 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   return (
-    <nav>
+    <nav className=''>
       <ul>
         <Link href={'/menu'}>
           <li>Meny</li>
