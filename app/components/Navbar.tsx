@@ -5,6 +5,8 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   return (
+    <>
+    <h1>Recipe JAR</h1>
     <nav className=''>
       <ul>
         <Link href={'/menu'}>
@@ -23,7 +25,7 @@ const Navbar = (props: Props) => {
           <li>Butiker</li>
         </Link>
       </ul>
-    </nav>
+    </nav></>
   );
 };
 
