@@ -18,7 +18,7 @@ const IngredientForm = ({ ingredient }: { ingredient: Recipe_ingredient }) => {
 
   return (
     <>
-      <form>
+      <div>
         <label>Ingredient Name:</label>
         <input
           type="text"
@@ -40,7 +40,7 @@ const IngredientForm = ({ ingredient }: { ingredient: Recipe_ingredient }) => {
         <button onClick={() => updateIngredient(updatedIngredient)}>
           Update
         </button>
-      </form>
+      </div>
     </>
   );
 };
