@@ -55,25 +55,37 @@ const Recipes = () => {
   return (
     <>
       <main className="recipe text-left my-1.5">
-        <h1 className="recipe__title font-bold">Lägg till maträtter</h1>
+        <h1 className="recipe__title font-bold p-1.5 px-4 ">
+          Lägg till maträtter
+        </h1>
         <form
           className="recipe__form"
           onSubmit={e => {
             e.preventDefault();
           }}
         >
-          <label htmlFor="search">Sök</label>
+          <label
+            htmlFor="search"
+            className="border-2 p-1.5 px-4 rounded-md border-black m-4"
+          >
+            Sök
+          </label>
           <input
-            className="border-2 border-black rounded-md my-2.5"
+            className="border-2 p-1.5 px-4 rounded-md border-black m-4"
             id="search"
             type="text"
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
           <br />
-          <label htmlFor="filter">Filter</label>
+          <label
+            htmlFor="filter"
+            className="border-2 p-1.5 px-4 rounded-md border-black m-4"
+          >
+            Filter
+          </label>
           <select
-            className="border-2 border-black rounded-md"
+            className="border-2 p-1.5 px-4 rounded-md border-black m-4"
             name="filter"
             id="filter"
             value={filter}
@@ -86,7 +98,7 @@ const Recipes = () => {
         </form>
         <ul>
           {recipeResult.map(r => (
-            <li className="my-1 py-1 border-b-2 font-bold" key={r.id}>
+            <li className="border-2 p-1.5 px-4 rounded-md border-black m-4" key={r.id}>
               <Link href={`/recipes/${r.id}`}>{r.name}</Link>
             </li>
           ))}
@@ -94,7 +106,7 @@ const Recipes = () => {
         {selectedRecipe && (
           <section>
             <button
-              className="border-2 p-1.5 px-4 rounded-md border-red-400 m-2"
+              className="border-2 p-1.5 px-4 rounded-md border-black m-4"
               onClick={() =>
                 addRecipeToMenu({
                   id: selectedRecipe.id,
@@ -106,27 +118,28 @@ const Recipes = () => {
               add
             </button>
             <button
-              className="border-2 p-1.5 px-4 rounded-md border-red-400 m-2"
+              className="border-2 p-1.5 px-4 rounded-md border-black m-4"
               onClick={() => removeRecipeFromMenu(selectedRecipe.id, 'Rasmus')}
             >
               delete
             </button>
 
-            <h3>{selectedRecipe.name}</h3>
-            <p>{selectedRecipe.portions}</p>
-            <ul className="border-4 border-blue-400">
+            <h3 className="m-4 font-bold ">
+              {selectedRecipe.name} <br /> {selectedRecipe.portions}
+            </h3>
+            <ul className="py-4 border-2 border-black rounded-md m-4">
               {selectedRecipe.recipe_ingredient.map(i => (
-                <li className="border-2 border-grey-200" key={i.id}>
+                <li className="m-4 underline" key={i.id}>
                   <span>{i.ingredientName}</span>
                   <span>{i.quantity}</span>
                   <span>{i.unit}</span>
                 </li>
               ))}
             </ul>
-            <p className="py-4 border-4 border-red-400">
+            <p className="p-4 border-2 border-black rounded-md m-4">
               {selectedRecipe.instruction}
             </p>
-            <button>Edit</button>
+            <button className="border-2 p-1.5 px-4 rounded-md border-black m-4">Edit</button>
             <RecipeForm recipe={selectedRecipe} />
           </section>
         )}

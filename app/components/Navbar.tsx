@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { randomizeLetters } from './UIhelperfunctions';
 import 'tailwindcss/tailwind.css';
 import Login from './LoginButton';
+import Login from './Login';
 
 const Navbar = () => {
   useEffect(() => {

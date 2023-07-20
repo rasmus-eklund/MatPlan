@@ -21,7 +21,7 @@ const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
   };
 
   return (
-    <form>
+    <form className="border-2 p-1.5 px-4 rounded-md border-black m-4">
       <label>Recipe Name:</label>
       <input
         type="text"
