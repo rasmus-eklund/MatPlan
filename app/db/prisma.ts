@@ -31,11 +31,15 @@ export const getRecipeById = async (id: string, userId: string) => {
   return JSON.stringify(data);
 };
 
-export const addRecipeToMenu = async (
-  id: string,
-  userId: string,
-  portions: number
-) => {
+export const addRecipeToMenu = async ({
+  id,
+  userId,
+  portions,
+}: {
+  id: string;
+  userId: string;
+  portions: number;
+}) => {
   await prisma.menu.create({ data: { recipeId: id, userId, portions } });
 };
 
