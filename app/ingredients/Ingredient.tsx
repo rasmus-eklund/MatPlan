@@ -16,7 +16,7 @@ const Ingredient = ({
       <input type="number" value={quantState} min={0}/>
       <select name="selectUnit" id="unit" value={unitState}>
         {units.map(u => (
-          <option>{u.abr}</option>
+          <option key={u.abr}>{u.abr}</option>
         ))}
       </select>
     </>
