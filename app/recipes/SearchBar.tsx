@@ -108,8 +108,8 @@ const Recipes = () => {
             >
               delete
             </button>
-            <h3 className='m-4 font-bold underline'>{selectedRecipe.name} <br/> {selectedRecipe.portions}</h3>
-            <ul className='py-4 border-4 border-black rounded-md m-4'>
+            <h3 className='m-4 font-bold '>{selectedRecipe.name} <br/> {selectedRecipe.portions}</h3>
+            <ul className='py-4 border-2 border-black rounded-md m-4'>
               {selectedRecipe.recipe_ingredient.map(i => (
                 <li className='border-2 border-grey-200' key={i.id}>
                   <span >{i.ingredientName}</span>
@@ -118,7 +118,7 @@ const Recipes = () => {
                 </li>
               ))}
             </ul>
-            <p className='py-4 border-4 border-black rounded-md m-4'>{selectedRecipe.instruction}</p>
+            <p className='py-4 border-2 border-black rounded-md m-4'>{selectedRecipe.instruction}</p>
           </section>
         )}
       </main>
