@@ -1,6 +1,10 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { getShoppingList, getStoreOrder } from '../db/prisma';
+import {
+  getExtraIngredients,
+  getShoppingList,
+  getStoreOrder,
+} from '../db/prisma';
 import { ShoppingListType } from '@/types';
 
 const ShoppingList = () => {
@@ -11,9 +15,7 @@ const ShoppingList = () => {
   const [filter, setFilter] = useState({ group: true });
 
   useEffect(() => {
-    getShoppingList()
-      .then(i => setIngredients(i))
-      .then(() => console.log(ingredients));
+    Promise.all([getShoppingList(), getExtraIngredients()]).then(([a, b])=> setIngredients([...a, ...b]))
   }, []);
 
   // const storeOrder = await getStoreOrder('jarjar.jarsson@gmail.com');
@@ -25,7 +27,11 @@ const ShoppingList = () => {
   return (
     <ul>
       {ingredients.map(i => (
-        <li key={i.id}>{i.name}</li>
+        <li key={i.name + '_shoppingList'} className="grid grid-cols-3">
+          <p>{i.name}</p>
+          <p>{i.quantity}</p>
+          <p>{i.unit}</p>
+        </li>
       ))}
     </ul>
   );
