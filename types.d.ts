@@ -42,8 +42,7 @@ export type ShoppingListType = {
   quantity: Decimal;
   unit: string;
   subCategory: number;
-  id: string;
-  recipe: string;
+  from: string;
 };
 
 export type IngredientType = {
