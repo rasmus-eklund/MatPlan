@@ -36,7 +36,7 @@ const AddIngredientForm = () => {
           value={unit}
           onChange={e => setUnit(e.target.value)}
         />
-        <SearchIngredients callback={} />
+        {/* <SearchIngredients callback={} /> */}
         <button
           onClick={e => {
             e.preventDefault();
