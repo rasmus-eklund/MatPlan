@@ -88,7 +88,7 @@ export const getShoppingList = async () => {
       recipe: {
         include: {
           recipe_ingredient: {
-            include: { ingredient: { include: { subcategory: true } } },
+            include: { ingredient: true },
           },
         },
       },
@@ -97,11 +97,10 @@ export const getShoppingList = async () => {
   return queryRes.flatMap(r =>
     r.recipe.recipe_ingredient.map(i => ({
       name: i.ingredientName,
-      quantity: i.quantity,
+      quantity: Number(i.quantity),
       unit: i.unit,
       subCategory: i.ingredient.subcategoryId,
-      id: i.id,
-      recipe: r.recipe.name,
+      from: r.recipe.name,
     }))
   );
 };
@@ -113,8 +112,17 @@ export const getIngredients = async (): Promise<IngredientType[]> =>
 
 export const getExtraIngredients = async () => {
   const userId = await getUser();
-  const data = await prisma.extra_ingredient.findMany({ where: { userId } });
-  return data.map(i => ({ ...i, quantity: Number(i.quantity) }));
+  const data = await prisma.extra_ingredient.findMany({
+    where: { userId },
+    include: { ingredient: true },
+  });
+  return data.map(i => ({
+    name: i.name,
+    quantity: Number(i.quantity),
+    unit: i.unit,
+    subCategory: i.ingredient.subcategoryId,
+    from: 'Egna varor'
+  }));
 };
 
 export const upsertExtraIngredient = async (ing: addIngredient) => {
@@ -124,11 +132,17 @@ export const upsertExtraIngredient = async (ing: addIngredient) => {
     userId,
     quantity: new Prisma.Decimal(ing.quantity),
   };
+  console.log(newIng);
   await prisma.extra_ingredient.upsert({
     where: { name: ing.name, userId },
     update: newIng,
     create: newIng,
   });
+};
+
+export const deleteExraIngredient = async (name: string) => {
+  const userId = await getUser();
+  await prisma.extra_ingredient.delete({ where: { name, userId } });
 };
 
 export const updateRecipe = async (recipe: FullRecipe) => {
