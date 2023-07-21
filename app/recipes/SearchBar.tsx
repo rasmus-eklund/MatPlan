@@ -20,6 +20,15 @@ const Recipes = () => {
   const [selectedRecipe, setSelectedRecipe] = useState<FullRecipe | null>(null);
   const debouncedSearch = useDebounce(search, 500);
 
+  const emptyRecipe:FullRecipe = {
+    id: "",
+    name:'',
+    portions: 0,
+    recipe_ingredient: [],
+    instruction:'',
+    userId:'Rasmus'
+  }
+
   const handleSearch = async ({ filter, search }: SearchRecipeParams) => {
     let data: Recipe[];
     switch (filter) {
@@ -96,6 +105,10 @@ const Recipes = () => {
             <option value="instruction">Instruktion</option>
           </select>
         </form>
+        <div>
+          <label>Add new recipe</label>
+          <RecipeForm recipe={emptyRecipe} />
+        </div>
         <ul>
           {recipeResult.map(r => (
             <li className="border-2 p-1.5 px-4 rounded-md border-black m-4" key={r.id}>
