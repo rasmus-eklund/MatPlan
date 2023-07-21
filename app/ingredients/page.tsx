@@ -18,15 +18,23 @@ const Ingredients = () => {
       unit: 'st',
     };
     await upsertExtraIngredient(ingredient);
-    await getExtraIngredients().then(ings => setIngredients(ings));
+    await update();
+  };
+  const update = async () => {
+    const ings = await getExtraIngredients();
+    await setIngredients(ings);
   };
 
   return (
     <>
       <SearchIngredients callback={addIngredient} />
-      <ul>
+      <ul className='flex flex-col gap-5'>
         {ingredients.map(i => (
-          <EditIngredient ingredient={i} key={i.name + '_extra'} />
+          <EditIngredient
+            callback={update}
+            ingredient={i}
+            key={i.name + '_extra'}
+          />
         ))}
       </ul>
     </>
