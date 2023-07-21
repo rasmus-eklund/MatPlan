@@ -1,13 +1,9 @@
 import React from 'react';
-import Login from './components/LoginButton';
 
-type Props = {};
-
-export default function page({}: Props) {
+export default function page() {
   return (
     <>
-      <h3>Login</h3>
-      <Login />
+      <p>Welcome to Recipe JAR</p>
     </>
   );
 }

@@ -1,15 +1,21 @@
 import { DefaultSession } from 'next-auth';
+import Image from 'next/image';
 
 const UserCard = ({ user }: { user: DefaultSession['user'] }) => {
   return (
-    <div className="card">
-      <div className="card-body">
-        <p>Current Logged In User</p>
-        <h5 className="card-title">{user?.name}</h5>
-        <p className="card-text">{user?.email}</p>
+      <div>
+        <h5>{user?.name}</h5>
+        {user && user.image && (
+          <Image
+            className="w-20 h-20 rounded-full overflow-hidden"
+            src={user.image}
+            alt="user image"
+            width={96}
+            height={96}
+          />
+        )}
       </div>
-    </div>
   );
-}
+};
 
 export default UserCard;
