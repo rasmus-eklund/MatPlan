@@ -36,7 +36,9 @@ const IngredientForm = ({ ingredient }: { ingredient: Recipe_ingredient }) => {
           value={unit}
           onChange={(e) => setUnit(e.target.value)}
         />
-        <button onClick={() => updateIngredient(updatedIngredient)}>
+        <button onClick={(e) => {
+          e.preventDefault()
+          updateIngredient(updatedIngredient)}}>
           Update
         </button>
       </div>
