@@ -11,7 +11,7 @@ export default function Login() {
         <button onClick={() => signOut()} type="button">
           Sign out
         </button>
-        <UserCard user={session?.user} />
+        <UserCard user={session.user} />
       </>
     );
   } else {

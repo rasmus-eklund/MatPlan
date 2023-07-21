@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header>
+      <header className='bg-black flex-row space-x-1 text-white'>
         <h1
           data-value="RECIPE JAR"
           className="bg-black text-white font-mono text-left p-2 py-4 text-4xl"
@@ -43,7 +43,7 @@ const Navbar = () => {
           </li>
 
           <li className="font-bold py-2 underline m-0.5">
-            <Link href={'/'}>Butiker</Link>
+            <Link href={'/stores'}>Butiker</Link>
           </li>
         </ul>
       </nav>
