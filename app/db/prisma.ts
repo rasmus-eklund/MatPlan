@@ -1,5 +1,10 @@
 'use server';
-import { ExtraIngredient, FullRecipe, IngredientType, Recipe_ingredient } from '@/types';
+import {
+  ExtraIngredient,
+  FullRecipe,
+  IngredientType,
+  Recipe_ingredient,
+} from '@/types';
 import { prisma } from './db';
 import { Prisma, extra_ingredient } from '@prisma/client';
 
@@ -131,4 +136,11 @@ export const updateIngredient = async (ingredient: Recipe_ingredient) => {
     },
   });
   console.log(ingredient);
+};
+
+export const updateExtraIngredient = async (ingredient: ExtraIngredient) => {
+  await prisma.extra_ingredient.update({
+    where: { name: ingredient.name },
+    data: ingredient,
+  });
 };
