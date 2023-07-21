@@ -8,10 +8,10 @@ import {
 import { prisma } from './db';
 import { Prisma, extra_ingredient } from '@prisma/client';
 import { getServerSession } from 'next-auth';
-import { OPTIONS } from '../api/auth/[...nextauth]/route';
+import options from '../api/auth/[...nextauth]/options';
 
 const getUser = async () => {
-  const session = await getServerSession(OPTIONS);
+  const session = await getServerSession(options);
   if (session?.user?.email) {
     return session.user.email;
   }
