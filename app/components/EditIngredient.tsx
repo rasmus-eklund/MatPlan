@@ -2,13 +2,17 @@ import { addIngredient } from '@/types';
 import React, { useState } from 'react';
 import units from '../db/units';
 import DeleteButton from './DeleteButton';
-import { upsertExtraIngredient } from '../db/prisma';
+import { deleteExraIngredient, upsertExtraIngredient } from '../db/prisma';
+
+type Prop = {
+  ingredient: addIngredient;
+  callback: () => Promise<void>;
+};
 
 const EditIngredient = ({
-  ingredient: { name, quantity, unit },
-}: {
-  ingredient: addIngredient;
-}) => {
+  ingredient: { name, unit, quantity },
+  callback,
+}: Prop) => {
   const [unitState, setUnitState] = useState(unit);
   const [quantState, setQuantState] = useState(quantity);
   const [editState, setEdiState] = useState(false);
@@ -16,15 +20,23 @@ const EditIngredient = ({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    await upsertExtraIngredient({name, quantity, unit});
+    await upsertExtraIngredient({
+      name,
+      quantity: quantState,
+      unit: unitState,
+    });
     setEdiState(false);
+  };
+  const handleDelete = async () => {
+    await deleteExraIngredient(name);
+    await callback();
   };
   if (!editState) {
     return (
-      <li className="border-2  grid grid-cols-5">
+      <li className="border-2 grid grid-cols-5 items-center">
         <p>{name}</p>
-        <p>{quantity}</p>
-        <p>{unit}</p>
+        <p>{quantState}</p>
+        <p>{unitState}</p>
         <button
           className="border-2"
           type="button"
@@ -34,13 +46,13 @@ const EditIngredient = ({
         >
           edit
         </button>
-        <DeleteButton callback={() => console.log('delete')} />
+        <DeleteButton callback={() => handleDelete()} />
       </li>
     );
   } else {
     return (
       <li className="border-2">
-        <form className="">
+        <form className="grid grid-cols-5">
           <p>{name}</p>
           <input
             id="edit-quantity"
@@ -56,12 +68,13 @@ const EditIngredient = ({
             onChange={e => setUnitState(e.target.value)}
           >
             {units.map(u => (
-              <option value={unitState} key={u.abr}>
+              <option key={u.abr}>
                 {u.abr}
               </option>
             ))}
           </select>
           <button onClick={handleSave}>save</button>
+          <button onClick={() => setEdiState(false)}>cancel</button>
         </form>
       </li>
     );
