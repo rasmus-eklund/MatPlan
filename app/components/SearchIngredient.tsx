@@ -6,6 +6,7 @@ import { IngredientType } from '@/types';
 import { useDebounce } from 'usehooks-ts';
 
 type Prop = { callback: (ingredient: string) => Promise<void> };
+
 const SearchIngredients = ({ callback }: Prop) => {
   const [allIngredients, setAllIngredients] = useState<IngredientType[]>([]);
   const [search, setSearch] = useState('');
