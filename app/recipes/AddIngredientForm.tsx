@@ -12,7 +12,7 @@ const AddIngredientForm = () => {
   const [ingList, setIngList] = useState<addIngredient[]>(currentList);
 
   const updatedIngredient = {
-    ingredientName: ingName,
+    name: ingName,
     quantity: quantity,
     unit: unit,
   };
@@ -20,6 +20,7 @@ const AddIngredientForm = () => {
     <>
       <div
         onSubmit={(e) => {
+          e.preventDefault()
           setIngname("");
           setQuantity(0);
           setUnit("");
@@ -47,8 +48,9 @@ const AddIngredientForm = () => {
         />
         <button
           type="submit"
-          onClick={() => {
+          onClick={(e) => {
             ingList.push(updatedIngredient);
+            e.preventDefault()
             localStorage.setItem("ingList", JSON.stringify(ingList));
           }}
         >

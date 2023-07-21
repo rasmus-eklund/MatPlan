@@ -3,16 +3,16 @@
 import React, { useEffect, useState } from 'react';
 import SearchIngredients from '../components/SearchIngredient';
 import { getExtraIngredients, upsertExtraIngredient } from '../db/prisma';
-import { ExtraIngredient } from '@/types';
+import { addIngredient } from '@/types';
 import Ingredient from './Ingredient';
 
 const Ingredients = () => {
-  const [ingredients, setIngredients] = useState<ExtraIngredient[]>([]);
+  const [ingredients, setIngredients] = useState<addIngredient[]>([]);
   useEffect(() => {
     getExtraIngredients().then(ings => setIngredients(ings));
   }, []);
   const addIngredient = async (name: string) => {
-    const ingredient: ExtraIngredient = {
+    const ingredient: addIngredient = {
       name,
       quantity: 1,
       unit: 'st',
