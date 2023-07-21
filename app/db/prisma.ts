@@ -1,6 +1,6 @@
 'use server';
 import {
-  ExtraIngredient,
+  addIngredient,
   FullRecipe,
   IngredientType,
   Recipe_ingredient,
@@ -139,7 +139,7 @@ export const getExtraIngredients = async () => {
   return [];
 };
 
-export const upsertExtraIngredient = async (ing: ExtraIngredient) => {
+export const upsertExtraIngredient = async (ing: addIngredient) => {
   const userId = await getUser();
   if (userId) {
     const newIng: extra_ingredient = {
@@ -170,6 +170,7 @@ export const updateRecipe = async (recipe: FullRecipe) => {
       userId: recipe.userId,
     },
   });
+  return recipe.id;
 };
 
 export const updateIngredient = async (ingredient: Recipe_ingredient) => {
