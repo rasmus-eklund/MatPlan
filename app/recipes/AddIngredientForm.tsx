@@ -1,5 +1,6 @@
 import { addIngredient } from '@/types';
 import { useState } from 'react';
+import SearchIngredients from '../components/SearchIngredient';
 
 const AddIngredientForm = () => {
   const data = localStorage.getItem('ingList') as string;
@@ -9,6 +10,8 @@ const AddIngredientForm = () => {
   const [quantity, setQuantity] = useState<number>(0);
   const [unit, setUnit] = useState<string>('');
   const [ingList, setIngList] = useState<addIngredient[]>([]);
+
+  const populateIng = (ingName: string) => {};
 
   return (
     <>
@@ -33,6 +36,7 @@ const AddIngredientForm = () => {
           value={unit}
           onChange={e => setUnit(e.target.value)}
         />
+        <SearchIngredients callback={} />
         <button
           onClick={e => {
             e.preventDefault();
