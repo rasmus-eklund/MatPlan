@@ -1,14 +1,14 @@
-import { Recipe_ingredient, addIngredient } from "@/types";
-import { useEffect, useState } from "react";
-import { updateIngredient } from "../db/prisma";
+import { Recipe_ingredient, addIngredient } from '@/types';
+import { useEffect, useState } from 'react';
+import { updateIngredient } from '../db/prisma';
 
 const AddIngredientForm = () => {
-  const data = localStorage.getItem("ingList") as string;
+  const data = localStorage.getItem('ingList') as string;
   const currentList = JSON.parse(data);
 
-  const [ingName, setIngname] = useState<string>("");
+  const [ingName, setIngname] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(0);
-  const [unit, setUnit] = useState<string>("");
+  const [unit, setUnit] = useState<string>('');
   const [ingList, setIngList] = useState<addIngredient[]>(currentList);
 
   const updatedIngredient = {
@@ -18,19 +18,12 @@ const AddIngredientForm = () => {
   };
   return (
     <>
-      <div
-        onSubmit={(e) => {
-          e.preventDefault()
-          setIngname("");
-          setQuantity(0);
-          setUnit("");
-        }}
-      >
+      <div>
         <label>Ingredient Name:</label>
         <input
           type="text"
           value={ingName}
-          onChange={(e) => {
+          onChange={e => {
             setIngname(e.target.value);
           }}
         />
@@ -38,20 +31,23 @@ const AddIngredientForm = () => {
         <input
           type="number"
           value={quantity}
-          onChange={(e) => setQuantity(parseInt(e.target.value))}
+          onChange={e => setQuantity(parseInt(e.target.value))}
         />
         <label>Unit:</label>
         <input
           type="text"
           value={unit}
-          onChange={(e) => setUnit(e.target.value)}
+          onChange={e => setUnit(e.target.value)}
         />
         <button
           type="submit"
-          onClick={(e) => {
+          onClick={e => {
             ingList.push(updatedIngredient);
-            e.preventDefault()
-            localStorage.setItem("ingList", JSON.stringify(ingList));
+            e.preventDefault();
+            localStorage.setItem('ingList', JSON.stringify(ingList));
+            setIngname('');
+            setQuantity(0);
+            setUnit('');
           }}
         >
           Add
