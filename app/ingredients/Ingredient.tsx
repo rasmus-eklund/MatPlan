@@ -2,23 +2,22 @@
 import { ExtraIngredient } from '@/types';
 import React, { ChangeEvent, useState } from 'react';
 import units from '../db/units';
-import { updateExtraIngredient } from '../db/prisma';
+import { upsertExtraIngredient } from '../db/prisma';
 
 const Ingredient = ({
-  ingredient: { name, quantity, unit, userId },
+  ingredient: { name, quantity, unit },
 }: {
   ingredient: ExtraIngredient;
 }) => {
   const [unitState, setUnitState] = useState(unit);
   const [quantState, setQuantState] = useState(quantity);
   const update = async () => {
-    updateExtraIngredient({
+    upsertExtraIngredient({
       name,
-      userId,
       quantity: quantState,
       unit: unitState,
     });
-  }
+  };
   const handleQuant = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     // setQuantState(e.target.value);
     // await update();
@@ -26,7 +25,7 @@ const Ingredient = ({
 
   const handleUnit = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     // setUnitState()
-  }
+  };
   return (
     <>
       <p>{name}</p>
@@ -38,7 +37,9 @@ const Ingredient = ({
         onChange={handleUnit}
       >
         {units.map(u => (
-          <option value={unitState} key={u.abr}>{u.abr}</option>
+          <option value={unitState} key={u.abr}>
+            {u.abr}
+          </option>
         ))}
       </select>
     </>

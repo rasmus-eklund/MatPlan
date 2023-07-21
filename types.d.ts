@@ -16,7 +16,6 @@ export type Recipe_ingredient = {
 
 export type ExtraIngredient = {
   name: string;
-  userId: string;
   unit: string;
   quantity: number;
 };
