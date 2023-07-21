@@ -1,13 +1,13 @@
 'use client';
-import { ExtraIngredient } from '@/types';
 import React, { ChangeEvent, useState } from 'react';
 import units from '../db/units';
 import { upsertExtraIngredient } from '../db/prisma';
+import { addIngredient } from '@/types';
 
 const Ingredient = ({
   ingredient: { name, quantity, unit },
 }: {
-  ingredient: ExtraIngredient;
+  ingredient: addIngredient;
 }) => {
   const [unitState, setUnitState] = useState(unit);
   const [quantState, setQuantState] = useState(quantity);
