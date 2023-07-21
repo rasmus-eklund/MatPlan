@@ -16,7 +16,7 @@ const Ingredients = () => {
       name,
       quantity: 1,
       unit: 'st',
-      userId: 'Rasmus',
+      userId: 'jarjar.jarsson@gmail.com',
     };
     await upsertIngredient(ingredient);
     await getExtraIngredients().then(ings => setIngredients(ings));

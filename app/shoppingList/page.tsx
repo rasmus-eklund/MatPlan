@@ -11,10 +11,10 @@ const ShoppingList = () => {
   const [filter, setFilter] = useState({group: true})
 
   useEffect(() => {
-    getShoppingList('Rasmus').then(i => setIngredients(i));
+    // getShoppingList('jarjar.jarsson@gmail.com').then(i => setIngredients(i));
   }, []);
 
-  // const storeOrder = await getStoreOrder('Rasmus');
+  // const storeOrder = await getStoreOrder('jarjar.jarsson@gmail.com');
   // const OrderId = storeOrder.map(s => s.id);
   // const sortedIngredient = ingredients.sort(
   //   (a, b) => OrderId.indexOf(a.subCategory) - OrderId.indexOf(b.subCategory)

@@ -10,7 +10,7 @@ const Menu = (props: Props) => {
   const [menu, setMenu] = useState<MenuItemType[]>([]);
 
   useEffect(() => {
-    getMenuItems("Rasmus").then((data) => setMenu(data));
+    getMenuItems("jarjar.jarsson@gmail.com").then((data) => setMenu(data));
   }, []);
   return (
     <>
