@@ -1,8 +1,8 @@
 'use client'
 import { FullRecipe, Recipe_ingredient } from '@/types';
 import React, { useState } from 'react';
-import { updateRecipe } from '../api/prisma';
 import IngredientForm from './IngredientForm';
+import { updateRecipe } from '../db/prisma';
 
 const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
   const [recipeName, setRecipeName] = useState<string>(recipe.name);

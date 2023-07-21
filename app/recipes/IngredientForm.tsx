@@ -1,6 +1,6 @@
 import { Recipe_ingredient } from "@/types";
 import { useState } from "react";
-import { updateIngredient } from "../api/prisma";
+import { updateIngredient } from "../db/prisma";
 
 const IngredientForm = ({ ingredient }: { ingredient: Recipe_ingredient }) => {
   const [ingName, setIngname] = useState<string>(ingredient.ingredientName);
