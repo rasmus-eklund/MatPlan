@@ -15,6 +15,7 @@ const Navbar = () => {
 
   return (
     <>
+   
       <header className='bg-black flex-row space-x-1 text-white'>
         <h1
           data-value="RECIPE JAR"
@@ -23,6 +24,8 @@ const Navbar = () => {
           RECIPE JAR
         </h1>
         <Login />
+    
+      
       </header>
       <nav>
         <ul className="flex flex-row m-0 max-w-full justify-center sm:justify-start">

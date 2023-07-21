@@ -33,17 +33,17 @@ const Recipes = () => {
     let data: Recipe[];
     switch (filter) {
       case 'ingredients':
-        data = await getRecipeByIngredient(search, 'Rasmus');
+        data = await getRecipeByIngredient(search);
         setRecipeResult(data);
         break;
 
       case 'name':
-        data = await getRecipeByName(search, 'Rasmus');
+        data = await getRecipeByName(search);
         setRecipeResult(data);
         break;
 
       case 'instruction':
-        data = await getRecipeByInstructions(search, 'Rasmus');
+        data = await getRecipeByInstructions(search);
         setRecipeResult(data);
         break;
 
@@ -53,7 +53,7 @@ const Recipes = () => {
   };
 
   const handleShowRecipe = async (id: string) => {
-    const res = await getRecipeById(id, 'Rasmus');
+    const res = await getRecipeById(id);
     const recipe: FullRecipe = JSON.parse(res);
     setSelectedRecipe(recipe);
   };
@@ -123,7 +123,6 @@ const Recipes = () => {
               onClick={() =>
                 addRecipeToMenu({
                   id: selectedRecipe.id,
-                  userId: 'Rasmus',
                   portions: selectedRecipe.portions,
                 })
               }
@@ -132,7 +131,7 @@ const Recipes = () => {
             </button>
             <button
               className="border-2 p-1.5 px-4 rounded-md border-black m-4"
-              onClick={() => removeRecipeFromMenu(selectedRecipe.id, 'Rasmus')}
+              onClick={() => removeRecipeFromMenu(selectedRecipe.id)}
             >
               delete
             </button>

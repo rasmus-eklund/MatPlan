@@ -8,10 +8,12 @@ const ShoppingList = () => {
   const [sortedIngredients, setSortedIngredients] = useState<
     ShoppingListType[]
   >([]);
-  const [filter, setFilter] = useState({group: true})
+  const [filter, setFilter] = useState({ group: true });
 
   useEffect(() => {
-    getShoppingList('Rasmus').then(i => setIngredients(i));
+    getShoppingList()
+      .then(i => setIngredients(i))
+      .then(() => console.log(ingredients));
   }, []);
 
   // const storeOrder = await getStoreOrder('Rasmus');

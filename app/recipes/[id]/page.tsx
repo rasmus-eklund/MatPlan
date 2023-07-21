@@ -8,7 +8,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<FullRecipe | null>(null);
   const [editMode, setEditMode] = useState<Boolean>(false);
   const handleGetRecipe = async (id: string) => {
-    const res = await getRecipeById(id, 'Rasmus');
+    const res = await getRecipeById(id);
     const data: FullRecipe = JSON.parse(res);
     setRecipe(data);
   };
