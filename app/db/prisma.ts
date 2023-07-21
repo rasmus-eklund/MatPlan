@@ -7,10 +7,11 @@ import {
 } from '@/types';
 import { prisma } from './db';
 import { Prisma, extra_ingredient } from '@prisma/client';
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { OPTIONS } from '../api/auth/[...nextauth]/route';
 
 const getUser = async () => {
-  const session = await getSession();
+  const session = await getServerSession(OPTIONS);
   if (session?.user?.email) {
     return session.user.email;
   }
@@ -19,81 +20,111 @@ const getUser = async () => {
 export const getRecipeByName = async (search: string) => {
   const userId = await getUser();
   if (userId) {
-    await prisma.recipe.findMany({
+    return await prisma.recipe.findMany({
       where: { userId, name: { contains: search, mode: 'insensitive' } },
     });
   }
   return [];
 };
 
-export const getRecipeByInstructions = async (search: string, userId: string) =>
-  await prisma.recipe.findMany({
-    where: { userId, instruction: { contains: search, mode: 'insensitive' } },
-  });
+export const getRecipeByInstructions = async (search: string) => {
+  const userId = await getUser();
+  if (userId) {
+    return await prisma.recipe.findMany({
+      where: { userId, instruction: { contains: search, mode: 'insensitive' } },
+    });
+  }
+  return [];
+};
 
-export const getRecipeByIngredient = async (search: string, userId: string) =>
-  await prisma.recipe.findMany({
-    where: {
-      userId,
-      recipe_ingredient: {
-        some: { ingredientName: { contains: search, mode: 'insensitive' } },
+export const getRecipeByIngredient = async (search: string) => {
+  const userId = await getUser();
+  if (userId) {
+    return await prisma.recipe.findMany({
+      where: {
+        userId,
+        recipe_ingredient: {
+          some: { ingredientName: { contains: search, mode: 'insensitive' } },
+        },
       },
-    },
-  });
+    });
+  }
+  return [];
+};
 
-export const getRecipeById = async (id: string, userId: string) => {
-  const data = await prisma.recipe.findUnique({
-    where: { id: id, userId },
-    include: { recipe_ingredient: true },
-  });
-  return JSON.stringify(data);
+export const getRecipeById = async (id: string) => {
+  const userId = await getUser();
+  if (userId) {
+    const data = await prisma.recipe.findUnique({
+      where: { id: id, userId },
+      include: { recipe_ingredient: true },
+    });
+    return JSON.stringify(data);
+  }
+  return '[]';
 };
 
 export const addRecipeToMenu = async ({
   id,
-  userId,
   portions,
 }: {
   id: string;
-  userId: string;
   portions: number;
 }) => {
-  await prisma.menu.create({ data: { recipeId: id, userId, portions } });
+  const userId = await getUser();
+  if (userId) {
+    await prisma.menu.create({ data: { recipeId: id, userId, portions } });
+  }
 };
 
-export const removeRecipeFromMenu = async (id: string, userId: string) => {
-  await prisma.menu.delete({ where: { recipeId: id, userId } });
+export const removeRecipeFromMenu = async (id: string) => {
+  const userId = await getUser();
+  if (userId) {
+    await prisma.menu.delete({ where: { recipeId: id, userId } });
+  }
 };
 
-export const getMenuItems = async (userId: string) =>
-  await prisma.menu.findMany({ where: { userId }, include: { recipe: true } });
+export const getMenuItems = async () => {
+  const userId = await getUser();
+  if (userId) {
+    return await prisma.menu.findMany({
+      where: { userId },
+      include: { recipe: true },
+    });
+  }
+  return [];
+};
 
-export const getShoppingList = async (userId: string) => {
-  const queryRes = await prisma.menu.findMany({
-    where: { userId },
-    include: {
-      recipe: {
-        include: {
-          recipe_ingredient: {
-            include: { ingredient: { include: { subcategory: true } } },
+export const getShoppingList = async () => {
+  const userId = await getUser();
+  if (userId) {
+    const queryRes = await prisma.menu.findMany({
+      where: { userId },
+      include: {
+        recipe: {
+          include: {
+            recipe_ingredient: {
+              include: { ingredient: { include: { subcategory: true } } },
+            },
           },
         },
       },
-    },
-  });
-  return queryRes.flatMap(r =>
-    r.recipe.recipe_ingredient.map(i => ({
-      name: i.ingredientName,
-      quantity: i.quantity,
-      unit: i.unit,
-      subCategory: i.ingredient.subcategoryId,
-      id: i.id,
-      recipe: r.recipe.name,
-    }))
-  );
+    });
+    return queryRes.flatMap(r =>
+      r.recipe.recipe_ingredient.map(i => ({
+        name: i.ingredientName,
+        quantity: i.quantity,
+        unit: i.unit,
+        subCategory: i.ingredient.subcategoryId,
+        id: i.id,
+        recipe: r.recipe.name,
+      }))
+    );
+  }
+  return [];
 };
 
-export const getStoreOrder = async (userId: string) =>
+export const getStoreOrder = async () =>
   await prisma.subcategory.findMany();
 
 export const getIngredients = async (): Promise<IngredientType[]> =>
@@ -111,7 +142,6 @@ export const getExtraIngredients = async () => {
 export const upsertExtraIngredient = async (ing: ExtraIngredient) => {
   const userId = await getUser();
   if (userId) {
-    console.log('upsert extra ing prisma: ', userId);
     const newIng: extra_ingredient = {
       ...ing,
       userId,
@@ -156,5 +186,4 @@ export const updateIngredient = async (ingredient: Recipe_ingredient) => {
       recipeId: ingredient.recipeId,
     },
   });
-  console.log(ingredient);
 };
