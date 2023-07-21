@@ -1,7 +1,7 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { useDebounce } from 'usehooks-ts';
-import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from '@/types';
+"use client";
+import { useEffect, useState } from "react";
+import { useDebounce } from "usehooks-ts";
+import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from "@/types";
 import {
   addRecipeToMenu,
   getRecipeById,
@@ -9,25 +9,26 @@ import {
   getRecipeByInstructions,
   getRecipeByName,
   removeRecipeFromMenu,
-} from '../db/prisma';
-import RecipeForm from './RecipeForm';
-import Link from 'next/link';
+} from "../db/prisma";
+import RecipeForm from "./RecipeForm";
+import Link from "next/link";
+import AddRecipeForm from "./AddRecipeForm";
 
 const Recipes = () => {
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState<FilterParams>('name');
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState<FilterParams>("name");
   const [recipeResult, setRecipeResult] = useState<Recipe[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<FullRecipe | null>(null);
   const debouncedSearch = useDebounce(search, 500);
 
-  const emptyRecipe:FullRecipe = {
+  const emptyRecipe: FullRecipe = {
     id: "",
-    name:'',
+    name: "",
     portions: 0,
     recipe_ingredient: [],
-    instruction:'',
-    userId:'Rasmus'
-  }
+    instruction: "",
+    userId: "jarjar.jarsson@gmail.com",
+  };
 
   const handleSearch = async ({ filter, search }: SearchRecipeParams) => {
     let data: Recipe[];
@@ -59,7 +60,7 @@ const Recipes = () => {
   };
 
   useEffect(() => {
-    handleSearch({ filter, search: debouncedSearch }).then(r => {});
+    handleSearch({ filter, search: debouncedSearch }).then((r) => {});
   }, [debouncedSearch, filter]);
   return (
     <>
@@ -69,7 +70,7 @@ const Recipes = () => {
         </h1>
         <form
           className="recipe__form"
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
           }}
         >
@@ -84,7 +85,7 @@ const Recipes = () => {
             id="search"
             type="text"
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <br />
           <label
@@ -98,7 +99,7 @@ const Recipes = () => {
             name="filter"
             id="filter"
             value={filter}
-            onChange={e => setFilter(e.target.value as FilterParams)}
+            onChange={(e) => setFilter(e.target.value as FilterParams)}
           >
             <option value="name">Namn</option>
             <option value="ingredients">Ingredient</option>
@@ -107,11 +108,14 @@ const Recipes = () => {
         </form>
         <div>
           <label>Add new recipe</label>
-          <RecipeForm recipe={emptyRecipe} />
+          <AddRecipeForm />
         </div>
         <ul>
-          {recipeResult.map(r => (
-            <li className="border-2 p-1.5 px-4 rounded-md border-black m-4" key={r.id}>
+          {recipeResult.map((r) => (
+            <li
+              className="border-2 p-1.5 px-4 rounded-md border-black m-4"
+              key={r.id}
+            >
               <Link href={`/recipes/${r.id}`}>{r.name}</Link>
             </li>
           ))}
@@ -140,7 +144,7 @@ const Recipes = () => {
               {selectedRecipe.name} <br /> {selectedRecipe.portions}
             </h3>
             <ul className="py-4 border-2 border-black rounded-md m-4">
-              {selectedRecipe.recipe_ingredient.map(i => (
+              {selectedRecipe.recipe_ingredient.map((i) => (
                 <li className="m-4 underline" key={i.id}>
                   <span>{i.ingredientName}</span>
                   <span>{i.quantity}</span>
@@ -151,7 +155,9 @@ const Recipes = () => {
             <p className="p-4 border-2 border-black rounded-md m-4">
               {selectedRecipe.instruction}
             </p>
-            <button className="border-2 p-1.5 px-4 rounded-md border-black m-4">Edit</button>
+            <button className="border-2 p-1.5 px-4 rounded-md border-black m-4">
+              Edit
+            </button>
             <RecipeForm recipe={selectedRecipe} />
           </section>
         )}

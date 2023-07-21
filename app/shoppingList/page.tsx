@@ -16,7 +16,7 @@ const ShoppingList = () => {
       .then(() => console.log(ingredients));
   }, []);
 
-  // const storeOrder = await getStoreOrder('Rasmus');
+  // const storeOrder = await getStoreOrder('jarjar.jarsson@gmail.com');
   // const OrderId = storeOrder.map(s => s.id);
   // const sortedIngredient = ingredients.sort(
   //   (a, b) => OrderId.indexOf(a.subCategory) - OrderId.indexOf(b.subCategory)
