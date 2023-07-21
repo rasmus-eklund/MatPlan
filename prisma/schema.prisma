@@ -79,6 +79,7 @@ model menu {
   recipeId String @unique
   userId   String
   portions Int
+  day      String
   recipe   recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   user     user   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
