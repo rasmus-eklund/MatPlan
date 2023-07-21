@@ -14,11 +14,6 @@ export type Recipe_ingredient = {
   ingredientName: string;
 };
 
-export type ExtraIngredient = {
-  name: string;
-  unit: string;
-  quantity: number;
-};
 
 export type FullRecipe = {
   id: string;
@@ -58,7 +53,7 @@ export type IngredientType = {
 };
 
 export type addIngredient = {
-  ingredientName: string;
+  name: string;
   quantity: number;
   unit: string;
 };
