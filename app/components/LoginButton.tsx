@@ -7,17 +7,19 @@ export default function Login() {
 
   if (session) {
     return (
-      <>
-        <button onClick={() => signOut()} type="button">
+    <>
+      <div className='flex flex-row font-semibold'>
+        <button className='text-end' onClick={() => signOut()} type="button">
           Sign out
         </button>
         <UserCard user={session.user} />
-      </>
+        </div>
+        </>
     );
   } else {
     return (
       <>
-        <button onClick={() => signIn()} type="button">
+        <button className='text-center' onClick={() => signIn()} type="button">
           Sign in
         </button>
       </>
