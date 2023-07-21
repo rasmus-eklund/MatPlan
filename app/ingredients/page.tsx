@@ -5,6 +5,7 @@ import SearchIngredients from '../components/SearchIngredient';
 import { getExtraIngredients, upsertExtraIngredient } from '../db/prisma';
 import { addIngredient } from '@/types';
 import Ingredient from './Ingredient';
+import EditIngredient from '../components/EditIngredient';
 
 const Ingredients = () => {
   const [ingredients, setIngredients] = useState<addIngredient[]>([]);
@@ -26,7 +27,8 @@ const Ingredients = () => {
       <SearchIngredients callback={addIngredient} />
       <ul>
         {ingredients.map(i => (
-          <Ingredient ingredient={i} key={i.name + '_extra'} />
+          // <Ingredient ingredient={i} key={i.name + '_extra'} />
+          <EditIngredient ingredient={i} key={i.name + '_extra'} />
         ))}
       </ul>
     </>
