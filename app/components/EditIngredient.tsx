@@ -2,13 +2,13 @@ import { addIngredient } from '@/types';
 import React, { useState } from 'react';
 import units from '../db/units';
 import DeleteButton from './DeleteButton';
+import { upsertExtraIngredient } from '../db/prisma';
 
 const EditIngredient = ({
   ingredient: { name, quantity, unit },
 }: {
   ingredient: addIngredient;
 }) => {
-  const [nameState, setNameState] = useState(name);
   const [unitState, setUnitState] = useState(unit);
   const [quantState, setQuantState] = useState(quantity);
   const [editState, setEdiState] = useState(false);
@@ -16,7 +16,7 @@ const EditIngredient = ({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    console.log('hi');
+    await upsertExtraIngredient({name, quantity, unit});
     setEdiState(false);
   };
   if (!editState) {
@@ -39,19 +39,16 @@ const EditIngredient = ({
     );
   } else {
     return (
-      <li className="grid grid-cols-5">
-        <form>
-          <label>Name:</label>
+      <li className="border-2">
+        <form className="">
           <p>{name}</p>
-          <label>Quantity:</label>
           <input
             id="edit-quantity"
             type="number"
             name="quantity"
-            value={quantity}
+            value={quantState}
             onChange={e => setQuantState(Number(e.target.value))}
           />
-          <label>Unit:</label>
           <select
             id="edit-unit"
             name="unit"

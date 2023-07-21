@@ -26,7 +26,6 @@ const Ingredients = () => {
       <SearchIngredients callback={addIngredient} />
       <ul>
         {ingredients.map(i => (
-          // <Ingredient ingredient={i} key={i.name + '_extra'} />
           <EditIngredient ingredient={i} key={i.name + '_extra'} />
         ))}
       </ul>
