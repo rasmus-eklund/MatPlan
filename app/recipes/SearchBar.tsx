@@ -3,14 +3,10 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
 import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from "@/types";
 import {
-  addRecipeToMenu,
-  getRecipeById,
   getRecipeByIngredient,
   getRecipeByInstructions,
   getRecipeByName,
-  removeRecipeFromMenu,
 } from "../db/prisma";
-import RecipeForm from "./RecipeForm";
 import Link from "next/link";
 import AddRecipeForm from "./AddRecipeForm";
 
@@ -18,7 +14,6 @@ const Recipes = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<FilterParams>("name");
   const [recipeResult, setRecipeResult] = useState<Recipe[]>([]);
-  const [selectedRecipe, setSelectedRecipe] = useState<FullRecipe | null>(null);
   const debouncedSearch = useDebounce(search, 500);
 
   const emptyRecipe: FullRecipe = {
@@ -51,12 +46,6 @@ const Recipes = () => {
       default:
         break;
     }
-  };
-
-  const handleShowRecipe = async (id: string) => {
-    const res = await getRecipeById(id);
-    const recipe: FullRecipe = JSON.parse(res);
-    setSelectedRecipe(recipe);
   };
 
   useEffect(() => {
@@ -120,47 +109,6 @@ const Recipes = () => {
             </li>
           ))}
         </ul>
-        {selectedRecipe && (
-          <section>
-            <button
-              className="border-2 p-1.5 px-4 rounded-md border-black m-4"
-              onClick={() =>
-                addRecipeToMenu({
-                  id: selectedRecipe.id,
-                  portions: selectedRecipe.portions,
-                })
-              }
-            >
-              add
-            </button>
-            <button
-              className="border-2 p-1.5 px-4 rounded-md border-black m-4"
-              onClick={() => removeRecipeFromMenu(selectedRecipe.id)}
-            >
-              delete
-            </button>
-
-            <h3 className="m-4 font-bold ">
-              {selectedRecipe.name} <br /> {selectedRecipe.portions}
-            </h3>
-            <ul className="py-4 border-2 border-black rounded-md m-4">
-              {selectedRecipe.recipe_ingredient.map((i) => (
-                <li className="m-4 underline" key={i.id}>
-                  <span>{i.ingredientName}</span>
-                  <span>{i.quantity}</span>
-                  <span>{i.unit}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="p-4 border-2 border-black rounded-md m-4">
-              {selectedRecipe.instruction}
-            </p>
-            <button className="border-2 p-1.5 px-4 rounded-md border-black m-4">
-              Edit
-            </button>
-            <RecipeForm recipe={selectedRecipe} />
-          </section>
-        )}
       </main>
     </>
   );
