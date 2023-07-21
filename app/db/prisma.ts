@@ -7,11 +7,24 @@ import {
 } from '@/types';
 import { prisma } from './db';
 import { Prisma, extra_ingredient } from '@prisma/client';
+import { getSession } from 'next-auth/react';
 
-export const getRecipeByName = async (search: string, userId: string) =>
-  await prisma.recipe.findMany({
-    where: { userId, name: { contains: search, mode: 'insensitive' } },
-  });
+const getUser = async () => {
+  const session = await getSession();
+  if (session?.user?.email) {
+    return session.user.email;
+  }
+};
+
+export const getRecipeByName = async (search: string) => {
+  const userId = await getUser();
+  if (userId) {
+    await prisma.recipe.findMany({
+      where: { userId, name: { contains: search, mode: 'insensitive' } },
+    });
+  }
+  return [];
+};
 
 export const getRecipeByInstructions = async (search: string, userId: string) =>
   await prisma.recipe.findMany({
@@ -86,22 +99,30 @@ export const getStoreOrder = async (userId: string) =>
 export const getIngredients = async (): Promise<IngredientType[]> =>
   await prisma.ingredient.findMany();
 
-export const getExtraIngredients = async () =>
-  (await prisma.extra_ingredient.findMany()).map(i => ({
-    ...i,
-    quantity: Number(i.quantity),
-  }));
+export const getExtraIngredients = async () => {
+  const userId = await getUser();
+  if (userId) {
+    const data = await prisma.extra_ingredient.findMany({ where: { userId } });
+    return data.map(i => ({ ...i, quantity: Number(i.quantity) }));
+  }
+  return [];
+};
 
-export const upsertIngredient = async (ing: ExtraIngredient) => {
-  const newIng: extra_ingredient = {
-    ...ing,
-    quantity: new Prisma.Decimal(ing.quantity),
-  };
-  await prisma.extra_ingredient.upsert({
-    where: { name: ing.name },
-    update: newIng,
-    create: newIng,
-  });
+export const upsertExtraIngredient = async (ing: ExtraIngredient) => {
+  const userId = await getUser();
+  if (userId) {
+    console.log('upsert extra ing prisma: ', userId);
+    const newIng: extra_ingredient = {
+      ...ing,
+      userId,
+      quantity: new Prisma.Decimal(ing.quantity),
+    };
+    await prisma.extra_ingredient.upsert({
+      where: { name: ing.name, userId },
+      update: newIng,
+      create: newIng,
+    });
+  }
 };
 
 export const updateRecipe = async (recipe: FullRecipe) => {
@@ -136,11 +157,4 @@ export const updateIngredient = async (ingredient: Recipe_ingredient) => {
     },
   });
   console.log(ingredient);
-};
-
-export const updateExtraIngredient = async (ingredient: ExtraIngredient) => {
-  await prisma.extra_ingredient.update({
-    where: { name: ingredient.name },
-    data: ingredient,
-  });
 };
