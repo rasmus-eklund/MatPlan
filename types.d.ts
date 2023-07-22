@@ -7,13 +7,12 @@ export type Recipe = {
 };
 
 export type Recipe_ingredient = {
-  id: string;
+  id?: string;
   recipeId: string;
   quantity: number;
   unit: string;
   ingredientName: string;
 };
-
 
 export type FullRecipe = {
   id: string;

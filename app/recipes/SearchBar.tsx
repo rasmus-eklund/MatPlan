@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
 import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from "@/types";
 import {
+  deleteRecipe,
   getRecipeByIngredient,
   getRecipeByInstructions,
   getRecipeByName,
@@ -16,29 +17,27 @@ const Recipes = () => {
   const [recipeResult, setRecipeResult] = useState<Recipe[]>([]);
   const debouncedSearch = useDebounce(search, 500);
 
-  const emptyRecipe: FullRecipe = {
-    id: "",
-    name: "",
-    portions: 0,
-    recipe_ingredient: [],
-    instruction: "",
-    userId: "jarjar.jarsson@gmail.com",
+  const handleDelete = async (id: string) => {
+    await deleteRecipe(id);
+    setSearch("");
+    const data = await getRecipeByName(search);
+    setRecipeResult(data);
   };
 
   const handleSearch = async ({ filter, search }: SearchRecipeParams) => {
     let data: Recipe[];
     switch (filter) {
-      case 'ingredients':
+      case "ingredients":
         data = await getRecipeByIngredient(search);
         setRecipeResult(data);
         break;
 
-      case 'name':
+      case "name":
         data = await getRecipeByName(search);
         setRecipeResult(data);
         break;
 
-      case 'instruction':
+      case "instruction":
         data = await getRecipeByInstructions(search);
         setRecipeResult(data);
         break;
@@ -48,8 +47,14 @@ const Recipes = () => {
     }
   };
 
+  const handleAddRecipe = async () => {
+    setSearch("");
+    const data = await getRecipeByName(search);
+    setRecipeResult(data);
+  };
+
   useEffect(() => {
-    handleSearch({ filter, search: debouncedSearch }).then((r) => {});
+    handleSearch({ filter, search: debouncedSearch });
   }, [debouncedSearch, filter]);
   return (
     <>
@@ -97,7 +102,7 @@ const Recipes = () => {
         </form>
         <div>
           <label>Add new recipe</label>
-          <AddRecipeForm />
+          <AddRecipeForm callback={handleAddRecipe} />
         </div>
         <ul>
           {recipeResult.map((r) => (
@@ -106,6 +111,14 @@ const Recipes = () => {
               key={r.id}
             >
               <Link href={`/recipes/${r.id}`}>{r.name}</Link>
+              <br></br>
+              <button
+                onClick={() => {
+                  handleDelete(r.id);
+                }}
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>
