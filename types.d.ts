@@ -14,7 +14,6 @@ export type Recipe_ingredient = {
   ingredientName: string;
 };
 
-
 export type FullRecipe = {
   id: string;
   instruction: string;
@@ -24,7 +23,7 @@ export type FullRecipe = {
   recipe_ingredient: Recipe_ingredient[];
 };
 
-export type FilterParams = "name" | "ingredients" | "instruction";
+export type FilterParams = 'name' | 'ingredients' | 'instruction';
 export type SearchRecipeParams = {
   filter: FilterParams;
   search: string;
@@ -35,6 +34,7 @@ export type MenuItem = {
   recipe: Recipe;
   recipeId: string;
   userId: string;
+  day: string;
 };
 
 export type ShoppingListType = {
@@ -55,4 +55,22 @@ export type addIngredient = {
   name: string;
   quantity: number;
   unit: string;
+};
+
+export type Store = {
+  id: string;
+  name: string;
+  order: number[];
+};
+
+export type SubcategoryItem = {
+  id: number;
+  name: string;
+  category: string;
+};
+
+export type StoreCategory = {
+  id: string;
+  name: string;
+  order: SubcategoryItem[];
 };
