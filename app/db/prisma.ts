@@ -7,16 +7,7 @@ import {
 } from '@/types';
 import { prisma } from './db';
 import { Prisma, extra_ingredient } from '@prisma/client';
-import { getServerSession } from 'next-auth';
-import options from '../api/auth/[...nextauth]/options';
-
-const getUser = async () => {
-  const session = await getServerSession(options);
-  if (!session?.user?.email) {
-    throw new Error('No user');
-  }
-  return session.user.email;
-};
+import getUser from './getUser';
 
 export const getRecipeByName = async (search: string) => {
   const userId = await getUser();
@@ -63,7 +54,7 @@ export const addRecipeToMenu = async ({
   const userId = await getUser();
   console.log({ recipeId: id, userId, portions, day: 'monday' });
   await prisma.menu.create({
-    data: { recipeId: id, userId, portions, day: 'monday' },
+    data: { recipeId: id, userId, portions, day: 'Måndag' },
   });
 };
 
@@ -105,8 +96,6 @@ export const getShoppingList = async () => {
   );
 };
 
-export const getStoreOrder = async () => await prisma.subcategory.findMany();
-
 export const getIngredients = async (): Promise<IngredientType[]> =>
   await prisma.ingredient.findMany();
 
@@ -121,7 +110,7 @@ export const getExtraIngredients = async () => {
     quantity: Number(i.quantity),
     unit: i.unit,
     subCategory: i.ingredient.subcategoryId,
-    from: 'Egna varor'
+    from: 'Egna varor',
   }));
 };
 
@@ -183,3 +172,9 @@ export const deleteRecipe = async (id: string) => {
   const userId = await getUser();
   await prisma.recipe.delete({ where: { id, userId } });
 };
+
+export const getSubcategories = async () =>
+  await prisma.subcategory.findMany({ include: { category: true } });
+
+export const getCategories = async () =>
+  await prisma.category.findMany({ include: { subcategory: true } });
