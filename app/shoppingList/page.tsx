@@ -1,39 +1,62 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import {
-  getExtraIngredients,
-  getShoppingList,
-  getStoreOrder,
-} from '../db/prisma';
-import { ShoppingListType } from '@/types';
+import * as stores from '../db/stores';
+import { ShoppingListType, Store } from '@/types';
+import SelectStore from '../components/SelectStore';
+import { getExtraIngredients, getShoppingList } from '../db/prisma';
 
 const ShoppingList = () => {
   const [ingredients, setIngredients] = useState<ShoppingListType[]>([]);
   const [sortedIngredients, setSortedIngredients] = useState<
     ShoppingListType[]
   >([]);
+  const [storesState, setStoresState] = useState<Store[]>([]);
+  const [store, setStore] = useState<Store>();
   const [filter, setFilter] = useState({ group: true });
 
   useEffect(() => {
-    Promise.all([getShoppingList(), getExtraIngredients()]).then(([a, b])=> setIngredients([...a, ...b]))
+    stores
+      .getAll()
+      .then(s => {
+        setStore(s[0]);
+        setStoresState(s);
+      })
+      .then(() => Promise.all([getShoppingList(), getExtraIngredients()]))
+      .then(([a, b]) => setIngredients([...a, ...b]));
   }, []);
 
-  // const storeOrder = await getStoreOrder('jarjar.jarsson@gmail.com');
-  // const OrderId = storeOrder.map(s => s.id);
-  // const sortedIngredient = ingredients.sort(
-  //   (a, b) => OrderId.indexOf(a.subCategory) - OrderId.indexOf(b.subCategory)
-  // );
+  useEffect(() => {
+    if (store) {
+      const sortedIngredients = ingredients.sort(
+        (a, b) =>
+          store.order.indexOf(a.subCategory) -
+          store.order.indexOf(b.subCategory)
+      );
+      setSortedIngredients(sortedIngredients);
+    }
+  }, [store, ingredients]);
+
+  const handleSelectStore = async (id: string) => {
+    const selected = await stores.get(id);
+    setStore({ ...selected, order: selected.order.map(i => i.id) });
+  };
 
   return (
-    <ul>
-      {ingredients.map(i => (
-        <li key={i.name + '_shoppingList'} className="grid grid-cols-3">
-          <p>{i.name}</p>
-          <p>{i.quantity}</p>
-          <p>{i.unit}</p>
-        </li>
-      ))}
-    </ul>
+    <>
+      <SelectStore
+        stores={storesState}
+        callback={id => handleSelectStore(id)}
+      />
+      <ul>
+        {sortedIngredients.map(i => (
+          <li key={crypto.randomUUID()} className="grid grid-cols-3">
+            <p>{i.name}</p>
+            <p>{`${i.quantity} ${i.unit}`}</p>
+            <p>{i.from}</p>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 
