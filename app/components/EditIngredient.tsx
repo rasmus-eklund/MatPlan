@@ -73,8 +73,8 @@ const EditIngredient = ({
               </option>
             ))}
           </select>
-          <button onClick={handleSave}>save</button>
-          <button onClick={() => setEdiState(false)}>cancel</button>
+          <button className='border-2 rounded-md border-black bg-green-400' onClick={handleSave}>spara</button>
+          <button onClick={() => setEdiState(false)}>avbryt</button>
         </form>
       </li>
     );
