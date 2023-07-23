@@ -1,12 +1,10 @@
 'use client';
 import { getMenuItems } from '../db/prisma';
-import { Recipe, MenuItem as MenuItemType } from '@/types';
+import { MenuItem as MenuItemType } from '@/types';
 import React, { useEffect, useState } from 'react';
 import MenuItem from './MenuItem';
 
-type Props = {};
-
-const Menu = (props: Props) => {
+const Menu = () => {
   const [menu, setMenu] = useState<MenuItemType[]>([]);
 
   useEffect(() => {
@@ -26,7 +24,6 @@ const Menu = (props: Props) => {
     'Söndag',
   ];
   return (
-    <>
       <ul>
         {days.map(day => (
           <li key={day}>
@@ -35,19 +32,16 @@ const Menu = (props: Props) => {
               {menu
                 .filter(r => r.day === day)
                 .map(r => (
-                    <MenuItem key={r.id} recipe={r.recipe} callback={() => update()} />
+                  <MenuItem
+                    key={r.id}
+                    item={r}
+                    callback={() => update()}
+                  />
                 ))}
             </ul>
           </li>
         ))}
       </ul>
-
-      {/* <ul>
-        {menu.map(r => (
-          <MenuItem recipe={r.recipe} key={r.id} />
-        ))}
-      </ul> */}
-    </>
   );
 };
 
