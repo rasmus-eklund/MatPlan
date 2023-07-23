@@ -35,6 +35,7 @@ export type MenuItem = {
   recipeId: string;
   userId: string;
   day: string;
+  portions: number;
 };
 
 export type ShoppingListType = {
