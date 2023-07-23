@@ -8,7 +8,7 @@ const DeleteButton = ({ callback }: Props) => {
       className="border-2 rounded-md border-black bg-red-400"
       onClick={() => callback()}
     >
-      delete
+      Ta bort
     </button>
   );
 };
