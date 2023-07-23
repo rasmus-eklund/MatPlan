@@ -22,7 +22,7 @@ const MenuItem = ({ recipe, callback }: Props) => {
           -
         </button>
         <p>{recipe.portions}</p>
-        <button className="rounded-full bg-red-300 w-5 h-5 align-middle">
+        <button className="rounded-full bg-green-300 w-5 h-5 align-middle">
           +
         </button>
         <DeleteButton callback={() => {handleRemove(recipe.id)}}/>
