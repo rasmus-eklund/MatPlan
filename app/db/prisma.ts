@@ -60,7 +60,18 @@ export const addRecipeToMenu = async ({
 
 export const removeRecipeFromMenu = async (id: string) => {
   const userId = await getUser();
-  await prisma.menu.delete({ where: { recipeId: id, userId } });
+  await prisma.menu.delete({ where: { id, userId } });
+};
+
+export const updateMenuPortions = async (
+  recipeId: string,
+  portions: number
+) => {
+  const userId = await getUser();
+  await prisma.menu.update({
+    where: { userId, id: recipeId },
+    data: { portions },
+  });
 };
 
 export const getMenuItems = async () => {
@@ -85,15 +96,17 @@ export const getShoppingList = async () => {
       },
     },
   });
-  return queryRes.flatMap(r =>
-    r.recipe.recipe_ingredient.map(i => ({
+
+  return queryRes.flatMap(r => {
+    const scale = r.portions / r.recipe.portions;
+    return r.recipe.recipe_ingredient.map(i => ({
       name: i.ingredientName,
-      quantity: Number(i.quantity),
+      quantity: Number(i.quantity) * scale,
       unit: i.unit,
       subCategory: i.ingredient.subcategoryId,
       from: r.recipe.name,
-    }))
-  );
+    }));
+  });
 };
 
 export const getIngredients = async (): Promise<IngredientType[]> =>
