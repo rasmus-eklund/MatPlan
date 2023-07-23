@@ -33,48 +33,65 @@ const EditIngredient = ({
   };
   if (!editState) {
     return (
-      <li className="border-2 grid grid-cols-5 items-center">
-        <p>{name}</p>
-        <p>{quantState}</p>
-        <p>{unitState}</p>
-        <button
-          className="border-2"
-          type="button"
-          onClick={() => {
-            setEdiState(true);
-          }}
-        >
-          edit
-        </button>
-        <DeleteButton callback={() => handleDelete()} />
+      <li className="border-2 flex gap-5 items-center p-1">
+        <p className="grow">{name}</p>
+        <div className="flex gap-2 justify-self-end">
+          <p>{quantState}</p>
+          <p>{unitState}</p>
+        </div>
+        <div className="flex gap-2 justify-self-end">
+          <button
+            className="border-2 border-black rounded-md bg-gray-400"
+            type="button"
+            onClick={() => {
+              setEdiState(true);
+            }}
+          >
+            Ändra
+          </button>
+          <DeleteButton callback={() => handleDelete()} />
+        </div>
       </li>
     );
   } else {
     return (
       <li className="border-2">
-        <form className="grid grid-cols-5">
-          <p>{name}</p>
-          <input
-            id="edit-quantity"
-            type="number"
-            name="quantity"
-            value={quantState}
-            onChange={e => setQuantState(Number(e.target.value))}
-          />
-          <select
-            id="edit-unit"
-            name="unit"
-            value={unitState}
-            onChange={e => setUnitState(e.target.value)}
-          >
-            {units.map(u => (
-              <option key={u.abr}>
-                {u.abr}
-              </option>
-            ))}
-          </select>
-          <button className='border-2 rounded-md border-black bg-green-400' onClick={handleSave}>spara</button>
-          <button onClick={() => setEdiState(false)}>avbryt</button>
+        <form className="flex gap-5 items-center p-1">
+          <p className="grow">{name}</p>
+          <div className="flex gap-2 justify-self-end">
+            <input
+              className='w-20'
+              id="edit-quantity"
+              type="number"
+              name="quantity"
+              value={quantState}
+              onChange={e => setQuantState(Number(e.target.value))}
+            />
+            <select
+              id="edit-unit"
+              name="unit"
+              value={unitState}
+              onChange={e => setUnitState(e.target.value)}
+            >
+              {units.map(u => (
+                <option key={u.abr}>{u.abr}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex gap-2 justify-self-end">
+            <button
+              className="border-2 border-black rounded-md bg-gray-400"
+              onClick={() => setEdiState(false)}
+            >
+              Avbryt
+            </button>
+            <button
+              className="border-2 rounded-md border-black bg-green-400"
+              onClick={handleSave}
+            >
+              Spara
+            </button>
+          </div>
         </form>
       </li>
     );
