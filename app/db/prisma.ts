@@ -47,14 +47,15 @@ export const getRecipeById = async (id: string) => {
 export const addRecipeToMenu = async ({
   id,
   portions,
+  day
 }: {
   id: string;
   portions: number;
+  day:string
 }) => {
   const userId = await getUser();
-  console.log({ recipeId: id, userId, portions, day: "monday" });
   await prisma.menu.create({
-    data: { recipeId: id, userId, portions, day: 'Måndag' },
+    data: { recipeId: id, userId, portions, day },
   });
 };
 
@@ -73,6 +74,14 @@ export const updateMenuPortions = async (
     data: { portions },
   });
 };
+
+export const changeRecipeDay =async (recipeId:string,day:string) => {
+  const userId = await getUser();
+  await prisma.menu.update({
+    where:{recipeId, userId}, data:{day}
+  })
+  
+}
 
 export const getMenuItems = async () => {
   const userId = await getUser();
