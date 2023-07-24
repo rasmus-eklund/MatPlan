@@ -1,57 +1,150 @@
-import { addIngredient } from '@/types';
-import { useState } from 'react';
-import SearchIngredients from '../components/SearchIngredient';
+import { Recipe_ingredient, addIngredient } from "@/types";
+import { useState } from "react";
+import DeleteButton from "../components/DeleteButton";
+import units from "../db/units";
+import { ingredient } from "@prisma/client";
+import { Search } from "react-router-dom";
+import SearchIngredients from "../components/SearchIngredient";
+import { type } from "os";
 
-const AddIngredientForm = () => {
-  const data = localStorage.getItem('ingList') as string;
-  const currentList = JSON.parse(data);
+// type Prop = {
+//   ingredient: addIngredient;
+//   callback: (ing: addIngredient) => void;
+// };
+type Prop = {
+  callback: (ingredient: Recipe_ingredient) => void;
+};
 
-  const [name, setName] = useState<string>('');
-  const [quantity, setQuantity] = useState<number>(0);
-  const [unit, setUnit] = useState<string>('');
-  const [ingList, setIngList] = useState<addIngredient[]>([]);
+const AddIngredientForm = ({ callback }: Prop) => {
+  const [ingName, setingName] = useState("");
+  const [ingQuan, setIngQuan] = useState(0);
+  const [ingUnit, setIngUnit] = useState("");
 
-  const populateIng = (ingName: string) => {};
-
+  const handleSearch = async (name: string) => {
+    setingName(name);
+  };
   return (
-    <>
-      <div>
-        <label>Ingredient Name:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={e => {
-            setName(e.target.value);
-          }}
-        />
-        <label>Quantity:</label>
-        <input
-          type="number"
-          value={quantity}
-          onChange={e => setQuantity(parseInt(e.target.value))}
-        />
-        <label>Unit:</label>
-        <input
-          type="text"
-          value={unit}
-          onChange={e => setUnit(e.target.value)}
-        />
-        {/* <SearchIngredients callback={} /> */}
-        <button
-          onClick={e => {
-            e.preventDefault();
-            setIngList([...ingList, { name, quantity, unit }]);
-            localStorage.setItem('ingList', JSON.stringify(ingList));
-            setName('');
-            setQuantity(0);
-            setUnit('');
-          }}
-        >
-          Add
-        </button>
-      </div>
-    </>
+    <div>
+      <SearchIngredients callback={handleSearch} />
+      <span>{ingName}</span>
+      <br></br>
+      <label>quantity</label>
+      <input
+        value={ingQuan}
+        onChange={(e) => setIngQuan(Number(e.target.value))}
+      />
+      <label>Unit</label>
+      <input value={ingUnit} onChange={(e) => setIngUnit(e.target.value)} />
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          callback({
+            ingredientName: ingName,
+            quantity: ingQuan,
+            unit: ingUnit,
+            recipeId: "",
+          });
+          setingName("");
+          setIngQuan(0);
+          setIngUnit("");
+        }}
+      >
+        Add
+      </button>
+    </div>
   );
 };
+
+type Prop1 = {
+  ing: Recipe_ingredient;
+  callback(ing: Recipe_ingredient): void;
+};
+
+export const Ingdisplay = ({ ing, callback }: Prop1) => {
+  return (
+    <div>
+      <p>{ing.ingredientName}</p>
+      <p>{ing.quantity}</p>
+      <p>{ing.unit}</p>
+      <button
+        onClick={(e) => {
+          callback(ing);
+          e.preventDefault();
+        }}
+      >
+        Delete
+      </button>
+    </div>
+  );
+};
+
+// const AddIngredientForm = ({ ingredient, callback }: Prop) => {
+//   const [quanState, setQuanState] = useState(ingredient.quantity);
+//   const [unitState, setUnitState] = useState(ingredient.unit);
+//   const [editState, setEdiState] = useState(false);
+
+//   const updatedIng: addIngredient = {
+//     name: ingredient.name,
+//     quantity: quanState,
+//     unit: unitState,
+//   };
+
+//   if (!editState) {
+//     return (
+//       <li className="border-2  grid grid-cols-5">
+//         <p>{ingredient.name}</p>
+//         <p>{ingredient.quantity}</p>
+//         <p>{ingredient.unit}</p>
+//         <button
+//           className="border-2"
+//           type="button"
+//           onClick={(e) => {
+//             e.preventDefault();
+//             setEdiState(true);
+//           }}
+//         >
+//           Edit
+//         </button>
+//         <DeleteButton callback={() => console.log("delete")} />
+//       </li>
+//     );
+//   } else {
+//     return (
+//       <li className="border-2">
+//         <form className="">
+//           <p>{ingredient.name}</p>
+//           <input
+//             id="edit-quantity"
+//             type="number"
+//             name="quantity"
+//             value={quanState}
+//             onChange={(e) => setQuanState(Number(e.target.value))}
+//           />
+//           <select
+//             id="edit-unit"
+//             name="unit"
+//             value={unitState}
+//             onChange={(e) => setUnitState(e.target.value)}
+//           >
+//             {units.map((u) => (
+//               <option value={unitState} key={u.abr}>
+//                 {u.abr}
+//               </option>
+//             ))}
+//           </select>
+//           <button
+//             onClick={(e) => {
+//               e.preventDefault();
+//               callback(updatedIng);
+//               setEdiState(false);
+//             }}
+//           >
+//             save
+//           </button>
+//         </form>
+//       </li>
+//     );
+//   }
+// };
 
 export default AddIngredientForm;

@@ -1,11 +1,13 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { getIngredients } from '../db/prisma';
-import { IngredientType } from '@/types';
-import { useDebounce } from 'usehooks-ts';
+import React, { useEffect, useState } from "react";
+import { getIngredients } from "../db/prisma";
+import { IngredientType } from "@/types";
+import { useDebounce } from "usehooks-ts";
 
-type Prop = { callback: (ingredient: string) => Promise<void> };
+type Prop = {
+  callback: (ingredient: string) => Promise<void>;
+};
 
 const SearchIngredients = ({ callback }: Prop) => {
   const [allIngredients, setAllIngredients] = useState<IngredientType[]>([]);
@@ -15,7 +17,7 @@ const SearchIngredients = ({ callback }: Prop) => {
   const debouncedSearch = useDebounce(search, 200);
 
   useEffect(() => {
-    getIngredients().then(ings => {
+    getIngredients().then((ings) => {
       setAllIngredients(ings);
     });
   }, []);

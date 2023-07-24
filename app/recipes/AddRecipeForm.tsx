@@ -1,36 +1,59 @@
 "use client";
-import { FullRecipe, Recipe_ingredient } from "@/types";
+import {
+  FullRecipe,
+  IngredientType,
+  Recipe_ingredient,
+  addIngredient,
+} from "@/types";
 import React, { useState } from "react";
-import IngredientForm from "./IngredientForm";
-import { updateIngredient, updateRecipe } from "../db/prisma";
-import AddIngredientForm from "./AddIngredientForm";
 
-const AddRecipeForm = () => {
+import { updateIngredient, updateRecipe } from "../db/prisma";
+import AddIngredientForm, { Ingdisplay } from "./AddIngredientForm";
+
+type Prop = {
+  callback: () => Promise<void>;
+};
+
+const AddRecipeForm = ({ callback }: Prop) => {
   const [recipeName, setRecipeName] = useState("");
   const [recipePortions, setRecipePortions] = useState(0);
   const [recipeInstrcution, setRecipeInstruction] = useState("");
-  const [recipeInfo, setRecipeInfo] = useState("");
+  const [ingredients, setIngredients] = useState<Recipe_ingredient[]>([]);
 
   const updatedRecipe = {
-    id:'',
+    id: "",
     name: recipeName,
     portions: recipePortions,
-    recipe_ingredient:[],
+    recipe_ingredient: [],
     instruction: recipeInstrcution,
     userId: "jarjar.jarsson@gmail.com",
   };
 
-  const handlesAddReicpe = async() => {
-    const recipeId = await updateRecipe(updatedRecipe)
-    const ingData = localStorage.getItem("ingList") as string;
-    const ingList = JSON.parse(ingData);
-    ingList.map(async(i:Recipe_ingredient)=>{
-      i.id = ""
-      i.recipeId = recipeId
-      await updateIngredient(i)
-    })
+  const handlesAddReicpe = async () => {
+    const recipeId = await updateRecipe(updatedRecipe);
+    console.log(recipeId);
+    ingredients.map(async (i: Recipe_ingredient) => {
+      i.id = "";
+      i.recipeId = recipeId;
+      console.log(i);
+      await updateIngredient(i);
+    });
+    setRecipeName("");
+    setRecipePortions(0);
+    setRecipeInstruction("");
+    setIngredients([]);
   };
 
+  const handleAddIngredient = (ing: Recipe_ingredient) => {
+    setIngredients([...ingredients, ing]);
+  };
+
+  const handleDeleteIng = (ing: Recipe_ingredient) => {
+    const newIng = ingredients.filter(
+      (i) => i.ingredientName !== ing.ingredientName
+    );
+    setIngredients(newIng);
+  };
 
   return (
     <form className="border-2 p-1.5 px-4 rounded-md border-black m-4">
@@ -46,25 +69,36 @@ const AddRecipeForm = () => {
       <label>Portions:</label>
       <input
         type="number"
+        className="border-2 border-black"
         value={recipePortions}
         onChange={(e) => {
           setRecipePortions(parseInt(e.target.value));
         }}
       />
-      <label>Ingredient:</label>
-      <AddIngredientForm />
-
+      <AddIngredientForm callback={handleAddIngredient} />
+      <ul>
+        {ingredients.map((i) => {
+          return <Ingdisplay ing={i} callback={handleDeleteIng} />;
+        })}
+      </ul>
       <label>Instructions:</label>
       <input
         type="text"
+        className="border-2 border-black"
         value={recipeInstrcution}
         onChange={(e) => {
           setRecipeInstruction(e.target.value);
         }}
       />
-      <button onClick={(e)=>{
-        e.preventDefault()
-        handlesAddReicpe()}}>Modify</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          handlesAddReicpe();
+          callback();
+        }}
+      >
+        ADD
+      </button>
     </form>
   );
 };

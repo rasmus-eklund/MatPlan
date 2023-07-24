@@ -1,4 +1,4 @@
-'use server';
+"use server";
 import {
   addIngredient,
   FullRecipe,
@@ -12,14 +12,14 @@ import getUser from './getUser';
 export const getRecipeByName = async (search: string) => {
   const userId = await getUser();
   return await prisma.recipe.findMany({
-    where: { userId, name: { contains: search, mode: 'insensitive' } },
+    where: { userId, name: { contains: search, mode: "insensitive" } },
   });
 };
 
 export const getRecipeByInstructions = async (search: string) => {
   const userId = await getUser();
   return await prisma.recipe.findMany({
-    where: { userId, instruction: { contains: search, mode: 'insensitive' } },
+    where: { userId, instruction: { contains: search, mode: "insensitive" } },
   });
 };
 
@@ -29,7 +29,7 @@ export const getRecipeByIngredient = async (search: string) => {
     where: {
       userId,
       recipe_ingredient: {
-        some: { ingredientName: { contains: search, mode: 'insensitive' } },
+        some: { ingredientName: { contains: search, mode: "insensitive" } },
       },
     },
   });
@@ -52,7 +52,7 @@ export const addRecipeToMenu = async ({
   portions: number;
 }) => {
   const userId = await getUser();
-  console.log({ recipeId: id, userId, portions, day: 'monday' });
+  console.log({ recipeId: id, userId, portions, day: "monday" });
   await prisma.menu.create({
     data: { recipeId: id, userId, portions, day: 'Måndag' },
   });
@@ -148,7 +148,7 @@ export const deleteExraIngredient = async (name: string) => {
 };
 
 export const updateRecipe = async (recipe: FullRecipe) => {
-  await prisma.recipe.upsert({
+  const result = await prisma.recipe.upsert({
     where: { id: recipe.id },
     update: {
       name: recipe.name,
@@ -162,7 +162,7 @@ export const updateRecipe = async (recipe: FullRecipe) => {
       userId: recipe.userId,
     },
   });
-  return recipe.id;
+  return result.id;
 };
 
 export const updateIngredient = async (ingredient: Recipe_ingredient) => {
@@ -183,6 +183,7 @@ export const updateIngredient = async (ingredient: Recipe_ingredient) => {
 
 export const deleteRecipe = async (id: string) => {
   const userId = await getUser();
+  console.log(id, userId);
   await prisma.recipe.delete({ where: { id, userId } });
 };
 
