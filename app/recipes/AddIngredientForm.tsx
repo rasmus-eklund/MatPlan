@@ -1,11 +1,7 @@
-import { Recipe_ingredient, addIngredient } from "@/types";
-import { useState } from "react";
-import DeleteButton from "../components/DeleteButton";
-import units from "../db/units";
-import { ingredient } from "@prisma/client";
-import { Search } from "react-router-dom";
-import SearchIngredients from "../components/SearchIngredient";
-import { type } from "os";
+import { Recipe_ingredient, addIngredient } from '@/types';
+import { useState } from 'react';
+import DeleteButton from '../components/DeleteButton';
+import SearchIngredients from '../components/SearchIngredient';
 
 // type Prop = {
 //   ingredient: addIngredient;
@@ -16,9 +12,9 @@ type Prop = {
 };
 
 const AddIngredientForm = ({ callback }: Prop) => {
-  const [ingName, setingName] = useState("");
+  const [ingName, setingName] = useState('');
   const [ingQuan, setIngQuan] = useState(0);
-  const [ingUnit, setIngUnit] = useState("");
+  const [ingUnit, setIngUnit] = useState('');
 
   const handleSearch = async (name: string) => {
     setingName(name);
@@ -31,22 +27,22 @@ const AddIngredientForm = ({ callback }: Prop) => {
       <label>quantity</label>
       <input
         value={ingQuan}
-        onChange={(e) => setIngQuan(Number(e.target.value))}
+        onChange={e => setIngQuan(Number(e.target.value))}
       />
       <label>Unit</label>
-      <input value={ingUnit} onChange={(e) => setIngUnit(e.target.value)} />
+      <input value={ingUnit} onChange={e => setIngUnit(e.target.value)} />
       <button
-        onClick={(e) => {
+        onClick={e => {
           e.preventDefault();
           callback({
             ingredientName: ingName,
             quantity: ingQuan,
             unit: ingUnit,
-            recipeId: "",
+            recipeId: '',
           });
-          setingName("");
+          setingName('');
           setIngQuan(0);
-          setIngUnit("");
+          setIngUnit('');
         }}
       >
         Add
@@ -66,14 +62,11 @@ export const Ingdisplay = ({ ing, callback }: Prop1) => {
       <p>{ing.ingredientName}</p>
       <p>{ing.quantity}</p>
       <p>{ing.unit}</p>
-      <button
-        onClick={(e) => {
+      <DeleteButton
+        callback={() => {
           callback(ing);
-          e.preventDefault();
         }}
-      >
-        Delete
-      </button>
+      />
     </div>
   );
 };
