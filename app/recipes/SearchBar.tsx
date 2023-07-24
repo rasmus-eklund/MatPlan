@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "usehooks-ts";
 import { FilterParams, FullRecipe, Recipe, SearchRecipeParams } from "@/types";
 import {
+    addRecipeToMenu,
   deleteRecipe,
   getRecipeByIngredient,
   getRecipeByInstructions,
@@ -10,11 +11,13 @@ import {
 } from "../db/prisma";
 import Link from "next/link";
 import AddRecipeForm from "./AddRecipeForm";
+import DaysDropDown from "../components/DaysDropDown";
 
 const Recipes = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<FilterParams>("name");
   const [recipeResult, setRecipeResult] = useState<Recipe[]>([]);
+  const [addRecipe, setAddRecipe] =useState(false)
   const debouncedSearch = useDebounce(search, 500);
 
   const handleDelete = async (id: string) => {
@@ -52,6 +55,15 @@ const Recipes = () => {
     const data = await getRecipeByName(search);
     setRecipeResult(data);
   };
+  
+
+  // const handleAddToMenu =async(id:string, portions:number) => {
+  //   await addRecipeToMenu({id, portions,day:"Undecided"})
+  // }
+
+  const handleAddNewRecipe = () => {
+    setAddRecipe(true)
+  }
 
   useEffect(() => {
     handleSearch({ filter, search: debouncedSearch });
@@ -62,7 +74,8 @@ const Recipes = () => {
         <h1 className="recipe__title font-bold p-1.5 px-4 ">
           Lägg till maträtter
         </h1>
-        <form
+        {!addRecipe && (<>
+          <form
           className="recipe__form"
           onSubmit={(e) => {
             e.preventDefault();
@@ -100,10 +113,14 @@ const Recipes = () => {
             <option value="instruction">Instruktion</option>
           </select>
         </form>
-        <div>
-          <label>Add new recipe</label>
+        <button onClick={handleAddNewRecipe}>Add new recipe</button>
+        </>)}
+        {addRecipe && (<>
           <AddRecipeForm callback={handleAddRecipe} />
-        </div>
+        <button onClick={()=>setAddRecipe(false)}>Back to Search</button>
+
+        </>)}
+        
         <ul>
           {recipeResult.map((r) => (
             <li
@@ -111,6 +128,9 @@ const Recipes = () => {
               key={r.id}
             >
               <Link href={`/recipes/${r.id}`}>{r.name}</Link>
+              <br></br>
+              <DaysDropDown id={r.id} portions={r.portions}/>
+              
               <br></br>
               <button
                 onClick={() => {
