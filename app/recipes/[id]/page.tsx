@@ -1,12 +1,15 @@
 'use client';
-import { addRecipeToMenu, deleteRecipe, getRecipeById } from '@/app/db/prisma';
-import { FullRecipe } from '@/types';
+import { addRecipeToMenu, getRecipeById } from '@/app/db/prisma';
+import { DayParams, FullRecipe } from '@/types';
 import React, { useEffect, useState } from 'react';
 import RecipeForm from '../RecipeForm';
+import Link from 'next/link';
+import DaysDropDown from '@/app/components/DaysDropDown';
 
 const Recipe = ({ params }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<FullRecipe | null>(null);
   const [editMode, setEditMode] = useState<Boolean>(false);
+  const [day, setDay] = useState<DayParams>('Måndag');
   const handleGetRecipe = async (id: string) => {
     const res = await getRecipeById(id);
     const data: FullRecipe = JSON.parse(res);
@@ -15,10 +18,10 @@ const Recipe = ({ params }: { params: { id: string } }) => {
 
   useEffect(() => {
     handleGetRecipe(params.id);
-  }, []);
+  }, [params.id]);
   return (
     <>
-      {!editMode && (
+      {!editMode && recipe && (
         <section>
           <h3>{recipe?.name}</h3>
           <p>{recipe?.portions}</p>
@@ -32,28 +35,24 @@ const Recipe = ({ params }: { params: { id: string } }) => {
             ))}
           </ul>
           <p>{recipe?.instruction}</p>
-          <button
-              className="border-2 p-1.5 px-4 rounded-md border-black m-4"
-              onClick={() =>
-                addRecipeToMenu({
-                  id: recipe!.id,
-                  portions: recipe!.portions,
-                })
-              }
-            >
-              add
-            </button>
-            <button
-              className="border-2 p-1.5 px-4 rounded-md border-black m-4"
-              onClick={() => deleteRecipe(recipe!.id)}
-            >
-              delete
-            </button>
+          <label
+            htmlFor="filter"
+            className="border-2 p-1.5 px-4 rounded-md border-black m-4"
+          >
+            Day
+          </label>
+          <DaysDropDown id={recipe.id} portions={recipe?.portions}/>
+         
         </section>
       )}
-      {(editMode && recipe) && (<RecipeForm recipe={recipe}/>)}
-    <button onClick={()=>{
-        setEditMode(true)}}>Edit</button>
+      {editMode && recipe && <RecipeForm recipe={recipe} />}
+      <button
+        onClick={() => {
+          setEditMode(true);
+        }}
+      >
+        Edit
+      </button>
     </>
   );
 };
