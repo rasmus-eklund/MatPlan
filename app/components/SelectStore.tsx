@@ -1,7 +1,7 @@
-import { Store } from '@/types';
+import { StorePrisma } from '@/types';
 
 type Props = {
-  stores: Store[];
+  stores: StorePrisma[];
   callback: (id: string) => void;
 };
 
