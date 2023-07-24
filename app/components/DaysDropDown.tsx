@@ -1,11 +1,11 @@
-import { DayParams, FullRecipe } from '@/types';
+import { FullRecipe } from '@/types';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { addRecipeToMenu } from '../db/prisma';
 import days from '../db/days';
 
 const DaysDropDown = ({ id, portions }: { id: string; portions:number }) => {
-  const [day, setDay] = useState<DayParams>('Undecided');
+  const [day, setDay] = useState('Undecided');
   return (
     <>
       <select
@@ -13,7 +13,7 @@ const DaysDropDown = ({ id, portions }: { id: string; portions:number }) => {
         name="day"
         id="day"
         value={day}
-        onChange={e => setDay(e.target.value as DayParams)}
+        onChange={e => setDay(e.target.value)}
       >
         {days.map(day => (
           <option key={day} value={day}>
