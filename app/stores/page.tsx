@@ -1,11 +1,11 @@
 'use client';
-import { Store } from '@/types';
+import { StorePrisma } from '@/types';
 import React, { useEffect, useState } from 'react';
 import * as stores from '../db/stores';
 import Link from 'next/link';
 
 const Stores = () => {
-  const [storesState, setStoresState] = useState<Store[]>([]);
+  const [storesState, setStoresState] = useState<StorePrisma[]>([]);
   const [name, setName] = useState('');
   useEffect(() => {
     stores.getAll().then(s => setStoresState(s));
