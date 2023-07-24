@@ -38,7 +38,10 @@ const ShoppingList = () => {
 
   const handleSelectStore = async (id: string) => {
     const selected = await stores.get(id);
-    setStore({ ...selected, order: selected.order.map(i => i.id) });
+    setStore({
+      ...selected,
+      order: selected.categories.flatMap(c => c.order.map(i => i.id)),
+    });
   };
 
   return (
