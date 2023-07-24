@@ -1,6 +1,6 @@
 'use server';
 import { CategoryItem, Store, StorePrisma, SubcategoryItem } from '@/types';
-import getUser from './getUser';
+import getUser from './user';
 import { prisma } from './db';
 
 export const get = async (id: string): Promise<Store> => {

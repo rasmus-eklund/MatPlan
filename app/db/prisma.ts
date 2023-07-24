@@ -7,7 +7,7 @@ import {
 } from '@/types';
 import { prisma } from './db';
 import { Prisma, extra_ingredient } from '@prisma/client';
-import getUser from './getUser';
+import getUser from './user';
 
 export const getRecipeByName = async (search: string) => {
   const userId = await getUser();
