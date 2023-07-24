@@ -78,7 +78,7 @@ const AddRecipeForm = ({ callback }: Prop) => {
       <AddIngredientForm callback={handleAddIngredient} />
       <ul>
         {ingredients.map((i) => {
-          return <Ingdisplay ing={i} callback={handleDeleteIng} />;
+          return <Ingdisplay key={crypto.randomUUID()} ing={i} callback={handleDeleteIng} />;
         })}
       </ul>
       <label>Instructions:</label>
