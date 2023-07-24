@@ -3,6 +3,8 @@ import { MenuItem } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { removeRecipeFromMenu, updateMenuPortions } from '../db/prisma';
 import DeleteButton from '../components/DeleteButton';
+import DaysDropDown from '../components/DaysDropDown';
+import DaysDropDownForMenu from '../components/DaysDropDownForMenu';
 
 type Props = {
   item: MenuItem;
@@ -44,6 +46,7 @@ const MenuItem = ({ item, callback }: Props) => {
         >
           +
         </button>
+        <DaysDropDownForMenu id={item.recipe.id} day={item.day} />
         <DeleteButton
           callback={() => {
             handleRemove(item.id);
