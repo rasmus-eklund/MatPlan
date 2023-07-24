@@ -58,7 +58,7 @@ export type addIngredient = {
   unit: string;
 };
 
-export type Store = {
+export type StorePrisma = {
   id: string;
   name: string;
   order: number[];
@@ -66,12 +66,27 @@ export type Store = {
 
 export type SubcategoryItem = {
   id: number;
-  name: string;
+  subcategory: string;
   category: string;
 };
 
-export type StoreCategory = {
-  id: string;
-  name: string;
+export type CategoryItem = {
+  category: string;
   order: SubcategoryItem[];
 };
+
+export type Store = {
+  id: string;
+  name: string;
+  categories: CategoryItem[];
+};
+
+// export type DayParams =
+//   | 'Måndag'
+//   | 'Tisdag'
+//   | 'Onsdag'
+//   | 'Torsdag'
+//   | 'Fredag'
+//   | 'Lördag'
+//   | 'Söndag'
+//   | 'Undecided';
