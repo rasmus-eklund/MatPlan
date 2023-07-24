@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import * as stores from '../db/stores';
-import { ShoppingListType, Store } from '@/types';
+import { ShoppingListType, StorePrisma } from '@/types';
 import SelectStore from '../components/SelectStore';
 import { getExtraIngredients, getShoppingList } from '../db/prisma';
 
@@ -10,8 +10,8 @@ const ShoppingList = () => {
   const [sortedIngredients, setSortedIngredients] = useState<
     ShoppingListType[]
   >([]);
-  const [storesState, setStoresState] = useState<Store[]>([]);
-  const [store, setStore] = useState<Store>();
+  const [storesState, setStoresState] = useState<StorePrisma[]>([]);
+  const [store, setStore] = useState<StorePrisma>();
   const [filter, setFilter] = useState({ group: true });
 
   useEffect(() => {
