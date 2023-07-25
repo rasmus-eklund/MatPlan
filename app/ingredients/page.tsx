@@ -34,11 +34,7 @@ const Ingredients = () => {
       <SearchIngredients callback={addIngredient} />
       <ul className="flex flex-col gap-5 p-5">
         {ingredients.map(i => (
-          <EditIngredient
-            callback={update}
-            ingredient={i}
-            key={i.id}
-          />
+          <EditIngredient callback={update} ingredient={i} key={i.id} />
         ))}
       </ul>
     </main>
