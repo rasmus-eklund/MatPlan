@@ -30,7 +30,7 @@ const Ingredients = () => {
   };
 
   return (
-    <main className="flex flex-col gap-5">
+    <main className="flex flex-col">
       <SearchIngredients callback={addIngredient} />
       <ul className="flex flex-col gap-5 p-5">
         {ingredients.map(i => (
