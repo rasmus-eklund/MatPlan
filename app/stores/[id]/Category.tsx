@@ -2,20 +2,30 @@ import { CategoryItem } from '@/types';
 import { useState } from 'react';
 import Subcategory from './Subcategory';
 import handleMove from '../moveItems';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleDown } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUp } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   category: CategoryItem;
   index: number;
   clicked: (direction: 'up' | 'down', index: number) => void;
+  editedSub: () => void;
 };
 
-const Category = ({ category: { category, order }, index, clicked }: Props) => {
+const Category = ({
+  category: { category, order },
+  index,
+  clicked,
+  editedSub,
+}: Props) => {
   const [subOrder, setSubOrder] = useState(order);
   const [open, setOpen] = useState(false);
   const [move, setMove] = useState(false);
   const handleClick = (direction: 'up' | 'down', index: number) => {
     const newOrder = handleMove(direction, index, subOrder);
     setSubOrder(newOrder);
+    editedSub();
   };
   return (
     <li className="border-2 border-blue-300 rounded-xl">
@@ -28,12 +38,24 @@ const Category = ({ category: { category, order }, index, clicked }: Props) => {
         </h2>
         {move && (
           <>
-            <button onClick={() => clicked('up', index)}>upp</button>
-            <button onClick={() => clicked('down', index)}>ned</button>
+            <FontAwesomeIcon
+              className={' hover:scale-110'}
+              onClick={() => clicked('down', index)}
+              icon={faCircleDown}
+              size="2xl"
+              style={{ color: '#9db2bf' }}
+            />
+            <FontAwesomeIcon
+              className={' hover:scale-110'}
+              onClick={() => clicked('up', index)}
+              icon={faCircleUp}
+              size="2xl"
+              style={{ color: '#9db2bf' }}
+            />
           </>
         )}
         <button
-          className="flex justify-center items-center rounded-full w-10 h-10 border-2 border-blue-500 m-2 mr-4"
+          className="flex justify-center items-center rounded-full w-10 h-10 border-2 border-#DDE6ED m-2 mr-4"
           onClick={() => setOpen(!open)}
         >
           +

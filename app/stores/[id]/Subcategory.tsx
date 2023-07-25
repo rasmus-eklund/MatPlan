@@ -1,5 +1,8 @@
 import { SubcategoryItem } from '@/types';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleDown } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUp } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   items: SubcategoryItem;
@@ -17,16 +20,26 @@ const Subcategory = ({
     setMove(!move);
   };
   return (
-    <li className="flex gap-5 border-2 border-black rounded-3xl m-2 p-1 font-semibold mr-4 ml-4">
+    <li className="flex gap-5 border-2 border-black rounded-3xl m-2 p-2 font-semibold mr-4 ml-4">
       <p className="ml-2 flex-grow " onClick={toggle}>
         {subcategory}
       </p>
       {move && (
         <div className="flex gap-1">
-          <button onClick={() => clicked('up', index)}>upp</button>
-          <button className="mr-2" onClick={() => clicked('down', index)}>
-            ned
-          </button>
+          <FontAwesomeIcon
+            className={' hover:scale-110'}
+            onClick={() => clicked('down', index)}
+            icon={faCircleDown}
+            size="xl"
+            style={{ color: '#9db2bf' }}
+          />
+          <FontAwesomeIcon
+            className={' hover:scale-110'}
+            onClick={() => clicked('up', index)}
+            icon={faCircleUp}
+            size="xl"
+            style={{ color: '#9db2bf' }}
+          />
         </div>
       )}
     </li>
