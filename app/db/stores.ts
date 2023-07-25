@@ -69,4 +69,17 @@ export const addDefault = async (name: string) => {
 export const remove = async (id: string) => {
   const userId = await getUser();
   await prisma.store.delete({ where: { userId, id } });
+  const nr = await prisma.store.findMany({ where: { userId } });
+  console.log(nr);
+  if (nr.length === 0) {
+    await createDefaultStore(userId);
+  }
+};
+
+export const createDefaultStore = async (userId: string) => {
+  const cats = await prisma.subcategory.findMany();
+  const store = cats.map(i => i.id);
+  await prisma.store.create({
+    data: { name: 'Ny affär', userId, order: store },
+  });
 };
