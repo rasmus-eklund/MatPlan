@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import * as stores from '../db/stores';
 import { ShoppingListType, StorePrisma } from '@/types';
 import SelectStore from '../components/SelectStore';
-import { getExtraIngredients, getShoppingList } from '../db/prisma';
+import { getShoppingList } from '../db/prisma';
+import { getExtraIngredients } from '../db/extraIngredients';
 
 const ShoppingList = () => {
   const [ingredients, setIngredients] = useState<ShoppingListType[]>([]);
