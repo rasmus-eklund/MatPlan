@@ -1,7 +1,6 @@
 'use client';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import UserCard from './UserCard';
-import { checkNewUser } from '../db/user';
 
 export default function Login() {
   const { data: session } = useSession();
@@ -9,9 +8,9 @@ export default function Login() {
   if (session) {
     return (
       <>
-        <div className="flex flex-row font-semibold">
+        <div className="flex flex-row font-semibold mr-2">
           <button
-            className="text-end"
+            className="text-end text-4 mr-2"
             onClick={async () => await signOut()}
             type="button"
           >
