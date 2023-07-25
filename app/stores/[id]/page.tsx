@@ -17,8 +17,10 @@ const StoreComponent = ({ params: { id } }: Props) => {
   return (
     <main>
       <h1 className="text-xl">{store?.name || 'loading'}</h1>
-      {store &&
-        store.categories.map(s => <Category key={s.category} category={s} />)}
+      <ul className='flex flex-col p-1 gap-2'>
+        {store &&
+          store.categories.map(s => <Category key={s.category} category={s} />)}
+      </ul>
     </main>
   );
 };
