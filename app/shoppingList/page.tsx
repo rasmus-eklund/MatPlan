@@ -5,6 +5,7 @@ import { ShoppingListType, StorePrisma } from '@/types';
 import SelectStore from '../components/SelectStore';
 import { getShoppingList } from '../db/prisma';
 import { getExtraIngredients } from '../db/extraIngredients';
+import Item from './Item';
 
 const ShoppingList = () => {
   const [ingredients, setIngredients] = useState<ShoppingListType[]>([]);
@@ -46,21 +47,17 @@ const ShoppingList = () => {
   };
 
   return (
-    <>
+    <main>
       <SelectStore
         stores={storesState}
         callback={id => handleSelectStore(id)}
       />
       <ul>
         {sortedIngredients.map(i => (
-          <li key={crypto.randomUUID()} className="grid grid-cols-3">
-            <p>{i.name}</p>
-            <p>{`${i.quantity} ${i.unit}`}</p>
-            <p>{i.from}</p>
-          </li>
+          <Item key={crypto.randomUUID()} item={i} />
         ))}
       </ul>
-    </>
+    </main>
   );
 };
 
