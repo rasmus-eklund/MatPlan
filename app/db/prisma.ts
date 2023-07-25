@@ -1,12 +1,10 @@
 "use server";
 import {
-  addIngredient,
   FullRecipe,
   IngredientType,
   Recipe_ingredient,
 } from '@/types';
 import { prisma } from './db';
-import { Prisma, extra_ingredient } from '@prisma/client';
 import getUser from './user';
 
 export const getRecipeByName = async (search: string) => {
@@ -120,41 +118,6 @@ export const getShoppingList = async () => {
 
 export const getIngredients = async (): Promise<IngredientType[]> =>
   await prisma.ingredient.findMany();
-
-export const getExtraIngredients = async () => {
-  const userId = await getUser();
-  const data = await prisma.extra_ingredient.findMany({
-    where: { userId },
-    include: { ingredient: true },
-  });
-  return data.map(i => ({
-    name: i.name,
-    quantity: Number(i.quantity),
-    unit: i.unit,
-    subCategory: i.ingredient.subcategoryId,
-    from: 'Egna varor',
-  }));
-};
-
-export const upsertExtraIngredient = async (ing: addIngredient) => {
-  const userId = await getUser();
-  const newIng: extra_ingredient = {
-    ...ing,
-    userId,
-    quantity: new Prisma.Decimal(ing.quantity),
-  };
-  console.log(newIng);
-  await prisma.extra_ingredient.upsert({
-    where: { name: ing.name, userId },
-    update: newIng,
-    create: newIng,
-  });
-};
-
-export const deleteExraIngredient = async (name: string) => {
-  const userId = await getUser();
-  await prisma.extra_ingredient.delete({ where: { name, userId } });
-};
 
 export const updateRecipe = async (recipe: FullRecipe) => {
   const result = await prisma.recipe.upsert({
