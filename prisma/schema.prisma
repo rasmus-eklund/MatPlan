@@ -54,7 +54,7 @@ model ingredient {
   name              String              @id
   categoryId        Int
   subcategoryId     Int
-  extra_ingredient  extra_ingredient?
+  extra_ingredient  extra_ingredient[]
   category          category            @relation(fields: [categoryId], references: [id])
   subcategory       subcategory         @relation(fields: [subcategoryId], references: [id])
   recipe_ingredient recipe_ingredient[]
@@ -87,7 +87,8 @@ model menu {
 }
 
 model extra_ingredient {
-  name       String     @id
+  id         String     @id @default(uuid())
+  name       String
   userId     String
   unit       String
   quantity   Decimal
