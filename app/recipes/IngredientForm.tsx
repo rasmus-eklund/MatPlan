@@ -1,15 +1,21 @@
 import { Recipe_ingredient } from "@/types";
 import { useState } from "react";
-import { updateIngredient } from "../db/prisma";
+import { deleteIngredient, updateIngredient } from "../db/prisma";
+import units from "../db/units";
 
-const IngredientForm = ({ ingredient }: { ingredient: Recipe_ingredient }) => {
-  const [ingName, setIngname] = useState<string>(ingredient.ingredientName);
+type Prop = {
+  ingredient: Recipe_ingredient;
+  // callback: void;
+};
+
+const IngredientForm = ({ ingredient }: Prop) => {
+  // const [ingName, setIngname] = useState<string>(ingredient.ingredientName);
   const [quantity, setQuantity] = useState<number>(ingredient.quantity);
   const [unit, setUnit] = useState<string>(ingredient.unit);
 
   const updatedIngredient: Recipe_ingredient = {
     id: ingredient.id,
-    ingredientName: ingName,
+    ingredientName: ingredient.ingredientName,
     quantity: quantity,
     unit: unit,
     recipeId: ingredient.recipeId,
@@ -17,13 +23,8 @@ const IngredientForm = ({ ingredient }: { ingredient: Recipe_ingredient }) => {
 
   return (
     <>
-      <div>
-        <label>Ingredient Name:</label>
-        <input
-          type="text"
-          value={ingName}
-          onChange={(e) => setIngname(e.target.value)}
-        />
+      <li className="border-2" key={ingredient.id}>
+        <p>{ingredient.ingredientName}</p>
         <label>Quantity:</label>
         <input
           type="number"
@@ -31,19 +32,37 @@ const IngredientForm = ({ ingredient }: { ingredient: Recipe_ingredient }) => {
           onChange={(e) => setQuantity(parseInt(e.target.value))}
         />
         <label>Unit:</label>
-        <input
-          type="text"
+        <select
+          id="edit-unit"
+          name="unit"
           value={unit}
           onChange={(e) => setUnit(e.target.value)}
-        />
-        <button onClick={(e) => {
-          e.preventDefault()
-          updateIngredient(updatedIngredient)}}>
+        >
+          {units.map((u) => (
+            <option key={u.abr}>{u.abr}</option>
+          ))}
+        </select>
+        <button
+          className="border-2 rounded-md border-black bg-green-400"
+          onClick={(e) => {
+            e.preventDefault();
+            updateIngredient(updatedIngredient);
+          }}
+        >
           Update
         </button>
-      </div>
+        <button
+          className="border-2 rounded-md border-black bg-red-400"
+          onClick={(e) => {
+            e.preventDefault();
+            deleteIngredient(ingredient.id);
+          }}
+        >
+          Delete
+        </button>
+      </li>
     </>
   );
 };
 
-export default IngredientForm
+export default IngredientForm;

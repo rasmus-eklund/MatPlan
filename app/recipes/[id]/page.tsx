@@ -1,15 +1,14 @@
-'use client';
-import { addRecipeToMenu, getRecipeById } from '@/app/db/prisma';
-import {  FullRecipe } from '@/types';
-import React, { useEffect, useState } from 'react';
-import RecipeForm from '../RecipeForm';
-import Link from 'next/link';
-import DaysDropDown from '@/app/components/DaysDropDown';
+"use client";
+import { addRecipeToMenu, getRecipeById } from "@/app/db/prisma";
+import { FullRecipe } from "@/types";
+import React, { useEffect, useState } from "react";
+import RecipeForm from "../RecipeForm";
+import Link from "next/link";
+import DaysDropDown from "@/app/components/DaysDropDown";
 
 const Recipe = ({ params }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<FullRecipe | null>(null);
   const [editMode, setEditMode] = useState<Boolean>(false);
-  const [day, setDay] = useState<string>('Måndag');
   const handleGetRecipe = async (id: string) => {
     const res = await getRecipeById(id);
     const data: FullRecipe = JSON.parse(res);
@@ -26,7 +25,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
           <h3>{recipe.name}</h3>
           <p>{recipe.portions}</p>
           <ul>
-            {recipe.recipe_ingredient.map(i => (
+            {recipe.recipe_ingredient.map((i) => (
               <li key={i.id}>
                 <span>{i.ingredientName}</span>
                 <span>{i.quantity}</span>
@@ -41,8 +40,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
           >
             Day
           </label>
-          <DaysDropDown id={recipe.id} portions={recipe?.portions}/>
-         
+          <DaysDropDown id={recipe.id} portions={recipe?.portions} />
         </section>
       )}
       {editMode && recipe && <RecipeForm recipe={recipe} />}

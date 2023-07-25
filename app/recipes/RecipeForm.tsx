@@ -1,8 +1,8 @@
-'use client'
-import { FullRecipe, Recipe_ingredient } from '@/types';
-import React, { useState } from 'react';
-import IngredientForm from './IngredientForm';
-import { updateRecipe } from '../db/prisma';
+"use client";
+import { FullRecipe, Recipe_ingredient } from "@/types";
+import React, { useState } from "react";
+import IngredientForm from "./IngredientForm";
+import { updateRecipe } from "../db/prisma";
 
 const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
   const [recipeName, setRecipeName] = useState<string>(recipe.name);
@@ -11,13 +11,13 @@ const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
     recipe.instruction
   );
 
-  const emptyIngredient: Recipe_ingredient= {
-    id:'',
-    ingredientName:'',
-    quantity:0,
-    unit:'',
-    recipeId:recipe.id
-  }
+  const emptyIngredient: Recipe_ingredient = {
+    id: "",
+    ingredientName: "",
+    quantity: 0,
+    unit: "",
+    recipeId: recipe.id,
+  };
 
   const updatedRecipe: FullRecipe = {
     id: recipe.id,
@@ -34,31 +34,35 @@ const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
       <input
         type="text"
         value={recipeName}
-        onChange={e => setRecipeName(e.target.value)}
+        onChange={(e) => setRecipeName(e.target.value)}
       />
       <label>Portions:</label>
       <input
         type="number"
         value={recipePortions}
-        onChange={e => setRecipePortions(parseInt(e.target.value))}
+        onChange={(e) => setRecipePortions(parseInt(e.target.value))}
       />
       <ul>
-        {recipe.recipe_ingredient && recipe.recipe_ingredient.map(i => (
-          <li key={i.id}>
+        {recipe.recipe_ingredient &&
+          recipe.recipe_ingredient.map((i) => (
             <IngredientForm ingredient={i} />
-          </li>
-        ))}
+          ))}
       </ul>
-      <IngredientForm ingredient={emptyIngredient}/>
+      <IngredientForm ingredient={emptyIngredient} />
       <label>Instructions:</label>
       <input
         type="text"
         value={recipeInstructions}
-        onChange={e => setRecipeInstructions(e.target.value)}
+        onChange={(e) => setRecipeInstructions(e.target.value)}
       />
-      <button onClick={(e) => {
-        e.preventDefault()
-        updateRecipe(updatedRecipe)}}>Modify</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          updateRecipe(updatedRecipe);
+        }}
+      >
+        Modify
+      </button>
     </form>
   );
 };

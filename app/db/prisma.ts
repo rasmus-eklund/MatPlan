@@ -150,6 +150,12 @@ export const updateIngredient = async (ingredient: Recipe_ingredient) => {
   });
 };
 
+export const deleteIngredient = async (id: string) => {
+  await prisma.recipe_ingredient.delete({
+    where: { id },
+  });
+};
+
 export const deleteRecipe = async (id: string) => {
   const userId = await getUser();
   console.log(id, userId);
