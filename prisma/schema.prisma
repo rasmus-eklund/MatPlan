@@ -26,7 +26,7 @@ model recipe {
   user              user                @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            String
   recipe_ingredient recipe_ingredient[]
-  menu              menu?
+  menu              menu[]
 
   @@map("public.recipe")
 }
@@ -76,7 +76,7 @@ model recipe_ingredient {
 
 model menu {
   id       String @id @default(uuid())
-  recipeId String @unique
+  recipeId String
   userId   String
   portions Int
   day      String
