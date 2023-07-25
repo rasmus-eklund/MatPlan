@@ -2,7 +2,13 @@ import { IngredientId } from '@/types';
 import React, { useState } from 'react';
 import units from '../db/units';
 import DeleteButton from './DeleteButton';
-import { deleteExraIngredient, updateExtraIngredient } from '../db/extraIngredients';
+import {
+  deleteExraIngredient,
+  updateExtraIngredient,
+} from '../db/extraIngredients';
+import EditButton from './EditButton';
+import Cancel from './Cancel';
+import SaveButton from './SaveButton';
 
 type Prop = {
   ingredient: IngredientId;
@@ -10,16 +16,13 @@ type Prop = {
 };
 
 const EditIngredient = ({
-  ingredient: {id, name, unit, quantity },
+  ingredient: { id, name, unit, quantity },
   callback,
 }: Prop) => {
   const [unitState, setUnitState] = useState(unit);
   const [quantState, setQuantState] = useState(quantity);
   const [editState, setEdiState] = useState(false);
-  const handleSave = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
+  const handleSave = async () => {
     await updateExtraIngredient(id, {
       name,
       quantity: quantState,
@@ -28,7 +31,7 @@ const EditIngredient = ({
     setEdiState(false);
   };
   const handleDelete = async () => {
-    await deleteExraIngredient(name);
+    await deleteExraIngredient(id);
     await callback();
   };
   if (!editState) {
@@ -40,15 +43,7 @@ const EditIngredient = ({
           <p>{unitState}</p>
         </div>
         <div className="flex gap-2 justify-self-end">
-          <button
-            className="border-2 border-black rounded-md bg-gray-400"
-            type="button"
-            onClick={() => {
-              setEdiState(true);
-            }}
-          >
-            Ändra
-          </button>
+          <EditButton callback={() => setEdiState(true)} />
           <DeleteButton callback={() => handleDelete()} />
         </div>
       </li>
@@ -60,7 +55,7 @@ const EditIngredient = ({
           <p className="grow">{name}</p>
           <div className="flex gap-2 justify-self-end">
             <input
-              className='w-20'
+              className="w-20"
               id="edit-quantity"
               type="number"
               name="quantity"
@@ -79,18 +74,8 @@ const EditIngredient = ({
             </select>
           </div>
           <div className="flex gap-2 justify-self-end">
-            <button
-              className="border-2 border-black rounded-md bg-gray-400"
-              onClick={() => setEdiState(false)}
-            >
-              Avbryt
-            </button>
-            <button
-              className="border-2 rounded-md border-black bg-green-400"
-              onClick={handleSave}
-            >
-              Spara
-            </button>
+            <Cancel callback={() => setEdiState(false)} />
+            <SaveButton callback={handleSave}></SaveButton>
           </div>
         </form>
       </li>
