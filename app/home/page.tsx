@@ -1,16 +1,14 @@
-'use client'
-import React, { useEffect } from 'react'
+'use client';
+import React, { useEffect } from 'react';
 import { checkNewUser } from '../db/user';
 
-type Props = {}
-
-const Home = (props: Props) => {
+export default function Landing() {
   useEffect(() => {
     (async () => await checkNewUser())();
   }, []);
   return (
-    <div>page</div>
-  )
+    <main>
+      <h1>Home Page</h1>
+    </main>
+  );
 }
-
-export default Home

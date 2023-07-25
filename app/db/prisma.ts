@@ -1,11 +1,7 @@
 "use server";
-import {
-  FullRecipe,
-  IngredientType,
-  Recipe_ingredient,
-} from '@/types';
-import { prisma } from './db';
-import getUser from './user';
+import { FullRecipe, IngredientType, Recipe_ingredient } from "@/types";
+import { prisma } from "./db";
+import getUser from "./user";
 
 export const getRecipeByName = async (search: string) => {
   const userId = await getUser();
@@ -45,11 +41,11 @@ export const getRecipeById = async (id: string) => {
 export const addRecipeToMenu = async ({
   id,
   portions,
-  day
+  day,
 }: {
   id: string;
   portions: number;
-  day:string
+  day: string;
 }) => {
   const userId = await getUser();
   await prisma.menu.create({
@@ -73,13 +69,14 @@ export const updateMenuPortions = async (
   });
 };
 
-export const changeRecipeDay =async (recipeId:string,day:string) => {
+export const changeRecipeDay = async (recipeId: string, day: string) => {
   const userId = await getUser();
+  console.log("changed");
   await prisma.menu.update({
-    where:{recipeId, userId}, data:{day}
-  })
-  
-}
+    where: { id: recipeId, userId },
+    data: { day },
+  });
+};
 
 export const getMenuItems = async () => {
   const userId = await getUser();
@@ -104,9 +101,9 @@ export const getShoppingList = async () => {
     },
   });
 
-  return queryRes.flatMap(r => {
+  return queryRes.flatMap((r) => {
     const scale = r.portions / r.recipe.portions;
-    return r.recipe.recipe_ingredient.map(i => ({
+    return r.recipe.recipe_ingredient.map((i) => ({
       name: i.ingredientName,
       quantity: Number(i.quantity) * scale,
       unit: i.unit,
@@ -150,6 +147,12 @@ export const updateIngredient = async (ingredient: Recipe_ingredient) => {
       unit: ingredient.unit,
       recipeId: ingredient.recipeId,
     },
+  });
+};
+
+export const deleteIngredient = async (id: string) => {
+  await prisma.recipe_ingredient.delete({
+    where: { id },
   });
 };
 
