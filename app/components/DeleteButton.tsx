@@ -1,15 +1,13 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 type Props = { callback: () => void };
 
 const DeleteButton = ({ callback }: Props) => {
   return (
-    <button
-      className="border-2 rounded-md border-black bg-red-400"
-      onClick={() => callback()}
-    >
-      Ta bort
-    </button>
+  <FontAwesomeIcon onClick={() => callback()} icon={faTrashCan} size={'lg'} className={' hover:scale-110'} style={{color: '#e24646'}}/>
+
   );
 };
 
