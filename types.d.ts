@@ -6,6 +6,13 @@ export type Recipe = {
   userId: string;
 };
 
+export type RecipeNoId = {
+  name: string;
+  portions: number;
+  ingredients: Ingredient[];
+  instruction: string;
+};
+
 export type Recipe_ingredient = {
   id?: string;
   recipeId: string;
@@ -52,7 +59,13 @@ export type IngredientType = {
   subcategoryId: number;
 };
 
-export type addIngredient = {
+export type Ingredient = {
+  name: string;
+  quantity: number;
+  unit: string;
+};
+export type IngredientId = {
+  id: string,
   name: string;
   quantity: number;
   unit: string;
