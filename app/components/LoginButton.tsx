@@ -1,6 +1,6 @@
-"use client";
-import { useSession, signIn, signOut } from "next-auth/react";
-import UserCard from "./UserCard";
+'use client';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import UserCard from './UserCard';
 
 export default function Login() {
   const { data: session } = useSession();
@@ -11,10 +11,10 @@ export default function Login() {
         <div className="flex flex-row font-semibold mr-2">
           <button
             className="text-end text-4 mr-2"
-            onClick={async () => await signOut({ callbackUrl: "/" })}
+            onClick={async () => await signOut({ callbackUrl: '/' })}
             type="button"
           >
-            Sign out
+            Logga ut
           </button>
           <UserCard user={session.user} />
         </div>
@@ -24,13 +24,13 @@ export default function Login() {
     return (
       <>
         <button
-          className="text-center"
+          className="text-center text-4"
           onClick={() => {
-            signIn("google", { callbackUrl: "/home" });
+            signIn('google', { callbackUrl: '/home' });
           }}
           type="button"
         >
-          Login
+          Logga in
         </button>
       </>
     );
