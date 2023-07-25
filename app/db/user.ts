@@ -4,6 +4,7 @@ import options from '../api/auth/[...nextauth]/options';
 import { prisma } from './db';
 import { Ingredient, RecipeNoId } from '@/types';
 import defaultRecipes from './recipes/recieps';
+import { createDefaultStore } from './stores';
 
 const getUser = async () => {
   const session = await getServerSession(options);
@@ -24,14 +25,6 @@ export const checkNewUser = async () => {
     await createDefaultRecipes(userId);
   }
   console.log('User in db');
-};
-
-const createDefaultStore = async (userId: string) => {
-  const cats = await prisma.subcategory.findMany();
-  const store = cats.map(i => i.id);
-  await prisma.store.create({
-    data: { name: 'Ny affär', userId, order: store },
-  });
 };
 
 const createDefaultRecipes = async (userId: string) => {
