@@ -2,38 +2,42 @@
 
 import React, { useEffect, useState } from 'react';
 import SearchIngredients from '../components/SearchIngredient';
-import { getExtraIngredients, upsertExtraIngredient } from '../db/prisma';
-import { addIngredient } from '@/types';
+import {
+  getExtraIngredients,
+  createExtraIngredient,
+} from '../db/extraIngredients';
+import { Ingredient, IngredientId } from '@/types';
 import EditIngredient from '../components/EditIngredient';
 
 const Ingredients = () => {
-  const [ingredients, setIngredients] = useState<addIngredient[]>([]);
+  const [ingredients, setIngredients] = useState<IngredientId[]>([]);
   useEffect(() => {
     getExtraIngredients().then(ings => setIngredients(ings));
   }, []);
   const addIngredient = async (name: string) => {
-    const ingredient: addIngredient = {
+    const ingredient: Ingredient = {
       name,
       quantity: 1,
       unit: 'st',
     };
-    await upsertExtraIngredient(ingredient);
+    await createExtraIngredient(ingredient);
     await update();
   };
+
   const update = async () => {
     const ings = await getExtraIngredients();
     await setIngredients(ings);
   };
 
   return (
-    <main className='flex flex-col gap-5'>
+    <main className="flex flex-col gap-5">
       <SearchIngredients callback={addIngredient} />
-      <ul className='flex flex-col gap-5 p-5'>
+      <ul className="flex flex-col gap-5 p-5">
         {ingredients.map(i => (
           <EditIngredient
             callback={update}
             ingredient={i}
-            key={i.name + '_extra'}
+            key={i.id}
           />
         ))}
       </ul>
