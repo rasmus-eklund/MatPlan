@@ -20,7 +20,7 @@ export default function RootLayout({
     // }}
     >
         <ProvidersWrapper>
-          <Navbar />
+          {/* <Navbar /> */}
           {children}
         </ProvidersWrapper>
       </body>
