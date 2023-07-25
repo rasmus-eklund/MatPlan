@@ -2,7 +2,7 @@
 import { StorePrisma } from '@/types';
 import React, { useEffect, useState } from 'react';
 import * as stores from '../db/stores';
-import Link from 'next/link';
+import StoreComponent from './storeComponent';
 
 const Stores = () => {
   const [storesState, setStoresState] = useState<StorePrisma[]>([]);
@@ -13,6 +13,14 @@ const Stores = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await stores.addDefault(name);
+    await update();
+    setName('');
+  };
+  const handleRemove = async (id: string) => {
+    await stores.remove(id);
+    await update();
+  };
+  const update = async () => {
     setStoresState(await stores.getAll());
   };
   return (
@@ -27,9 +35,7 @@ const Stores = () => {
       </form>
       <ul>
         {storesState.map(s => (
-          <li key={s.id}>
-            <Link href={`/stores/${s.id}`}>{s.name}</Link>
-          </li>
+          <StoreComponent key={s.id} store={s} callback={handleRemove} />
         ))}
       </ul>
     </>
