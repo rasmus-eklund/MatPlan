@@ -3,7 +3,7 @@ import {
   FullRecipe,
   IngredientType,
   Recipe_ingredient,
-  addIngredient,
+  Ingredient,
 } from "@/types";
 import React, { useState } from "react";
 
