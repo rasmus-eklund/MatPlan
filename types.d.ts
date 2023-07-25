@@ -50,7 +50,7 @@ export type ShoppingListType = {
   quantity: Decimal;
   unit: string;
   subCategory: number;
-  from: string;
+  from?: string;
 };
 
 export type IngredientType = {

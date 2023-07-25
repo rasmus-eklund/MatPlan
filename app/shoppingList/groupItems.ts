@@ -1,29 +1,18 @@
-type GroupedMenuItem = {
-  name: string;
-  quantity: number;
-  unit: string;
-  subCategory: number;
-  from: string;
-};
-type Grouped = {
-  name: string;
-  quantity: number;
-  unit: string;
-  subCategory: number;
-};
-// const groupItems = (items: GroupedMenuItem[]) => {
-//   const groupedItems: Grouped[] = items.reduce((acc, cur) => {
-//     const match = acc.findIndex(
-//       (i: GroupedMenuItem) => i.name === cur.name && i.unit === cur.unit
-//     );
-//     const newAcc = [...acc];
-//     if (match === -1) {
-//       const newItem: Grouped = {...cur};
-//       newAcc.push(newItem)
-//     }
-//     return newAcc;
-//   }, []);
-// };
+import { ShoppingListType } from '@/types';
+
+export const groupItems = (items: ShoppingListType[]): ShoppingListType[] =>
+  items.reduce((acc: ShoppingListType[], cur) => {
+    const match = acc.findIndex(
+      (i: ShoppingListType) => i.name === cur.name && i.unit === cur.unit
+    );
+    const item: ShoppingListType = { ...cur };
+    if (match === -1) {
+      acc.push(item);
+    } else {
+      acc[match].quantity += item.quantity;
+    }
+    return acc;
+  }, []);
 
 // const groupedMenuItems: Record<string, GroupedMenuItem> = {};
 

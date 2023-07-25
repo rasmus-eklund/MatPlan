@@ -6,6 +6,7 @@ import SelectStore from '../components/SelectStore';
 import { getShoppingList } from '../db/prisma';
 import { getExtraIngredients } from '../db/extraIngredients';
 import Item from './Item';
+import { groupItems } from './groupItems';
 
 const ShoppingList = () => {
   const [ingredients, setIngredients] = useState<ShoppingListType[]>([]);
@@ -14,7 +15,8 @@ const ShoppingList = () => {
   >([]);
   const [storesState, setStoresState] = useState<StorePrisma[]>([]);
   const [store, setStore] = useState<StorePrisma>();
-  const [filter, setFilter] = useState({ group: true });
+  const [group, setGroup] = useState(false);
+  const [recipe, setRecipe] = useState(false);
 
   useEffect(() => {
     stores
@@ -29,14 +31,20 @@ const ShoppingList = () => {
 
   useEffect(() => {
     if (store) {
-      const sortedIngredients = ingredients.sort(
+      let sortedIngredients = ingredients.sort(
         (a, b) =>
           store.order.indexOf(a.subCategory) -
           store.order.indexOf(b.subCategory)
       );
+      if (group) {
+        sortedIngredients = groupItems(sortedIngredients);
+      }
+      if (recipe) {
+        sortedIngredients = sortedIngredients.map(i => ({ ...i, from: '' }));
+      }
       setSortedIngredients(sortedIngredients);
     }
-  }, [store, ingredients]);
+  }, [store, ingredients, group, recipe]);
 
   const handleSelectStore = async (id: string) => {
     const selected = await stores.get(id);
@@ -52,7 +60,23 @@ const ShoppingList = () => {
         stores={storesState}
         callback={id => handleSelectStore(id)}
       />
-      <ul>
+      <label htmlFor="group_check">Gruppera</label>
+      <input
+        onChange={() => setGroup(!group)}
+        checked={group}
+        type="checkbox"
+        name="group_check"
+        id="group_check"
+      />
+      <label htmlFor="recipe_check">Recept</label>
+      <input
+        onChange={() => setRecipe(!recipe)}
+        checked={recipe}
+        type="checkbox"
+        name="recipe_check"
+        id="recipe_check"
+      />
+      <ul className='flex flex-col'>
         {sortedIngredients.map(i => (
           <Item key={crypto.randomUUID()} item={i} />
         ))}
