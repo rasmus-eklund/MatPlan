@@ -5,6 +5,7 @@ import Category from './Category';
 import { Store, StorePrisma } from '@/types';
 import handleMove from '../moveItems';
 import EditButton from '@/app/components/EditButton';
+import SaveButton from '@/app/components/SaveButton';
 
 type Props = { params: { id: string } };
 const StoreComponent = ({ params: { id } }: Props) => {
@@ -60,7 +61,7 @@ const StoreComponent = ({ params: { id } }: Props) => {
           </form>
         )}
         <EditButton callback={() => setEditName(!editName)} />
-        {edited && <button onClick={() => handleSave()}>Spara</button>}
+        {edited && <SaveButton  callback={() => handleSave()} />}
       </div>
       <ul className="flex flex-col p-1 gap-1">
         {store &&
