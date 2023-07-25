@@ -54,9 +54,9 @@ const SearchIngredients = ({ callback }: Prop) => {
 
   return (
     <section className="flex flex-col relative align-middle">
-      <div className='flex bg-blue-300 p-2'>
+      <div className='flex bg-2 p-2 items-center'>
         <input
-          className="w-full rounded-xl px-2 outline-none focus:bg-white bg-gray-100"
+          className="w-full rounded-xl px-2 outline-none bg-4 focus:bg-5"
           type="text"
           value={search}
           onChange={e => setSearch(e.target.value)}
@@ -66,12 +66,12 @@ const SearchIngredients = ({ callback }: Prop) => {
           autoComplete="off"
         />
       </div>
-      <ul className="absolute top-full bg-slate-400 border-2 w-full">
+      <ul className="absolute top-full bg-4 w-full">
         {debouncedSearch.length > 1 &&
           searchResults.map((name, i) => (
             <li
-              className={`hover:bg-sky-600 ${
-                i === selected ? 'bg-sky-600' : ''
+              className={`hover:bg-3 ${
+                i === selected ? 'bg-3' : ''
               }`}
               key={name + '_search'}
             >
