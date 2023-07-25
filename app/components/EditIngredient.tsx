@@ -1,16 +1,16 @@
-import { addIngredient } from '@/types';
+import { IngredientId } from '@/types';
 import React, { useState } from 'react';
 import units from '../db/units';
 import DeleteButton from './DeleteButton';
-import { deleteExraIngredient, upsertExtraIngredient } from '../db/prisma';
+import { deleteExraIngredient, updateExtraIngredient } from '../db/extraIngredients';
 
 type Prop = {
-  ingredient: addIngredient;
+  ingredient: IngredientId;
   callback: () => Promise<void>;
 };
 
 const EditIngredient = ({
-  ingredient: { name, unit, quantity },
+  ingredient: {id, name, unit, quantity },
   callback,
 }: Prop) => {
   const [unitState, setUnitState] = useState(unit);
@@ -20,7 +20,7 @@ const EditIngredient = ({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    await upsertExtraIngredient({
+    await updateExtraIngredient(id, {
       name,
       quantity: quantState,
       unit: unitState,
