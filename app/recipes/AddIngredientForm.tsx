@@ -1,4 +1,4 @@
-import { Recipe_ingredient, addIngredient } from '@/types';
+import { Recipe_ingredient, Ingredient } from '@/types';
 import { useState } from 'react';
 import DeleteButton from '../components/DeleteButton';
 import SearchIngredients from '../components/SearchIngredient';
