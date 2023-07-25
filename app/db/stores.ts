@@ -45,7 +45,6 @@ export const getAll = async (): Promise<StorePrisma[]> => {
   const stores = await prisma.store.findMany({
     where: { userId },
   });
-  console.log(stores);
   return stores;
 };
 
