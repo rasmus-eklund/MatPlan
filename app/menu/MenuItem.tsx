@@ -1,10 +1,13 @@
-'use client';
-import { MenuItem } from '@/types';
-import React, { useEffect, useState } from 'react';
-import { removeRecipeFromMenu, updateMenuPortions } from '../db/prisma';
-import DeleteButton from '../components/DeleteButton';
-import DaysDropDown from '../components/DaysDropDown';
-import DaysDropDownForMenu from '../components/DaysDropDownForMenu';
+"use client";
+import { MenuItem } from "@/types";
+import React, { useCallback, useEffect, useState } from "react";
+import {
+  changeRecipeDay,
+  removeRecipeFromMenu,
+  updateMenuPortions,
+} from "../db/prisma";
+import DeleteButton from "../components/DeleteButton";
+import DaysDropDownForMenu from "../components/DaysDropDownForMenu";
 
 type Props = {
   item: MenuItem;
@@ -13,6 +16,8 @@ type Props = {
 
 const MenuItem = ({ item, callback }: Props) => {
   const [portionsState, setPortionsState] = useState(item.portions);
+  const [day, setDay] = useState(item.day);
+
   const handleRemove = async (id: string) => {
     await removeRecipeFromMenu(id);
     await callback();
@@ -23,11 +28,26 @@ const MenuItem = ({ item, callback }: Props) => {
   const handlePlus = () => {
     setPortionsState(portionsState + 1);
   };
+
+  const handleUpdateDay = (newDay: string) => {
+    setDay(newDay);
+    console.log(day);
+  };
+
   useEffect(() => {
     (async () => {
       await updateMenuPortions(item.id, portionsState);
     })();
   }, [portionsState, item]);
+
+  useEffect(() => {
+    (async () => {
+      await changeRecipeDay(item.id, day);
+      if (day !== item.day) {
+        callback();
+      }
+    })();
+  }, [day, item]);
 
   return (
     <li className="flex items-center border-2 border-gray-400 p-2 gap-2">
@@ -46,7 +66,7 @@ const MenuItem = ({ item, callback }: Props) => {
         >
           +
         </button>
-        <DaysDropDownForMenu id={item.recipe.id} day={item.day} />
+        <DaysDropDownForMenu initDay={item.day} callback={handleUpdateDay} />
         <DeleteButton
           callback={() => {
             handleRemove(item.id);
