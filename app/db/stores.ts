@@ -70,7 +70,6 @@ export const remove = async (id: string) => {
   const userId = await getUser();
   await prisma.store.delete({ where: { userId, id } });
   const nr = await prisma.store.findMany({ where: { userId } });
-  console.log(nr);
   if (nr.length === 0) {
     await createDefaultStore(userId);
   }

@@ -31,7 +31,6 @@ const MenuItem = ({ item, callback }: Props) => {
 
   const handleUpdateDay = (newDay: string) => {
     setDay(newDay);
-    console.log(day);
   };
 
   useEffect(() => {
