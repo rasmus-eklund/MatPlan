@@ -5,7 +5,7 @@ import { addRecipeToMenu } from '../db/prisma';
 import days from '../db/days';
 
 const DaysDropDown = ({ id, portions }: { id: string; portions:number }) => {
-  const [day, setDay] = useState('Undecided');
+  const [day, setDay] = useState(days.at(-1)!);
   return (
     <>
       <select
