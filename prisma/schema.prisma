@@ -13,9 +13,19 @@ model user {
   menu             menu[]
   extra_ingredient extra_ingredient[]
   store            store[]
-  home             String[]
+  home             home[]
 
   @@map("public.user")
+}
+
+model home {
+  id             String     @id @default(uuid())
+  user           user       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+  ingredient     ingredient @relation(fields: [ingredientName], references: [name])
+  ingredientName String
+
+  @@map("public.home")
 }
 
 model recipe {
@@ -58,6 +68,7 @@ model ingredient {
   category          category            @relation(fields: [categoryId], references: [id])
   subcategory       subcategory         @relation(fields: [subcategoryId], references: [id])
   recipe_ingredient recipe_ingredient[]
+  home              home[]
 
   @@map("public.ingredient")
 }
