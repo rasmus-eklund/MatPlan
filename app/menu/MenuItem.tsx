@@ -50,7 +50,7 @@ const MenuItem = ({ item, callback }: Props) => {
   }, [day, item]);
 
   return (
-    <li className="flex items-center justify-center flex-grow bg-4 rounded-lg p-2 gap-2">
+    <li className="flex items-center justify-between flex-grow bg-4 rounded-lg px-8 gap-2 font-bold text-1">
       <p>{item.recipe.name}</p>
       <div className="flex content-between items-center gap-2">
         <button
