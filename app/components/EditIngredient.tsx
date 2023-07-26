@@ -1,39 +1,38 @@
-import { IngredientId } from '@/types';
+import { Ingredient } from '@/types';
 import React, { useState } from 'react';
 import units from '../db/units';
 import DeleteButton from './DeleteButton';
-import {
-  deleteExraIngredient,
-  updateExtraIngredient,
-} from '../db/extraIngredients';
+
 import EditButton from './EditButton';
 import Cancel from './Cancel';
 import SaveButton from './SaveButton';
 
 type Prop = {
-  ingredient: IngredientId;
-  callback: () => Promise<void>;
+  ingredient: Ingredient;
+  remove: () => Promise<void>;
+  save: (ingredient: Ingredient) => Promise<void>;
 };
 
 const EditIngredient = ({
-  ingredient: { id, name, unit, quantity },
-  callback,
+  ingredient: { name, unit, quantity },
+  remove,
+  save,
 }: Prop) => {
   const [unitState, setUnitState] = useState(unit);
   const [quantState, setQuantState] = useState(quantity);
   const [editState, setEdiState] = useState(false);
-  const handleSave = async () => {
-    await updateExtraIngredient(id, {
-      name,
-      quantity: quantState,
-      unit: unitState,
-    });
-    setEdiState(false);
-  };
-  const handleDelete = async () => {
-    await deleteExraIngredient(id);
-    await callback();
-  };
+  // const handleSave = async () => {
+  //   await updateExtraIngredient(id, {
+  //     name,
+  //     quantity: quantState,
+  //     unit: unitState,
+  //   });
+  //   setEdiState(false);
+  // };
+  // const handleDelete = async () => {
+  //   await deleteExraIngredient(id);
+  //   await callback();
+  // };
   if (!editState) {
     return (
       <li className="border-2 flex gap-5 items-center p-1">
@@ -44,7 +43,7 @@ const EditIngredient = ({
         </div>
         <div className="flex gap-2 justify-self-end">
           <EditButton callback={() => setEdiState(true)} />
-          <DeleteButton callback={() => handleDelete()} />
+          <DeleteButton callback={remove} />
         </div>
       </li>
     );
@@ -75,7 +74,14 @@ const EditIngredient = ({
           </div>
           <div className="flex gap-2 justify-self-end">
             <Cancel callback={() => setEdiState(false)} />
-            <SaveButton callback={handleSave}></SaveButton>
+            <SaveButton
+              callback={async () => {
+                {
+                  await save({ name, quantity: quantState, unit: unitState });
+                  setEdiState(false);
+                }
+              }}
+            ></SaveButton>
           </div>
         </form>
       </li>

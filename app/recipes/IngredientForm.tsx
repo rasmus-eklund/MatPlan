@@ -1,7 +1,7 @@
-import { Recipe_ingredient } from "@/types";
-import { useState } from "react";
-import { deleteIngredient, updateIngredient } from "../db/prisma";
-import units from "../db/units";
+import { Recipe_ingredient } from '@/types';
+import { useState } from 'react';
+import { deleteIngredient, updateIngredient } from '../db/prisma';
+import units from '../db/units';
 
 type Prop = {
   ingredient: Recipe_ingredient;
@@ -9,7 +9,6 @@ type Prop = {
 };
 
 const IngredientForm = ({ ingredient }: Prop) => {
-  // const [ingName, setIngname] = useState<string>(ingredient.ingredientName);
   const [quantity, setQuantity] = useState<number>(ingredient.quantity);
   const [unit, setUnit] = useState<string>(ingredient.unit);
 
@@ -29,22 +28,22 @@ const IngredientForm = ({ ingredient }: Prop) => {
         <input
           type="number"
           value={quantity}
-          onChange={(e) => setQuantity(parseInt(e.target.value))}
+          onChange={e => setQuantity(parseInt(e.target.value))}
         />
         <label>Unit:</label>
         <select
           id="edit-unit"
           name="unit"
           value={unit}
-          onChange={(e) => setUnit(e.target.value)}
+          onChange={e => setUnit(e.target.value)}
         >
-          {units.map((u) => (
+          {units.map(u => (
             <option key={u.abr}>{u.abr}</option>
           ))}
         </select>
         <button
           className="border-2 rounded-md border-black bg-green-400"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
             updateIngredient(updatedIngredient);
           }}
@@ -53,7 +52,7 @@ const IngredientForm = ({ ingredient }: Prop) => {
         </button>
         <button
           className="border-2 rounded-md border-black bg-red-400"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
             deleteIngredient(ingredient.id);
           }}
