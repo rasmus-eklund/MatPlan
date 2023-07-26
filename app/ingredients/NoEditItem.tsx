@@ -1,28 +1,26 @@
 import { Ingredient } from '@/types';
 import React, { useEffect, useState } from 'react';
-import { addHome, removeHome } from '../db/home';
 
 type Props = {
   ing: Ingredient;
   home: boolean;
   showHome: boolean;
+  onCheck: (check: boolean) => Promise<void>;
 };
 
 const NoEditItem = ({
   ing: { name, quantity, unit },
   home,
   showHome,
+  onCheck,
 }: Props) => {
   const [check, setChecked] = useState(home);
-  useEffect(() => {
-    if (check) {
-      addHome(name);
-      console.log(check);
-    } else {
-      console.log(check);
-      // removeHome(name);
-    }
-  }, [check, name]);
+  const handleChange = async () => {
+    setChecked(!check);
+    await onCheck(!check);
+  };
+
+  useEffect(() => {setChecked(home)}, [home])
 
   return (
     <li className="border-2 flex gap-5 items-center p-1">
@@ -39,7 +37,7 @@ const NoEditItem = ({
             checked={check}
             name="home"
             id="home"
-            onChange={() => setChecked(!check)}
+            onChange={handleChange}
           />
         </>
       )}

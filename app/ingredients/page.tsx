@@ -25,7 +25,16 @@ const Ingredients = () => {
   }, []);
 
   const isHome = (name: string) => {
-    return Boolean(homeState.find(n => n.ingredientName === name));
+    const home = Boolean(homeState.some(n => n.ingredientName === name));
+    if (home) {
+    }
+    return home;
+  };
+  const handleChange = async (check: boolean, name: string) => {
+    if (check) {
+      return await addHome(name);
+    }
+    await removeHome(name);
   };
 
   const addIngredient = async (name: string) => {
@@ -56,28 +65,33 @@ const Ingredients = () => {
   };
 
   return (
-    <main className="flex flex-col">
+    <main>
       <SearchIngredients callback={addIngredient} />
-      <ul>
-        {extraIngredients.map(i => (
-          <EditIngredient
-            remove={() => handleDelete(i.id)}
-            save={ing => handleSave(i.id, ing)}
-            ingredient={i}
-            key={i.id}
-          />
-        ))}
-      </ul>
-      <ul className="flex flex-col gap-5 p-5">
-        {ingredients.map(ing => (
-          <NoEditItem
-            key={ing.id}
-            ing={ing}
-            home={isHome(ing.name)}
-            showHome={true}
-          />
-        ))}
-      </ul>
+      <section className="flex flex-col gap-2 mt-2">
+        <h2>Extra varor:</h2>
+        <ul className="flex flex-col gap-2">
+          {extraIngredients.map(i => (
+            <EditIngredient
+              remove={() => handleDelete(i.id)}
+              save={ing => handleSave(i.id, ing)}
+              ingredient={i}
+              key={i.id}
+            />
+          ))}
+        </ul>
+        <h2>Recept varor:</h2>
+        <ul className="flex flex-col gap-2">
+          {ingredients.map(ing => (
+            <NoEditItem
+              key={ing.id}
+              ing={ing}
+              home={isHome(ing.name)}
+              showHome={true}
+              onCheck={check => handleChange(check, ing.name)}
+            />
+          ))}
+        </ul>
+      </section>
     </main>
   );
 };

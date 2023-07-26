@@ -19,11 +19,10 @@ model user {
 }
 
 model home {
-  id             String     @id @default(uuid())
   user           user       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId         String
   ingredient     ingredient @relation(fields: [ingredientName], references: [name])
-  ingredientName String
+  ingredientName String     @id
 
   @@map("public.home")
 }
