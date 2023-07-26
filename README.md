@@ -1,34 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Recipe Jar
 
-## Getting Started
+Recipe Jar is a versatile recipe app in Swedish that goes beyond the traditional recipe management. It allows you to plan your meals for the week, create shopping lists, and even optimize your grocery shopping layout. Whether you're a cooking enthusiast or just trying to simplify your meal planning, Recipe Jar has got you covered!
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [Introduction](#recipe-jar)
+- [Main Uses](#main-uses)
+  - [Meny Section](#meny-section)
+  - [Maträtter Section](#maträtter-section)
+  - [Varor Section](#varor-section)
+  - [Butiker Section](#butiker-section)
+- [How to Use](#how-to-use)
+- [Logging In](#logging-in)
+- [Project Demo](#project-demo)
+- [License](#license)
+- [Credits](#credits)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Main Uses
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Meny [menu] Section
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The Meny section is where your weekly meal planning takes place. Easily organize your menu for the week by adding meals to specific days. You can even adjust the portions for each meal according to your needs. Not sure which day to have a particular meal? No worries! There's an "Undecided" category to keep those meals until you decide.
 
-## Learn More
+### Maträtter [recipes] Section
 
-To learn more about Next.js, take a look at the following resources:
+In the Maträtter section, you'll find an extensive list of recipes to choose from. You have the flexibility to filter recipes by name, ingredient, or instruction, making it easy to find the perfect dish for any occasion. When you find a recipe you like, click the "Add" button and choose a day from the dropdown. Recipe Jar will automatically add the necessary ingredients to both your "Inköpslista" (shopping list) and Meny (menu)!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Varor [items] Section
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Not all items you need to buy are part of a recipe. The Varor section allows you to add additional items to your shopping list that aren't associated with a particular recipe. Need to pick up some milk or snacks? Add them here, and they'll be included in your shopping list.
 
-## Deploy on Vercel
+### Butiker [stores] Section
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Keep track of your preferred stores for grocery shopping in the Butiker section. You can add, delete, and rearrange stores to customize the shopping layout based on your preferences. This way, Recipe Jar generates your shopping list according to the layout you define here, saving you time and making your shopping experience more efficient.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## How to Use
+
+1. Visit the [Recipe Jar website](https://recipe-jar.vercel.app/).
+2. Start by exploring the Meny section and plan your meals for the week.
+3. Move to the Maträtter section to discover a wide range of recipes and add them to your menu and shopping list.
+4. If you need to buy items not linked to a recipe, head to the Varor section and add them to your shopping list.
+5. Utilize the Butiker section to customize your grocery store layout and optimize your shopping experience.
+6. Enjoy hassle-free meal planning and grocery shopping with Recipe Jar!
+
+## Logging In
+
+To access features, log in to Recipe Jar using your Google account. Simply click on the "Logga in" (Log in) button in the top right corner, and you'll be redirected to Google authentication. Once logged in, you can save your preferences and access your recipes and shopping lists from anywhere.
+
+## Project Demo
+
+For a live demo of Recipe Jar, visit [https://recipe-jar.vercel.app/](https://recipe-jar.vercel.app/).
+
+## License
+
+Recipe Jar is licensed under the [MIT License](https://opensource.org/licenses/MIT). 
+Please see the [LICENSE](LICENSE) file for more details.
+
+## Credits
+
+Recipe Jar is a project brought to you by Allan Heremi, Rasmus Eklund, and Jou-fang wang.
+
+Feel free to contribute, raise issues, or provide feedback to help us improve Recipe Jar further!
+
+---
+
+*This project was made using Next.js, Tailwind CSS, PostgreSQL/Prisma, deployment made possible via Vercel.*
