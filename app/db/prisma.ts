@@ -78,11 +78,10 @@ export const updateIngredient = async ({
   quantity,
   unit,
 }: Recipe_ingredient) => {
-  const res = await prisma.recipe_ingredient.update({
+  await prisma.recipe_ingredient.update({
     where: { id },
     data: { quantity, unit },
   });
-  console.log(res);
 };
 
 export const createIngredient = async (
@@ -108,7 +107,6 @@ export const deleteIngredient = async (id: string) => {
 
 export const deleteRecipe = async (id: string) => {
   const userId = await getUser();
-  console.log(id, userId);
   await prisma.recipe.delete({ where: { id, userId } });
 };
 
