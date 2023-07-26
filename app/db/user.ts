@@ -56,4 +56,15 @@ const addRecipeIngredient = async (
   await prisma.recipe_ingredient.createMany({ data: newIngs });
 };
 
+export const getHome = async () => {
+  const userId = await getUser();
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  return user!.home;
+};
+
+export const setHome = async (home: string[]) => {
+  const userId = await getUser();
+  await prisma.user.update({ where: { id: userId }, data: { home } });
+};
+
 export default getUser;
