@@ -96,6 +96,5 @@ export type Store = {
 };
 
 export type Home = {
-  id: string;
   ingredientName: string;
 };
