@@ -45,7 +45,7 @@ const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
       <ul>
         {recipe.recipe_ingredient &&
           recipe.recipe_ingredient.map((i) => (
-            <IngredientForm ingredient={i} />
+            <IngredientForm key={i.id} ingredient={i} />
           ))}
       </ul>
       <IngredientForm ingredient={emptyIngredient} />
