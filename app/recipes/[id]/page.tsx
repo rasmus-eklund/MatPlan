@@ -1,9 +1,8 @@
 "use client";
-import { addRecipeToMenu, getRecipeById } from "@/app/db/prisma";
+import { getRecipeById } from "@/app/db/prisma";
 import { FullRecipe } from "@/types";
 import React, { useEffect, useState } from "react";
 import RecipeForm from "../RecipeForm";
-import Link from "next/link";
 import DaysDropDown from "@/app/components/DaysDropDown";
 
 const Recipe = ({ params }: { params: { id: string } }) => {
