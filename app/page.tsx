@@ -2,14 +2,15 @@
 import React from "react";
 import Image from "next/image";
 import LoginHome from "./components/LoginHome";
+import HeaderHome from "./components/HeaderHome";
 export default function Landing() {
   return (<>
     <main className="w-full h-96 flex justify-center flex-col items-center text-5">
       <h1 className="font-bold text-2xl">Welcome to Recipe JAR
       </h1>
-      <p className="text-center my-4 text-lg">
-          Plan meals, create shopping lists, and simplify your culinary journey with Recipe Jar, the versatile recipe app for cooking enthusiasts.
-        </p>
+      <h3 className="text-lg mb-2">
+          Plan meals, create shopping lists, and simplify your culinary journey.
+          </h3> 
       <LoginHome />
       
 

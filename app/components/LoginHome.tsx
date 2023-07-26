@@ -16,7 +16,7 @@ export default function Login() {
           >
             Logga ut
           </button>
-          <UserCard user={session.user} />
+         
         </div>
       </>
     );
