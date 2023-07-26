@@ -6,7 +6,7 @@ const days = [
   'Fredag',
   'Lördag',
   'Söndag',
-  'Undecided',
+  'Obestämd'
 ];
 
 export default days;
