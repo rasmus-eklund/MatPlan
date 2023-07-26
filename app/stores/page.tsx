@@ -25,7 +25,7 @@ const Stores = () => {
   };
   return (
     <>
-      <div>Stores</div>
+      <div>Affärer</div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

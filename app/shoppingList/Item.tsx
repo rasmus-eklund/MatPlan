@@ -23,7 +23,7 @@ const Item = ({ item: { name, quantity, from, unit } }: Props) => {
         <p className="text-left flex-shrink-0">{name}</p>
       </div>
       <p className="text-left flex-shrink-0">{`${quantity} ${unit}`}</p>
-      {from && <p className="text-center overflow-clip">{from}</p>}
+      {from && <p className="overflow-hidden whitespace-nowrap overflow-ellipsis">{from}</p>}
     </li>
   );
 };

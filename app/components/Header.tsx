@@ -1,11 +1,11 @@
-"use client";
-import React, { useEffect } from "react";
-import { randomizeLetters } from "./UIhelperfunctions";
-import Login from "./LoginButton";
+'use client';
+import React, { useEffect } from 'react';
+import { randomizeLetters } from './UIhelperfunctions';
+import Login from './LoginButton';
 
 const Header = () => {
   useEffect(() => {
-    const h1Element = document.querySelector("h1");
+    const h1Element = document.querySelector('h1');
     if (h1Element) {
       randomizeLetters(h1Element);
     }

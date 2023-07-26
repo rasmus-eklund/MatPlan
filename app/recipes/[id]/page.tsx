@@ -1,10 +1,10 @@
-"use client";
-import { addRecipeToMenu, getRecipeById } from "@/app/db/prisma";
-import { FullRecipe } from "@/types";
-import React, { useEffect, useState } from "react";
-import RecipeForm from "../RecipeForm";
-import Link from "next/link";
-import DaysDropDown from "@/app/components/DaysDropDown";
+'use client';
+import { getRecipeById } from '@/app/db/prisma';
+import { FullRecipe } from '@/types';
+import React, { useEffect, useState } from 'react';
+import RecipeForm from './EditRecipe';
+import ShowRecipe from './ShowRecipe';
+import EditButton from '@/app/components/EditButton';
 
 const Recipe = ({ params }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<FullRecipe | null>(null);
@@ -13,45 +13,21 @@ const Recipe = ({ params }: { params: { id: string } }) => {
     const res = await getRecipeById(id);
     const data: FullRecipe = JSON.parse(res);
     setRecipe(data);
+    setEditMode(false);
   };
 
   useEffect(() => {
     handleGetRecipe(params.id);
   }, [params.id]);
+
   return (
-    <>
-      {!editMode && recipe && (
-        <section>
-          <h3>{recipe.name}</h3>
-          <p>{recipe.portions}</p>
-          <ul>
-            {recipe.recipe_ingredient.map((i) => (
-              <li key={i.id}>
-                <span>{i.ingredientName}</span>
-                <span>{i.quantity}</span>
-                <span>{i.unit}</span>
-              </li>
-            ))}
-          </ul>
-          <p>{recipe?.instruction}</p>
-          <label
-            htmlFor="filter"
-            className="border-2 p-1.5 px-4 rounded-md border-black m-4"
-          >
-            Day
-          </label>
-          <DaysDropDown id={recipe.id} portions={recipe?.portions} />
-        </section>
+    <main>
+      {!editMode && recipe && <ShowRecipe recipe={recipe} />}
+      {editMode && recipe && (
+        <RecipeForm recipe={recipe} updateParentUI={handleGetRecipe} />
       )}
-      {editMode && recipe && <RecipeForm recipe={recipe} />}
-      <button
-        onClick={() => {
-          setEditMode(true);
-        }}
-      >
-        Edit
-      </button>
-    </>
+      {!editMode && <EditButton callback={() => setEditMode(true)} />}
+    </main>
   );
 };
 

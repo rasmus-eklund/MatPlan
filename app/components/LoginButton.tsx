@@ -7,32 +7,28 @@ export default function Login() {
 
   if (session) {
     return (
-      <>
-        <div className="flex flex-row font-semibold mr-2">
-          <button
-            className="text-end text-4 mr-4"
-            onClick={async () => await signOut({ callbackUrl: '/' })}
-            type="button"
-          >
-            Logga ut
-          </button>
-          <UserCard user={session.user} />
-        </div>
-      </>
+      <div className="flex flex-row font-semibold mr-2">
+        <button
+          className="text-end text-4 mr-4"
+          onClick={async () => await signOut({ callbackUrl: '/' })}
+          type="button"
+        >
+          Logga ut
+        </button>
+        <UserCard user={session.user} />
+      </div>
     );
   } else {
     return (
-      <>
-        <button
-          className="text-center text-4 mr-4"
-          onClick={() => {
-            signIn('google', { callbackUrl: '/home' });
-          }}
-          type="button"
-        >
-          Logga in
-        </button>
-      </>
+      <button
+        className="text-center text-4 mr-4"
+        onClick={() => {
+          signIn('google', { callbackUrl: '/home' });
+        }}
+        type="button"
+      >
+        Logga in
+      </button>
     );
   }
 }
