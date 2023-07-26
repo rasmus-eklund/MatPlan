@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import * as stores from '../db/stores';
 import { ShoppingListType, StorePrisma } from '@/types';
 import SelectStore from '../components/SelectStore';
-import { getShoppingList } from '../db/prisma';
+import { getRecipeIngredients } from '../db/prisma';
 import { getExtraIngredients } from '../db/extraIngredients';
 import Item from './Item';
 import { groupItems } from './groupItems';
@@ -25,7 +25,7 @@ const ShoppingList = () => {
         setStore(s[0]);
         setStoresState(s);
       })
-      .then(() => Promise.all([getShoppingList(), getExtraIngredients()]))
+      .then(() => Promise.all([getRecipeIngredients(), getExtraIngredients()]))
       .then(([a, b]) => setIngredients([...a, ...b]));
   }, []);
 

@@ -2,7 +2,7 @@
 import { FullRecipe, Recipe_ingredient } from "@/types";
 import React, { useState } from "react";
 import IngredientForm from "./IngredientForm";
-import { updateRecipe } from "../db/prisma";
+import { upsertRecipe } from "../db/prisma";
 
 const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
   const [recipeName, setRecipeName] = useState<string>(recipe.name);
@@ -10,7 +10,6 @@ const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
   const [recipeInstructions, setRecipeInstructions] = useState<string>(
     recipe.instruction
   );
-
   const emptyIngredient: Recipe_ingredient = {
     id: "",
     ingredientName: "",
@@ -30,13 +29,13 @@ const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
 
   return (
     <form className="border-2 p-1.5 px-4 rounded-md border-black m-4">
-      <label>Recipe Name:</label>
+      <label>Receptets namn:</label>
       <input
         type="text"
         value={recipeName}
         onChange={(e) => setRecipeName(e.target.value)}
       />
-      <label>Portions:</label>
+      <label>Portioner:</label>
       <input
         type="number"
         value={recipePortions}
@@ -49,7 +48,7 @@ const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
           ))}
       </ul>
       <IngredientForm ingredient={emptyIngredient} />
-      <label>Instructions:</label>
+      <label>Instruktioner:</label>
       <input
         type="text"
         value={recipeInstructions}
@@ -58,10 +57,10 @@ const RecipeForm = ({ recipe }: { recipe: FullRecipe }) => {
       <button
         onClick={(e) => {
           e.preventDefault();
-          updateRecipe(updatedRecipe);
+          upsertRecipe(updatedRecipe);
         }}
       >
-        Modify
+        Modifiera
       </button>
     </form>
   );

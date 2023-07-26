@@ -36,7 +36,6 @@ export const createExtraIngredient = async (ing: Ingredient) => {
     quantity: new Prisma.Decimal(ing.quantity),
     userId,
   };
-  console.log(newIng);
   await prisma.extra_ingredient.create({
     data: newIng,
   });

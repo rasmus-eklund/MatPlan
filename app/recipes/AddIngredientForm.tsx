@@ -24,7 +24,7 @@ const AddIngredientForm = ({ callback }: Prop) => {
       <SearchIngredients callback={handleSearch} />
       <span>{ingName}</span>
       <br></br>
-      <label>quantity</label>
+      <label>kvantitet</label>
       <input
         value={ingQuan}
         onChange={e => setIngQuan(Number(e.target.value))}
@@ -45,7 +45,7 @@ const AddIngredientForm = ({ callback }: Prop) => {
           setIngUnit('');
         }}
       >
-        Add
+        Lägg till
       </button>
     </div>
   );

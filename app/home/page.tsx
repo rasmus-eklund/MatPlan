@@ -8,7 +8,7 @@ export default function Landing() {
   }, []);
   return (
     <main>
-      <h1>Home Page</h1>
+      <h1>Startsida</h1>
     </main>
   );
 }
