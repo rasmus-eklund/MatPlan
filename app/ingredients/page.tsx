@@ -5,6 +5,8 @@ import SearchIngredients from '../components/SearchIngredient';
 import {
   getExtraIngredients,
   createExtraIngredient,
+  deleteExraIngredient,
+  updateExtraIngredient,
 } from '../db/extraIngredients';
 import { Ingredient, IngredientId } from '@/types';
 import EditIngredient from '../components/EditIngredient';
@@ -33,12 +35,25 @@ const Ingredients = () => {
     await setIngredients([...ings, ...extra]);
   };
 
+  const handleSave = async (id: string, ing: Ingredient) => {
+    await updateExtraIngredient(id, ing);
+  };
+  const handleDelete = async (id: string) => {
+    await deleteExraIngredient(id);
+    await update();
+  };
+
   return (
     <main className="flex flex-col">
       <SearchIngredients callback={addIngredient} />
       <ul className="flex flex-col gap-5 p-5">
         {ingredients.map(i => (
-          <EditIngredient callback={update} ingredient={i} key={i.id} />
+          <EditIngredient
+            remove={() => handleDelete(i.id)}
+            save={ing => handleSave(i.id, ing)}
+            ingredient={i}
+            key={i.id}
+          />
         ))}
       </ul>
     </main>
