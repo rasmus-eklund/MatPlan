@@ -2,7 +2,6 @@
 import React from 'react';
 import Image from 'next/image';
 import LoginHome from './components/LoginHome';
-import HeaderHome from './components/HeaderHome';
 export default function Landing() {
   return (
     <main className="w-full h-96 flex justify-center flex-col items-center text-5">
