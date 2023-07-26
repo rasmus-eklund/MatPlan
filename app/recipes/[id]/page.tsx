@@ -49,7 +49,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
           setEditMode(true);
         }}
       >
-        Edit
+        Ändra
       </button>
     </>
   );

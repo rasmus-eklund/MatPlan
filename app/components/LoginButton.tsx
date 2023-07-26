@@ -24,7 +24,7 @@ export default function Login() {
     return (
       <>
         <button
-          className="text-center text-4"
+           className="text-end text-4 mr-2"
           onClick={() => {
             signIn('google', { callbackUrl: '/home' });
           }}

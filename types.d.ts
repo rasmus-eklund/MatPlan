@@ -30,7 +30,8 @@ export type FullRecipe = {
   recipe_ingredient: Recipe_ingredient[];
 };
 
-export type FilterParams = "name" | "ingredients" | "instruction";
+export type FilterParams = 'name' | 'ingredients' | 'instruction';
+
 export type SearchRecipeParams = {
   filter: FilterParams;
   search: string;
@@ -69,6 +70,7 @@ export type IngredientId = {
   name: string;
   quantity: number;
   unit: string;
+  from: string;
 };
 
 export type StorePrisma = {
@@ -93,13 +95,3 @@ export type Store = {
   name: string;
   categories: CategoryItem[];
 };
-
-// export type DayParams =
-//   | 'Måndag'
-//   | 'Tisdag'
-//   | 'Onsdag'
-//   | 'Torsdag'
-//   | 'Fredag'
-//   | 'Lördag'
-//   | 'Söndag'
-//   | 'Undecided';

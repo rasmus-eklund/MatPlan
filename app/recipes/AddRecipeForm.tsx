@@ -1,13 +1,10 @@
 "use client";
 import {
-  FullRecipe,
-  IngredientType,
   Recipe_ingredient,
-  Ingredient,
 } from "@/types";
 import React, { useState } from "react";
 
-import { updateIngredient, updateRecipe } from "../db/prisma";
+import { updateIngredient, upsertRecipe } from "../db/prisma";
 import AddIngredientForm, { Ingdisplay } from "./AddIngredientForm";
 
 type Prop = {
@@ -30,7 +27,7 @@ const AddRecipeForm = ({ callback }: Prop) => {
   };
 
   const handlesAddReicpe = async () => {
-    const recipeId = await updateRecipe(updatedRecipe);
+    const recipeId = await upsertRecipe(updatedRecipe);
     console.log(recipeId);
     ingredients.map(async (i: Recipe_ingredient) => {
       i.id = "";
@@ -57,7 +54,7 @@ const AddRecipeForm = ({ callback }: Prop) => {
 
   return (
     <form className="border-2 p-1.5 px-4 rounded-md border-black m-4">
-      <label>Recipe Name:</label>
+      <label>Receptets namn:</label>
       <input
         type="text"
         className="border-2 border-black"
@@ -66,7 +63,7 @@ const AddRecipeForm = ({ callback }: Prop) => {
           setRecipeName(e.target.value);
         }}
       />
-      <label>Portions:</label>
+      <label>Portioner:</label>
       <input
         type="number"
         className="border-2 border-black"
@@ -81,7 +78,7 @@ const AddRecipeForm = ({ callback }: Prop) => {
           return <Ingdisplay key={crypto.randomUUID()} ing={i} callback={handleDeleteIng} />;
         })}
       </ul>
-      <label>Instructions:</label>
+      <label>Instruktioner:</label>
       <input
         type="text"
         className="border-2 border-black"
@@ -97,10 +94,51 @@ const AddRecipeForm = ({ callback }: Prop) => {
           callback();
         }}
       >
-        ADD
+        Lägg till
       </button>
     </form>
   );
 };
 
 export default AddRecipeForm;
+
+
+// <form
+//               className="recipe__form"
+//               onSubmit={e => {
+//                 e.preventDefault();
+//               }}
+//             >
+//               <label
+//                 htmlFor="search"
+//                 className="border-2 p-1.5 px-4 rounded-md border-black m-4"
+//               >
+//                 Sök
+//               </label>
+//               <input
+//                 className="border-2 p-1.5 px-4 rounded-md border-black m-4"
+//                 id="search"
+//                 type="text"
+//                 value={search}
+//                 onChange={e => setSearch(e.target.value)}
+//               />
+//               <br />
+//               <label
+//                 htmlFor="filter"
+//                 className="border-2 p-1.5 px-4 rounded-md border-black m-4"
+//               >
+//                 Filtrera
+//               </label>
+//               <select
+//                 className="border-2 p-1.5 px-4 rounded-md border-black m-4"
+//                 name="filter"
+//                 id="filter"
+//                 value={filter}
+//                 onChange={e => setFilter(e.target.value as FilterParams)}
+//               >
+//                 <option value="name">Namn</option>
+//                 <option value="ingredients">Ingredient</option>
+//                 <option value="instruction">Instruktion</option>
+//               </select>
+//             </form>
+//             <button onClick={handleAddNewRecipe}>Lägg till nytt recept</button>

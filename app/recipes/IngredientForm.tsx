@@ -49,7 +49,7 @@ const IngredientForm = ({ ingredient }: Prop) => {
             updateIngredient(updatedIngredient);
           }}
         >
-          Update
+          Uppdatera
         </button>
         <button
           className="border-2 rounded-md border-black bg-red-400"
@@ -58,7 +58,7 @@ const IngredientForm = ({ ingredient }: Prop) => {
             deleteIngredient(ingredient.id);
           }}
         >
-          Delete
+          Ta bort
         </button>
       </li>
     </>
