@@ -32,7 +32,7 @@ const DaysDropDown = ({ id, portions }: { id: string; portions:number }) => {
             })
           }
         >
-          Add
+          Lägg till
         </button>
       </Link>
     </>

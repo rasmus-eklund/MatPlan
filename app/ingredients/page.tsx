@@ -8,11 +8,12 @@ import {
 } from '../db/extraIngredients';
 import { Ingredient, IngredientId } from '@/types';
 import EditIngredient from '../components/EditIngredient';
+import { getRecipeIngredients } from '../db/prisma';
 
 const Ingredients = () => {
   const [ingredients, setIngredients] = useState<IngredientId[]>([]);
   useEffect(() => {
-    getExtraIngredients().then(ings => setIngredients(ings));
+    update();
   }, []);
   const addIngredient = async (name: string) => {
     const ingredient: Ingredient = {
@@ -25,8 +26,11 @@ const Ingredients = () => {
   };
 
   const update = async () => {
-    const ings = await getExtraIngredients();
-    await setIngredients(ings);
+    const [extra, ings] = await Promise.all([
+      getExtraIngredients(),
+      getRecipeIngredients(),
+    ]);
+    await setIngredients([...ings, ...extra]);
   };
 
   return (
