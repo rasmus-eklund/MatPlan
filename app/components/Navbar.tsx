@@ -21,7 +21,7 @@ const Navbar = () => {
   ];
   return (
     <nav className="bg-1">
-      <ul className="flex justify-between px-10">
+      <ul className="flex justify-between px-4">
         {items.map(({ name, href, icon }) => (
           <NavbarLink name={name} href={href} icon={icon} key={href} />
         ))}
