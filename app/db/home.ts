@@ -5,16 +5,16 @@ import getUser from './user';
 
 export const removeHome = async (name: string) => {
   const userId = await getUser();
-  await prisma.home.delete({ where: { id: userId, ingredientName: name } });
+  await prisma.home.delete({ where: { userId, ingredientName: name } });
 };
 
 export const addHome = async (name: string) => {
   const userId = await getUser();
-  await prisma.home.create({ data: { ingredientName: name, userId } });
+  await prisma.home.create({ data: { userId, ingredientName: name } });
 };
 
 export const getHome = async (): Promise<Home[]> => {
   const userId = await getUser();
   const home = await prisma.home.findMany({ where: { userId } });
-  return home;
+  return home.map(({ingredientName}) => ({ingredientName}));
 };
