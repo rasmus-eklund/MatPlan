@@ -1,4 +1,4 @@
-import SearchBar from './SearchBar';
+import SearchBar from "./SearchBar";
 
 const page = () => {
   // search bar or add recipe form
@@ -11,7 +11,7 @@ const page = () => {
   // };
 
   return (
-    <main>
+    <main className="p-4 bg-2">
       <SearchBar />
     </main>
   );
