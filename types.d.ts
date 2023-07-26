@@ -13,20 +13,11 @@ export type RecipeNoId = {
   instruction: string;
 };
 
-export type Recipe_ingredient = {
-  id: string;
-  recipeId: string;
-  quantity: number;
-  unit: string;
-  ingredientName: string;
-};
-
 export type FullRecipe = {
   id: string;
   instruction: string;
   name: string;
   portions: number;
-  userId: string;
   recipe_ingredient: Recipe_ingredient[];
 };
 
@@ -73,6 +64,14 @@ export type IngredientId = {
   from: string;
 };
 
+export type Recipe_ingredient = {
+  id: string;
+  recipeId: string;
+  quantity: number;
+  unit: string;
+  ingredientName: string;
+};
+
 export type StorePrisma = {
   id: string;
   name: string;
@@ -94,4 +93,8 @@ export type Store = {
   id: string;
   name: string;
   categories: CategoryItem[];
+};
+
+export type Home = {
+  ingredientName: string;
 };

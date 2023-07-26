@@ -10,11 +10,11 @@ const Item = ({ item: { name, quantity, from, unit } }: Props) => {
   const [check, setCheck] = useState(false);
   return (
     <li
-      className={`grid grid-cols-4 px-5 order-1 ${
-        check && 'opacity-50 order-2'
+      className={`grid ${from ? 'grid-cols-3' : 'grid-cols-2'} px-2 order-1 ${
+        check && 'opacity-50 order-3'
       }`}
     >
-      <div className="flex gap-5">
+      <div className="flex gap-2">
         <input
           type="checkbox"
           checked={check}
@@ -22,8 +22,14 @@ const Item = ({ item: { name, quantity, from, unit } }: Props) => {
         />
         <p className="text-left flex-shrink-0">{name}</p>
       </div>
-      <p className="text-left flex-shrink-0">{`${quantity} ${unit}`}</p>
-      {from && <p className="text-center overflow-clip">{from}</p>}
+      <p
+        className={`text-left ${!from && 'justify-self-end'} flex-shrink-0`}
+      >{`${quantity} ${unit}`}</p>
+      {from && (
+        <p className="overflow-hidden whitespace-nowrap overflow-ellipsis">
+          {from}
+        </p>
+      )}
     </li>
   );
 };

@@ -42,12 +42,10 @@ const SearchIngredients = ({ callback }: Prop) => {
     const len = searchResults.length;
     if (e.key === 'ArrowDown') {
       const target = selected === len - 1 ? len - 1 : selected + 1;
-      console.log({ target, selected });
       setSelected(target);
     }
     if (e.key === 'ArrowUp') {
       const target = selected === 0 ? 0 : selected - 1;
-      console.log({ target, selected });
       setSelected(target);
     }
   };
@@ -60,7 +58,7 @@ const SearchIngredients = ({ callback }: Prop) => {
           type="text"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          placeholder="Sök vara eller ingrediens..."
+          placeholder="Lägg till vara..."
           onKeyDown={handleEnter}
           autoFocus={true}
           autoComplete="off"
