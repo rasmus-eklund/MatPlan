@@ -55,7 +55,7 @@ const MenuItem = ({ item, callback }: Props) => {
       <div className="flex content-between items-center gap-2">
         <button
           onClick={handleMinus}
-          className="rounded-full bg-4 w-5 h-5 flex items-center justify-center"
+          className="rounded-full bg-3 w-5 h-5 flex items-center justify-center"
         >
           -
         </button>

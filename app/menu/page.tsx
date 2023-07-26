@@ -24,7 +24,7 @@ const Menu = () => {
       <ul>
         {days.map(day => (
      
-          <li key={day} className='bg-3 p-4 m-2'  >
+          <li key={day} className='bg-3 p-4 m-2 rounded-md'  >
             <h2 className='text-center text-2xl text-1 font-bold p-2 rounded-md'>{day}</h2>
             <ul>
               {menu
