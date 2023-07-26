@@ -21,18 +21,7 @@ const EditIngredient = ({
   const [unitState, setUnitState] = useState(unit);
   const [quantState, setQuantState] = useState(quantity);
   const [editState, setEdiState] = useState(false);
-  // const handleSave = async () => {
-  //   await updateExtraIngredient(id, {
-  //     name,
-  //     quantity: quantState,
-  //     unit: unitState,
-  //   });
-  //   setEdiState(false);
-  // };
-  // const handleDelete = async () => {
-  //   await deleteExraIngredient(id);
-  //   await callback();
-  // };
+
   if (!editState) {
     return (
       <li className="border-2 flex gap-5 items-center p-1">
