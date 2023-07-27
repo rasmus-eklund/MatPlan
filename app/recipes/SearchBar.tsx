@@ -49,12 +49,12 @@ const SearchBar = () => {
   return (
     <main>
       <>
-        <section className="flex text-left my-1.5 justify-between gap-2">
-          <div className="search flex  bg-3 w-2/3 h-20 justify-center items-center">
-            <div className="searchBar flex-col w-2/3 justify-center align-middle">
-              <h1 className="recipe__title font-bold ">Sök</h1>
+        <section className="flex text-left my-1.5 justify-between gap-2 text-1">
+          <div className="search flex  bg-3 w-2/3 h-20 justify-center items-center rounded-md">
+            <div className="searchBar flex-col flex w-2/3 justify-center items-center">
+              <h1 className="recipe__title font-bold text-left w-4/6 ">Sök</h1>
               <input
-                className="border-2 rounded-md border-black"
+                className="border-2 rounded-md border-black w-4/6 bg-4 border-none"
                 id="search"
                 type="text"
                 value={search}
@@ -62,11 +62,11 @@ const SearchBar = () => {
               />
             </div>
 
-            <div className="filter flex-col w-1/3 content-center">
-              <h1 className="recipe__title font-bold ">Filtrera</h1>
+            <div className="filter flex-col flex w-1/3 justify-center items-center">
+              <h1 className="recipe__title font-bold w-2/3">Filtrera</h1>
 
               <select
-                className="border-2 rounded-md border-black"
+                className="border-2 rounded-md border-black w-2/3 bg-4 border-none"
                 name="filter"
                 id="filter"
                 value={filter}
@@ -79,8 +79,13 @@ const SearchBar = () => {
             </div>
           </div>
 
-          <div className="addNewRecipe flex content-center bg-3 w-1/3 justify-center h-20">
-            <button onClick={() => createNew()}>Skapa nytt recept</button>
+          <div className="addNewRecipe flex content-center bg-3 w-1/3 justify-center items-center h-20 rounded-md">
+            <button
+              className="bg-4 h-1/2 w-2/3 rounded-md"
+              onClick={() => createNew()}
+            >
+              Skapa nytt recept
+            </button>
           </div>
         </section>
         <SearchResults recipeResult={results} deleteRecipe={handleDelete} />
