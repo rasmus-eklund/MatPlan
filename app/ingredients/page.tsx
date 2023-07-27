@@ -65,11 +65,21 @@ const Ingredients = () => {
   };
 
   return (
-    <main>
+    <main className='bg-2 p-10'>
+      <div className='bg-3 p-6 rounded-md'>
+      
+  
+      <div className='w-6/12'>
+     
       <SearchIngredients callback={addIngredient} />
-      <section className="flex flex-col gap-2 mt-2">
-        <h2>Extra varor:</h2>
-        <ul className="flex flex-col gap-2">
+    
+      </div>
+     
+      <div className='bg-3'>
+      <section className="flex flex-col gap-2 mt-4 bg-3">
+        <div className='bg-2 p-2 rounded-md mb-4'>
+        <h2 className='text-3'>Extra varor:</h2>
+        <ul className="flex flex-col gap-2 font-medium">
           {extraIngredients.map(i => (
             <EditIngredient
               remove={() => handleDelete(i.id)}
@@ -79,7 +89,9 @@ const Ingredients = () => {
             />
           ))}
         </ul>
-        <h2>Recept varor:</h2>
+        </div>
+        <div className='bg-2 p-4 rounded-md'>
+        <h2 className='text-3'>Recept varor:</h2>
         <ul className="flex flex-col gap-2">
           {ingredients.map(ing => (
             <NoEditItem
@@ -91,7 +103,11 @@ const Ingredients = () => {
             />
           ))}
         </ul>
+        </div>
+        
       </section>
+      </div>
+      </div>
     </main>
   );
 };

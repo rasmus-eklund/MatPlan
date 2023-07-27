@@ -23,7 +23,7 @@ const NoEditItem = ({
   useEffect(() => {setChecked(home)}, [home])
 
   return (
-    <li className="border-2 flex gap-5 items-center p-1">
+    <li className=" flex gap-5 items-center p-1 px-2 bg-4 text-2 font-medium rounded-md">
       <p className="grow">{name}</p>
       <div className="flex gap-2 justify-self-end">
         <p>{quantity}</p>
