@@ -24,11 +24,11 @@ const ShowRecipe = ({ recipe }: Props) => {
 
         <div className="flex  justify-between">
           <h1 className="text-2xl text-4">Ingredienser</h1>
-          <div className=" justify-end w-3/4">
-            <ul className=" bg-3 py-2 rounded-lg text-2 ">
+          <div className=" justify-end w-3/4 ">
+            <ul className=" bg-3 py-2 rounded-lg text-2 gap-1.5 flex flex-col p-2">
               {recipe.recipe_ingredient.map(
                 ({ id, ingredientName: name, quantity, unit }) => (
-                  <li className="bg-4 m-1.5 px-4 rounded-md" key={id}>
+                  <li className="bg-4 px-4 rounded-md" key={id}>
                     <div className="justify-between flex ">
                       <p>{name}</p>
                       <p>
