@@ -15,12 +15,15 @@ const ShowRecipe = ({ recipe }: Props) => {
   <h1 className='text-2xl'>Portioner:</h1>
   <p className='ml-8 bg-4 py-0.5 px-6 rounded-lg'>{recipe.portions}</p>
 </div>
+
+<div className='flex border-2 justify-between'>
 <h1 className='text-2xl'>Ingredienser</h1>
-      <ul>
+<div className='border-2 justify-end w-2/3'>
+      <ul className=' bg-4 py-0.5 px-6 rounded-lg'>
         {recipe.recipe_ingredient.map(
           ({ id, ingredientName: name, quantity, unit }) => (
-            <li key={id}>
-              <div className='justify-between flex'>
+            <li className='' key={id}>
+              <div className='justify-between flex '>
               <p>{name}</p>
               <p>{quantity} {unit}</p>
               </div>
@@ -28,6 +31,8 @@ const ShowRecipe = ({ recipe }: Props) => {
           )
         )}
       </ul>
+      </div>
+      </div>
       <p>{recipe.instruction}</p>
       <label
         htmlFor="filter"
