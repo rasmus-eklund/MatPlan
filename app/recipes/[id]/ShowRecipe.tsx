@@ -10,19 +10,21 @@ const ShowRecipe = ({ recipe }: Props) => {
   return (
     <section className='w-full flex justify-center bg-2 p-4'>
 <div className='bg-3 w-2/3 p-4 rounded-md'>
-      <h3 className='text-1 font-bold text-xl'>{recipe.name}</h3>
-<div className='flex justify-start'>
-  <h1 className='text-2xl'>Portioner:</h1>
-  <p className='ml-8 bg-4 py-0.5 px-6 rounded-lg'>{recipe.portions}</p>
+      <h3 className='text-1 font-bold text-3xl'>{recipe.name}</h3>
+<div className='flex justify-between border-2'>
+  <h1 className='text-2xl w-1/4'>Portioner:</h1>
+  <div className='w-3/4'>
+  <p className='bg-4 text-center text-2 font-bold rounded-lg w-10'>{recipe.portions}</p>
+  </div>
 </div>
 
 <div className='flex border-2 justify-between'>
 <h1 className='text-2xl'>Ingredienser</h1>
-<div className='border-2 justify-end w-2/3'>
-      <ul className=' bg-4 py-0.5 px-6 rounded-lg'>
+<div className='border-2 justify-end w-3/4'>
+      <ul className=' bg-4 py-2 rounded-lg text-2 '>
         {recipe.recipe_ingredient.map(
           ({ id, ingredientName: name, quantity, unit }) => (
-            <li className='' key={id}>
+            <li className='bg-3 m-1.5 px-4 rounded-md' key={id}>
               <div className='justify-between flex '>
               <p>{name}</p>
               <p>{quantity} {unit}</p>
