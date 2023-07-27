@@ -1,29 +1,29 @@
-import { FullRecipe } from '@/types';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { addRecipeToMenu } from '../db/prisma';
-import days from '../db/days';
+import { FullRecipe } from "@/types";
+import Link from "next/link";
+import React, { useState } from "react";
+import { addRecipeToMenu } from "../db/prisma";
+import days from "../db/days";
 
-const DaysDropDown = ({ id, portions }: { id: string; portions:number }) => {
+const DaysDropDown = ({ id, portions }: { id: string; portions: number }) => {
   const [day, setDay] = useState(days.at(-1)!);
   return (
     <>
       <select
-        className="border-2 p-1.5 px-4 rounded-md border-black m-4 text-2 bg-4"
+        className=" p-1.5 px-4 rounded-md m-4 text-1 bg-3"
         name="day"
         id="day"
         value={day}
-        onChange={e => setDay(e.target.value)}
+        onChange={(e) => setDay(e.target.value)}
       >
-        {days.map(day => (
+        {days.map((day) => (
           <option key={day} value={day}>
             {day}
           </option>
         ))}
       </select>
-      <Link href={'/recipes'}>
+      <Link href={"/recipes"}>
         <button
-          className="border-2 p-1.5 px-4 rounded-md border-black m-4 text-2 bg-4"
+          className=" p-1.5 px-4 rounded-md m-4 text-1 bg-3"
           onClick={() =>
             addRecipeToMenu({
               id,
