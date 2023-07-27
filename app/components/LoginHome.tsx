@@ -24,7 +24,7 @@ export default function Login() {
     return (
       <>
         <button
-          className="text-center text-xl p-4 rounded-md text-4 bg-1 border-1 font-bold"
+          className="text-center text-xl text-4 p-4 rounded-md bg-3 border-1 font-bold bg-opacity-60 "
           onClick={() => {
             signIn('google', { callbackUrl: '/menu' });
           }}
