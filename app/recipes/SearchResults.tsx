@@ -10,14 +10,18 @@ type Props = {
 
 const SearchResults = ({ recipeResult, deleteRecipe }: Props) => {
   return (
-    <section>
-      <ul>
+    <section className="bg-3 px-4 py-4 rounded-lg">
+      <ul className="flex flex-col gap-4">
         {recipeResult.map((r) => (
-          <li className="flex justify-between px-4 border-4 border-3 text-2 font-bold bg-3 rounded-md border-black m-2 items-center" key={r.id}>
+          <li
+            className="flex justify-between px-4 text-1
+             font-bold bg-4 rounded-md  items-center"
+            key={r.id}
+          >
             <Link href={`/recipes/${r.id}`}>{r.name}</Link>
             <div>
-            <DaysDropDown id={r.id} portions={r.portions} />
-            <DeleteButton callback={() => deleteRecipe(r.id)} />
+              <DaysDropDown id={r.id} portions={r.portions} />
+              <DeleteButton callback={() => deleteRecipe(r.id)} />
             </div>
           </li>
         ))}

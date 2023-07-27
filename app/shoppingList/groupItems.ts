@@ -33,7 +33,6 @@ export const updateCheckedData = (items: ShoppingListType[]) => {
     data = JSON.parse(raw);
   }
   data = data.filter(d => items.some(item => item.id === d.id));
-  console.log(data);
   items.forEach(i => {
     if (!data.some(d => d.id === i.id)) {
       data.push({ id: i.id, name: i.name, checked: false });
