@@ -65,7 +65,8 @@ const Ingredients = () => {
   };
 
   return (
-    <main className='bg-3 p-4'>
+    <main className='bg-2 p-10'>
+      <div className='bg-3 p-6 rounded-md'>
       
   
       <div className='w-6/12'>
@@ -103,8 +104,9 @@ const Ingredients = () => {
           ))}
         </ul>
         </div>
-      
+        
       </section>
+      </div>
       </div>
     </main>
   );
