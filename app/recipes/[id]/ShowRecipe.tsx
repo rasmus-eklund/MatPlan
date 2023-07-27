@@ -10,11 +10,11 @@ const ShowRecipe = ({ recipe }: Props) => {
   return (
     <section className="w-full flex justify-center bg-2 p-4">
       <div className="bg-3 w-2/3 p-4 rounded-md">
-        <h3 className="text-1 font-bold text-3xl">{recipe.name}</h3>
+        <h1 className="text-1 font-bold text-3xl">{recipe.name}</h1>
         <div className="flex justify-between">
-          <h1 className="text-2xl w-1/4">Portioner:</h1>
+          <h1 className="text-2xl w-1/4 my-4">Portioner:</h1>
           <div className="w-3/4">
-            <p className="bg-4 text-center text-2 font-bold rounded-lg w-10">
+            <p className="bg-4 text-center text-2 font-bold rounded-lg w-10 my-4">
               {recipe.portions}
             </p>
           </div>
