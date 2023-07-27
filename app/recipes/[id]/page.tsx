@@ -21,7 +21,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
   }, [params.id]);
 
   return (
-    <main>
+    <main className='bg-2'>
       {!editMode && recipe && <ShowRecipe recipe={recipe} />}
       {editMode && recipe && (
         <RecipeForm recipe={recipe} updateParentUI={handleGetRecipe} />
