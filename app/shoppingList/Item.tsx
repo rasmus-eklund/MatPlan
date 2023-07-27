@@ -21,8 +21,8 @@ const Item = ({ item, checked }: Props) => {
   };
   return (
     <li
-      className={`grid ${from ? 'grid-cols-3' : 'grid-cols-2'} px-2 order-1 ${
-        check && 'opacity-50 order-3'
+      className={`flex justify-between order-1 bg-3 px-2 rounded-md ${
+        check && 'opacity-50 order-2'
       }`}
     >
       <div className="flex gap-2">
@@ -31,16 +31,19 @@ const Item = ({ item, checked }: Props) => {
           checked={check}
           onChange={() => handleChecking(item)}
         />
-        <p className="text-left flex-shrink-0">{name}</p>
+        <p className="text-left">{name}</p>
       </div>
-      <p
-        className={`text-left ${!from && 'justify-self-end'} flex-shrink-0`}
-      >{`${quantity} ${unit}`}</p>
-      {from && (
-        <p className="overflow-hidden whitespace-nowrap overflow-ellipsis">
-          {from}
-        </p>
-      )}
+      <div className="flex gap-2 justify-between">
+        <div className="flex gap-2">
+          <p>{quantity}</p>
+          <p>{unit}</p>
+        </div>
+        {from && (
+          <p className="overflow-hidden whitespace-nowrap overflow-ellipsis w-25">
+            {from}
+          </p>
+        )}
+      </div>
     </li>
   );
 };

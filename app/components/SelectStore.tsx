@@ -8,6 +8,7 @@ type Props = {
 const SelectStore = ({ stores, callback }: Props) => {
   return (
     <select
+      className='bg-4 rounded-md px-2'
       name="store"
       id="store_select"
       onChange={e => callback(e.target.value)}
