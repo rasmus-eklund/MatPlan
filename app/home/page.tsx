@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
 import { checkNewUser } from '../db/user';
-import TrendingRecipeCard from '../components/TrendingRecipeCard';
 
 export default function Landing() {
   useEffect(() => {
