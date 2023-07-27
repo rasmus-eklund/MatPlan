@@ -49,19 +49,19 @@ const MenuItem = ({ item, callback }: Props) => {
   }, [day, item]);
 
   return (
-    <li className="flex items-center justify-between flex-grow bg-4 rounded-lg px-8 gap-2 font-bold text-1">
-      <p>{item.recipe.name}</p>
-      <div className="flex content-between items-center gap-2">
+    <li className="flex items-center justify-between flex-grow bg-4 rounded-lg px-8 gap-4 font-bold text-1">
+      <p className="text-lg">{item.recipe.name}</p>
+      <div className="flex content-between items-center gap-4">
         <button
           onClick={handleMinus}
-          className="rounded-full bg-3 w-5 h-5 flex items-center justify-center"
+          className="rounded-full bg-3 w-6 h-6 flex items-center justify-center"
         >
           -
         </button>
-        <p>{portionsState}</p>
+        <p className="text-lg">{portionsState}</p>
         <button
           onClick={handlePlus}
-          className="rounded-full bg-3 w-5 h-5 flex items-center justify-center"
+          className="rounded-full bg-3 w-6 h-6 flex items-center justify-center"
         >
           +
         </button>

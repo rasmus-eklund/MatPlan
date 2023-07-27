@@ -9,12 +9,9 @@ type Prop = {
 
 const DaysDropDownForMenu = ({ callback, initDay }: Prop) => {
   const [day, setDay] = useState(initDay);
-  // const handleChange = async (recipeId: string, day: string) => {
-  //   await changeRecipeDay(recipeId, day);
-  // };
   return (
     <select
-      className="border-2 p-1.5 px-4 rounded-md border-black m-4"
+      className=" p-1.5 px-2 rounded-md  m-4 bg-3"
       name="day"
       id="day"
       value={day}
