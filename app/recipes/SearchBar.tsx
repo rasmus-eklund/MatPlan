@@ -55,7 +55,7 @@ const SearchBar = () => {
               Sök
             </h1>
             <input
-              className="border-2 rounded-md border-black w-4/6 bg-4 border-none h-10"
+              className="border-2 rounded-md border-black w-4/6 bg-4 border-none h-10 text-xl p-2"
               id="search"
               type="text"
               value={search}
