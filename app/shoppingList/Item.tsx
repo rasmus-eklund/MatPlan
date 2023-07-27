@@ -1,13 +1,24 @@
 'use client';
 import { ShoppingListType } from '@/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { updateCheckedItem } from './groupItems';
 
 type Props = {
   item: ShoppingListType;
+  checked: boolean;
 };
 
-const Item = ({ item: { name, quantity, from, unit } }: Props) => {
-  const [check, setCheck] = useState(false);
+const Item = ({ item, checked }: Props) => {
+  const { name, quantity, from, unit } = item;
+  const [check, setCheck] = useState(checked);
+  useEffect(() => {
+    setCheck(checked);
+  }, [checked, item]);
+  const handleChecking = (item: ShoppingListType) => {
+    const newCheck = !check;
+    setCheck(newCheck);
+    updateCheckedItem(item, newCheck);
+  };
   return (
     <li
       className={`grid ${from ? 'grid-cols-3' : 'grid-cols-2'} px-2 order-1 ${
@@ -18,7 +29,7 @@ const Item = ({ item: { name, quantity, from, unit } }: Props) => {
         <input
           type="checkbox"
           checked={check}
-          onChange={() => setCheck(!check)}
+          onChange={() => handleChecking(item)}
         />
         <p className="text-left flex-shrink-0">{name}</p>
       </div>

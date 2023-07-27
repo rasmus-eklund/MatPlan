@@ -38,11 +38,18 @@ export type MenuItem = {
 };
 
 export type ShoppingListType = {
+  id: string;
   name: string;
   quantity: Decimal;
   unit: string;
   subCategory: number;
   from?: string;
+};
+
+export type ShoppingListLocalStorage = {
+  id: string;
+  name: string;
+  checked: boolean;
 };
 
 export type IngredientType = {

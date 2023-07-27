@@ -1,12 +1,16 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import * as stores from '../db/stores';
-import { ShoppingListType, StorePrisma } from '@/types';
+import {
+  ShoppingListLocalStorage,
+  ShoppingListType,
+  StorePrisma,
+} from '@/types';
 import SelectStore from '../components/SelectStore';
 import { getRecipeIngredients } from '../db/prisma';
 import { getExtraIngredients } from '../db/extraIngredients';
 import Item from './Item';
-import { groupItems } from './groupItems';
+import { groupItems, updateCheckedData } from './groupItems';
 
 const ShoppingList = () => {
   const [ingredients, setIngredients] = useState<ShoppingListType[]>([]);
@@ -17,16 +21,23 @@ const ShoppingList = () => {
   const [store, setStore] = useState<StorePrisma>();
   const [group, setGroup] = useState(false);
   const [recipe, setRecipe] = useState(false);
+  const [data, setData] = useState<ShoppingListLocalStorage[]>([]);
 
   useEffect(() => {
-    stores
-      .getAll()
-      .then(s => {
-        setStore(s[0]);
-        setStoresState(s);
-      })
-      .then(() => Promise.all([getRecipeIngredients(), getExtraIngredients()]))
-      .then(([a, b]) => setIngredients([...a, ...b]));
+    const update = async () => {
+      const theStore = await stores.getAll();
+      setStore(theStore[0]);
+      setStoresState(theStore);
+      const [ings, extra] = await Promise.all([
+        getRecipeIngredients(),
+        getExtraIngredients(),
+      ]);
+      const allIngs = [...ings, ...extra];
+      setIngredients(allIngs);
+      const data = updateCheckedData(allIngs);
+      setData(data);
+    };
+    update();
   }, []);
 
   useEffect(() => {
@@ -37,14 +48,14 @@ const ShoppingList = () => {
           store.order.indexOf(b.subCategory)
       );
       if (group) {
-        sortedIngredients = groupItems(sortedIngredients);
+        sortedIngredients = groupItems(sortedIngredients, data);
       }
       if (recipe) {
         sortedIngredients = sortedIngredients.map(i => ({ ...i, from: '' }));
       }
       setSortedIngredients(sortedIngredients);
     }
-  }, [store, ingredients, group, recipe]);
+  }, [store, ingredients, group, recipe, data]);
 
   const handleSelectStore = async (id: string) => {
     const selected = await stores.get(id);
@@ -76,9 +87,13 @@ const ShoppingList = () => {
         name="recipe_check"
         id="recipe_check"
       />
-      <ul className='flex flex-col'>
+      <ul className="flex flex-col">
         {sortedIngredients.map(i => (
-          <Item key={crypto.randomUUID()} item={i} />
+          <Item
+            key={crypto.randomUUID()}
+            item={i}
+            checked={data.find(d => d.id === i.id)!.checked}
+          />
         ))}
       </ul>
     </main>
