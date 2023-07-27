@@ -1,11 +1,11 @@
-import { Ingredient } from '@/types';
-import React, { useState } from 'react';
-import units from '../db/units';
-import DeleteButton from './DeleteButton';
+import { Ingredient } from "@/types";
+import React, { useState } from "react";
+import units from "../db/units";
+import DeleteButton from "./DeleteButton";
 
-import EditButton from './EditButton';
-import Cancel from './Cancel';
-import SaveButton from './SaveButton';
+import EditButton from "./EditButton";
+import Cancel from "./Cancel";
+import SaveButton from "./SaveButton";
 
 type Prop = {
   ingredient: Ingredient;
@@ -48,15 +48,15 @@ const EditIngredient = ({
               type="number"
               name="quantity"
               value={quantState}
-              onChange={e => setQuantState(Number(e.target.value))}
+              onChange={(e) => setQuantState(Number(e.target.value))}
             />
             <select
               id="edit-unit"
               name="unit"
               value={unitState}
-              onChange={e => setUnitState(e.target.value)}
+              onChange={(e) => setUnitState(e.target.value)}
             >
-              {units.map(u => (
+              {units.map((u) => (
                 <option key={u.abr}>{u.abr}</option>
               ))}
             </select>

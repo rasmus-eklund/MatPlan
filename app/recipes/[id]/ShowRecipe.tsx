@@ -8,53 +8,44 @@ type Props = {
 
 const ShowRecipe = ({ recipe }: Props) => {
   return (
-    <section className="w-full flex justify-center bg-2 p-4">
-      <div className="bg-3 w-2/3 p-4 rounded-md">
-        <h1 className="text-1 font-bold text-3xl py-4">{recipe.name}</h1>
-        <DaysDropDown id={recipe.id} portions={recipe.portions} />
+    <form className="flex flex-col bg-3 p-5 rounded-md gap-5">
+      <h1 className="text-1 bg-3 text-3xl min-w-full mb-6 font-bold">
+        {recipe.name}
+      </h1>
+      {/* <DaysDropDown id={recipe.id} portions={recipe.portions} /> */}
+      <div className="rounded-md bg-2 p-4 flex flex-col gap-2">
+        <div className="flex">
+          <h2 className="text-4 text-lg w-1/4">Portioner:</h2>
+          <p className="rounded-md w-10 text-center text-1 bg-3">
+            {recipe.portions}
+          </p>
+        </div>
 
-        <div className="bg-2 p-2 rounded-md">
-          <div className="flex justify-between">
-            <h1 className="text-2xl w-1/4 my-4 text-4">Portioner:</h1>
-            <div className="w-3/4">
-              <p className="bg-3 text-center text-2 font-bold rounded-lg w-10 my-4">
-                {recipe.portions}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex  justify-between">
-            <h1 className="text-2xl text-4">Ingredienser</h1>
-            <div className=" justify-end w-3/4 ">
-              <ul className=" bg-3 py-2 rounded-lg text-2 gap-1.5 flex flex-col p-2">
-                {recipe.recipe_ingredient.map(
-                  ({ id, ingredientName: name, quantity, unit }) => (
-                    <li className="bg-4 px-4 rounded-md" key={id}>
-                      <div className="justify-between flex ">
-                        <p>{name}</p>
-                        <p>
-                          {quantity} {unit}
-                        </p>
-                      </div>
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
-          </div>
-          <div className="flex justify-between">
-            <div className="justify-end w-1/4 ">
-              <h1 className="text-2xl text-4">Instruktion</h1>
-            </div>
-            <div className="w-3/4 rounded-md mt-2 text-2 bg-3">
-              <p className=" w-3/4 rounded-md bg-3 text-2 px-4 mx-1.5">
-                {recipe.instruction}
-              </p>
-            </div>
-          </div>
+        <div className="flex bg-2">
+          <h2 className="text-4 text-lg w-1/4">Ingredienser</h2>
+          <ul className="bg-3 p-2 rounded-md w-3/4 flex flex-col gap-1.5 py-2">
+            {recipe.recipe_ingredient.map(
+              ({ id, ingredientName: name, quantity, unit }) => (
+                <li className="bg-4 px-4 rounded-md" key={id}>
+                  <div className="justify-between flex text-2 ">
+                    <p>{name}</p>
+                    <p>
+                      {quantity} {unit}
+                    </p>
+                  </div>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+        <div className="flex">
+          <h2 className="text-4 text-lg w-1/4">Instruktion</h2>
+          <p className="bg-3 text-1 w-3/4 rounded-md p-2">
+            {recipe.instruction}
+          </p>
         </div>
       </div>
-    </section>
+    </form>
   );
 };
 
