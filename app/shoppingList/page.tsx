@@ -66,36 +66,46 @@ const ShoppingList = () => {
   };
 
   return (
-    <main>
-      <SelectStore
-        stores={storesState}
-        callback={id => handleSelectStore(id)}
-      />
-      <label htmlFor="group_check">Gruppera</label>
-      <input
-        onChange={() => setGroup(!group)}
-        checked={group}
-        type="checkbox"
-        name="group_check"
-        id="group_check"
-      />
-      <label htmlFor="recipe_check">Recept</label>
-      <input
-        onChange={() => setRecipe(!recipe)}
-        checked={recipe}
-        type="checkbox"
-        name="recipe_check"
-        id="recipe_check"
-      />
-      <ul className="flex flex-col">
-        {sortedIngredients.map(i => (
-          <Item
-            key={crypto.randomUUID()}
-            item={i}
-            checked={data.find(d => d.id === i.id)!.checked}
+    <main className="bg-2 p-5 h-screen">
+      <div className="bg-3 rounded-md p-3 flex flex-col gap-2">
+        <div className="flex justify-between">
+          <SelectStore
+            stores={storesState}
+            callback={id => handleSelectStore(id)}
           />
-        ))}
-      </ul>
+          <div className="flex flex-col">
+            <div className="flex gap-2">
+              <input
+                onChange={() => setGroup(!group)}
+                checked={group}
+                type="checkbox"
+                name="group_check"
+                id="group_check"
+              />
+              <label htmlFor="group_check">Gruppera ingredienser</label>
+            </div>
+            <div className='flex gap-2'>
+              <input
+                onChange={() => setRecipe(!recipe)}
+                checked={recipe}
+                type="checkbox"
+                name="recipe_check"
+                id="recipe_check"
+              />
+              <label htmlFor="recipe_check">Dölj tillhörighet</label>
+            </div>
+          </div>
+        </div>
+        <ul className="flex flex-col bg-2 rounded-md p-2 gap-1">
+          {sortedIngredients.map(i => (
+            <Item
+              key={crypto.randomUUID()}
+              item={i}
+              checked={data.find(d => d.id === i.id)!.checked}
+            />
+          ))}
+        </ul>
+      </div>
     </main>
   );
 };
