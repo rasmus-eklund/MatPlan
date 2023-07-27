@@ -2,9 +2,8 @@ import { CategoryItem } from '@/types';
 import { useState } from 'react';
 import Subcategory from './Subcategory';
 import handleMove from '../moveItems';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleDown } from '@fortawesome/free-solid-svg-icons';
-import { faCircleUp } from '@fortawesome/free-solid-svg-icons';
+import UppArrow from '@/app/components/UppArrow';
+import DownArrow from '@/app/components/DownArrow';
 
 type Props = {
   category: CategoryItem;
@@ -28,40 +27,30 @@ const Category = ({
     editedSub();
   };
   return (
-    <li className="border-2 border-blue-300 rounded-xl">
-      <div className="flex gap-5 items-center">
-        <h2
+    <li className="rounded-md bg-2 px-2 py-1">
+      <div className="flex justify-between items-center p-1">
+        <h3
           onClick={() => setMove(!move)}
-          className="text-xl flex-grow font-bold ml-4"
+          className="text-xl font-bold text-4 hover:cursor-pointer select-none"
         >
           {category}
-        </h2>
-        {move && (
-          <>
-            <FontAwesomeIcon
-              className={' hover:scale-110'}
-              onClick={() => clicked('down', index)}
-              icon={faCircleDown}
-              size="2xl"
-              style={{ color: '#9db2bf' }}
-            />
-            <FontAwesomeIcon
-              className={' hover:scale-110'}
-              onClick={() => clicked('up', index)}
-              icon={faCircleUp}
-              size="2xl"
-              style={{ color: '#9db2bf' }}
-            />
-          </>
-        )}
-        <button
-          className="flex justify-center items-center rounded-full w-10 h-10 border-2 border-#DDE6ED m-2 mr-4"
-          onClick={() => setOpen(!open)}
-        >
-          +
-        </button>
+        </h3>
+        <div className="flex gap-3">
+          {move && (
+            <>
+              <UppArrow bg={2} callback={() => clicked('up', index)} />
+              <DownArrow bg={2} callback={() => clicked('down', index)} />
+            </>
+          )}
+          <button
+            className="text-2 font-bold flex justify-center items-center rounded-full w-8 h-8 bg-3"
+            onClick={() => setOpen(!open)}
+          >
+            +
+          </button>
+        </div>
       </div>
-      <ul>
+      <ul className="flex flex-col gap-1">
         {open &&
           subOrder.map((subCat, index) => (
             <Subcategory

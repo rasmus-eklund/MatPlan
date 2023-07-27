@@ -49,34 +49,41 @@ const StoreComponent = ({ params: { id } }: Props) => {
     setEditName(false);
   };
   return (
-    <main>
-      <div className="flex items-center gap-5">
-        {!editName && (
-          <h1 className="text-2xl font-bold m-2">{name || 'loading'}</h1>
-        )}
-
-        {editName && (
-          <form onSubmit={handleSubmit} className="text-2xl font-bold m-2">
-            <input value={name} onChange={e => setName(e.target.value)}></input>
-          </form>
-        )}
-        <EditButton callback={() => setEditName(!editName)} />
-        {edited && <SaveButton  callback={() => handleSave()} />}
+    <main className="bg-2 p-5 min-h-screen">
+      <div className="bg-3 rounded-md p-3 flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          {!editName && (
+            <h2 className="text-1 text-2xl font-bold">{name || 'loading'}</h2>
+          )}
+          {editName && (
+            <form onSubmit={handleSubmit} className="text-2xl font-bold">
+              <input
+                className="bg-4 rounded-md"
+                value={name}
+                onChange={e => setName(e.target.value)}
+              ></input>
+            </form>
+          )}
+          <div className="flex gap-2">
+            <EditButton callback={() => setEditName(!editName)} />
+            {edited && <SaveButton callback={() => handleSave()} />}
+          </div>
+        </div>
+        <ul className="flex flex-col gap-2 bg-3 rounded-md">
+          {store &&
+            store.categories.map((s, index) => (
+              <Category
+                key={s.category}
+                category={s}
+                index={index}
+                clicked={(direction: 'up' | 'down', index: number) =>
+                  handleClick(direction, index)
+                }
+                editedSub={() => setEdited(true)}
+              />
+            ))}
+        </ul>
       </div>
-      <ul className="flex flex-col p-1 gap-1">
-        {store &&
-          store.categories.map((s, index) => (
-            <Category
-              key={s.category}
-              category={s}
-              index={index}
-              clicked={(direction: 'up' | 'down', index: number) =>
-                handleClick(direction, index)
-              }
-              editedSub={() => setEdited(true)}
-            />
-          ))}
-      </ul>
     </main>
   );
 };

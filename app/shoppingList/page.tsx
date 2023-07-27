@@ -66,7 +66,7 @@ const ShoppingList = () => {
   };
 
   return (
-    <main className="bg-2 p-5 h-screen">
+    <main className="bg-2 p-5 min-h-screen">
       <div className="bg-3 rounded-md p-3 flex flex-col gap-2">
         <div className="flex justify-between">
           <SelectStore

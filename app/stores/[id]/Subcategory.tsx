@@ -1,8 +1,7 @@
 import { SubcategoryItem } from '@/types';
 import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleDown } from '@fortawesome/free-solid-svg-icons';
-import { faCircleUp } from '@fortawesome/free-solid-svg-icons';
+import DownArrow from '@/app/components/DownArrow';
+import UpArrow from '@/app/components/UppArrow';
 
 type Props = {
   items: SubcategoryItem;
@@ -20,26 +19,17 @@ const Subcategory = ({
     setMove(!move);
   };
   return (
-    <li className="flex gap-5 border-2 border-black rounded-3xl m-2 p-2 font-semibold mr-4 ml-4">
-      <p className="ml-2 flex-grow " onClick={toggle}>
+    <li className="flex justify-between rounded-md font-semibold bg-3 px-2 py-1">
+      <p
+        className="text-1 hover:cursor-pointer select-none"
+        onClick={toggle}
+      >
         {subcategory}
       </p>
       {move && (
         <div className="flex gap-1">
-          <FontAwesomeIcon
-            className={' hover:scale-110'}
-            onClick={() => clicked('down', index)}
-            icon={faCircleDown}
-            size="xl"
-            style={{ color: '#9db2bf' }}
-          />
-          <FontAwesomeIcon
-            className={' hover:scale-110'}
-            onClick={() => clicked('up', index)}
-            icon={faCircleUp}
-            size="xl"
-            style={{ color: '#9db2bf' }}
-          />
+          <DownArrow bg={2} callback={() => clicked('down', index)} />
+          <UpArrow bg={2} callback={() => clicked('up', index)} />
         </div>
       )}
     </li>

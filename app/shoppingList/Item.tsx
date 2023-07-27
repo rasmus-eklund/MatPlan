@@ -21,7 +21,7 @@ const Item = ({ item, checked }: Props) => {
   };
   return (
     <li
-      className={`flex justify-between order-1 bg-3 px-2 rounded-md ${
+      className={`flex justify-between order-1 bg-4 text-2 px-2 rounded-md ${
         check && 'opacity-50 order-2'
       }`}
     >
@@ -33,7 +33,7 @@ const Item = ({ item, checked }: Props) => {
         />
         <p className="text-left">{name}</p>
       </div>
-      <div className="flex gap-2 justify-between">
+      <div className={`flex gap-4 justify-between ${from && 'w-1/3'}`}>
         <div className="flex gap-2">
           <p>{quantity}</p>
           <p>{unit}</p>

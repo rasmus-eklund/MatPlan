@@ -1,6 +1,4 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
   callback: () => void;
@@ -8,7 +6,15 @@ type Props = {
 
 const EditButton = ({ callback }: Props) => {
   return (
- <FontAwesomeIcon type='button' className={'hover:scale-110'}  onClick={callback} icon={faPencil} size='lg' style={{color: "#9db2bf",} }  />
+    <button
+      className="bg-4 text-2 px-2 rounded-md"
+      onClick={e => {
+        e.preventDefault();
+        callback();
+      }}
+    >
+      Ändra
+    </button>
   );
 };
 
