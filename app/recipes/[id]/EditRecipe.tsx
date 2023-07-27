@@ -56,7 +56,6 @@ const RecipeForm = ({ recipe, updateParentUI }: Prop) => {
   };
 
   const handleUpdate = async (ing: Recipe_ingredient) => {
-    console.log('client update ing:', ing);
     await updateIngredient(ing);
     setIngredients(
       ingredients.map(i => {

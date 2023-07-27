@@ -17,14 +17,11 @@ const getUser = async () => {
 export const checkNewUser = async () => {
   const userId = await getUser();
   const users = await prisma.user.findUnique({ where: { id: userId } });
-  console.log(users);
   if (users === null) {
-    console.log('add new user');
     await prisma.user.create({ data: { id: userId } });
     await createDefaultStore(userId);
     await createDefaultRecipes(userId);
   }
-  console.log('User in db');
 };
 
 const createDefaultRecipes = async (userId: string) => {

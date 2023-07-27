@@ -11,6 +11,7 @@ type Prop = {
   ingredient: Ingredient;
   remove: () => Promise<void>;
   save: (ingredient: Ingredient) => Promise<void>;
+
 };
 
 const EditIngredient = ({

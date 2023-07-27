@@ -94,3 +94,7 @@ export type Store = {
   name: string;
   categories: CategoryItem[];
 };
+
+export type Home = {
+  ingredientName: string;
+};
