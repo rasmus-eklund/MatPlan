@@ -11,7 +11,7 @@ const page = () => {
   // };
 
   return (
-    <main className="p-4 bg-2">
+    <main className="p-4 bg-2 flex flex-col gap-4">
       <SearchBar />
     </main>
   );

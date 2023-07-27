@@ -47,50 +47,50 @@ const SearchBar = () => {
     handleSearch({ filter, search: debouncedSearch });
   }, [debouncedSearch, filter]);
   return (
-    <main>
-      <>
-        <section className="flex text-left my-1.5 justify-between gap-2 text-1">
-          <div className="search flex  bg-3 w-2/3 h-20 justify-center items-center rounded-md">
-            <div className="searchBar flex-col flex w-2/3 justify-center items-center">
-              <h1 className="recipe__title font-bold text-left w-4/6 ">Sök</h1>
-              <input
-                className="border-2 rounded-md border-black w-4/6 bg-4 border-none"
-                id="search"
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
-
-            <div className="filter flex-col flex w-1/3 justify-center items-center">
-              <h1 className="recipe__title font-bold w-2/3">Filtrera</h1>
-
-              <select
-                className="border-2 rounded-md border-black w-2/3 bg-4 border-none"
-                name="filter"
-                id="filter"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value as FilterParams)}
-              >
-                <option value="name">Namn</option>
-                <option value="ingredients">Ingredient</option>
-                <option value="instruction">Instruktion</option>
-              </select>
-            </div>
+    <>
+      <section className="flex text-left my-1.5 justify-between gap-6 text-1 ">
+        <div className="search flex h-40 bg-3 w-2/3  justify-center items-center rounded-lg">
+          <div className="searchBar flex-col flex w-2/3 justify-center items-center gap-2">
+            <h1 className="recipe__title font-bold text-left w-4/6 text-3xl">
+              Sök
+            </h1>
+            <input
+              className="border-2 rounded-md border-black w-4/6 bg-4 border-none h-10"
+              id="search"
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
 
-          <div className="addNewRecipe flex content-center bg-3 w-1/3 justify-center items-center h-20 rounded-md">
-            <button
-              className="bg-4 h-1/2 w-2/3 rounded-md"
-              onClick={() => createNew()}
+          <div className="filter flex-col flex w-1/3 justify-center gap-2">
+            <h1 className="recipe__title font-bold w-2/3 text-3xl">Filtrera</h1>
+
+            <select
+              className="border-2 rounded-md border-black w-2/3 bg-4 border-none h-10 text-xl p-2"
+              name="filter"
+              id="filter"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value as FilterParams)}
             >
-              Skapa nytt recept
-            </button>
+              <option value="name">Namn</option>
+              <option value="ingredients">Ingredient</option>
+              <option value="instruction">Instruktion</option>
+            </select>
           </div>
-        </section>
-        <SearchResults recipeResult={results} deleteRecipe={handleDelete} />
-      </>
-    </main>
+        </div>
+
+        <div className="addNewRecipe flex content-center bg-3 w-1/3 justify-center items-center rounded-md">
+          <button
+            className="bg-4 h-1/2 w-2/3 rounded-md text-3xl font-bold"
+            onClick={() => createNew()}
+          >
+            Skapa nytt recept
+          </button>
+        </div>
+      </section>
+      <SearchResults recipeResult={results} deleteRecipe={handleDelete} />
+    </>
   );
 };
 export default SearchBar;
