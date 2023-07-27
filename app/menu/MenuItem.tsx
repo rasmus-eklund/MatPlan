@@ -1,6 +1,6 @@
 "use client";
 import { MenuItem } from "@/types";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   changeRecipeDay,
   removeRecipeFromMenu,
@@ -49,7 +49,7 @@ const MenuItem = ({ item, callback }: Props) => {
   }, [day, item]);
 
   return (
-    <li className="flex gap-5 items-center bg-4 text-2 rounded-md px-4 py-1">
+    <li className="flex items-center justify-between bg-4 rounded-md px-8 gap-4 font-bold text-1">
       <p className="text-lg">{item.recipe.name}</p>
       <div className="flex content-between items-center gap-4">
         <button

@@ -1,10 +1,10 @@
-"use client";
-import { getRecipeById } from "@/app/db/prisma";
-import { FullRecipe } from "@/types";
-import React, { useEffect, useState } from "react";
-import RecipeForm from "./EditRecipe";
-import ShowRecipe from "./ShowRecipe";
-import EditButton from "@/app/components/EditButton";
+'use client';
+import { getRecipeById } from '@/app/db/prisma';
+import { FullRecipe } from '@/types';
+import React, { useEffect, useState } from 'react';
+import RecipeForm from './EditRecipe';
+import ShowRecipe from './ShowRecipe';
+import EditButton from '@/app/components/EditButton';
 
 const Recipe = ({ params }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<FullRecipe | null>(null);
@@ -29,7 +29,6 @@ const Recipe = ({ params }: { params: { id: string } }) => {
         )}
         {!editMode && (
           <div className="flex gap-2 justify-end mx-8 py-1 ">
-            <p className="text-1">Edit</p>
             <EditButton callback={() => setEditMode(true)} />
           </div>
         )}

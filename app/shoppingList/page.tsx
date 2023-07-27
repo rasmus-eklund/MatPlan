@@ -82,7 +82,7 @@ const ShoppingList = () => {
                 name="group_check"
                 id="group_check"
               />
-              <label htmlFor="group_check">Gruppera ingredienser</label>
+              <label className='text-1' htmlFor="group_check">Gruppera ingredienser</label>
             </div>
             <div className='flex gap-2'>
               <input
@@ -92,7 +92,7 @@ const ShoppingList = () => {
                 name="recipe_check"
                 id="recipe_check"
               />
-              <label htmlFor="recipe_check">Dölj tillhörighet</label>
+              <label className='text-1' htmlFor="recipe_check">Dölj tillhörighet</label>
             </div>
           </div>
         </div>

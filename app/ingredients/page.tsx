@@ -65,7 +65,7 @@ const Ingredients = () => {
   };
 
   return (
-    <main className="bg-2 p-5">
+    <main className="bg-2 p-5 min-h-screen">
       <div className="bg-3 p-5 rounded-md flex flex-col gap-3">
         <div className="w-1/2">
           <SearchIngredients callback={addIngredient} />

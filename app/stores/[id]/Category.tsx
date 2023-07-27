@@ -38,8 +38,8 @@ const Category = ({
         <div className="flex gap-3">
           {move && (
             <>
-              <UppArrow bg={2} callback={() => clicked('up', index)} />
               <DownArrow bg={2} callback={() => clicked('down', index)} />
+              <UppArrow bg={2} callback={() => clicked('up', index)} />
             </>
           )}
           <button

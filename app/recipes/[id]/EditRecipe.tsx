@@ -1,15 +1,15 @@
-"use client";
-import { FullRecipe, Recipe_ingredient } from "@/types";
-import { useState } from "react";
+'use client';
+import { FullRecipe, Recipe_ingredient } from '@/types';
+import { useState } from 'react';
 import {
   createIngredient,
   deleteIngredient,
   updateIngredient,
   updateRecipe,
-} from "../../db/prisma";
-import SaveButton from "../../components/SaveButton";
-import SearchIngredients from "@/app/components/SearchIngredient";
-import EditIngredient from "@/app/components/EditIngredient";
+} from '../../db/prisma';
+import SaveButton from '../../components/SaveButton';
+import SearchIngredients from '@/app/components/SearchIngredient';
+import EditIngredient from '@/app/components/EditIngredient';
 type Prop = {
   recipe: FullRecipe;
   updateParentUI: (id: string) => Promise<void>;
@@ -45,20 +45,20 @@ const RecipeForm = ({ recipe, updateParentUI }: Prop) => {
     const newIng = await createIngredient(recipe.id, {
       name,
       quantity: 1,
-      unit: "st",
+      unit: 'st',
     });
     setIngredients([...ingredients, newIng]);
   };
 
   const handleDelete = async (id: string) => {
     await deleteIngredient(id);
-    setIngredients(ingredients.filter((i) => i.id !== id));
+    setIngredients(ingredients.filter(i => i.id !== id));
   };
 
   const handleUpdate = async (ing: Recipe_ingredient) => {
     await updateIngredient(ing);
     setIngredients(
-      ingredients.map((i) => {
+      ingredients.map(i => {
         if (i.id === ing.id) {
           return ing;
         }
@@ -70,10 +70,10 @@ const RecipeForm = ({ recipe, updateParentUI }: Prop) => {
   return (
     <form className="flex flex-col rounded-md p-5 bg-3 gap-5">
       <input
-        className="text-1 bg-3 text-3xl min-w-full mb-6 font-bold"
+        className="text-1 bg-3 text-3xl min-w-full font-bold"
         type="text"
         value={recipeName}
-        onChange={(e) => setRecipeName(e.target.value)}
+        onChange={e => setRecipeName(e.target.value)}
       />
       <div className="rounded-md bg-2 p-4 flex flex-col gap-2">
         <div className="flex">
@@ -82,7 +82,7 @@ const RecipeForm = ({ recipe, updateParentUI }: Prop) => {
             className="rounded-md w-10 text-center text-1 bg-3"
             type="number"
             value={recipePortions}
-            onChange={(e) => setRecipePortions(parseInt(e.target.value))}
+            onChange={e => setRecipePortions(parseInt(e.target.value))}
           />
         </div>
 
@@ -91,11 +91,11 @@ const RecipeForm = ({ recipe, updateParentUI }: Prop) => {
           <div className="bg-3 p-2 rounded-md w-3/4">
             <SearchIngredients callback={handleAddIngredient} />
             <ul className="flex flex-col gap-1.5 py-2">
-              {ingredients.map((i) => (
+              {ingredients.map(i => (
                 <EditIngredient
                   ingredient={{ ...i, name: i.ingredientName }}
                   remove={async () => handleDelete(i.id)}
-                  save={async (ing) =>
+                  save={async ing =>
                     handleUpdate({
                       ingredientName: ing.name,
                       id: i.id,
@@ -116,7 +116,7 @@ const RecipeForm = ({ recipe, updateParentUI }: Prop) => {
             className="bg-3 text-1 w-3/4 rounded-md p-2"
             type="text"
             value={recipeInstructions}
-            onChange={(e) => setRecipeInstructions(e.target.value)}
+            onChange={e => setRecipeInstructions(e.target.value)}
           />
         </div>
       </div>

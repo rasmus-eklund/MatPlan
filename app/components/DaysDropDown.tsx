@@ -9,7 +9,7 @@ const DaysDropDown = ({ id, portions }: { id: string; portions: number }) => {
   return (
     <>
       <select
-        className=" p-1.5 px-4 rounded-md m-4 text-1 bg-3"
+        className="rounded-md text-1 bg-4 py-1"
         name="day"
         id="day"
         value={day}
@@ -23,7 +23,7 @@ const DaysDropDown = ({ id, portions }: { id: string; portions: number }) => {
       </select>
       <Link href={"/recipes"}>
         <button
-          className=" p-1.5 px-4 rounded-md m-4 text-1 bg-3"
+          className="rounded-md m-4 text-1 bg-4 px-2 py-1"
           onClick={() =>
             addRecipeToMenu({
               id,
