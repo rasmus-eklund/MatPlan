@@ -52,9 +52,9 @@ const SearchIngredients = ({ callback }: Prop) => {
 
   return (
     <section className="flex flex-col relative align-middle">
-      <div className='flex bg-2 p-2 items-center'>
+      <div className='flex bg-3 items-center'>
         <input
-          className="w-full rounded-xl px-2 outline-none bg-4 focus:bg-5"
+          className="w-full rounded-md px-4 py-2 outline-none bg-4 focus:bg-5"
           type="text"
           value={search}
           onChange={e => setSearch(e.target.value)}

@@ -68,46 +68,63 @@ const RecipeForm = ({ recipe, updateParentUI }: Prop) => {
   };
 
   return (
-    <form className="border-2 p-1.5 px-4 rounded-md border-black m-4">
-      <label>Receptets namn:</label>
-      <input
-        type="text"
-        value={recipeName}
-        onChange={e => setRecipeName(e.target.value)}
-      />
-      <label>Portioner:</label>
-      <input
-        type="number"
-        value={recipePortions}
-        onChange={e => setRecipePortions(parseInt(e.target.value))}
-      />
-      <SearchIngredients callback={handleAddIngredient} />
-      <ul>
-        {ingredients.map(i => (
-          <EditIngredient
-            ingredient={{ ...i, name: i.ingredientName }}
-            remove={async () => handleDelete(i.id)}
-            save={async ing =>
-              handleUpdate({
-                ingredientName: ing.name,
-                id: i.id,
-                quantity: ing.quantity,
-                recipeId: i.recipeId,
-                unit: ing.unit,
-              })
-            }
-            key={i.id}
-          />
-        ))}
-      </ul>
-      <label>Instruktion:</label>
-      <input
-        type="text"
-        value={recipeInstructions}
-        onChange={e => setRecipeInstructions(e.target.value)}
-      />
-      <SaveButton callback={handleUpdateRecipe} />
-    </form>
+    <main className="bg-2 p-4 flex flex-col">
+      <form className="flex flex-col rounded-md p-5 bg-3 gap-5">
+        <input
+          className="text-1 bg-3 text-3xl min-w-full mb-6"
+          type="text"
+          value={recipeName}
+          onChange={e => setRecipeName(e.target.value)}
+        />
+        <div className="rounded-md bg-2 p-4 flex flex-col gap-2">
+          <div className="flex">
+            <h2 className="text-4 text-lg w-1/4">Portioner</h2>
+            <input
+              className="rounded-md w-10 text-center text-1 bg-3"
+              type="number"
+              value={recipePortions}
+              onChange={e => setRecipePortions(parseInt(e.target.value))}
+            />
+          </div>
+          <div className="flex bg-2">
+            <h2 className="text-4 text-lg w-1/4">Ingredienser</h2>
+            <div className="bg-3 p-2 rounded-md w-3/4">
+              <SearchIngredients callback={handleAddIngredient} />
+              <ul className='flex flex-col gap-1.5 py-2'>
+                {ingredients.map(i => (
+                  <EditIngredient
+                    ingredient={{ ...i, name: i.ingredientName }}
+                    remove={async () => handleDelete(i.id)}
+                    save={async ing =>
+                      handleUpdate({
+                        ingredientName: ing.name,
+                        id: i.id,
+                        quantity: ing.quantity,
+                        recipeId: i.recipeId,
+                        unit: ing.unit,
+                      })
+                    }
+                    key={i.id}
+                  />
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="flex">
+            <h2 className="text-4 text-lg w-1/4">Instruktion:</h2>
+            <input
+              className="bg-3 text-1 w-3/4 rounded-md p-2"
+              type="text"
+              value={recipeInstructions}
+              onChange={e => setRecipeInstructions(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className='self-end'>
+          <SaveButton callback={handleUpdateRecipe} />
+        </div>
+      </form>
+    </main>
   );
 };
 

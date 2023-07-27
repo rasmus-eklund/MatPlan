@@ -25,7 +25,7 @@ const EditIngredient = ({
 
   if (!editState) {
     return (
-      <li className="border-2 flex gap-5 items-center p-1">
+      <li className="flex gap-5 items-center bg-4 text-2 rounded-md px-4 py-1">
         <p className="grow">{name}</p>
         <div className="flex gap-2 justify-self-end">
           <p>{quantState}</p>
@@ -39,9 +39,9 @@ const EditIngredient = ({
     );
   } else {
     return (
-      <li className="border-2">
-        <form className="flex gap-5 items-center p-1">
-          <p className="grow">{name}</p>
+      <li className="bg-4 rounded-md px-4 py-1">
+        <form className="flex gap-5 items-center">
+          <p className="text-1 grow">{name}</p>
           <div className="flex gap-2 justify-self-end">
             <input
               className="w-20"
