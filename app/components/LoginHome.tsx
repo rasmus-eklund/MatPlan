@@ -7,9 +7,9 @@ export default function Login() {
 
   if (session) {
     return (
-      <div className="text-center text-xl text-4 p-4 rounded-md bg-3 border-1 font-bold bg-opacity-60 ">
+      <div className="text-center text-xl text-4 p-4 rounded-md bg-1 border-1 font-bold bg-opacity-90 ">
         <button
-          className="text-end text-1 px-6"
+          className="text-end text-4 px-6"
           onClick={async () => await signOut({ callbackUrl: '/' })}
           type="button"
         >
@@ -19,9 +19,9 @@ export default function Login() {
     );
   } else {
     return (
-      <div className="text-center text-xl text-4 p-4 rounded-md bg-3 border-1 font-bold bg-opacity-60 ">
+      <div className="text-center text-xl text-4 p-4 rounded-md bg-1 border-1 font-bold bg-opacity-90 ">
         <button
-          className="text-end text-1 px-6"
+          className="text-end text-4 px-6"
           onClick={() => {
             signIn('google', { callbackUrl: '/menu' });
           }}
