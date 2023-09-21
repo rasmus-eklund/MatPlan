@@ -1,6 +1,7 @@
 # Recipe Jar 
 <img style='height: 124px; width: 124px' src='https://i.ibb.co/DLwDVmt/recipe-jar-image.png'>
 
+## This application was built over a span of 8 days
 Recipe Jar is a versatile recipe app in Swedish that goes beyond the traditional recipe management. It allows you to plan your meals for the week, create shopping lists, and even optimize your grocery shopping layout. Whether you're a cooking enthusiast or just trying to simplify your meal planning, Recipe Jar has got you covered!
 
 
