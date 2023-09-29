@@ -36,6 +36,7 @@ model recipe {
   userId            String
   recipe_ingredient recipe_ingredient[]
   menu              menu[]
+  recipes           String[]
 
   @@map("public.recipe")
 }
@@ -85,13 +86,14 @@ model recipe_ingredient {
 }
 
 model menu {
-  id       String @id @default(uuid())
-  recipeId String
-  userId   String
-  portions Int
-  day      String
-  recipe   recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  user     user   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id               String             @id @default(uuid())
+  recipeId         String
+  userId           String
+  portions         Int
+  day              String
+  recipe           recipe             @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user             user               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  extra_ingredient extra_ingredient[]
 
   @@map("public.menu")
 }
@@ -102,8 +104,11 @@ model extra_ingredient {
   userId     String
   unit       String
   quantity   Decimal
+  checked    Boolean
+  recipe     menu?      @relation(fields: [menuId], references: [id], onDelete: Cascade)
   ingredient ingredient @relation(fields: [name], references: [name])
   user       user       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  menuId     String?
 
   @@map("public.extra_ingredient")
 }
