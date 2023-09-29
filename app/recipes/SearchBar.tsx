@@ -1,29 +1,28 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useDebounce } from "usehooks-ts";
-import { FilterParams, Recipe, SearchRecipeParams } from "@/types";
+'use client';
+import { useEffect, useState } from 'react';
+import { useDebounce } from 'usehooks-ts';
+import { FilterParams, Recipe, SearchRecipeParams } from '@/types';
 import {
   createNewRecipe,
   deleteRecipe,
   getRecipeByIngredient,
   getRecipeByInstructions,
   getRecipeByName,
-} from "../db/recipes";
-import SearchResults from "./SearchResults";
-
-import { useRouter } from "next/navigation";
+} from '../db/recipes';
+import SearchResults from './SearchResults';
+import { useRouter } from 'next/navigation';
 
 const SearchBar = () => {
   const router = useRouter();
-  const options: FilterParams[] = ["name", "ingredients", "instruction"];
-  const [search, setSearch] = useState("");
+  const options: FilterParams[] = ['name', 'ingredients', 'instruction'];
+  const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<FilterParams>(options[0]);
   const debouncedSearch = useDebounce(search, 500);
   const [results, setResults] = useState<Recipe[]>([]);
 
   const createNew = async () => {
     const id = await createNewRecipe();
-    router.push("/recipes/" + id);
+    router.push('/recipes/' + id);
   };
 
   const handleDelete = async (id: string) => {
@@ -34,13 +33,13 @@ const SearchBar = () => {
 
   useEffect(() => {
     const handleSearch = async ({ filter, search }: SearchRecipeParams) => {
-      if (filter === "ingredients") {
+      if (filter === 'ingredients') {
         setResults(await getRecipeByIngredient(search));
       }
-      if (filter === "instruction") {
+      if (filter === 'instruction') {
         setResults(await getRecipeByInstructions(search));
       }
-      if (filter === "name") {
+      if (filter === 'name') {
         setResults(await getRecipeByName(search));
       }
     };
@@ -59,7 +58,7 @@ const SearchBar = () => {
               id="search"
               type="text"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={e => setSearch(e.target.value)}
             />
           </div>
 
@@ -71,7 +70,7 @@ const SearchBar = () => {
               name="filter"
               id="filter"
               value={filter}
-              onChange={(e) => setFilter(e.target.value as FilterParams)}
+              onChange={e => setFilter(e.target.value as FilterParams)}
             >
               <option value="name">Namn</option>
               <option value="ingredients">Ingredient</option>

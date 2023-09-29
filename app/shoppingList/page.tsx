@@ -7,7 +7,7 @@ import {
   StorePrisma,
 } from '@/types';
 import SelectStore from '../components/SelectStore';
-import { getRecipeIngredients } from '../db/menu';
+import { getRecipeIngredients } from '../db/ingredients';
 import { getExtraIngredients } from '../db/extraIngredients';
 import Item from './Item';
 import { groupItems, updateCheckedData } from './groupItems';
@@ -82,9 +82,11 @@ const ShoppingList = () => {
                 name="group_check"
                 id="group_check"
               />
-              <label className='text-1' htmlFor="group_check">Gruppera ingredienser</label>
+              <label className="text-1" htmlFor="group_check">
+                Gruppera ingredienser
+              </label>
             </div>
-            <div className='flex gap-2'>
+            <div className="flex gap-2">
               <input
                 onChange={() => setRecipe(!recipe)}
                 checked={recipe}
@@ -92,7 +94,9 @@ const ShoppingList = () => {
                 name="recipe_check"
                 id="recipe_check"
               />
-              <label className='text-1' htmlFor="recipe_check">Dölj tillhörighet</label>
+              <label className="text-1" htmlFor="recipe_check">
+                Dölj tillhörighet
+              </label>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { Recipe_ingredient } from '@/types';
 import { useState } from 'react';
-import { deleteIngredient, updateIngredient } from '../db/menu';
+import { deleteIngredient, updateIngredient } from '../db/ingredients';
 import units from '../db/constants/units';
 
 type Prop = {

@@ -1,3 +1,4 @@
+'use server'
 import { Ingredient, IngredientType, Recipe_ingredient } from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
