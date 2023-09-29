@@ -1,6 +1,6 @@
 'use server';
 import { Ingredient } from '@/types';
-import { prisma } from './db';
+import { prisma } from './prisma';
 import getUser from './user';
 import { Prisma } from '@prisma/client';
 
@@ -31,10 +31,10 @@ export const updateExtraIngredient = async (id: string, ing: Ingredient) => {
 export const createExtraIngredient = async (ing: Ingredient) => {
   const userId = await getUser();
   const newIng = {
-    id: crypto.randomUUID(),
     ...ing,
     quantity: new Prisma.Decimal(ing.quantity),
     userId,
+    checked: false,
   };
   await prisma.extra_ingredient.create({
     data: newIng,

@@ -7,7 +7,7 @@ import {
   StorePrisma,
 } from '@/types';
 import SelectStore from '../components/SelectStore';
-import { getRecipeIngredients } from '../db/prisma';
+import { getRecipeIngredients } from '../db/menu';
 import { getExtraIngredients } from '../db/extraIngredients';
 import Item from './Item';
 import { groupItems, updateCheckedData } from './groupItems';

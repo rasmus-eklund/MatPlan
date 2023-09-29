@@ -4,8 +4,8 @@ import * as stores from '@/app/db/stores';
 import Category from './Category';
 import { Store, StorePrisma } from '@/types';
 import handleMove from '../moveItems';
-import EditButton from '@/app/components/EditButton';
-import SaveButton from '@/app/components/SaveButton';
+import EditButton from '@/app/components/buttons/Edit';
+import SaveButton from '@/app/components/buttons/Save';
 
 type Props = { params: { id: string } };
 const StoreComponent = ({ params: { id } }: Props) => {

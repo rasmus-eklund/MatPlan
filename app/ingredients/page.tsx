@@ -10,7 +10,7 @@ import {
 } from '../db/extraIngredients';
 import { Home, Ingredient, IngredientId } from '@/types';
 import EditIngredient from '../components/EditIngredient';
-import { getRecipeIngredients } from '../db/prisma';
+import { getRecipeIngredients } from '../db/menu';
 import { getHome, addHome, removeHome } from '../db/home';
 import NoEditItem from './NoEditItem';
 

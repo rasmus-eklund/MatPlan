@@ -5,8 +5,8 @@ import {
   changeRecipeDay,
   removeRecipeFromMenu,
   updateMenuPortions,
-} from "../db/prisma";
-import DeleteButton from "../components/DeleteButton";
+} from "../db/menu";
+import DeleteButton from "../components/buttons/Delete";
 import DaysDropDownForMenu from "../components/DaysDropDownForMenu";
 
 type Props = {

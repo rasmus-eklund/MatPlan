@@ -1,7 +1,7 @@
 import { Recipe } from "@/types";
 import Link from "next/link";
 import DaysDropDown from "../components/DaysDropDown";
-import DeleteButton from "../components/DeleteButton";
+import DeleteButton from "../components/buttons/Delete";
 
 type Props = {
   recipeResult: Recipe[];

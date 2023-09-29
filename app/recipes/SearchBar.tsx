@@ -8,7 +8,7 @@ import {
   getRecipeByIngredient,
   getRecipeByInstructions,
   getRecipeByName,
-} from "../db/prisma";
+} from "../db/recipes";
 import SearchResults from "./SearchResults";
 
 import { useRouter } from "next/navigation";

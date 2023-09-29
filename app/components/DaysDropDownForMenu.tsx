@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import days from "../db/days";
-import { changeRecipeDay } from "../db/prisma";
+import days from "../db/constants/days";
 
 type Prop = {
   callback: (day: string) => void;

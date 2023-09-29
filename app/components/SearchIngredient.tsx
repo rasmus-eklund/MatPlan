@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getIngredients } from "../db/prisma";
+import { getIngredients } from "../db/ingredients";
 import { IngredientType } from "@/types";
 import { useDebounce } from "usehooks-ts";
 

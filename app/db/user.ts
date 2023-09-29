@@ -1,9 +1,9 @@
 'use server';
 import { getServerSession } from 'next-auth';
 import options from '../api/auth/[...nextauth]/options';
-import { prisma } from './db';
+import { prisma } from './prisma';
 import { Ingredient, RecipeNoId } from '@/types';
-import defaultRecipes from './recipes/recieps';
+import defaultRecipes from './constants/recipes/recieps';
 import { createDefaultStore } from './stores';
 
 const getUser = async () => {

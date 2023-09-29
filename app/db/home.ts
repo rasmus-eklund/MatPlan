@@ -1,6 +1,6 @@
 'use server'
 import { Home } from '@/types';
-import { prisma } from './db';
+import { prisma } from './prisma';
 import getUser from './user';
 
 export const removeHome = async (name: string) => {

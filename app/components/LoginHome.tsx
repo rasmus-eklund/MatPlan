@@ -1,6 +1,5 @@
 'use client';
 import { useSession, signIn, signOut } from 'next-auth/react';
-import UserCard from './UserCard';
 
 export default function Login() {
   const { data: session } = useSession();
@@ -23,7 +22,7 @@ export default function Login() {
         <button
           className="text-end text-4 px-6"
           onClick={() => {
-            signIn('google', { callbackUrl: '/menu' });
+            signIn('google', { callbackUrl: '/home' });
           }}
           type="button"
         >

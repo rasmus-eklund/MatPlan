@@ -1,11 +1,11 @@
 import { Ingredient } from "@/types";
 import React, { useState } from "react";
-import units from "../db/units";
-import DeleteButton from "./DeleteButton";
+import units from "../db/constants/units";
+import DeleteButton from "./buttons/Delete";
 
-import EditButton from "./EditButton";
-import Cancel from "./Cancel";
-import SaveButton from "./SaveButton";
+import EditButton from "./buttons/Edit";
+import Cancel from "./buttons/Cancel";
+import SaveButton from "./buttons/Save";
 
 type Prop = {
   ingredient: Ingredient;

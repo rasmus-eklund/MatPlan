@@ -1,8 +1,7 @@
-import { FullRecipe } from "@/types";
 import Link from "next/link";
 import React, { useState } from "react";
-import { addRecipeToMenu } from "../db/prisma";
-import days from "../db/days";
+import { addRecipeToMenu } from "../db/menu";
+import days from "../db/constants/days";
 
 const DaysDropDown = ({ id, portions }: { id: string; portions: number }) => {
   const [day, setDay] = useState(days.at(-1)!);

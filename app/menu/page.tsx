@@ -1,9 +1,9 @@
 "use client";
-import { getMenuItems } from "../db/prisma";
+import { getMenuItems } from "../db/menu";
 import { MenuItem as MenuItemType } from "@/types";
 import React, { useEffect, useState } from "react";
 import MenuItem from "./MenuItem";
-import days from "../db/days";
+import days from "../db/constants/days";
 
 const Menu = () => {
   const [menu, setMenu] = useState<MenuItemType[]>([]);

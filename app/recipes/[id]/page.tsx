@@ -1,10 +1,10 @@
 'use client';
-import { getRecipeById } from '@/app/db/prisma';
+import { getRecipeById } from '@/app/db/recipes';
 import { FullRecipe } from '@/types';
 import React, { useEffect, useState } from 'react';
 import RecipeForm from './EditRecipe';
 import ShowRecipe from './ShowRecipe';
-import EditButton from '@/app/components/EditButton';
+import EditButton from '@/app/components/buttons/Edit';
 
 const Recipe = ({ params }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<FullRecipe | null>(null);

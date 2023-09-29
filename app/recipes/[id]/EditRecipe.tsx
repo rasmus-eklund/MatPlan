@@ -1,13 +1,13 @@
 'use client';
 import { FullRecipe, Recipe_ingredient } from '@/types';
 import { useState } from 'react';
+import { updateRecipe } from '../../db/recipes';
 import {
   createIngredient,
   deleteIngredient,
   updateIngredient,
-  updateRecipe,
-} from '../../db/prisma';
-import SaveButton from '../../components/SaveButton';
+} from '@/app/db/ingredients';
+import SaveButton from '../../components/buttons/Save';
 import SearchIngredients from '@/app/components/SearchIngredient';
 import EditIngredient from '@/app/components/EditIngredient';
 type Prop = {
