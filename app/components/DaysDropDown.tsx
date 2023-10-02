@@ -6,9 +6,9 @@ import days from "../db/constants/days";
 const DaysDropDown = ({ id, portions }: { id: string; portions: number }) => {
   const [day, setDay] = useState(days.at(-1)!);
   return (
-    <>
+    <div className="flex gap-2">
       <select
-        className="rounded-md text-1 bg-4 py-1"
+        className="rounded-md text-1 bg-4 px-2"
         name="day"
         id="day"
         value={day}
@@ -22,7 +22,7 @@ const DaysDropDown = ({ id, portions }: { id: string; portions: number }) => {
       </select>
       <Link href={"/recipes"}>
         <button
-          className="rounded-md m-4 text-1 bg-4 px-2 py-1"
+          className="rounded-md text-1 bg-4 h-10 px-2"
           onClick={() =>
             addRecipeToMenu({
               id,
@@ -34,7 +34,7 @@ const DaysDropDown = ({ id, portions }: { id: string; portions: number }) => {
           Lägg till
         </button>
       </Link>
-    </>
+    </div>
   );
 };
 
