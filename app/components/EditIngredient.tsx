@@ -1,11 +1,11 @@
-import { Ingredient } from "@/types";
-import React, { useState } from "react";
-import units from "../db/constants/units";
-import DeleteButton from "./buttons/Delete";
+import { Ingredient } from '@/types';
+import React, { useState } from 'react';
+import units from '../db/constants/units';
+import DeleteButton from './buttons/Delete';
 
-import EditButton from "./buttons/Edit";
-import Cancel from "./buttons/Cancel";
-import SaveButton from "./buttons/Save";
+import EditButton from './buttons/Edit';
+import Cancel from './buttons/Cancel';
+import SaveButton from './buttons/Save';
 
 type Prop = {
   ingredient: Ingredient;
@@ -24,13 +24,12 @@ const EditIngredient = ({
 
   if (!editState) {
     return (
-      <li className="flex gap-5 items-center bg-4 text-2 rounded-md px-4 py-1">
+      <li className="flex justify-between items-center bg-4 text-2 rounded-md px-2 py-1">
         <p className="grow">{name}</p>
-        <div className="flex gap-2 justify-self-end">
-          <p>{quantState}</p>
-          <p>{unitState}</p>
-        </div>
-        <div className="flex gap-2 justify-self-end">
+        <div className="flex gap-2">
+          <p>
+            {quantState} {unitState}
+          </p>
           <EditButton callback={() => setEdiState(true)} />
           <DeleteButton callback={remove} />
         </div>
@@ -38,29 +37,28 @@ const EditIngredient = ({
     );
   } else {
     return (
-      <li className="bg-4 rounded-md px-4 py-1">
-        <form className="flex gap-5 items-center">
-          <p className="text-1 grow">{name}</p>
-          <div className="flex gap-2 justify-self-end">
-            <input
-              className="w-20"
-              id="edit-quantity"
-              type="number"
-              name="quantity"
-              value={quantState}
-              onChange={(e) => setQuantState(Number(e.target.value))}
-            />
-            <select
-              id="edit-unit"
-              name="unit"
-              value={unitState}
-              onChange={(e) => setUnitState(e.target.value)}
-            >
-              {units.map((u) => (
-                <option key={u.abr}>{u.abr}</option>
-              ))}
-            </select>
-          </div>
+      <li className="flex justify-between items-center bg-4 text-2 rounded-md px-2 py-1">
+        <p className="text-1">{name}</p>
+        <form className="flex items-center">
+          <input
+            className="w-16"
+            id="edit-quantity"
+            type="number"
+            name="quantity"
+            value={quantState}
+            onChange={e => setQuantState(Number(e.target.value))}
+          />
+          <select
+            id="edit-unit"
+            name="unit"
+            value={unitState}
+            onChange={e => setUnitState(e.target.value)}
+          >
+            {units.map(u => (
+              <option key={u.abr}>{u.abr}</option>
+            ))}
+          </select>
+
           <div className="flex gap-2 justify-self-end">
             <Cancel callback={() => setEdiState(false)} />
             <SaveButton

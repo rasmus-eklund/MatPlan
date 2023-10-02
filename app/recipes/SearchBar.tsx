@@ -48,9 +48,9 @@ const SearchBar = () => {
   return (
     <>
       <section className="flex flex-wrap bg-3 gap-2 items-center rounded-md p-2">
-        <div className="flex rounded-md h-10">
+        <div className="flex rounded-md h-10 w-full">
           <input
-            className="bg-4 text-xl"
+            className="bg-4 text-xl px-2 w-full"
             id="search"
             type="text"
             value={search}

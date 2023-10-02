@@ -64,7 +64,7 @@ const SearchIngredients = ({ callback }: Prop) => {
           autoComplete="off"
         />
       </div>
-      <ul className="absolute top-full bg-4 w-full">
+      <ul className="absolute top-full bg-4 w-full z-10">
         {debouncedSearch.length > 1 &&
           searchResults.map((name, i) => (
             <li

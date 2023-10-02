@@ -5,7 +5,7 @@ type Props = {
 const EditButton = ({ callback }: Props) => {
   return (
     <button
-      className="bg-4 text-2 px-2 rounded-md"
+      className="bg-4 text-1 px-2 rounded-md"
       onClick={e => {
         e.preventDefault();
         callback();

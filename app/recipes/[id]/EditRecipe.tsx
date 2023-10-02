@@ -68,16 +68,16 @@ const RecipeForm = ({ recipe, updateParentUI }: Prop) => {
   };
 
   return (
-    <form className="flex flex-col rounded-md p-5 bg-3 gap-5">
+    <form className="flex flex-col rounded-md bg-3 gap-5">
       <input
-        className="text-1 bg-3 text-3xl min-w-full font-bold"
+        className="text-1 bg-3 text-3xl font-bold"
         type="text"
         value={recipeName}
         onChange={e => setRecipeName(e.target.value)}
       />
       <div className="rounded-md bg-2 p-4 flex flex-col gap-2">
-        <div className="flex">
-          <h2 className="text-4 text-lg w-1/4">Portioner</h2>
+        <div className="flex justify-between">
+          <h2 className="text-4 text-lg">Portioner</h2>
           <input
             className="rounded-md w-10 text-center text-1 bg-3"
             type="number"
@@ -86,11 +86,11 @@ const RecipeForm = ({ recipe, updateParentUI }: Prop) => {
           />
         </div>
 
-        <div className="flex bg-2">
-          <h2 className="text-4 text-lg w-1/4">Ingredienser</h2>
-          <div className="bg-3 p-2 rounded-md w-3/4">
+        <div className="flex flex-col bg-2">
+          <h2 className="text-4 text-lg">Ingredienser</h2>
+          <div className="bg-3 p-2 rounded-md">
             <SearchIngredients callback={handleAddIngredient} />
-            <ul className="flex flex-col gap-1.5 py-2">
+            <ul className="flex flex-col gap-1 py-2">
               {ingredients.map(i => (
                 <EditIngredient
                   ingredient={{ ...i, name: i.ingredientName }}
@@ -110,11 +110,10 @@ const RecipeForm = ({ recipe, updateParentUI }: Prop) => {
             </ul>
           </div>
         </div>
-        <div className="flex">
-          <h2 className="text-4 text-lg w-1/4">Instruktion</h2>
-          <input
-            className="bg-3 text-1 w-3/4 rounded-md p-2"
-            type="text"
+        <div className="flex flex-col">
+          <h2 className="text-4 text-lg">Instruktion</h2>
+          <textarea
+            className="bg-3 text-1 rounded-md p-2"
             value={recipeInstructions}
             onChange={e => setRecipeInstructions(e.target.value)}
           />
