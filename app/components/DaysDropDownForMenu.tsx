@@ -1,25 +1,28 @@
-import React, { useState } from "react";
-import days from "../db/constants/days";
+import { FC, useState } from 'react';
+import days from '../db/constants/days';
 
-type Prop = {
+type DaysDropDownForMenuProp = {
   callback: (day: string) => void;
   initDay: string;
 };
 
-const DaysDropDownForMenu = ({ callback, initDay }: Prop) => {
+const DaysDropDownForMenu: FC<DaysDropDownForMenuProp> = ({
+  callback,
+  initDay,
+}) => {
   const [day, setDay] = useState(initDay);
   return (
     <select
-      className=" p-1.5 px-2 rounded-md  m-4 bg-3"
+      className="rounded-md bg-3 p-1"
       name="day"
       id="day"
       value={day}
-      onChange={(e) => {
+      onChange={e => {
         setDay(e.target.value);
         callback(e.target.value);
       }}
     >
-      {days.map((day) => (
+      {days.map(day => (
         <option key={day} value={day}>
           {day}
         </option>

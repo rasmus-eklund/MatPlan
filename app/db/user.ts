@@ -2,9 +2,9 @@
 import { getServerSession } from 'next-auth';
 import options from '../api/auth/[...nextauth]/options';
 import { prisma } from './prisma';
-import { Ingredient, RecipeNoId } from '@/types';
 import defaultRecipes from './constants/recipes/recieps';
-import { createDefaultStore } from './stores';
+import * as store from './stores';
+import { addRecipesToContainer, addRecipe } from './recipes';
 
 const getUser = async () => {
   const session = await getServerSession(options);
@@ -19,38 +19,27 @@ export const checkNewUser = async () => {
   const users = await prisma.user.findUnique({ where: { id: userId } });
   if (users === null) {
     await prisma.user.create({ data: { id: userId } });
-    await createDefaultStore(userId);
-    await createDefaultRecipes(userId);
+    await store.addDefault(userId);
+    await createDefaultRecipes();
   }
 };
 
-const createDefaultRecipes = async (userId: string) => {
-  for (const recipe of defaultRecipes) {
-    await addRecipe(recipe, userId);
-  }
-};
-
-const addRecipe = async (
-  { name, portions, instruction, ingredients }: RecipeNoId,
-  userId: string
-) => {
-  const newRecipe = await prisma.recipe.create({
-    data: { name, portions, instruction, userId },
-  });
-  await addRecipeIngredient(ingredients, newRecipe.id);
-};
-
-const addRecipeIngredient = async (
-  ingredients: Ingredient[],
-  recipeId: string
-) => {
-  const newIngs = ingredients.map(({ quantity, unit, name }) => ({
-    ingredientName: name,
-    recipeId,
-    quantity,
-    unit,
-  }));
-  await prisma.recipe_ingredient.createMany({ data: newIngs });
+export const createDefaultRecipes = async () => {
+  const userId = await getUser();
+  const test3 = await addRecipe(
+    defaultRecipes.find(i => i.name === 'Test3')!,
+    userId
+  );
+  const test2 = await addRecipe(
+    defaultRecipes.find(i => i.name === 'Test2')!,
+    userId
+  );
+  const test1 = await addRecipe(
+    defaultRecipes.find(i => i.name === 'Test1')!,
+    userId
+  );
+  await addRecipesToContainer(test2, test1);
+  await addRecipesToContainer(test3, test2);
 };
 
 export default getUser;

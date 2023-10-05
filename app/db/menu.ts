@@ -1,4 +1,5 @@
 'use server';
+import { MenuItem } from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
 
@@ -41,15 +42,14 @@ export const changeRecipeDay = async (recipeId: string, day: string) => {
   });
 };
 
-export const getMenuItems = async () => {
+export const getMenuItems = async (): Promise<MenuItem[]> => {
   const userId = await getUser();
-  return await prisma.menu.findMany({
+  const res = (await prisma.menu.findMany({
     where: { userId },
     include: { recipe: true },
-  });
+  })) as MenuItem[];
+  return res;
 };
-
-
 
 // export const getSubcategories = async () =>
 //   await prisma.subcategory.findMany({ include: { category: true } });

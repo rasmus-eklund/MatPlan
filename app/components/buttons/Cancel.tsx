@@ -1,21 +1,14 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faX } from '@fortawesome/free-solid-svg-icons';
+import { FC } from 'react';
 
-type Props = {
+type CancelProps = {
   callback: () => void;
 };
 
-const Cancel = ({ callback }: Props) => {
+const Cancel: FC<CancelProps> = ({ callback }) => {
   return (
-    <FontAwesomeIcon
-      type="button"
-      className={'hover:scale-110'}
-      onClick={callback}
-      icon={faX}
-      size="lg"
-      style={{ color: '#e24646' }}
-    />
+    <button className="bg-4 text-2 px-2 rounded-md" onClick={callback}>
+      Avbryt
+    </button>
   );
 };
 

@@ -1,111 +1,26 @@
-import { RecipeNoId } from '@/types';
+import { RecipeFront } from '@/types';
 
-const defaultRecipes: RecipeNoId[] = [
+const defaultRecipes: RecipeFront[] = [
   {
-    name: 'Raggmunk med fläsk',
+    name: 'Test1',
     portions: 2,
-    ingredients: [
-      {
-        quantity: 120,
-        unit: 'g',
-        name: 'vetemjöl',
-      },
-      {
-        quantity: 4,
-        unit: 'dl',
-        name: 'mjölk',
-      },
-      {
-        quantity: 2,
-        unit: 'st',
-        name: 'ägg',
-      },
-      {
-        quantity: 0.5,
-        unit: 'tsk',
-        name: 'salt',
-      },
-      {
-        quantity: 900,
-        unit: 'g',
-        name: 'potatis',
-      },
-      {
-        quantity: 400,
-        unit: 'g',
-        name: 'rimmat bogfläsk',
-      },
-    ],
-    instruction:
-      'Blanda mjölk, mjöl, ägg och salt.\nSkala och riv potatis. Krama ur vätskan och blanda ned i smeten.\nStek raggmunk och fläsk.',
+    instruction: 'Test 1',
+    recipe_ingredient: [{ name: 'banan', quantity: 1, unit: 'st' }],
+    containers: [],
   },
   {
-    name: 'Köttbullar med gräddsås och potatis',
-    portions: 4,
-    ingredients: [
-      {
-        quantity: 500,
-        unit: 'g',
-        name: 'fläskfärs',
-      },
-      {
-        quantity: 1,
-        unit: 'st',
-        name: 'köttbuljongtärning',
-      },
-      {
-        quantity: 1,
-        unit: 'st',
-        name: 'lök',
-      },
-      {
-        quantity: 0.5,
-        unit: 'tsk',
-        name: 'peppar',
-      },
-      {
-        quantity: 8,
-        unit: 'st',
-        name: 'potatis',
-      },
-      {
-        quantity: 50,
-        unit: 'g',
-        name: 'smör',
-      },
-      {
-        quantity: 1,
-        unit: 'msk',
-        name: 'vetemjöl',
-      },
-      {
-        quantity: 3,
-        unit: 'dl',
-        name: 'grädde',
-      },
-      {
-        quantity: 0.5,
-        unit: 'st',
-        name: 'köttbuljongtärning',
-      },
-      {
-        quantity: 1,
-        unit: 'msk',
-        name: 'soja',
-      },
-      {
-        quantity: 2,
-        unit: 'tsk',
-        name: 'worcestershiresås',
-      },
-      {
-        quantity: 1,
-        unit: 'tsk',
-        name: 'örtkrydda',
-      },
-    ],
-    instruction:
-      'Finhacka löken och blanda med fläskfärsen.\nLös buljongtärningen i lite vatten och blanda i färsen.\nBlanda i peppar. Skala och koka potatis. Smält smör i en kastrull och fortsätt fräsa under ständig omrörning tills det är gyllenbrunt och doftar nötigt.\nVispa ner mjöl och lite av grädden till en tjock stuvning. Tillsätt resterande grädde, lite i taget, under vispning. Tillsätt örtkryddor (och ev steksky).\nLåt sjuda på låg värme minst 10 min men gärna längre. Rör då och då. Tillsätt smulad buljongtärning, soja, och worcestersås. Låt koka ytterligare 5 min. Smaka av med salt och peppar.\n',
+    name: 'Test2',
+    portions: 2,
+    instruction: 'Test 2',
+    recipe_ingredient: [{ name: 'gurka', quantity: 1, unit: 'st' }],
+    containers: [],
+  },
+  {
+    name: 'Test3',
+    portions: 2,
+    instruction: 'Test 3',
+    recipe_ingredient: [{ name: 'apelsin', quantity: 1, unit: 'st' }],
+    containers: [],
   },
 ];
 

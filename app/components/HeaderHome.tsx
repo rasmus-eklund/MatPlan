@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { randomizeLetters } from "./UIhelperfunctions";
+import { randomizeLetters } from "../utils/utils";
 import Login from "./buttons/Login";
 
 const Header = () => {

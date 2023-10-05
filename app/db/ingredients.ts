@@ -1,5 +1,9 @@
-'use server'
-import { Ingredient, IngredientType, Recipe_ingredient } from '@/types';
+'use server';
+import {
+  RecipeIngredient,
+  IngredientCat,
+  RecipeIngredientFront,
+} from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
 
@@ -7,7 +11,7 @@ export const updateIngredient = async ({
   id,
   quantity,
   unit,
-}: Recipe_ingredient) => {
+}: RecipeIngredient) => {
   await prisma.recipe_ingredient.update({
     where: { id },
     data: { quantity, unit },
@@ -16,15 +20,10 @@ export const updateIngredient = async ({
 
 export const createIngredient = async (
   recipeId: string,
-  ingredient: Ingredient
-): Promise<Recipe_ingredient> => {
+  ingredient: RecipeIngredientFront
+): Promise<RecipeIngredient> => {
   const ing = await prisma.recipe_ingredient.create({
-    data: {
-      ingredientName: ingredient.name,
-      quantity: ingredient.quantity,
-      unit: ingredient.unit,
-      recipeId,
-    },
+    data: { ...ingredient, recipeId },
   });
   return { ...ing, quantity: Number(ing.quantity) };
 };
@@ -42,7 +41,7 @@ export const getRecipeIngredients = async () => {
     include: {
       recipe: {
         include: {
-          recipe_ingredient: {
+          ingredients: {
             include: { ingredient: true },
           },
         },
@@ -52,9 +51,9 @@ export const getRecipeIngredients = async () => {
 
   return queryRes.flatMap(r => {
     const scale = r.portions / r.recipe.portions;
-    return r.recipe.recipe_ingredient.map(i => ({
+    return r.recipe.ingredients.map(i => ({
       id: i.id,
-      name: i.ingredientName,
+      name: i.name,
       quantity: Number(i.quantity) * scale,
       unit: i.unit,
       subCategory: i.ingredient.subcategoryId,
@@ -63,5 +62,5 @@ export const getRecipeIngredients = async () => {
   });
 };
 
-export const getIngredients = async (): Promise<IngredientType[]> =>
+export const getIngredients = async (): Promise<IngredientCat[]> =>
   await prisma.ingredient.findMany();

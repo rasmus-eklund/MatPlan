@@ -1,31 +1,48 @@
 export type Recipe = {
   id: string;
-  instruction: string;
   name: string;
   portions: number;
-  userId: string;
-};
-
-export type RecipeNoId = {
-  name: string;
-  portions: number;
-  ingredients: Ingredient[];
   instruction: string;
+  ingredients: RecipeIngredient[];
 };
 
-export type FullRecipe = {
+export type RecipeIngredient = {
   id: string;
-  instruction: string;
+  recipeId: string;
+  quantity: number;
+  unit: string;
   name: string;
-  portions: number;
-  recipe_ingredient: Recipe_ingredient[];
 };
 
-export type FilterParams = 'name' | 'ingredients' | 'instruction';
+export type RecipeIngredientFront = {
+  quantity: number;
+  unit: string;
+  name: string;
+};
 
-export type SearchRecipeParams = {
-  filter: FilterParams;
-  search: string;
+export type RecipeFront = {
+  name: string;
+  portions: number;
+  instruction: string;
+  ingredients: RecipeIngredientFront[];
+};
+
+export type Recipe_recipe = {
+  containerRecipeId: string;
+  containedRecipeId: string;
+  id: string;
+};
+
+export type RecipeSearch = {
+  name: string;
+  id: string;
+  portions: number;
+};
+
+export type IngredientCat = {
+  name: string;
+  categoryId: number;
+  subcategoryId: number;
 };
 
 export type MenuItem = {
@@ -52,33 +69,6 @@ export type ShoppingListLocalStorage = {
   checked: boolean;
 };
 
-export type IngredientType = {
-  name: string;
-  categoryId: number;
-  subcategoryId: number;
-};
-
-export type Ingredient = {
-  name: string;
-  quantity: number;
-  unit: string;
-};
-export type IngredientId = {
-  id: string;
-  name: string;
-  quantity: number;
-  unit: string;
-  from: string;
-};
-
-export type Recipe_ingredient = {
-  id: string;
-  recipeId: string;
-  quantity: number;
-  unit: string;
-  ingredientName: string;
-};
-
 export type StorePrisma = {
   id: string;
   name: string;
@@ -103,5 +93,12 @@ export type Store = {
 };
 
 export type Home = {
-  ingredientName: string;
+  name: string;
 };
+
+export type SearchParams = {
+  search: string;
+  filter: Filter;
+};
+
+export type Filter = 'name' | 'ingredient' | 'instruction';

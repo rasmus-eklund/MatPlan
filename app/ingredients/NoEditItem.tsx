@@ -1,8 +1,8 @@
-import { Ingredient } from '@/types';
+import { IngredientBare } from '@/types';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
-  ing: Ingredient;
+  ing: IngredientBare;
   home: boolean;
   showHome: boolean;
   onCheck: (check: boolean) => Promise<void>;

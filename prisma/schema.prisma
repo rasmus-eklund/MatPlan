@@ -19,26 +19,37 @@ model user {
 }
 
 model home {
-  user           user       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId         String
-  ingredient     ingredient @relation(fields: [ingredientName], references: [name])
-  ingredientName String     @id
+  user       user       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  ingredient ingredient @relation(fields: [name], references: [name])
+  name       String     @id
 
   @@map("public.home")
 }
 
 model recipe {
-  id                String              @id @default(uuid())
-  name              String
-  portions          Int
-  instruction       String
-  user              user                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId            String
-  recipe_ingredient recipe_ingredient[]
-  menu              menu[]
-  recipes           String[]
+  id          String              @id @default(uuid())
+  name        String
+  portions    Int
+  instruction String
+  user        user                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  ingredients recipe_ingredient[]
+  menu        menu[]
+  containers  recipe_recipe[]     @relation("containedRecipes")
+  containedIn recipe_recipe[]     @relation("containerRecipes")
 
   @@map("public.recipe")
+}
+
+model recipe_recipe {
+  id                String @id @default(uuid())
+  containerRecipe   recipe @relation("containedRecipes", fields: [containerRecipeId], references: [id], onDelete: Cascade)
+  containerRecipeId String
+  containedRecipe   recipe @relation("containerRecipes", fields: [containedRecipeId], references: [id], onDelete: Cascade)
+  containedRecipeId String
+
+  @@map("public.recipe_recipe")
 }
 
 model category {
@@ -74,13 +85,13 @@ model ingredient {
 }
 
 model recipe_ingredient {
-  id             String     @id @default(uuid())
-  recipeId       String
-  quantity       Decimal
-  unit           String
-  ingredientName String
-  ingredient     ingredient @relation(fields: [ingredientName], references: [name])
-  recipe         recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  id         String     @id @default(uuid())
+  recipeId   String
+  quantity   Decimal
+  unit       String
+  name       String
+  ingredient ingredient @relation(fields: [name], references: [name])
+  recipe     recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 
   @@map("public.recipe_ingredient")
 }

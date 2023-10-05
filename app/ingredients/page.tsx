@@ -8,15 +8,15 @@ import {
   deleteExraIngredient,
   updateExtraIngredient,
 } from '../db/extraIngredients';
-import { Home, Ingredient, IngredientId } from '@/types';
+import { Home, IngredientBare, RecipeIngredient } from '@/types';
 import EditIngredient from '../components/EditIngredient';
 import { getRecipeIngredients } from '../db/ingredients';
 import { getHome, addHome, removeHome } from '../db/home';
 import NoEditItem from './NoEditItem';
 
 const Ingredients = () => {
-  const [ingredients, setIngredients] = useState<IngredientId[]>([]);
-  const [extraIngredients, setExtraIngredients] = useState<IngredientId[]>([]);
+  const [ingredients, setIngredients] = useState<RecipeIngredient[]>([]);
+  const [extraIngredients, setExtraIngredients] = useState<RecipeIngredient[]>([]);
   const [homeState, setHomeState] = useState<Home[]>([]);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const Ingredients = () => {
   };
 
   const addIngredient = async (name: string) => {
-    const ingredient: Ingredient = {
+    const ingredient: IngredientBare = {
       name,
       quantity: 1,
       unit: 'st',
@@ -56,7 +56,7 @@ const Ingredients = () => {
     setExtraIngredients(extra);
   };
 
-  const handleSave = async (id: string, ing: Ingredient) => {
+  const handleSave = async (id: string, ing: IngredientBare) => {
     await updateExtraIngredient(id, ing);
   };
   const handleDelete = async (id: string) => {
