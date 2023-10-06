@@ -9,21 +9,22 @@ import {
 import DeleteButton from './buttons/Delete';
 import DaysDropDown from './DaysDropDown';
 import Incrementer from './Incrementer';
+import { FC } from 'react';
 
-type Props = {
+type MenuItemProps = {
   item: MenuItem;
-  callback: () => Promise<void>;
+  update: () => Promise<void>;
 };
 
-const MenuItem = ({ item, callback }: Props) => {
+const MenuItem: FC<MenuItemProps> = ({ item, update }) => {
   const handleRemove = async (id: string) => {
     await removeRecipeFromMenu(id);
-    await callback();
+    await update();
   };
 
   const handleChangeDay = (day: Day) => {
     if (day !== item.day) {
-      changeRecipeDay(item.id, day);
+      changeRecipeDay(item.id, day).then(update);
     }
   };
 
@@ -39,7 +40,7 @@ const MenuItem = ({ item, callback }: Props) => {
       >
         {item.name}
       </Link>
-      <div className='flex items-center'>
+      <div className="flex items-center">
         <Incrementer
           initialValue={item.portions}
           callback={handleChangePortions}

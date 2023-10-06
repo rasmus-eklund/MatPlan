@@ -10,11 +10,10 @@ const Menu = () => {
 
   useEffect(() => {
     getMenuItems().then(data => setMenu(data));
-  }, [menu]);
+  }, []);
 
   const update = async () => {
-    const items = await getMenuItems();
-    setMenu(items);
+    setMenu(await getMenuItems());
   };
 
   return (
@@ -35,7 +34,7 @@ const Menu = () => {
                     return 0;
                   })
                   .map(r => (
-                    <MenuItem key={r.id} item={r} callback={() => update()} />
+                    <MenuItem key={r.id} item={r} update={update} />
                   ))}
               </ul>
             </li>
