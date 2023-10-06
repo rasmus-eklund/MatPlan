@@ -1,4 +1,3 @@
-import { SubcategoryItem } from "@/types";
 
 const move = <T>(arr: T[], first: number, second: number) => {
   const newArr = [...arr];

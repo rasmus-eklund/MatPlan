@@ -1,3 +1,16 @@
+const days = [
+  'Måndag',
+  'Tisdag',
+  'Onsdag',
+  'Torsdag',
+  'Fredag',
+  'Lördag',
+  'Söndag',
+  'Obestämd',
+] as const;
+
+export type Day = (typeof days)[number];
+
 export type Recipe = {
   id: string;
   name: string;
@@ -47,10 +60,9 @@ export type IngredientCat = {
 
 export type MenuItem = {
   id: string;
-  recipe: Recipe;
+  name: string;
   recipeId: string;
-  userId: string;
-  day: string;
+  day: Day;
   portions: number;
 };
 

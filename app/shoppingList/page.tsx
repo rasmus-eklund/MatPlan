@@ -9,8 +9,8 @@ import {
 import SelectStore from '../components/SelectStore';
 import { getRecipeIngredients } from '../db/ingredients';
 import { getExtraIngredients } from '../db/extraIngredients';
-import Item from './Item';
-import { groupItems, updateCheckedData } from './groupItems';
+import Item from '../components/ShoppingListItem';
+import { groupItems, updateCheckedData } from '../components/groupItems';
 
 const ShoppingList = () => {
   const [ingredients, setIngredients] = useState<ShoppingListType[]>([]);

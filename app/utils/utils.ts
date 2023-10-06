@@ -43,7 +43,10 @@ export const capitalize = (s: string) => {
   return s[0].toUpperCase() + s.slice(1);
 };
 
-export const SearchRecipeByFilter = async ({ filter, search }: SearchParams) => {
+export const SearchRecipeByFilter = async ({
+  filter,
+  search,
+}: SearchParams) => {
   let data: RecipeSearch[] = [];
   if (filter === 'ingredient') {
     data = await getRecipeByIngredient(search);
@@ -56,3 +59,4 @@ export const SearchRecipeByFilter = async ({ filter, search }: SearchParams) => 
   }
   return data;
 };
+

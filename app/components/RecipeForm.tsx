@@ -6,13 +6,13 @@ import {
   SearchParams,
 } from '@/types';
 import { FC, useState } from 'react';
-import SaveButton from '../components/buttons/Save';
+import SaveButton from './buttons/Save';
 import SearchIngredients from '@/app/components/SearchIngredient';
 import EditIngredient from '@/app/components/EditIngredient';
-import Cancel from '../components/buttons/Cancel';
+import Cancel from './buttons/Cancel';
 import SearchRecipeForm from './SearchRecipeForm';
 import { SearchRecipeByFilter } from '../utils/utils';
-import DeleteButton from '../components/buttons/Delete';
+import DeleteButton from './buttons/Delete';
 
 type RecipeFormProp = {
   recipe: RecipeFront;

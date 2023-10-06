@@ -94,14 +94,20 @@ export const deleteRecipe = async (id: string) => {
   await prisma.recipe.delete({ where: { id, userId } });
 };
 
-export const addRecipe = async (recipe: RecipeFront, recipes: string[]) => {
+export const addRecipe = async (
+  recipe: RecipeFront,
+  recipes: RecipeSearch[]
+) => {
   const userId = await getUser();
   const { name, instruction, portions, ingredients } = recipe;
   const { id } = await prisma.recipe.create({
     data: { instruction, name, portions, userId },
   });
   await addRecipeIngredients(ingredients, id);
-  await addRecipesToContainer(recipes, id);
+  await addRecipesToContainer(
+    recipes.map(i => i.id),
+    id
+  );
   return id;
 };
 
@@ -124,7 +130,9 @@ export const addRecipesToContainer = async (
   await prisma.recipe_recipe.createMany({ data });
 };
 
-export const getContained = async (recipeId: string): Promise<RecipeSearch[]> => {
+export const getContained = async (
+  recipeId: string
+): Promise<RecipeSearch[]> => {
   const contained = await prisma.recipe_recipe.findMany({
     where: { containerRecipeId: recipeId },
     select: {

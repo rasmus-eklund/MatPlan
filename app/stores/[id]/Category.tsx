@@ -1,7 +1,7 @@
 import { CategoryItem } from '@/types';
 import { useState } from 'react';
 import Subcategory from './Subcategory';
-import handleMove from '../moveItems';
+import handleMove from '../../utils/MoveStoreItems';
 import UppArrow from '@/app/components/UppArrow';
 import DownArrow from '@/app/components/DownArrow';
 

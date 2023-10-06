@@ -1,15 +1,15 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { RecipeFront, RecipeSearch, SearchParams } from '@/types';
-import SearchRecipeForm from './SearchRecipeForm';
-import SearchResults from './SearchResults';
+import SearchRecipeForm from '../components/SearchRecipeForm';
+import SearchResults from '../components/SearchResults';
 import { addRecipe } from '../db/recipes';
 import {
   parseAsString,
   parseAsStringEnum,
   useQueryState,
 } from 'next-usequerystate';
-import RecipeForm from './RecipeForm';
+import RecipeForm from '../components/RecipeForm';
 import { SearchRecipeByFilter } from '../utils/utils';
 
 enum Filter {
@@ -37,10 +37,11 @@ const SearchRecipeComponent = () => {
     setResults(await SearchRecipeByFilter({ search, filter }));
   };
 
-  const createNewRecipe = async (recipe: RecipeFront, recipes: string[]) => {
+  const createNewRecipe = (recipe: RecipeFront, recipes: RecipeSearch[]) => {
+    addRecipe(recipe, recipes)
+      .then(() => SearchRecipeByFilter({ search, filter }))
+      .then(res => setResults(res));
     setFormHidden(true);
-    await addRecipe(recipe, recipes);
-    setResults(await SearchRecipeByFilter({ search, filter }));
   };
 
   const emptyRecipe: RecipeFront = {

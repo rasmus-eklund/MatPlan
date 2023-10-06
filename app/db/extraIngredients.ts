@@ -1,5 +1,5 @@
 'use server';
-import { RecipeIngredient } from '@/types';
+import { RecipeIngredient, RecipeIngredientFront } from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
 import { Prisma } from '@prisma/client';
@@ -31,7 +31,7 @@ export const updateExtraIngredient = async (
   });
 };
 
-export const createExtraIngredient = async (ing: RecipeIngredient) => {
+export const createExtraIngredient = async (ing: RecipeIngredientFront) => {
   const userId = await getUser();
   const newIng = {
     ...ing,

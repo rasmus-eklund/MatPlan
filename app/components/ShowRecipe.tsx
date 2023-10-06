@@ -7,9 +7,10 @@ import { capitalize } from '../utils/utils';
 
 type ShowRecipeProps = {
   recipe: Recipe;
+  scale: number;
 };
 
-const ShowRecipe: FC<ShowRecipeProps> = ({ recipe }) => {
+const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, scale }) => {
   const [recipes, setRecipes] = useState<{ name: string; id: string }[]>([]);
 
   useEffect(() => {
@@ -24,9 +25,7 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ recipe }) => {
       <div className="rounded-md bg-2 p-2 flex flex-col gap-2">
         <div className="flex justify-between">
           <h2 className="text-4 text-lg">Portioner:</h2>
-          <p className="rounded-md w-10 text-center text-1 bg-3">
-            {recipe.portions}
-          </p>
+          <p className="rounded-md w-10 text-center text-1 bg-3">{scale}</p>
         </div>
         <div className="flex flex-col bg-2 gap-1">
           <h2 className="text-4 text-lg">Ingredienser</h2>
@@ -36,7 +35,7 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ recipe }) => {
                 <div className="flex justify-between text-2">
                   <p>{capitalize(name)}</p>
                   <p>
-                    {quantity} {unit}
+                    {(scale / recipe.portions) * quantity} {unit}
                   </p>
                 </div>
               </li>

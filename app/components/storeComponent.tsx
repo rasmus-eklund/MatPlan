@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import DeleteButton from '../components/buttons/Delete';
+import DeleteButton from './buttons/Delete';
 
 type Props = {
   callback: (id: string) => void;

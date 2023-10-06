@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import * as stores from '@/app/db/stores';
 import Category from './Category';
 import { Store, StorePrisma } from '@/types';
-import handleMove from '../moveItems';
+import handleMove from '../../utils/MoveStoreItems';
 import EditButton from '@/app/components/buttons/Edit';
 import SaveButton from '@/app/components/buttons/Save';
 

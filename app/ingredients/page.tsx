@@ -1,6 +1,5 @@
 'use client';
-
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchIngredients from '../components/SearchIngredient';
 import {
   getExtraIngredients,
@@ -8,11 +7,12 @@ import {
   deleteExraIngredient,
   updateExtraIngredient,
 } from '../db/extraIngredients';
-import { Home, IngredientBare, RecipeIngredient } from '@/types';
+import { Home, RecipeIngredient, RecipeIngredientFront } from '@/types';
 import EditIngredient from '../components/EditIngredient';
 import { getRecipeIngredients } from '../db/ingredients';
 import { getHome, addHome, removeHome } from '../db/home';
-import NoEditItem from './NoEditItem';
+import NoEditItem from '../components/NoEditItem';
+
 
 const Ingredients = () => {
   const [ingredients, setIngredients] = useState<RecipeIngredient[]>([]);
@@ -25,7 +25,7 @@ const Ingredients = () => {
   }, []);
 
   const isHome = (name: string) => {
-    const home = Boolean(homeState.some(n => n.ingredientName === name));
+    const home = Boolean(homeState.some(n => n.name === name));
     if (home) {
     }
     return home;
@@ -38,7 +38,7 @@ const Ingredients = () => {
   };
 
   const addIngredient = async (name: string) => {
-    const ingredient: IngredientBare = {
+    const ingredient: RecipeIngredientFront = {
       name,
       quantity: 1,
       unit: 'st',
@@ -56,7 +56,7 @@ const Ingredients = () => {
     setExtraIngredients(extra);
   };
 
-  const handleSave = async (id: string, ing: IngredientBare) => {
+  const handleSave = async (id: string, ing: RecipeIngredientFront) => {
     await updateExtraIngredient(id, ing);
   };
   const handleDelete = async (id: string) => {

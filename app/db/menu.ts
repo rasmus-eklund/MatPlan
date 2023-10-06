@@ -1,5 +1,5 @@
 'use server';
-import { MenuItem } from '@/types';
+import { Day, MenuItem } from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
 
@@ -23,18 +23,15 @@ export const removeRecipeFromMenu = async (id: string) => {
   await prisma.menu.delete({ where: { id, userId } });
 };
 
-export const updateMenuPortions = async (
-  recipeId: string,
-  portions: number
-) => {
+export const updateMenuPortions = async (id: string, portions: number) => {
   const userId = await getUser();
   await prisma.menu.update({
-    where: { userId, id: recipeId },
+    where: { userId, id },
     data: { portions },
   });
 };
 
-export const changeRecipeDay = async (recipeId: string, day: string) => {
+export const changeRecipeDay = async (recipeId: string, day: Day) => {
   const userId = await getUser();
   await prisma.menu.update({
     where: { id: recipeId, userId },
@@ -44,15 +41,22 @@ export const changeRecipeDay = async (recipeId: string, day: string) => {
 
 export const getMenuItems = async (): Promise<MenuItem[]> => {
   const userId = await getUser();
-  const res = (await prisma.menu.findMany({
+  const res = await prisma.menu.findMany({
     where: { userId },
-    include: { recipe: true },
-  })) as MenuItem[];
-  return res;
+    select: {
+      id: true,
+      recipeId: true,
+      day: true,
+      portions: true,
+      recipe: { select: { name: true } },
+    },
+  });
+  const item: MenuItem[] = res.map(i => ({
+    id: i.id,
+    day: i.day as Day,
+    name: i.recipe.name,
+    recipeId: i.recipeId,
+    portions: i.portions,
+  }));
+  return item;
 };
-
-// export const getSubcategories = async () =>
-//   await prisma.subcategory.findMany({ include: { category: true } });
-
-// export const getCategories = async () =>
-//   await prisma.category.findMany({ include: { subcategory: true } });

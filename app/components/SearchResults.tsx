@@ -1,12 +1,16 @@
-import { RecipeSearch } from '@/types';
+import { Day, RecipeSearch } from '@/types';
 import Link from 'next/link';
-import DaysDropDown from '../components/DaysDropDown';
+import DaysDropDown from './DaysDropDown';
+import { addRecipeToMenu } from '../db/menu';
 
 type Props = {
   recipeResult: RecipeSearch[];
 };
 
 const SearchResults = ({ recipeResult }: Props) => {
+  const addRecipe = (day: Day, id: string, portions: number) => {
+    addRecipeToMenu({ day, id, portions });
+  };
   return (
     <section className="flex flex-col bg-3 p-2 gap-2 rounded-md">
       <h2 className="text-xl text-1">Recept:</h2>
@@ -19,7 +23,10 @@ const SearchResults = ({ recipeResult }: Props) => {
           >
             <Link href={`/recipes/${r.id}`}>{r.name}</Link>
             <div className="flex items-center gap-4">
-              <DaysDropDown id={r.id} portions={r.portions} />
+              <DaysDropDown
+                initDay="Obestämd"
+                callback={day => addRecipe(day, r.id, r.portions)}
+              />
             </div>
           </li>
         ))}

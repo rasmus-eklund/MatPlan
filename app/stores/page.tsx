@@ -2,7 +2,7 @@
 import { StorePrisma } from '@/types';
 import React, { useEffect, useState } from 'react';
 import * as stores from '../db/stores';
-import StoreComponent from './storeComponent';
+import StoreComponent from '../components/storeComponent';
 
 const Stores = () => {
   const [storesState, setStoresState] = useState<StorePrisma[]>([]);
