@@ -69,7 +69,7 @@ export const getRecipeById = async (id: string): Promise<Recipe> => {
 
 export const updateRecipe = async (
   recipe: RecipeFront,
-  recipes: string[],
+  recipes: RecipeSearch[],
   id: string
 ) => {
   const userId = await getUser();
@@ -80,11 +80,13 @@ export const updateRecipe = async (
       name: recipe.name,
       portions: recipe.portions,
       instruction: recipe.instruction,
-      ingredients: { deleteMany: { recipeId: id } },
+      ingredients: {
+        deleteMany: { recipeId: id },
+        createMany: { data: recipe.ingredients },
+      },
       containers: { deleteMany: { containerRecipeId: id } },
     },
   });
-  await addRecipeIngredients(recipe.ingredients, id);
   await addRecipesToContainer(recipes, id);
   return updatedRecipe.id;
 };
@@ -101,31 +103,28 @@ export const addRecipe = async (
   const userId = await getUser();
   const { name, instruction, portions, ingredients } = recipe;
   const { id } = await prisma.recipe.create({
-    data: { instruction, name, portions, userId },
+    data: {
+      instruction,
+      name,
+      portions,
+      userId,
+      ingredients: { createMany: { data: ingredients } },
+    },
   });
-  await addRecipeIngredients(ingredients, id);
-  await addRecipesToContainer(
-    recipes.map(i => i.id),
-    id
-  );
+  if (recipes.length > 0) {
+    await addRecipesToContainer(recipes, id);
+  }
   return id;
 };
 
-export const addRecipeIngredients = async (
-  ingredients: RecipeIngredientFront[],
-  recipeId: string
-) => {
-  const newIngs = ingredients.map(ing => ({ ...ing, recipeId }));
-  await prisma.recipe_ingredient.createMany({ data: newIngs });
-};
-
 export const addRecipesToContainer = async (
-  containedRecipeIds: string[],
+  containedRecipeIds: RecipeSearch[],
   containerRecipeId: string
 ) => {
-  const data = containedRecipeIds.map(id => ({
+  const data = containedRecipeIds.map(({ id, portions }) => ({
     containerRecipeId,
     containedRecipeId: id,
+    portions,
   }));
   await prisma.recipe_recipe.createMany({ data });
 };

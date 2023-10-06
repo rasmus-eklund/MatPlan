@@ -66,13 +66,14 @@ export type MenuItem = {
   portions: number;
 };
 
-export type ShoppingListType = {
+export type ShoppingListItem = {
   id: string;
   name: string;
-  quantity: Decimal;
+  userId: string;
   unit: string;
-  subCategory: number;
-  from?: string;
+  quantity: Number;
+  checked: boolean;
+  menuId?: string;
 };
 
 export type ShoppingListLocalStorage = {

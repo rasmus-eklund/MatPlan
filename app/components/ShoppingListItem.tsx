@@ -1,10 +1,10 @@
 'use client';
-import { ShoppingListType } from '@/types';
+import { ShoppingListItem } from '@/types';
 import { useEffect, useState } from 'react';
 import { updateCheckedItem } from './groupItems';
 
 type Props = {
-  item: ShoppingListType;
+  item: ShoppingListItem;
   checked: boolean;
 };
 
@@ -14,7 +14,7 @@ const Item = ({ item, checked }: Props) => {
   useEffect(() => {
     setCheck(checked);
   }, [checked, item]);
-  const handleChecking = (item: ShoppingListType) => {
+  const handleChecking = (item: ShoppingListItem) => {
     const newCheck = !check;
     setCheck(newCheck);
     updateCheckedItem(item, newCheck);

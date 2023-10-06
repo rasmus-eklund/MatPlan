@@ -35,11 +35,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
   };
 
   const handleUpdate = (recipe: RecipeFront, recipes: RecipeSearch[]) => {
-    updateRecipe(
-      recipe,
-      recipes.map(i => i.id),
-      params.id
-    ).then(() => {
+    updateRecipe(recipe, recipes, params.id).then(() => {
       setHideForm(true);
     });
   };

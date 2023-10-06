@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import * as stores from '../db/stores';
 import {
   ShoppingListLocalStorage,
-  ShoppingListType,
+  ShoppingListItem,
   StorePrisma,
 } from '@/types';
 import SelectStore from '../components/SelectStore';
@@ -13,9 +13,9 @@ import Item from '../components/ShoppingListItem';
 import { groupItems, updateCheckedData } from '../components/groupItems';
 
 const ShoppingList = () => {
-  const [ingredients, setIngredients] = useState<ShoppingListType[]>([]);
+  const [ingredients, setIngredients] = useState<ShoppingListItem[]>([]);
   const [sortedIngredients, setSortedIngredients] = useState<
-    ShoppingListType[]
+    ShoppingListItem[]
   >([]);
   const [storesState, setStoresState] = useState<StorePrisma[]>([]);
   const [store, setStore] = useState<StorePrisma>();

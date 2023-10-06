@@ -11,7 +11,7 @@ model user {
   id               String             @id
   recipe           recipe[]
   menu             menu[]
-  extra_ingredient extra_ingredient[]
+  shoppingListItem shoppingListItem[]
   store            store[]
   home             home[]
 
@@ -23,6 +23,8 @@ model home {
   userId     String
   ingredient ingredient @relation(fields: [name], references: [name])
   name       String     @id
+  quantity   Decimal
+  unit       String
 
   @@map("public.home")
 }
@@ -44,6 +46,7 @@ model recipe {
 
 model recipe_recipe {
   id                String @id @default(uuid())
+  portions          Int
   containerRecipe   recipe @relation("containedRecipes", fields: [containerRecipeId], references: [id], onDelete: Cascade)
   containerRecipeId String
   containedRecipe   recipe @relation("containerRecipes", fields: [containedRecipeId], references: [id], onDelete: Cascade)
@@ -75,7 +78,7 @@ model ingredient {
   name              String              @id
   categoryId        Int
   subcategoryId     Int
-  extra_ingredient  extra_ingredient[]
+  shoppingListItem  shoppingListItem[]
   category          category            @relation(fields: [categoryId], references: [id])
   subcategory       subcategory         @relation(fields: [subcategoryId], references: [id])
   recipe_ingredient recipe_ingredient[]
@@ -104,12 +107,12 @@ model menu {
   day              String
   recipe           recipe             @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   user             user               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  extra_ingredient extra_ingredient[]
+  shoppingListItem shoppingListItem[]
 
   @@map("public.menu")
 }
 
-model extra_ingredient {
+model shoppingListItem {
   id         String     @id @default(uuid())
   name       String
   userId     String

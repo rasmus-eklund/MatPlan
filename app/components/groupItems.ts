@@ -1,17 +1,17 @@
-import { ShoppingListLocalStorage, ShoppingListType } from '@/types';
+import { ShoppingListLocalStorage, ShoppingListItem } from '@/types';
 
 export const groupItems = (
-  items: ShoppingListType[],
+  items: ShoppingListItem[],
   data: ShoppingListLocalStorage[]
-): ShoppingListType[] => {
-  const groupedItems = items.reduce((acc: ShoppingListType[], cur) => {
+): ShoppingListItem[] => {
+  const groupedItems = items.reduce((acc: ShoppingListItem[], cur) => {
     // const lsItem = data.find(i => i.id === cur.id);
     // const isChecked = cur.id && lsItem!.id && lsItem!.checked;
     const match = acc.findIndex(
-      (i: ShoppingListType) =>
+      (i: ShoppingListItem) =>
         i.name === cur.name && i.unit === cur.unit
     );
-    const item: ShoppingListType = { ...cur };
+    const item: ShoppingListItem = { ...cur };
     if (match === -1) {
       acc.push(item);
     } else {
@@ -24,7 +24,7 @@ export const groupItems = (
 
 const nameLS = 'shoppingList_checked';
 
-export const updateCheckedData = (items: ShoppingListType[]) => {
+export const updateCheckedData = (items: ShoppingListItem[]) => {
   const raw = localStorage.getItem(nameLS);
   let data: ShoppingListLocalStorage[];
   if (raw === null) {
@@ -42,7 +42,7 @@ export const updateCheckedData = (items: ShoppingListType[]) => {
   return data;
 };
 
-export const updateCheckedItem = (item: ShoppingListType, checked: boolean) => {
+export const updateCheckedItem = (item: ShoppingListItem, checked: boolean) => {
   const data: ShoppingListLocalStorage[] = JSON.parse(
     localStorage.getItem(nameLS)!
   );
@@ -56,7 +56,7 @@ export const updateCheckedItem = (item: ShoppingListType, checked: boolean) => {
 };
 
 const createChecked = (
-  items: ShoppingListType[]
+  items: ShoppingListItem[]
 ): ShoppingListLocalStorage[] => {
   const data = items.map(i => ({ id: i.id!, name: i.name, checked: false }));
   localStorage.setItem(nameLS, JSON.stringify(data));

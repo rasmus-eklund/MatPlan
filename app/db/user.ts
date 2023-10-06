@@ -25,21 +25,26 @@ export const checkNewUser = async () => {
 };
 
 export const createDefaultRecipes = async () => {
-  const userId = await getUser();
   const test3 = await addRecipe(
     defaultRecipes.find(i => i.name === 'Test3')!,
-    userId
+    []
   );
   const test2 = await addRecipe(
     defaultRecipes.find(i => i.name === 'Test2')!,
-    userId
+    []
   );
   const test1 = await addRecipe(
     defaultRecipes.find(i => i.name === 'Test1')!,
-    userId
+    []
   );
-  await addRecipesToContainer(test2, test1);
-  await addRecipesToContainer(test3, test2);
+  await addRecipesToContainer(
+    [{ id: test2, name: 'Test2', portions: 2 }],
+    test1
+  );
+  await addRecipesToContainer(
+    [{ id: test3, name: 'Test3', portions: 2 }],
+    test2
+  );
 };
 
 export default getUser;

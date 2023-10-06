@@ -1,5 +1,5 @@
 'use server';
-import { Day, MenuItem } from '@/types';
+import { Day, MenuItem, ShoppingListItem } from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
 
@@ -13,8 +13,26 @@ export const addRecipeToMenu = async ({
   day: string;
 }) => {
   const userId = await getUser();
+  const res = await prisma.recipe_ingredient.findMany({
+    where: { recipeId: id },
+  });
+  const ingredients = res.map(({ name, quantity, unit }) => ({
+    checked: false,
+    name,
+    quantity,
+    unit,
+    userId,
+  }));
   await prisma.menu.create({
-    data: { recipeId: id, userId, portions, day },
+    data: {
+      recipeId: id,
+      userId,
+      portions,
+      day,
+      shoppingListItem: {
+        createMany: { data: ingredients },
+      },
+    },
   });
 };
 
