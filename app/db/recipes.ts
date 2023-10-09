@@ -1,10 +1,5 @@
 'use server';
-import {
-  Recipe,
-  RecipeFront,
-  RecipeIngredientFront,
-  RecipeSearch,
-} from '@/types';
+import { Recipe, RecipeFront, RecipeSearch } from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
 
@@ -44,7 +39,7 @@ export const getRecipeByIngredient = async (
   });
 };
 
-export const getRecipeById = async (id: string): Promise<Recipe> => {
+export const getRecipeById = async (id: string): Promise<RecipeFront> => {
   const userId = await getUser();
   const data = await prisma.recipe.findUniqueOrThrow({
     where: { id: id, userId },
@@ -72,20 +67,20 @@ export const updateRecipe = async (
   recipes: RecipeSearch[],
   id: string
 ) => {
-  const userId = await getUser();
-
   const updatedRecipe = await prisma.recipe.update({
-    where: { id, userId },
+    where: { id },
     data: {
       name: recipe.name,
       portions: recipe.portions,
       instruction: recipe.instruction,
       ingredients: {
         deleteMany: { recipeId: id },
-        createMany: { data: recipe.ingredients },
       },
       containers: { deleteMany: { containerRecipeId: id } },
     },
+  });
+  await prisma.recipe_ingredient.createMany({
+    data: recipe.ingredients.map(i => ({ ...i, recipeId: id })),
   });
   await addRecipesToContainer(recipes, id);
   return updatedRecipe.id;

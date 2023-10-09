@@ -1,7 +1,8 @@
 'use client';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { randomizeLetters } from '../utils/utils';
-import Login from './buttons/Login';
+import LoginButton from './buttons/LoginButton';
+import Link from 'next/link';
 
 const Header = () => {
   useEffect(() => {
@@ -12,14 +13,15 @@ const Header = () => {
   }, []);
   return (
     <header className="bg-1 flex justify-between text-white items-center">
-      <h1
+      <Link
+        href={'/test'}
         data-value="RECIPE JAR"
-        className=" text-5 font-mono text-left p-2 py-4 text-4xl"
+        className=" text-5 font-mono text-left p-2 py-4 text-2xl md:text-4xl"
       >
         RECIPE JAR
-      </h1>
+      </Link>
       <div className="justify-items-end">
-        <Login />
+        <LoginButton />
       </div>
     </header>
   );

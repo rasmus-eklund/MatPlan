@@ -1,115 +1,38 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import * as stores from '../db/stores';
-import {
-  ShoppingListLocalStorage,
-  ShoppingListItem,
-  StorePrisma,
-} from '@/types';
+import React, { useEffect, useRef, useState } from 'react';
+import { IngredientCat, ShoppingListItem } from '@/types';
+import { getIngredientCategories, getShoppingList } from '../db/items';
+import { getAllStores } from '../db/stores';
 import SelectStore from '../components/SelectStore';
-import { getRecipeIngredients } from '../db/ingredients';
-import { getExtraIngredients } from '../db/extraIngredients';
-import Item from '../components/ShoppingListItem';
-import { groupItems, updateCheckedData } from '../components/groupItems';
 
 const ShoppingList = () => {
-  const [ingredients, setIngredients] = useState<ShoppingListItem[]>([]);
-  const [sortedIngredients, setSortedIngredients] = useState<
-    ShoppingListItem[]
-  >([]);
-  const [storesState, setStoresState] = useState<StorePrisma[]>([]);
-  const [store, setStore] = useState<StorePrisma>();
-  const [group, setGroup] = useState(false);
-  const [recipe, setRecipe] = useState(false);
-  const [data, setData] = useState<ShoppingListLocalStorage[]>([]);
+  const [items, setItems] = useState<ShoppingListItem[]>([]);
+  const [stores, setStores] = useState<{ name: string; id: string }[]>();
+  const categories = useRef<IngredientCat[]>();
 
   useEffect(() => {
-    const update = async () => {
-      const theStore = await stores.getAll();
-      setStore(theStore[0]);
-      setStoresState(theStore);
-      const [ings, extra] = await Promise.all([
-        getRecipeIngredients(),
-        getExtraIngredients(),
-      ]);
-      const allIngs = [...ings, ...extra];
-      setIngredients(allIngs);
-      const data = updateCheckedData(allIngs);
-      setData(data);
-    };
-    update();
+    Promise.all([
+      getAllStores(),
+      getShoppingList(),
+      getIngredientCategories(),
+    ]).then(([allStores, shoppingList, ingredientCategories]) => {
+      setStores(allStores);
+      setItems(shoppingList);
+      categories.current = ingredientCategories;
+    });
   }, []);
 
-  useEffect(() => {
-    if (store) {
-      let sortedIngredients = ingredients.sort(
-        (a, b) =>
-          store.order.indexOf(a.subCategory) -
-          store.order.indexOf(b.subCategory)
-      );
-      if (group) {
-        sortedIngredients = groupItems(sortedIngredients, data);
-      }
-      if (recipe) {
-        sortedIngredients = sortedIngredients.map(i => ({ ...i, from: '' }));
-      }
-      setSortedIngredients(sortedIngredients);
-    }
-  }, [store, ingredients, group, recipe, data]);
-
-  const handleSelectStore = async (id: string) => {
-    const selected = await stores.get(id);
-    setStore({
-      ...selected,
-      order: selected.categories.flatMap(c => c.order.map(i => i.id)),
-    });
-  };
-
   return (
-    <main className="bg-2 p-5 min-h-screen">
-      <div className="bg-3 rounded-md p-3 flex flex-col gap-2">
-        <div className="flex justify-between">
-          <SelectStore
-            stores={storesState}
-            callback={id => handleSelectStore(id)}
-          />
-          <div className="flex flex-col">
-            <div className="flex gap-2">
-              <input
-                onChange={() => setGroup(!group)}
-                checked={group}
-                type="checkbox"
-                name="group_check"
-                id="group_check"
-              />
-              <label className="text-1" htmlFor="group_check">
-                Gruppera ingredienser
-              </label>
-            </div>
-            <div className="flex gap-2">
-              <input
-                onChange={() => setRecipe(!recipe)}
-                checked={recipe}
-                type="checkbox"
-                name="recipe_check"
-                id="recipe_check"
-              />
-              <label className="text-1" htmlFor="recipe_check">
-                Dölj tillhörighet
-              </label>
-            </div>
-          </div>
-        </div>
-        <ul className="flex flex-col bg-2 rounded-md p-2 gap-1">
-          {sortedIngredients.map(i => (
-            <Item
-              key={crypto.randomUUID()}
-              item={i}
-              checked={data.find(d => d.id === i.id)!.checked}
-            />
-          ))}
-        </ul>
-      </div>
+    <main className="bg-2 p-5 grow overflow-y-auto">
+      {stores && categories.current ? (
+        <SelectStore
+          stores={stores}
+          items={items}
+          categories={categories.current}
+        />
+      ) : (
+        <p>Loading...</p>
+      )}
     </main>
   );
 };

@@ -3,8 +3,9 @@ import { getServerSession } from 'next-auth';
 import options from '../api/auth/[...nextauth]/options';
 import { prisma } from './prisma';
 import defaultRecipes from './constants/recipes/recieps';
-import * as store from './stores';
+
 import { addRecipesToContainer, addRecipe } from './recipes';
+import { addDefaultStore } from './stores';
 
 const getUser = async () => {
   const session = await getServerSession(options);
@@ -19,12 +20,12 @@ export const checkNewUser = async () => {
   const users = await prisma.user.findUnique({ where: { id: userId } });
   if (users === null) {
     await prisma.user.create({ data: { id: userId } });
-    await store.addDefault(userId);
-    await createDefaultRecipes();
+    await addDefaultStore();
+    await addDefaultRecipes();
   }
 };
 
-export const createDefaultRecipes = async () => {
+export const addDefaultRecipes = async () => {
   const test3 = await addRecipe(
     defaultRecipes.find(i => i.name === 'Test3')!,
     []

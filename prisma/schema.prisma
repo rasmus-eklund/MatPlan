@@ -23,8 +23,8 @@ model home {
   userId     String
   ingredient ingredient @relation(fields: [name], references: [name])
   name       String     @id
-  quantity   Decimal
-  unit       String
+  quantity   Decimal?
+  unit       String?
 
   @@map("public.home")
 }
@@ -56,20 +56,22 @@ model recipe_recipe {
 }
 
 model category {
-  id          Int           @id
-  name        String
-  ingredient  ingredient[]
-  subcategory subcategory[]
+  id             Int              @id
+  name           String
+  ingredient     ingredient[]
+  subcategory    subcategory[]
+  store_category store_category[]
 
   @@map("public.category")
 }
 
 model subcategory {
-  id         Int          @id
-  name       String
-  categoryId Int
-  ingredient ingredient[]
-  category   category     @relation(fields: [categoryId], references: [id])
+  id             Int              @id
+  name           String
+  categoryId     Int
+  ingredient     ingredient[]
+  category       category         @relation(fields: [categoryId], references: [id])
+  store_category store_category[]
 
   @@map("public.subcategory")
 }
@@ -128,11 +130,21 @@ model shoppingListItem {
 }
 
 model store {
-  id     String @id @default(uuid())
+  id     String           @id @default(uuid())
   name   String
-  order  Int[]
-  user   user   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   user             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
+  order  store_category[]
 
   @@map("public.store")
+}
+
+model store_category {
+  id            String      @id @default(uuid())
+  category      category    @relation(fields: [categoryId], references: [id])
+  subcategory   subcategory @relation(fields: [subcategoryId], references: [id])
+  categoryId    Int
+  subcategoryId Int
+  store         store?      @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  storeId       String?
 }

@@ -2,6 +2,7 @@
 import { Day, MenuItem, ShoppingListItem } from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
+import { Prisma } from '@prisma/client';
 
 export const addRecipeToMenu = async ({
   id,
@@ -41,11 +42,36 @@ export const removeRecipeFromMenu = async (id: string) => {
   await prisma.menu.delete({ where: { id, userId } });
 };
 
-export const updateMenuPortions = async (id: string, portions: number) => {
+export const updateMenuPortions = async (id: string, newPortions: number) => {
   const userId = await getUser();
+  const { recipe } = await prisma.menu.findUniqueOrThrow({
+    where: { id },
+    select: { recipe: { select: { portions: true, ingredients: true } } },
+  });
+  const scale = newPortions / recipe.portions;
+  const rescaled = recipe.ingredients.map(i => {
+    const { recipeId, ...rest } = i;
+    return {
+      ...rest,
+      quantity: Number(rest.quantity) * scale,
+      userId,
+      checked: false,
+    };
+  });
   await prisma.menu.update({
-    where: { userId, id },
-    data: { portions },
+    where: { id },
+    data: {
+      portions: newPortions,
+      shoppingListItem: {
+        deleteMany: { menuId: id },
+        createMany: {
+          data: rescaled.map(i => ({
+            ...i,
+            quantity: new Prisma.Decimal(i.quantity.toString()),
+          })),
+        },
+      },
+    },
   });
 };
 

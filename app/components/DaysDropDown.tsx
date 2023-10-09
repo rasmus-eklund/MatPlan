@@ -7,17 +7,12 @@ type DaysDropDownProp = {
   initDay: Day;
 };
 
-const DaysDropDown: FC<DaysDropDownProp> = ({
-  callback,
-  initDay,
-}) => {
+const DaysDropDown: FC<DaysDropDownProp> = ({ callback, initDay }) => {
   const [day, setDay] = useState(initDay);
 
   return (
     <select
       className="rounded-md text-1 bg-4 h-10 px-2 hover:bg-3 hover:text-4"
-      name="day"
-      id="day"
       value={day}
       onChange={e => {
         setDay(e.target.value as Day);

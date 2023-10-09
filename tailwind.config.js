@@ -11,16 +11,15 @@ module.exports = {
       2: '#526D82',
       3: '#9DB2BF',
       4: '#DDE6ED',
-      5: '#FFF'
+      5: '#FFF',
     },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        // 'background_image':"url('./public/bg-img.jpg')"
       },
     },
   },
   plugins: [],
-}
+};

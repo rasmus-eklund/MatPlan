@@ -42,7 +42,7 @@ const SearchRecipeForm: FC<SearchFormProps> = ({
             onChange={e => setFilter(e.target.value as Filter)}
           >
             <option value="name">Namn</option>
-            <option value="ingredients">Ingredient</option>
+            <option value="ingredient">Ingredient</option>
             <option value="instruction">Instruktion</option>
           </select>
         )}

@@ -52,7 +52,7 @@ const SearchRecipeComponent = () => {
   };
 
   return (
-    <main className="p-4 bg-2 flex flex-col gap-2 min-h-screen">
+    <main className="p-4 bg-2 flex flex-col gap-2 grow overflow-y-auto">
       {formHidden && (
         <SearchRecipeForm handleSearch={handleSearch} onlySearch={false} />
       )}

@@ -1,7 +1,7 @@
 'use client';
 import ShowRecipe from '@/app/components/ShowRecipe';
 import { getRecipeById } from '@/app/db/recipes';
-import { Recipe } from '@/types';
+import { RecipeFront } from '@/types';
 import { useEffect, useState } from 'react';
 
 const Page = ({
@@ -9,7 +9,7 @@ const Page = ({
 }: {
   params: { slug: [id: string, portions: number] };
 }) => {
-  const [recipe, setRecipe] = useState<Recipe>();
+  const [recipe, setRecipe] = useState<RecipeFront>();
   const [id, portions] = params.slug;
 
   useEffect(() => {
@@ -17,9 +17,9 @@ const Page = ({
   }, [id]);
 
   return (
-    <main className="bg-2 min-h-screen p-5">
+    <main className="bg-2 p-5 grow overflow-y-auto">
       <section className="flex flex-col gap-5 bg-3 p-8 lg: max-w-screen-sm">
-        {recipe && <ShowRecipe recipe={recipe} scale={portions} />}
+        {recipe && <ShowRecipe recipe={recipe} id={id} scale={portions} />}
       </section>
     </main>
   );

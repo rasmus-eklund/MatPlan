@@ -1,46 +1,45 @@
 'use client';
-import { ShoppingListItem } from '@/types';
-import { useEffect, useState } from 'react';
-import { updateCheckedItem } from './groupItems';
+import { ShoppingListFilter, ShoppingListItem } from '@/types';
+import { FC, useState } from 'react';
 
-type Props = {
+type ItemProps = {
   item: ShoppingListItem;
-  checked: boolean;
+  filter: ShoppingListFilter;
 };
 
-const Item = ({ item, checked }: Props) => {
-  const { name, quantity, from, unit } = item;
+const Item: FC<ItemProps> = ({ item, filter }) => {
+  const { name, quantity, from, unit, checked } = item;
   const [check, setCheck] = useState(checked);
-  useEffect(() => {
-    setCheck(checked);
-  }, [checked, item]);
-  const handleChecking = (item: ShoppingListItem) => {
-    const newCheck = !check;
-    setCheck(newCheck);
-    updateCheckedItem(item, newCheck);
-  };
+  const [moved, setMoved] = useState(false);
+
   return (
     <li
-      className={`flex justify-between order-1 bg-4 text-2 px-2 rounded-md ${
-        check && 'opacity-50 order-2'
+      className={`flex justify-between order-1 bg-4 text-2 px-2 rounded-md transition-opacity duration-200 ${
+        check && 'opacity-50'
+      } ${moved && 'order-2'}
       }`}
     >
       <div className="flex gap-2">
         <input
           type="checkbox"
           checked={check}
-          onChange={() => handleChecking(item)}
+          onChange={() => {
+            setTimeout(() => setMoved(!moved), 300);
+            setCheck(!check);
+          }}
         />
         <p className="text-left">{name}</p>
       </div>
-      <div className={`flex gap-4 justify-between ${from && 'w-1/3'}`}>
+      <div
+        className={`flex gap-2 justify-between ${!filter.hideRecipe && 'w-1/4'}`}
+      >
         <div className="flex gap-2">
           <p>{quantity}</p>
           <p>{unit}</p>
         </div>
-        {from && (
-          <p className="overflow-hidden whitespace-nowrap overflow-ellipsis w-25">
-            {from}
+        {!filter.hideRecipe && (
+          <p className="overflow-hidden whitespace-nowrap overflow-ellipsis">
+            {from === 'extraItem' ? 'Egen' : from}
           </p>
         )}
       </div>

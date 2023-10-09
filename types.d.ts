@@ -69,44 +69,41 @@ export type MenuItem = {
 export type ShoppingListItem = {
   id: string;
   name: string;
-  userId: string;
+  quantity: number;
   unit: string;
-  quantity: Number;
   checked: boolean;
-  menuId?: string;
-};
-
-export type ShoppingListLocalStorage = {
-  id: string;
-  name: string;
-  checked: boolean;
-};
-
-export type StorePrisma = {
-  id: string;
-  name: string;
-  order: number[];
-};
-
-export type SubcategoryItem = {
-  id: number;
-  subcategory: string;
-  category: string;
-};
-
-export type CategoryItem = {
-  category: string;
-  order: SubcategoryItem[];
+  from: string;
 };
 
 export type Store = {
-  id: string;
   name: string;
-  categories: CategoryItem[];
+  order: {
+    category: {
+      name: string;
+      id: number;
+    };
+    subcategory: {
+      name: string;
+      id: number;
+    };
+  }[];
+};
+
+export type StoreCategory = {
+  categoryId: number;
+  subcategoryId: number;
+};
+
+export type CategoryItem = {
+  name: string;
+  id: number;
+  subcategories: { name: string; id: number }[];
 };
 
 export type Home = {
   name: string;
+  quantity: number;
+  unit: string;
 };
 
 export type SearchParams = {
@@ -115,3 +112,8 @@ export type SearchParams = {
 };
 
 export type Filter = 'name' | 'ingredient' | 'instruction';
+
+export type ShoppingListFilter = {
+  group: boolean;
+  hideRecipe: boolean;
+};

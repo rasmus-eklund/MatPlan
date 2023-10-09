@@ -6,13 +6,13 @@ import {
   SearchParams,
 } from '@/types';
 import { FC, useState } from 'react';
-import SaveButton from './buttons/Save';
+import SaveButton from './buttons/SaveButton';
 import SearchIngredients from '@/app/components/SearchIngredient';
 import EditIngredient from '@/app/components/EditIngredient';
-import Cancel from './buttons/Cancel';
+import CancelButton from './buttons/CancelButton';
 import SearchRecipeForm from './SearchRecipeForm';
 import { SearchRecipeByFilter } from '../utils/utils';
-import DeleteButton from './buttons/Delete';
+import DeleteButton from './buttons/DeleteButton';
 
 type RecipeFormProp = {
   recipe: RecipeFront;
@@ -96,6 +96,7 @@ const RecipeForm: FC<RecipeFormProp> = props => {
                   remove={async () => handleDeleteIngredient(i)}
                   save={async () => handleUpdateIngredient(ing, i)}
                   key={crypto.randomUUID()}
+                  editable={true}
                 />
               ))}
             </ul>
@@ -145,7 +146,7 @@ const RecipeForm: FC<RecipeFormProp> = props => {
       </div>
       <div className="self-end flex gap-2">
         <SaveButton callback={handleUpdateRecipe} />
-        <Cancel callback={props.closeForm} />
+        <CancelButton callback={props.closeForm} />
       </div>
     </section>
   );

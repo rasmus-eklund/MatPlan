@@ -1,76 +1,74 @@
 'use server';
-import { CategoryItem, Store, StorePrisma, SubcategoryItem } from '@/types';
 import getUser from './user';
 import { prisma } from './prisma';
+import { Store, StoreCategory } from '@/types';
 
-export const get = async (id: string): Promise<Store> => {
+const generateDefaultStore = async () =>
+  await prisma.category.findMany({
+    select: {
+      id: true,
+      name: true,
+      subcategory: { select: { id: true, name: true } },
+    },
+  });
+
+export const getAllStores = async (): Promise<
+  { name: string; id: string }[]
+> => {
   const userId = await getUser();
-  const subCats = await prisma.subcategory.findMany({
-    include: { category: true },
-  });
-  const store = (await prisma.store.findUnique({
-    where: { id, userId },
-  })) as StorePrisma;
-
-  const theMap = store.order.map(i => {
-    const match = subCats.find(sc => sc.id === i)!;
-    return {
-      subCatId: match.id,
-      subCatName: match.name,
-      catName: match.category.name,
-    };
-  });
-  const initial: CategoryItem[] = [];
-  theMap.forEach(i => {
-    const subcat: SubcategoryItem = {
-      category: i.catName,
-      subcategory: i.subCatName,
-      id: i.subCatId,
-    };
-    const indexOfCat = initial.findIndex(
-      (item: CategoryItem) => i.catName === item.category
-    );
-    if (indexOfCat !== -1) {
-      initial[indexOfCat].order.push(subcat);
-    } else {
-      initial.push({ category: i.catName, order: [subcat] });
-    }
-  });
-  const out: Store = { name: store.name, id: store.id, categories: initial };
-  return out;
-};
-
-export const getAll = async (): Promise<StorePrisma[]> => {
-  const userId = await getUser();
-  const stores = await prisma.store.findMany({
+  return await prisma.store.findMany({
     where: { userId },
-  });
-  return stores;
-};
-
-export const upsert = async (store: StorePrisma) => {
-  const userId = await getUser();
-  await prisma.store.upsert({
-    where: { id: store.id },
-    update: { ...store, userId },
-    create: { ...store, userId },
+    select: { id: true, name: true },
   });
 };
 
-export const addDefault = async (name: string) => {
+export const getStoreById = async (id: string): Promise<Store> =>
+  await prisma.store.findUniqueOrThrow({
+    where: { id },
+    select: {
+      name: true,
+      order: {
+        select: {
+          category: { select: { name: true, id: true } },
+          subcategory: { select: { name: true, id: true } },
+        },
+      },
+    },
+  });
+
+export const addDefaultStore = async () => {
   const userId = await getUser();
-  const cats = await prisma.subcategory.findMany();
-  const store = cats.map(i => i.id);
+  const store = await generateDefaultStore();
+  const data: StoreCategory[] = store.flatMap(cat =>
+    cat.subcategory.map(sub => ({ categoryId: cat.id, subcategoryId: sub.id }))
+  );
   await prisma.store.create({
-    data: { name, userId, order: store },
+    data: { name: 'Ny affär', userId, order: { createMany: { data } } },
   });
 };
 
-export const remove = async (id: string) => {
+export const removeStore = async (id: string) => {
   const userId = await getUser();
   await prisma.store.delete({ where: { userId, id } });
   const nr = await prisma.store.findMany({ where: { userId } });
   if (nr.length === 0) {
-    await addDefault('Ny affär');
+    await addDefaultStore();
   }
+};
+
+export const renameStore = async (id: string, name: string) => {
+  await prisma.store.update({ where: { id }, data: { name: name } });
+};
+
+export const updateStore = async (id: string, data: StoreCategory[]) => {
+  await prisma.store_category.deleteMany({ where: { storeId: id } });
+  await prisma.store.update({
+    where: { id },
+    data: {
+      order: {
+        deleteMany: { storeId: id },
+        createMany: { data },
+      },
+    },
+  });
 };

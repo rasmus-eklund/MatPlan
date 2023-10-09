@@ -1,14 +1,19 @@
 'use client';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { checkNewUser } from '../db/user';
+import { useRouter } from 'next/navigation';
 
 export default function Landing() {
+  const { push } = useRouter();
   useEffect(() => {
-    (async () => await checkNewUser())();
-  }, []);
+    checkNewUser().then(() => {
+      push('/menu');
+    });
+  }, [push]);
+
   return (
-    <main className='bg-2 h-screen'>
-      <p className='text-4'>Startsida</p>
+    <main className="bg-2 grow">
+      <p className="text-4 text-6xl">Loading...</p>
     </main>
   );
 }

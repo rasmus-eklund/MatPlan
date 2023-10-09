@@ -1,23 +1,24 @@
 'use client';
-import { Recipe } from '@/types';
+import { Recipe, RecipeFront } from '@/types';
 import { FC, useEffect, useState } from 'react';
 import { getContained } from '../db/recipes';
 import Link from 'next/link';
 import { capitalize } from '../utils/utils';
 
 type ShowRecipeProps = {
-  recipe: Recipe;
+  recipe: RecipeFront;
+  id: string;
   scale: number;
 };
 
-const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, scale }) => {
+const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, id, scale }) => {
   const [recipes, setRecipes] = useState<{ name: string; id: string }[]>([]);
 
   useEffect(() => {
-    getContained(recipe.id).then(res => {
+    getContained(id).then(res => {
       setRecipes(res);
     });
-  }, [recipe.id]);
+  }, [id]);
 
   return (
     <section className="flex flex-col bg-3 rounded-md gap-5">
@@ -30,7 +31,7 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, scale }) => {
         <div className="flex flex-col bg-2 gap-1">
           <h2 className="text-4 text-lg">Ingredienser</h2>
           <ul className="bg-3 p-1 rounded-md flex flex-col gap-1">
-            {recipe.ingredients.map(({ id, name, quantity, unit }) => (
+            {recipe.ingredients.map(({ name, quantity, unit }) => (
               <li className="bg-4 p-1 rounded-md" key={id}>
                 <div className="flex justify-between text-2">
                   <p>{capitalize(name)}</p>

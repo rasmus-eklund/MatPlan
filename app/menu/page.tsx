@@ -18,7 +18,7 @@ const Menu = () => {
 
   return (
     <>
-      <main className="bg-2 p-6 min-h-screen">
+      <main className="flex flex-col bg-2 p-6 grow overflow-y-auto">
         <ul className=" flex flex-col gap-2">
           {days.map(day => (
             <li key={day} className="bg-3 p-2 rounded-md flex flex-col">

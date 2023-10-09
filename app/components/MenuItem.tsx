@@ -6,10 +6,10 @@ import {
   removeRecipeFromMenu,
   updateMenuPortions,
 } from '../db/menu';
-import DeleteButton from './buttons/Delete';
+import DeleteButton from './buttons/DeleteButton';
 import DaysDropDown from './DaysDropDown';
 import Incrementer from './Incrementer';
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 
 type MenuItemProps = {
   item: MenuItem;
@@ -17,6 +17,7 @@ type MenuItemProps = {
 };
 
 const MenuItem: FC<MenuItemProps> = ({ item, update }) => {
+  const portionsRef = useRef(item.portions);
   const handleRemove = async (id: string) => {
     await removeRecipeFromMenu(id);
     await update();
@@ -29,18 +30,19 @@ const MenuItem: FC<MenuItemProps> = ({ item, update }) => {
   };
 
   const handleChangePortions = async (portions: number) => {
+    portionsRef.current = portions;
     await updateMenuPortions(item.id, portions);
   };
 
   return (
-    <li className="flex items-center justify-between bg-4 rounded-md px-2 gap-2 font-bold text-1">
+    <li className="flex flex-col md:flex-row items-center justify-between bg-4 rounded-md px-2 gap-2 font-bold text-1">
       <Link
-        href={`/menu/${item.recipeId}/${item.portions}`}
-        className="text-lg"
+        href={`/menu/${item.recipeId}/${portionsRef.current}`}
+        className="text-lg self-start md:self-center"
       >
         {item.name}
       </Link>
-      <div className="flex items-center">
+      <div className="flex items-center justify-between">
         <Incrementer
           initialValue={item.portions}
           callback={handleChangePortions}

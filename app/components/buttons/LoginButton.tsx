@@ -2,9 +2,8 @@
 import { useSession, signIn, signOut } from 'next-auth/react';
 import UserCard from '../UserCard';
 
-export default function Login() {
+const LoginButton = () => {
   const { data: session } = useSession();
-
   if (session) {
     return (
       <div className="flex flex-row font-semibold mr-2">
@@ -31,4 +30,6 @@ export default function Login() {
       </button>
     );
   }
-}
+};
+
+export default LoginButton;

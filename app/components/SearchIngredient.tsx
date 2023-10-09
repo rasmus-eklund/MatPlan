@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
-import { getIngredients } from '../db/ingredients';
+import { getIngredientCategories } from '../db/items';
 import { IngredientCat } from '@/types';
 
 type SearchIngredientsProp = {
@@ -15,7 +15,7 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
   const [selected, setSelected] = useState(0);
 
   useEffect(() => {
-    getIngredients().then(ings => {
+    getIngredientCategories().then(ings => {
       setAllIngredients(ings);
     });
   }, []);
@@ -23,7 +23,7 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
   useEffect(() => {
     if (search.length > 1) {
       const result = allIngredients
-        .filter(({ name }) => name.includes(search))
+        .filter(({ name }) => name.includes(search.toLowerCase()))
         .map(i => i.name)
         .toSorted((a, b) => a.length - b.length);
       setSearchResults(result);
@@ -64,7 +64,7 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
           autoComplete="off"
         />
       </div>
-      <ul className="absolute top-full bg-4 w-full z-10">
+      <ul className="absolute top-10 bg-4 w-full z-1">
         {search.length > 1 &&
           searchResults.map((name, i) => (
             <li

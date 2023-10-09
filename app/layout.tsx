@@ -1,4 +1,5 @@
 import ProvidersWrapper from './ProvidersWrapper';
+import 'tailwindcss/tailwind.css';
 
 export const metadata = {
   title: 'RecipeJAR',
@@ -11,11 +12,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <ProvidersWrapper>
-          {children}
-        </ProvidersWrapper>
+    <html lang="en" className="h-full">
+      <body className="h-full flex flex-col">
+        <ProvidersWrapper>{children}</ProvidersWrapper>
       </body>
     </html>
   );
