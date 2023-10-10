@@ -25,7 +25,7 @@ export default function Landing() {
       <LoginHome />
 
       <Image
-        src="/bgimage.png"
+        src="/bgimage.jpg"
         alt="background image"
         layout="fill"
         objectFit="cover"

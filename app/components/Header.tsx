@@ -1,23 +1,16 @@
-'use client';
-import { useEffect } from 'react';
-import { randomizeLetters } from '../utils/utils';
 import LoginButton from './buttons/LoginButton';
+import Image from 'next/image';
 
 const Header = () => {
-  useEffect(() => {
-    const h1Element = document.querySelector('h1');
-    if (h1Element) {
-      randomizeLetters(h1Element);
-    }
-  }, []);
   return (
     <header className="bg-1 flex justify-between text-white items-center">
-      <h1
-        data-value="MatPlan"
-        className=" text-5 font-mono text-left p-2 py-4 text-2xl md:text-4xl"
-      >
-        MatPlan
-      </h1>
+      <Image
+        className={'px-2'}
+        src={'/logo-color.svg'}
+        alt="MatPlan logo"
+        width={150}
+        height={80}
+      />
       <div className="justify-items-end">
         <LoginButton />
       </div>
