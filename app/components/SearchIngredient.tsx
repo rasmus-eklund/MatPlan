@@ -25,7 +25,7 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
       const result = allIngredients
         .filter(({ name }) => name.includes(search.toLowerCase()))
         .map(i => i.name)
-        .toSorted((a, b) => a.length - b.length);
+        .sort((a, b) => a.length - b.length);
       setSearchResults(result);
       setSelected(0);
     }

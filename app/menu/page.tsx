@@ -1,6 +1,6 @@
 'use client';
 import { getMenuItems } from '../db/menu';
-import { MenuItem as MenuItemType } from '@/types';
+import { Day, MenuItem as MenuItemType } from '@/types';
 import React, { useEffect, useState } from 'react';
 import MenuItem from '../components/MenuItem';
 import days from '../db/constants/days';
@@ -16,6 +16,16 @@ const Menu = () => {
     setMenu(await getMenuItems());
   };
 
+  const toSorted = (items: MenuItemType[], day: Day) => {
+    return items
+      .filter(r => r.day === day)
+      .sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+      });
+  };
+
   return (
     <>
       <main className="flex flex-col bg-2 p-6 grow overflow-y-auto">
@@ -26,16 +36,9 @@ const Menu = () => {
                 {day}
               </h2>
               <ul className="flex flex-col gap-2">
-                {menu
-                  .filter(r => r.day === day)
-                  .toSorted((a, b) => {
-                    if (a.name < b.name) return -1;
-                    if (a.name > b.name) return 1;
-                    return 0;
-                  })
-                  .map(r => (
-                    <MenuItem key={r.id} item={r} update={update} />
-                  ))}
+                {toSorted(menu, day).map(r => (
+                  <MenuItem key={r.id} item={r} update={update} />
+                ))}
               </ul>
             </li>
           ))}

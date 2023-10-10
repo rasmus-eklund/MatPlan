@@ -102,8 +102,8 @@ export type CategoryItem = {
 
 export type Home = {
   name: string;
-  quantity: number;
-  unit: string;
+  quantity: number?;
+  unit: string?;
 };
 
 export type SearchParams = {

@@ -19,6 +19,13 @@ export const addHome = async (
 
 export const getHome = async (): Promise<Home[]> => {
   const userId = await getUser();
-  const home = await prisma.home.findMany({ where: { userId } });
-  return home.map(({ name }) => ({ name }));
+  const home = await prisma.home.findMany({
+    where: { userId },
+    select: { name: true, quantity: true, unit: true },
+  });
+  return home.map(({ name, unit, quantity }) => ({
+    name,
+    unit,
+    quantity: quantity ? Number(quantity) : null,
+  }));
 };

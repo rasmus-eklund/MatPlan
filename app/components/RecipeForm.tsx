@@ -40,7 +40,10 @@ const RecipeForm: FC<RecipeFormProp> = props => {
   };
 
   const handleDeleteIngredient = (i: number) => {
-    setRecipe({ ...recipe, ingredients: recipe.ingredients.toSpliced(i, 1) });
+    setRecipe({
+      ...recipe,
+      ingredients: recipe.ingredients.filter((_, index) => index !== i),
+    });
   };
 
   const handleUpdateIngredient = (ing: RecipeIngredientFront, i: number) => {
