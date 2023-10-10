@@ -16,12 +16,12 @@ export default function Landing() {
 
   return (
     <main className="w-full grow flex justify-center flex-col gap-3 items-center text-1">
-      <h1 className="font-bold text-6xl bg-3 p-2 w-fit rounded-3xl mx-8 bg-opacity-60">
-        Välkommen till Recipe JAR
+      <h1 className="font-bold text-2xl md:text-6xl bg-3 p-2 w-fit rounded-3xl mx-8 bg-opacity-60">
+        Välkommen till MatPlan
       </h1>
-      <h3 className="text-4xl mb-2 w-100 text-center text-1 bg-3 p-2 w-2/3 rounded-3xl m-8 bg-opacity-60 font-bold">
-        Planera måltider, förenkla inköpslistor och förenkla din matupplevelse.
-      </h3>
+      <p className="text-xl md:text-4xl mb-2 w-100 text-center text-1 bg-3 p-2 w-2/3 rounded-3xl m-8 bg-opacity-60 font-bold">
+        Planera måltider, förenkla inköpslistor och effektivisera dina matinköp.
+      </p>
       <LoginHome />
 
       <Image
