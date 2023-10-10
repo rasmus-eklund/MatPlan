@@ -1,11 +1,9 @@
 import { RecipeIngredientFront } from '@/types';
 import { FC, useState } from 'react';
-import units from '../db/constants/units';
+import units from '../utils/units';
 import DeleteButton from './buttons/DeleteButton';
-
+import Button from './buttons/Button';
 import EditButton from './buttons/EditButton';
-import CancelButton from './buttons/CancelButton';
-import SaveButton from './buttons/SaveButton';
 
 type EditIngredientProp = {
   ingredient: RecipeIngredientFront;
@@ -36,7 +34,7 @@ const EditIngredient: FC<EditIngredientProp> = ({
   return (
     <li className="flex justify-between items-center bg-4 text-2 rounded-md px-2 py-1">
       <p className="grow">{ingredient.name}</p>
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 md:gap-4 items-center">
         {edit ? (
           <>
             <input
@@ -56,8 +54,8 @@ const EditIngredient: FC<EditIngredientProp> = ({
               ))}
             </select>
             <div className="flex gap-2 justify-self-end">
-              <CancelButton callback={() => setEdit(false)} />
-              <SaveButton callback={handleSave}></SaveButton>
+              <Button name="Avbryt" callback={() => setEdit(false)} />
+              <Button name="Spara" callback={handleSave} />
             </div>
           </>
         ) : (

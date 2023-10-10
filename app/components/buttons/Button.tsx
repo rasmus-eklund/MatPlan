@@ -1,15 +1,16 @@
 import { FC } from 'react';
 
-type SaveButtonProps = {
+type ButtonProps = {
+  name: string;
   callback: () => void;
 };
 
-const SaveButton: FC<SaveButtonProps> = ({ callback }) => {
+const Button: FC<ButtonProps> = ({ name, callback }) => {
   return (
     <button className="bg-4 text-1 px-2 rounded-md" onClick={callback}>
-      Spara
+      {name}
     </button>
   );
 };
 
-export default SaveButton;
+export default Button;

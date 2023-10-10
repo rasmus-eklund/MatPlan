@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { checkNewUser } from '../db/user';
 import { useRouter } from 'next/navigation';
+import Loading from '../components/Loading';
 
 export default function Landing() {
   const { push } = useRouter();
@@ -12,8 +13,8 @@ export default function Landing() {
   }, [push]);
 
   return (
-    <main className="bg-2 grow">
-      <p className="text-4 text-6xl">Loading...</p>
+    <main className="bg-2 grow flex justify-center items-center">
+      <Loading />
     </main>
   );
 }

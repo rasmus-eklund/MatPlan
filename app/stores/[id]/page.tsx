@@ -3,10 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { getStoreById, renameStore, updateStore } from '@/app/db/stores';
 import Category from '../../components/Category';
 import { CategoryItem, StoreCategory } from '@/types';
-import EditButton from '@/app/components/buttons/EditButton';
-import SaveButton from '@/app/components/buttons/SaveButton';
 import { formatStore } from '@/app/utils/utils';
-import CancelButton from '@/app/components/buttons/CancelButton';
 import {
   DndContext,
   DragEndEvent,
@@ -21,6 +18,7 @@ import {
   arrayMove,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
+import Button from '@/app/components/buttons/Button';
 
 type Props = { params: { id: string } };
 const StoreComponent = ({ params: { id } }: Props) => {
@@ -86,11 +84,11 @@ const StoreComponent = ({ params: { id } }: Props) => {
           <div className="flex gap-2">
             {editName ? (
               <>
-                <SaveButton callback={handleRenameStore} />
-                <CancelButton callback={() => setEditName(false)} />
+                <Button name="Spara" callback={handleRenameStore} />
+                <Button name="Avbryt" callback={() => setEditName(false)} />
               </>
             ) : (
-              <EditButton callback={() => setEditName(true)} />
+              <Button name="Ändra" callback={() => setEditName(true)} />
             )}
           </div>
         </div>
@@ -115,8 +113,9 @@ const StoreComponent = ({ params: { id } }: Props) => {
       </div>
       {orderEdited && (
         <div className="flex items-center gap-4 justify-end absolute bottom-8 left-0 w-full px-10">
-          <SaveButton callback={handleSaveOrder} />
-          <CancelButton
+          <Button name="Spara" callback={handleSaveOrder} />
+          <Button
+            name="Avbryt"
             callback={() => {
               setOrderEdited(false);
               setCategoryItems(originalOrder.current!);

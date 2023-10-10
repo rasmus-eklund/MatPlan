@@ -5,18 +5,17 @@ import { FC, useState } from 'react';
 type ItemProps = {
   item: ShoppingListItem;
   filter: ShoppingListFilter;
+  onCheck: (item: Omit<ShoppingListItem, 'name' | 'from'>) => void;
 };
 
-const Item: FC<ItemProps> = ({ item, filter }) => {
-  const { name, quantity, from, unit, checked } = item;
+const Item: FC<ItemProps> = ({ item, filter, onCheck }) => {
+  const { id, name, quantity, from, unit, checked } = item;
   const [check, setCheck] = useState(checked);
-  const [moved, setMoved] = useState(false);
 
   return (
     <li
-      className={`flex justify-between order-1 bg-4 text-2 px-2 rounded-md transition-opacity duration-200 ${
+      className={`flex justify-between bg-4 text-2 px-2 rounded-md transition-opacity duration-200 ${
         check && 'opacity-50'
-      } ${moved && 'order-2'}
       }`}
     >
       <div className="flex gap-2">
@@ -24,14 +23,20 @@ const Item: FC<ItemProps> = ({ item, filter }) => {
           type="checkbox"
           checked={check}
           onChange={() => {
-            setTimeout(() => setMoved(!moved), 300);
-            setCheck(!check);
+            setCheck(prev => {
+              setTimeout(() => {
+                onCheck({ ...item, checked: !prev });
+              }, 300);
+              return !prev;
+            });
           }}
         />
         <p className="text-left">{name}</p>
       </div>
       <div
-        className={`flex gap-2 justify-between ${!filter.hideRecipe && 'w-1/4'}`}
+        className={`flex gap-2 justify-between ${
+          !filter.hideRecipe && 'w-1/4'
+        }`}
       >
         <div className="flex gap-2">
           <p>{quantity}</p>

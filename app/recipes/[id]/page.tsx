@@ -8,13 +8,13 @@ import {
 import { Day, RecipeFront, RecipeSearch } from '@/types';
 import React, { useEffect, useState } from 'react';
 
-import EditButton from '@/app/components/buttons/EditButton';
 import DaysDropDown from '@/app/components/DaysDropDown';
-import DeleteButton from '@/app/components/buttons/DeleteButton';
 import { useRouter } from 'next/navigation';
 import ShowRecipe from '@/app/components/ShowRecipe';
 import RecipeForm from '@/app/components/RecipeForm';
 import { addRecipeToMenu } from '@/app/db/menu';
+import Button from '@/app/components/buttons/Button';
+import Loading from '@/app/components/Loading';
 
 const Recipe = ({ params }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<RecipeFront>();
@@ -47,7 +47,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
 
   return (
     <main className="bg-2 p-5 grow overflow-y-auto">
-      {recipe && (
+      {recipe ? (
         <section className="flex flex-col gap-5 bg-3 p-8 lg: max-w-screen-sm">
           {hideForm ? (
             <>
@@ -57,6 +57,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
                 scale={recipe.portions}
               />
               <div className="flex gap-2 justify-between">
+                <button className="text-"></button>
                 <DaysDropDown
                   initDay="Obestämd"
                   callback={day =>
@@ -64,8 +65,8 @@ const Recipe = ({ params }: { params: { id: string } }) => {
                   }
                 />
                 <div className="flex gap-4 items-center py-2">
-                  <EditButton callback={() => setHideForm(false)} />
-                  <DeleteButton callback={handleDeleteRecipe} />
+                  <Button name="Ändra" callback={() => setHideForm(false)} />
+                  <Button name="Ta bort" callback={handleDeleteRecipe} />
                 </div>
               </div>
             </>
@@ -78,6 +79,8 @@ const Recipe = ({ params }: { params: { id: string } }) => {
             />
           )}
         </section>
+      ) : (
+        <Loading />
       )}
     </main>
   );

@@ -1,14 +1,13 @@
 import { FC } from 'react';
+import EditIcon from '../icons/EditIcon';
 
-type EditButtonProps = {
-  callback: () => void;
-};
+type EditButtonProps = { callback: () => void };
 
 const EditButton: FC<EditButtonProps> = ({ callback }) => {
   return (
-    <button className="bg-4 text-1 px-2 rounded-md" onClick={() => callback()}>
-      Ändra
-    </button>
+    <div className='flex h-6' onClick={() => callback()}>
+      <EditIcon className="fill-1 hover:scale-125" />
+    </div>
   );
 };
 

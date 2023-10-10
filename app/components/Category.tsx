@@ -1,5 +1,5 @@
 import { CategoryItem } from '@/types';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import DraggableIcon from './icons/DraggableIcon';
@@ -16,6 +16,7 @@ const Category: FC<CategoryProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const {
+    isDragging,
     attributes,
     listeners,
     setNodeRef,
@@ -23,6 +24,11 @@ const Category: FC<CategoryProps> = ({
     transition,
     setActivatorNodeRef,
   } = useSortable({ id });
+
+  useEffect(() => {
+    setOpen(false);
+  }, [isDragging]);
+
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),

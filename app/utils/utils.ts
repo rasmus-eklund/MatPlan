@@ -56,13 +56,18 @@ export const sortShoppingList = (
   items: ShoppingListItem[],
   categories: IngredientCat[]
 ) => {
-  let sortedIngredients = items.sort((a, b) => {
+  const sortedIngredients = items.sort((a, b) => {
     const aIndex = categories.find(i => i.name === a.name)!.subcategoryId;
     const bIndex = categories.find(i => i.name === b.name)!.subcategoryId;
     return (
       store.order.map(i => i.subcategory.id).indexOf(aIndex) -
       store.order.map(i => i.subcategory.id).indexOf(bIndex)
     );
+  });
+  sortedIngredients.sort((a, b) => {
+    if (a.checked === b.checked) return 0;
+    if (a.checked) return 1;
+    return -1;
   });
   return sortedIngredients;
 };

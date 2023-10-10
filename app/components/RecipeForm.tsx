@@ -6,13 +6,12 @@ import {
   SearchParams,
 } from '@/types';
 import { FC, useState } from 'react';
-import SaveButton from './buttons/SaveButton';
 import SearchIngredients from '@/app/components/SearchIngredient';
 import EditIngredient from '@/app/components/EditIngredient';
-import CancelButton from './buttons/CancelButton';
 import SearchRecipeForm from './SearchRecipeForm';
 import { SearchRecipeByFilter } from '../utils/utils';
 import DeleteButton from './buttons/DeleteButton';
+import Button from './buttons/Button';
 
 type RecipeFormProp = {
   recipe: RecipeFront;
@@ -148,8 +147,8 @@ const RecipeForm: FC<RecipeFormProp> = props => {
         </div>
       </div>
       <div className="self-end flex gap-2">
-        <SaveButton callback={handleUpdateRecipe} />
-        <CancelButton callback={props.closeForm} />
+        <Button name='Spara' callback={handleUpdateRecipe} />
+        <Button name='Stäng' callback={props.closeForm} />
       </div>
     </section>
   );

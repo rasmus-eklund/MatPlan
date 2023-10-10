@@ -9,13 +9,19 @@ import { getStoreById } from '../db/stores';
 import Item from './ShoppingListItem';
 import { sortShoppingList } from '../utils/utils';
 
-type SelectStoreProps = {
+type FilterShoppingListProps = {
   stores: { name: string; id: string }[];
   items: ShoppingListItem[];
   categories: IngredientCat[];
+  onCheck: (item: Omit<ShoppingListItem, 'name' | 'from'>) => void;
 };
 
-const SelectStore: FC<SelectStoreProps> = ({ stores, items, categories }) => {
+const FilterShoppingList: FC<FilterShoppingListProps> = ({
+  stores,
+  items,
+  categories,
+  onCheck,
+}) => {
   const [store, setStore] = useState<Store>();
   const [option, setOption] = useState<string>(stores[0].id);
   const [filter, setFilter] = useState<ShoppingListFilter>({
@@ -53,7 +59,7 @@ const SelectStore: FC<SelectStoreProps> = ({ stores, items, categories }) => {
               id="group_check"
             />
             <label className="text-1" htmlFor="group_check">
-              Gruppera ingredienser
+              Gruppera
             </label>
           </div>
           <div className="flex gap-2">
@@ -67,7 +73,7 @@ const SelectStore: FC<SelectStoreProps> = ({ stores, items, categories }) => {
               id="recipe_check"
             />
             <label className="text-1" htmlFor="recipe_check">
-              Dölj tillhörighet
+              Dölj ursprung
             </label>
           </div>
         </div>
@@ -75,11 +81,11 @@ const SelectStore: FC<SelectStoreProps> = ({ stores, items, categories }) => {
       <ul className="flex flex-col bg-2 rounded-md p-2 gap-1">
         {store &&
           sortShoppingList(store, items, categories).map(item => (
-            <Item key={item.id} item={item} filter={filter} />
+            <Item key={item.id} item={item} filter={filter} onCheck={onCheck} />
           ))}
       </ul>
     </div>
   );
 };
 
-export default SelectStore;
+export default FilterShoppingList;

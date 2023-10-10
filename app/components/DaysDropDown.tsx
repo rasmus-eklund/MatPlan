@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import type { Day } from '@/types';
-import days from '../db/constants/days';
+import days from '../utils/days';
 
 type DaysDropDownProp = {
   callback: (day: Day) => void;
@@ -19,8 +19,8 @@ const DaysDropDown: FC<DaysDropDownProp> = ({ callback, initDay }) => {
         callback(e.target.value as Day);
       }}
     >
-      {days.map(day => (
-        <option key={day} value={day}>
+      {days.map((day, i) => (
+        <option key={day + i} value={day}>
           {day}
         </option>
       ))}

@@ -7,15 +7,12 @@ import {
 import { prisma } from './prisma';
 import getUser from './user';
 
-export const updateItem = async ({
-  id,
-  quantity,
-  unit,
-  checked,
-}: ShoppingListItem) => {
+export const updateItem = async (
+  data: Omit<ShoppingListItem, 'from' | 'name'>
+) => {
   await prisma.shoppingListItem.update({
-    where: { id },
-    data: { quantity, unit, checked },
+    where: { id: data.id },
+    data: { ...data },
   });
 };
 
