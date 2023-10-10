@@ -2,7 +2,7 @@ import ProvidersWrapper from './ProvidersWrapper';
 import 'tailwindcss/tailwind.css';
 
 export const metadata = {
-  title: 'RecipeJAR',
+  title: 'MatPlan',
   description: 'Handle your shopping and recipes in one place',
 };
 
