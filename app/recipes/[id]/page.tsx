@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 import DaysDropDown from '@/app/components/DaysDropDown';
 import { useRouter } from 'next/navigation';
 import ShowRecipe from '@/app/components/ShowRecipe';
-import RecipeForm from '@/app/components/RecipeForm';
+import RecipeForm from '@/app/components/recipes/RecipeForm';
 import { addRecipeToMenu } from '@/app/db/menu';
 import Button from '@/app/components/buttons/Button';
 import Loading from '@/app/components/Loading';

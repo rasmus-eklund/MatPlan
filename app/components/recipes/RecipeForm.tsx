@@ -9,9 +9,9 @@ import { FC, useState } from 'react';
 import SearchIngredients from '@/app/components/SearchIngredient';
 import EditIngredient from '@/app/components/EditIngredient';
 import SearchRecipeForm from './SearchRecipeForm';
-import { SearchRecipeByFilter } from '../utils/utils';
-import DeleteButton from './buttons/DeleteButton';
-import Button from './buttons/Button';
+import { SearchRecipeByFilter } from '../../utils/utils';
+import DeleteButton from '../buttons/DeleteButton';
+import Button from '../buttons/Button';
 
 type RecipeFormProp = {
   recipe: RecipeFront;

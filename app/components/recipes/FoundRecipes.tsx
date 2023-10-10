@@ -1,13 +1,13 @@
 import { Day, RecipeSearch } from '@/types';
 import Link from 'next/link';
-import DaysDropDown from './DaysDropDown';
-import { addRecipeToMenu } from '../db/menu';
+import DaysDropDown from '../DaysDropDown';
+import { addRecipeToMenu } from '../../db/menu';
 
 type Props = {
   recipeResult: RecipeSearch[];
 };
 
-const SearchResults = ({ recipeResult }: Props) => {
+const FoundRecipes = ({ recipeResult }: Props) => {
   const addRecipe = (day: Day, id: string, portions: number) => {
     addRecipeToMenu({ day, id, portions });
   };
@@ -35,4 +35,4 @@ const SearchResults = ({ recipeResult }: Props) => {
   );
 };
 
-export default SearchResults;
+export default FoundRecipes;

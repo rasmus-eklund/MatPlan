@@ -1,15 +1,15 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { RecipeFront, RecipeSearch, SearchParams } from '@/types';
-import SearchRecipeForm from '../components/SearchRecipeForm';
-import SearchResults from '../components/SearchResults';
+import SearchRecipeForm from '../components/recipes/SearchRecipeForm';
+import FoundRecipes from '../components/recipes/FoundRecipes';
 import { addRecipe } from '../db/recipes';
 import {
   parseAsString,
   parseAsStringEnum,
   useQueryState,
 } from 'next-usequerystate';
-import RecipeForm from '../components/RecipeForm';
+import RecipeForm from '../components/recipes/RecipeForm';
 import { SearchRecipeByFilter } from '../utils/utils';
 
 enum Filter {
@@ -74,7 +74,7 @@ const SearchRecipeComponent = () => {
           >
             Nytt recept
           </button>
-          <SearchResults recipeResult={results} />
+          <FoundRecipes recipeResult={results} />
         </>
       )}
     </main>

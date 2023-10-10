@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import HomeIcon from './icons/MenuIcon';
-import RecipeIcon from './icons/RecipesIcon';
-import ItemsIcon from './icons/ItemsIcon';
-import ShoppingListIcon from './icons/ShoppingListIcon';
-import StoreIcon from './icons/StoreIcon';
+import HomeIcon from '../icons/MenuIcon';
+import RecipeIcon from '../icons/RecipesIcon';
+import ItemsIcon from '../icons/ItemsIcon';
+import ShoppingListIcon from '../icons/ShoppingListIcon';
+import StoreIcon from '../icons/StoreIcon';
 import Link from 'next/link';
 
 const Navbar = () => {

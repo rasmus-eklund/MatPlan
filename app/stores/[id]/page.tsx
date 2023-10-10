@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { getStoreById, renameStore, updateStore } from '@/app/db/stores';
-import Category from '../../components/Category';
+import CategoryItemComponent from '../../components/stores/CategoryItem';
 import { CategoryItem, StoreCategory } from '@/types';
 import { formatStore } from '@/app/utils/utils';
 import {
@@ -22,14 +22,14 @@ import Button from '@/app/components/buttons/Button';
 
 type Props = { params: { id: string } };
 const StoreComponent = ({ params: { id } }: Props) => {
-  const [categoryItems, setCategoryItems] = useState<CategoryItem[]>([]);
+  const [categoryItems, setCategoryItems] = useState<CategoryItemComponent[]>([]);
   const [editName, setEditName] = useState(false);
   const [orderEdited, setOrderEdited] = useState(false);
   const [name, setName] = useState('');
   const touchSensor = useSensor(TouchSensor);
   const mouseSensor = useSensor(MouseSensor);
   const sensors = useSensors(mouseSensor, touchSensor);
-  let originalOrder = useRef<CategoryItem[]>();
+  let originalOrder = useRef<CategoryItemComponent[]>();
 
   useEffect(() => {
     getStoreById(id).then(s => {
@@ -103,9 +103,9 @@ const StoreComponent = ({ params: { id } }: Props) => {
                 items={categoryItems}
                 strategy={verticalListSortingStrategy}
               >
-                {categoryItems.map(item => {
-                  return <Category key={item.id} category={item} />;
-                })}
+                {categoryItems.map(item => (
+                  <CategoryItemComponent key={item.id} category={item} />
+                ))}
               </SortableContext>
             </DndContext>
           </ul>

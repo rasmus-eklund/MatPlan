@@ -1,17 +1,17 @@
-import { CategoryItem } from '@/types';
+import { CategoryItem as CategoryItemComponent } from '@/types';
 import { FC, useEffect, useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import DraggableIcon from './icons/DraggableIcon';
-import { capitalize } from '../utils/utils';
-import MinimizeIcon from './icons/MinimizeIcon';
-import MaximizeIcon from './icons/MaximizeIcon';
+import DraggableIcon from '../icons/DraggableIcon';
+import { capitalize } from '../../utils/utils';
+import MinimizeIcon from '../icons/MinimizeIcon';
+import MaximizeIcon from '../icons/MaximizeIcon';
 
 type CategoryProps = {
-  category: CategoryItem;
+  category: CategoryItemComponent;
 };
 
-const Category: FC<CategoryProps> = ({
+const CategoryItemComponent: FC<CategoryProps> = ({
   category: { id, name, subcategories },
 }) => {
   const [open, setOpen] = useState(false);
@@ -48,7 +48,7 @@ const Category: FC<CategoryProps> = ({
             {capitalize(name)}
           </h3>
         </div>
-        <div onClick={() => setOpen(!open)} className="flex gap-3">
+        <div onClick={() => setOpen(!open)}>
           {open ? (
             <MinimizeIcon className="h-8 fill-4 hover:scale-110" />
           ) : (
@@ -72,4 +72,4 @@ const Category: FC<CategoryProps> = ({
   );
 };
 
-export default Category;
+export default CategoryItemComponent;

@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import Image from 'next/image';
-import LoginHome from './components/LoginHome';
+import LoginHome from './components/layout/LoginHome';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 

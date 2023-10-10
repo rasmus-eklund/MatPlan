@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { FC } from 'react';
-import DeleteButton from './buttons/DeleteButton';
+import DeleteButton from '../buttons/DeleteButton';
 
 type StoreItemProps = {
   callback: (id: string) => void;

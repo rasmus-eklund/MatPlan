@@ -2,7 +2,7 @@
 import { Store } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { getAllStores, addDefaultStore, removeStore } from '../db/stores';
-import StoreComponent from '../components/StoreItem';
+import StoreComponent from '../components/stores/StoreItem';
 import PlusIcon from '../components/icons/PlusIcon';
 
 const Stores = () => {

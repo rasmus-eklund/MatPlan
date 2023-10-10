@@ -2,7 +2,7 @@
 import { getMenuItems } from '../db/menu';
 import { Day, MenuItem as MenuItemType } from '@/types';
 import React, { useEffect, useState } from 'react';
-import MenuItem from '../components/MenuItem';
+import MenuItem from '../components/menu/MenuItem';
 import days from '../utils/days';
 
 const Menu = () => {

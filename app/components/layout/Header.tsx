@@ -1,4 +1,4 @@
-import LoginButton from './buttons/LoginButton';
+import LoginButton from '../buttons/LoginButton';
 import Image from 'next/image';
 
 const Header = () => {

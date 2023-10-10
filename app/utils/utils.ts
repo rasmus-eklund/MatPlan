@@ -4,6 +4,7 @@ import {
   RecipeSearch,
   SearchParams,
   ShoppingListItem,
+  ShoppingListItemsGrouped,
   Store,
 } from '@/types';
 import {
@@ -51,11 +52,11 @@ export const formatStore = (items: Store): CategoryItem[] => {
   }, start);
 };
 
-export const sortShoppingList = (
+export const sortShoppingListByStore = <T extends { name: string }>(
   store: Store,
-  items: ShoppingListItem[],
+  items: T[],
   categories: IngredientCat[]
-) => {
+): T[] => {
   const sortedIngredients = items.sort((a, b) => {
     const aIndex = categories.find(i => i.name === a.name)!.subcategoryId;
     const bIndex = categories.find(i => i.name === b.name)!.subcategoryId;
@@ -64,10 +65,34 @@ export const sortShoppingList = (
       store.order.map(i => i.subcategory.id).indexOf(bIndex)
     );
   });
-  sortedIngredients.sort((a, b) => {
+  return sortedIngredients;
+};
+
+export const sortShoppingListByChecked = <T extends { checked: boolean }>(
+  items: T[]
+) =>
+  items.sort((a, b) => {
     if (a.checked === b.checked) return 0;
     if (a.checked) return 1;
     return -1;
   });
-  return sortedIngredients;
+
+export const groupShoppingListItems = (
+  items: ShoppingListItem[]
+): ShoppingListItemsGrouped[] => {
+  const start: ShoppingListItemsGrouped[] = [];
+  const groupedItems = items.reduce((acc, item) => {
+    const group = acc.find(groupItem => groupItem.name === item.name);
+    if (group) {
+      group.group.push(item);
+    } else {
+      const newGroup = { name: item.name, group: [item], checked: false };
+      acc.push(newGroup);
+    }
+    return acc;
+  }, start);
+  return groupedItems.map(group => ({
+    ...group,
+    checked: group.group.every(i => i.checked),
+  }));
 };

@@ -75,6 +75,12 @@ export type ShoppingListItem = {
   from: string;
 };
 
+export type ShoppingListItemsGrouped = {
+  name: string;
+  checked: boolean;
+  group: ShoppingListItem[];
+};
+
 export type Store = {
   name: string;
   order: {

@@ -5,9 +5,9 @@ import {
   changeRecipeDay,
   removeRecipeFromMenu,
   updateMenuPortions,
-} from '../db/menu';
-import DeleteButton from './buttons/DeleteButton';
-import DaysDropDown from './DaysDropDown';
+} from '../../db/menu';
+import DeleteButton from '../buttons/DeleteButton';
+import DaysDropDown from '../DaysDropDown';
 import Incrementer from './Incrementer';
 import { FC, useRef } from 'react';
 

@@ -5,15 +5,21 @@ import {
   Store,
 } from '@/types';
 import { FC, useEffect, useState } from 'react';
-import { getStoreById } from '../db/stores';
+import { getStoreById } from '../../db/stores';
 import Item from './ShoppingListItem';
-import { sortShoppingList } from '../utils/utils';
+import {
+  groupShoppingListItems,
+  sortShoppingListByChecked,
+  sortShoppingListByStore,
+} from '../../utils/utils';
+import Loading from '../Loading';
+import ShoppingListItemsGrouped from './ShoppingListItemsGrouped';
 
 type FilterShoppingListProps = {
   stores: { name: string; id: string }[];
   items: ShoppingListItem[];
   categories: IngredientCat[];
-  onCheck: (item: Omit<ShoppingListItem, 'name' | 'from'>) => void;
+  onCheck: (item: ShoppingListItem[]) => void;
 };
 
 const FilterShoppingList: FC<FilterShoppingListProps> = ({
@@ -79,10 +85,37 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
         </div>
       </div>
       <ul className="flex flex-col bg-2 rounded-md p-2 gap-1">
-        {store &&
-          sortShoppingList(store, items, categories).map(item => (
-            <Item key={item.id} item={item} filter={filter} onCheck={onCheck} />
-          ))}
+        {store ? (
+          filter.group ? (
+            sortShoppingListByChecked(
+              sortShoppingListByStore(
+                store,
+                groupShoppingListItems(items),
+                categories
+              )
+            ).map(group => (
+              <ShoppingListItemsGrouped
+                key={group.name}
+                filter={filter}
+                group={group}
+                onCheck={onCheck}
+              />
+            ))
+          ) : (
+            sortShoppingListByChecked(
+              sortShoppingListByStore(store, items, categories)
+            ).map(item => (
+              <Item
+                key={item.id}
+                item={item}
+                filter={filter}
+                onCheck={onCheck}
+              />
+            ))
+          )
+        ) : (
+          <Loading />
+        )}
       </ul>
     </div>
   );
