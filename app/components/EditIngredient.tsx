@@ -1,6 +1,6 @@
 import { RecipeIngredientFront } from '@/types';
 import { FC, useState, ReactNode } from 'react';
-import units from '../utils/units';
+import units from '../constants/units';
 import DeleteButton from './buttons/DeleteButton';
 import Button from './buttons/Button';
 import EditButton from './buttons/EditButton';

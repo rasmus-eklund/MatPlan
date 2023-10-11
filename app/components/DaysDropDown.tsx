@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import type { Day } from '@/types';
-import days from '../utils/days';
+import days from '../constants/days';
 
 type DaysDropDownProp = {
   callback: (day: Day) => void;
