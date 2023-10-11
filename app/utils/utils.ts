@@ -12,7 +12,7 @@ export const capitalize = (s: string) => {
   return s[0].toUpperCase() + s.slice(1);
 };
 
-export const formatStore = (items: Store): CategoryItem[] => {
+export const groupSubcategoryByCategory = (items: Store): CategoryItem[] => {
   const start: CategoryItem[] = [];
   return items.order.reduce((acc, inputItem) => {
     const foundIndex = acc.findIndex(item => item.id === inputItem.category.id);
@@ -30,7 +30,7 @@ export const formatStore = (items: Store): CategoryItem[] => {
   }, start);
 };
 
-export const sortShoppingListByStore = <T extends { name: string }>(
+export const sortByName = <T extends { name: string }>(
   store: Store,
   items: T[],
   categories: IngredientCat[]
@@ -46,7 +46,7 @@ export const sortShoppingListByStore = <T extends { name: string }>(
   return sortedIngredients;
 };
 
-export const sortShoppingListByChecked = <T extends { checked: boolean }>(
+export const sortByChecked = <T extends { checked: boolean }>(
   items: T[]
 ) =>
   items.sort((a, b) => {

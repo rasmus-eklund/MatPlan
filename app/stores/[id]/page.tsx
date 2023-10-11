@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { getStoreById, renameStore, updateStore } from '@/app/db/stores';
 import CategoryItemComponent from '../../components/stores/CategoryItem';
 import { CategoryItem, StoreCategory } from '@/types';
-import { formatStore } from '@/app/utils/utils';
+import { groupSubcategoryByCategory } from '@/app/utils/utils';
 import {
   DndContext,
   DragEndEvent,
@@ -34,7 +34,7 @@ const StoreComponent = ({ params: { id } }: Props) => {
   useEffect(() => {
     getStoreById(id).then(s => {
       setName(s.name);
-      const order = formatStore(s).map(i => ({ ...i, id: i.id + 1 }));
+      const order = groupSubcategoryByCategory(s).map(i => ({ ...i, id: i.id + 1 }));
       setCategoryItems(order);
       originalOrder.current = order;
     });

@@ -9,8 +9,8 @@ import { getStoreById } from '../../db/stores';
 import Item from './ShoppingListItem';
 import {
   groupShoppingListItems,
-  sortShoppingListByChecked,
-  sortShoppingListByStore,
+  sortByChecked,
+  sortByName,
 } from '../../utils/utils';
 import Loading from '../Loading';
 import ShoppingListItemsGrouped from './ShoppingListItemsGrouped';
@@ -87,8 +87,8 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
       <ul className="flex flex-col bg-2 rounded-md p-2 gap-1">
         {store ? (
           filter.group ? (
-            sortShoppingListByChecked(
-              sortShoppingListByStore(
+            sortByChecked(
+              sortByName(
                 store,
                 groupShoppingListItems(items),
                 categories
@@ -102,8 +102,8 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
               />
             ))
           ) : (
-            sortShoppingListByChecked(
-              sortShoppingListByStore(store, items, categories)
+            sortByChecked(
+              sortByName(store, items, categories)
             ).map(item => (
               <Item
                 key={item.id}

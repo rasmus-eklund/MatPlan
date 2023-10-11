@@ -10,7 +10,7 @@ import MinimizeIcon from '../icons/MinimizeIcon';
 import {
   capitalize,
   groupByUnit,
-  sortShoppingListByChecked,
+  sortByChecked,
 } from '../../utils/utils';
 
 type ShoppingListItemsGroupedProps = {
@@ -69,7 +69,7 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
       </div>
       {open && (
         <ul className="flex flex-col gap-1">
-          {sortShoppingListByChecked(group.group).map(item => (
+          {sortByChecked(group.group).map(item => (
             <Item key={item.id} item={item} filter={filter} onCheck={onCheck} />
           ))}
         </ul>
