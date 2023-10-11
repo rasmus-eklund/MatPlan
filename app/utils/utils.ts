@@ -96,3 +96,16 @@ export const groupShoppingListItems = (
     checked: group.group.every(i => i.checked),
   }));
 };
+
+export const groupByUnit = (items: ShoppingListItem[]) => {
+  const start: { quantity: number; unit: string }[] = [];
+  return items.reduce((acc, item) => {
+    const index = acc.findIndex(i => i.unit === item.unit);
+    if (index !== -1) {
+      acc[index].quantity += item.quantity;
+    } else {
+      acc.push({ quantity: item.quantity, unit: item.unit });
+    }
+    return acc;
+  }, start);
+};

@@ -3,19 +3,27 @@ import {
   ShoppingListItem,
   ShoppingListItemsGrouped,
 } from '@/types';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import Item from './ShoppingListItem';
 import MaximizeIcon from '../icons/MaximizeIcon';
 import MinimizeIcon from '../icons/MinimizeIcon';
-import { capitalize, sortShoppingListByChecked } from '../../utils/utils';
+import {
+  capitalize,
+  groupByUnit,
+  sortShoppingListByChecked,
+} from '../../utils/utils';
 
-type Props = {
+type ShoppingListItemsGroupedProps = {
   group: ShoppingListItemsGrouped;
   onCheck: (item: ShoppingListItem[]) => void;
   filter: ShoppingListFilter;
 };
 
-const ShoppingListItemsGrouped = ({ group, onCheck, filter }: Props) => {
+const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
+  group,
+  onCheck,
+  filter,
+}) => {
   const [open, setOpen] = useState(false);
   return (
     <li
@@ -42,7 +50,16 @@ const ShoppingListItemsGrouped = ({ group, onCheck, filter }: Props) => {
           />
           <p>{capitalize(group.name)}</p>
         </div>
-        <div onClick={() => setOpen(!open)}>
+        <div className="flex gap-2" onClick={() => setOpen(!open)}>
+          <ul className="flex gap-1">
+            {groupByUnit(group.group).map((i, index, arr) => (
+              <li className="flex gap-1" key={i.unit}>
+                <p>{i.quantity}</p>
+                <p>{i.unit}</p>
+                {index < arr.length - 1 && <span>, </span>}
+              </li>
+            ))}
+          </ul>
           {open ? (
             <MinimizeIcon className="h-6 fill-1 hover:scale-110" />
           ) : (

@@ -12,7 +12,8 @@ import FilterShoppingList from '../components/shoppingList/FilterShoppingList';
 
 const ShoppingList = () => {
   const [items, setItems] = useState<ShoppingListItem[]>([]);
-  const [selectedStore, setSelectedStore] = useState<{ name: string; id: string }[]>();
+  const [selectedStore, setSelectedStore] =
+    useState<{ name: string; id: string }[]>();
   const categories = useRef<IngredientCat[]>();
 
   useEffect(() => {
@@ -28,6 +29,11 @@ const ShoppingList = () => {
   }, []);
 
   const handleCheck = (updatedItems: ShoppingListItem[]) => {
+    const newItems = [
+      ...items.filter(i => !updatedItems.some(item => item.id === i.id)),
+      ...updatedItems,
+    ];
+    setItems(newItems);
     Promise.all(
       updatedItems.map(item =>
         updateItem({
@@ -37,13 +43,7 @@ const ShoppingList = () => {
           unit: item.unit,
         })
       )
-    ).then(() => {
-      const newItems = [
-        ...items.filter(i => !updatedItems.some(item => item.id === i.id)),
-        ...updatedItems,
-      ];
-      setItems(newItems);
-    });
+    );
   };
   return (
     <main className="bg-2 p-5 grow overflow-y-auto">
