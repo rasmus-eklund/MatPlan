@@ -72,7 +72,7 @@ export type ShoppingListItemsGrouped = {
   group: ShoppingListItem[];
 };
 
-export type Store = {
+export type StoreOrder = {
   name: string;
   order: {
     category: {
