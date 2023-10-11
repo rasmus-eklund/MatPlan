@@ -5,7 +5,7 @@ import {
   experimental_useOptimistic as useOptimistic,
 } from 'react';
 import SearchIngredients from '../components/SearchIngredient';
-import { Home, ShoppingListItem } from '@/types';
+import { Home, IngredientCat, ShoppingListItem } from '@/types';
 import EditIngredient from '../components/EditIngredient';
 import { editHome, getHome } from '../db/home';
 import {
@@ -46,14 +46,14 @@ const Ingredients = () => {
     );
   };
 
-  const addIngredient = async (name: string) => {
+  const addIngredient = async ({ name, subcategoryId }: IngredientCat) => {
     const newItem: ShoppingListItem = {
       name,
       quantity: 1,
       unit: 'st',
       checked: false,
-      from: 'extraItem',
       id: 'placeholder',
+      subcategoryId,
     };
     setOptimisticItems(({ items, home }) => ({
       items: [...items, { ...newItem, checked: false, id: 'placeholder' }],
@@ -103,7 +103,7 @@ const Ingredients = () => {
           <h2 className="text-3">Extra varor:</h2>
           <ul className="flex flex-col gap-2">
             {optimisticItems.items
-              .filter(i => i.from === 'extraItem')
+              .filter(i => !i.recipe)
               .map(i => (
                 <EditIngredient
                   remove={() => handleDelete(i.id)}
@@ -119,7 +119,7 @@ const Ingredients = () => {
           <h2 className="text-3">Recept varor:</h2>
           <ul className="flex flex-col gap-2">
             {optimisticItems.items
-              .filter(i => i.from !== 'extraItem')
+              .filter(i => i.recipe)
               .map(i => (
                 <EditIngredient
                   remove={() => handleDelete(i.id)}

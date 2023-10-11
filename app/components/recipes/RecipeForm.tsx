@@ -1,5 +1,6 @@
 'use client';
 import {
+  IngredientCat,
   RecipeFront,
   RecipeIngredientFront,
   RecipeSearch,
@@ -9,9 +10,9 @@ import { FC, useState } from 'react';
 import SearchIngredients from '@/app/components/SearchIngredient';
 import EditIngredient from '@/app/components/EditIngredient';
 import SearchRecipeForm from './SearchRecipeForm';
-import { SearchRecipeByFilter } from '../../utils/utils';
 import DeleteButton from '../buttons/DeleteButton';
 import Button from '../buttons/Button';
+import { SearchRecipeByFilter } from '@/app/db/recipes';
 
 type RecipeFormProp = {
   recipe: RecipeFront;
@@ -33,8 +34,8 @@ const RecipeForm: FC<RecipeFormProp> = props => {
     props.update(recipe, connectedRecipes);
   };
 
-  const handleAddIngredient = (name: string) => {
-    const ingredient = { name, quantity: 1, unit: 'st' };
+  const handleAddIngredient = (ing: IngredientCat) => {
+    const ingredient = { name: ing.name, quantity: 1, unit: 'st' };
     setRecipe({ ...recipe, ingredients: [...recipe.ingredients, ingredient] });
   };
 
@@ -147,8 +148,8 @@ const RecipeForm: FC<RecipeFormProp> = props => {
         </div>
       </div>
       <div className="self-end flex gap-2">
-        <Button name='Spara' callback={handleUpdateRecipe} />
-        <Button name='Stäng' callback={props.closeForm} />
+        <Button name="Spara" callback={handleUpdateRecipe} />
+        <Button name="Stäng" callback={props.closeForm} />
       </div>
     </section>
   );
