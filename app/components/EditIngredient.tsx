@@ -1,5 +1,5 @@
 import { RecipeIngredientFront } from '@/types';
-import { FC, useState } from 'react';
+import { FC, useState, ReactNode } from 'react';
 import units from '../utils/units';
 import DeleteButton from './buttons/DeleteButton';
 import Button from './buttons/Button';
@@ -8,22 +8,24 @@ import EditButton from './buttons/EditButton';
 type EditIngredientProp = {
   ingredient: RecipeIngredientFront;
   remove: () => Promise<void>;
-  save: (ingredient: RecipeIngredientFront) => Promise<void>;
+  update: (ingredient: RecipeIngredientFront) => Promise<void>;
   editable: boolean;
+  children?: ReactNode;
 };
 
 const EditIngredient: FC<EditIngredientProp> = ({
   ingredient,
   remove,
-  save,
+  update,
   editable,
+  children,
 }) => {
   const [unit, setUnit] = useState(ingredient.unit);
   const [quant, setQuant] = useState(ingredient.quantity);
   const [edit, setEdit] = useState(false);
 
-  const handleSave = () => {
-    save({
+  const handleUpdate = () => {
+    update({
       name: ingredient.name,
       quantity: quant,
       unit: unit,
@@ -55,12 +57,13 @@ const EditIngredient: FC<EditIngredientProp> = ({
             </select>
             <div className="flex gap-2 justify-self-end">
               <Button name="Avbryt" callback={() => setEdit(false)} />
-              <Button name="Spara" callback={handleSave} />
+              <Button name="Spara" callback={handleUpdate} />
             </div>
           </>
         ) : (
           <>
             <p> {`${quant} ${unit}`}</p>
+            {children}
             {editable && (
               <>
                 <EditButton callback={() => setEdit(true)} />
