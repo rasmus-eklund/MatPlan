@@ -1,5 +1,6 @@
 import {
   CategoryItem,
+  Home,
   IngredientCat,
   RecipeSearch,
   SearchParams,
@@ -108,4 +109,11 @@ export const groupByUnit = (items: ShoppingListItem[]) => {
     }
     return acc;
   }, start);
+};
+
+export const isHome = (name: string, items: Home[]) => {
+  const home = Boolean(items.some(n => n.name === name));
+  if (home) {
+  }
+  return home;
 };
