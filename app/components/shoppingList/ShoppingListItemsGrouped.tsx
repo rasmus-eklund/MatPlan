@@ -25,9 +25,9 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
   const [animate, setAnimate] = useState(false);
   return (
     <li
-      className={`flex flex-col bg-3 px-2 py-1 rounded-md gap-1 transition-opacity duration-200 ${
+      className={`flex flex-col bg-3 px-2 rounded-md gap-1 transition-opacity duration-200 ${
         (group.checked || animate) && 'opacity-50'
-      }`}
+      } ${open && 'py-1'}`}
       key={group.name}
     >
       <div className="flex justify-between items-center">
@@ -49,12 +49,12 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
               });
             }}
           />
-          <p>{capitalize(group.name)}</p>
+          <p className="text-1">{capitalize(group.name)}</p>
         </div>
         <div className="flex gap-2" onClick={() => setOpen(!open)}>
           <ul className="flex gap-1">
             {groupByUnit(group.group).map((i, index, arr) => (
-              <li className="flex gap-1" key={i.unit}>
+              <li className="flex gap-1 text-1" key={i.unit}>
                 <p>{i.quantity}</p>
                 <p>{i.unit}</p>
                 {index < arr.length - 1 && <span>, </span>}

@@ -34,11 +34,7 @@ const Item: FC<ItemProps> = ({ item, filter, onCheck }) => {
         />
         <p className="text-left">{name}</p>
       </div>
-      <div
-        className={`flex gap-2 justify-between ${
-          !filter.hideRecipe && 'w-1/4'
-        }`}
-      >
+      <div className={`flex gap-2 justify-between ${recipe && 'w-1/4'}`}>
         <div className="flex gap-2">
           <p>{quantity}</p>
           <p>{unit}</p>
