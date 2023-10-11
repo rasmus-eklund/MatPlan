@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import HomeIcon from '../icons/MenuIcon';
+import HomeIcon from '../icons/HomeIcon';
 import RecipeIcon from '../icons/RecipesIcon';
 import ItemsIcon from '../icons/ItemsIcon';
 import ShoppingListIcon from '../icons/ShoppingListIcon';
