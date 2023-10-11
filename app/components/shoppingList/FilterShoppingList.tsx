@@ -2,7 +2,7 @@ import {
   IngredientCat,
   ShoppingListFilter,
   ShoppingListItem,
-  Store,
+  StoreOrder,
 } from '@/types';
 import { FC, useEffect, useState } from 'react';
 import { getStoreById } from '../../db/stores';
@@ -28,7 +28,7 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
   categories,
   onCheck,
 }) => {
-  const [store, setStore] = useState<Store>();
+  const [store, setStore] = useState<StoreOrder>();
   const [option, setOption] = useState<string>(stores[0].id);
   const [filter, setFilter] = useState<ShoppingListFilter>({
     group: false,

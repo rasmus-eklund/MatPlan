@@ -1,7 +1,7 @@
 'use server';
 import getUser from './user';
 import { prisma } from './prisma';
-import { Store, StoreCategory } from '@/types';
+import { StoreOrder, StoreCategory } from '@/types';
 
 const generateDefaultStore = async () =>
   await prisma.category.findMany({
@@ -22,7 +22,7 @@ export const getAllStores = async (): Promise<
   });
 };
 
-export const getStoreById = async (id: string): Promise<Store> =>
+export const getStoreById = async (id: string): Promise<StoreOrder> =>
   await prisma.store.findUniqueOrThrow({
     where: { id },
     select: {

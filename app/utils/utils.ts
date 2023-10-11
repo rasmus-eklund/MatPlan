@@ -4,7 +4,7 @@ import {
   IngredientCat,
   ShoppingListItem,
   ShoppingListItemsGrouped,
-  Store,
+  StoreOrder,
 } from '@/types';
 
 
@@ -12,7 +12,7 @@ export const capitalize = (s: string) => {
   return s[0].toUpperCase() + s.slice(1);
 };
 
-export const groupSubcategoryByCategory = (items: Store): CategoryItem[] => {
+export const groupSubcategoryByCategory = (items: StoreOrder): CategoryItem[] => {
   const start: CategoryItem[] = [];
   return items.order.reduce((acc, inputItem) => {
     const foundIndex = acc.findIndex(item => item.id === inputItem.category.id);
@@ -31,7 +31,7 @@ export const groupSubcategoryByCategory = (items: Store): CategoryItem[] => {
 };
 
 export const sortByName = <T extends { name: string }>(
-  store: Store,
+  store: StoreOrder,
   items: T[],
   categories: IngredientCat[]
 ): T[] => {

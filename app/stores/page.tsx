@@ -1,5 +1,5 @@
 'use client';
-import { Store } from '@/types';
+import { StoreOrder } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { getAllStores, addDefaultStore, removeStore } from '../db/stores';
 import StoreComponent from '../components/stores/StoreItem';
