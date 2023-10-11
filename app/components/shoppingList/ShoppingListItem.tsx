@@ -1,4 +1,5 @@
 'use client';
+import durations from '@/app/constants/animationDurations';
 import { ShoppingListFilter, ShoppingListItem } from '@/types';
 import { FC, useState } from 'react';
 
@@ -9,22 +10,26 @@ type ItemProps = {
 };
 
 const Item: FC<ItemProps> = ({ item, filter, onCheck }) => {
-  const { name, quantity, from, unit, checked } = item;
+  const { name, quantity, recipe, unit, checked } = item;
+  const [animate, setAnimate] = useState(false);
 
   return (
     <li
       className={`flex justify-between bg-4 text-2 px-2 rounded-md transition-opacity duration-200 ${
-        checked && 'opacity-50'
+        (checked || animate) && 'opacity-50'
       }`}
     >
       <div className="flex gap-2">
         <input
           type="checkbox"
-          checked={checked}
+          checked={checked || animate}
           onChange={() => {
-            setTimeout(() => {
-              onCheck([{ ...item, checked: !checked }]);
-            }, 300);
+            setAnimate(prev => {
+              setTimeout(() => {
+                onCheck([{ ...item, checked: !checked }]);
+              }, durations.checkShoppingList);
+              return !prev;
+            });
           }}
         />
         <p className="text-left">{name}</p>
@@ -38,9 +43,9 @@ const Item: FC<ItemProps> = ({ item, filter, onCheck }) => {
           <p>{quantity}</p>
           <p>{unit}</p>
         </div>
-        {!filter.hideRecipe && (
+        {!filter.hideRecipe && recipe && (
           <p className="overflow-hidden whitespace-nowrap overflow-ellipsis">
-            {from === 'extraItem' ? 'Egen' : from}
+            {recipe}
           </p>
         )}
       </div>

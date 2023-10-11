@@ -7,11 +7,8 @@ import React, { FC, useState } from 'react';
 import Item from './ShoppingListItem';
 import MaximizeIcon from '../icons/MaximizeIcon';
 import MinimizeIcon from '../icons/MinimizeIcon';
-import {
-  capitalize,
-  groupByUnit,
-  sortByChecked,
-} from '../../utils/utils';
+import { capitalize, groupByUnit, sortByChecked } from '../../utils/utils';
+import durations from '@/app/constants/animationDurations';
 
 type ShoppingListItemsGroupedProps = {
   group: ShoppingListItemsGrouped;
@@ -25,10 +22,11 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
   filter,
 }) => {
   const [open, setOpen] = useState(false);
+  const [animate, setAnimate] = useState(false);
   return (
     <li
       className={`flex flex-col bg-3 px-2 py-1 rounded-md gap-1 transition-opacity duration-200 ${
-        group.checked && 'opacity-50'
+        (group.checked || animate) && 'opacity-50'
       }`}
       key={group.name}
     >
@@ -37,15 +35,18 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
           <input
             type="checkbox"
             name="checkGroup"
-            checked={group.checked}
+            checked={group.checked || animate}
             id={`check-group-${group.name}`}
             onChange={() => {
-              setOpen(false);
-              setTimeout(() => {
-                onCheck(
-                  group.group.map(i => ({ ...i, checked: !group.checked }))
-                );
-              }, 300);
+              setAnimate(prev => {
+                setOpen(false);
+                setTimeout(() => {
+                  onCheck(
+                    group.group.map(i => ({ ...i, checked: !group.checked }))
+                  );
+                }, durations.checkShoppingList);
+                return !prev;
+              });
             }}
           />
           <p>{capitalize(group.name)}</p>
