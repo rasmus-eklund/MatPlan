@@ -2,37 +2,14 @@ import {
   CategoryItem,
   Home,
   IngredientCat,
-  RecipeSearch,
-  SearchParams,
   ShoppingListItem,
   ShoppingListItemsGrouped,
   Store,
 } from '@/types';
-import {
-  getRecipeByIngredient,
-  getRecipeByInstructions,
-  getRecipeByName,
-} from '../db/recipes';
+
 
 export const capitalize = (s: string) => {
   return s[0].toUpperCase() + s.slice(1);
-};
-
-export const SearchRecipeByFilter = async ({
-  filter,
-  search,
-}: SearchParams) => {
-  let data: RecipeSearch[] = [];
-  if (filter === 'ingredient') {
-    data = await getRecipeByIngredient(search);
-  }
-  if (filter === 'instruction') {
-    data = await getRecipeByInstructions(search);
-  }
-  if (filter === 'name') {
-    data = await getRecipeByName(search);
-  }
-  return data;
 };
 
 export const formatStore = (items: Store): CategoryItem[] => {

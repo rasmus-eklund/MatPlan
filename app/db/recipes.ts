@@ -1,5 +1,5 @@
 'use server';
-import { Recipe, RecipeFront, RecipeSearch } from '@/types';
+import { Recipe, RecipeFront, RecipeSearch, SearchParams } from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
 
@@ -37,6 +37,23 @@ export const getRecipeByIngredient = async (
     },
     select: { name: true, id: true, portions: true },
   });
+};
+
+export const SearchRecipeByFilter = async ({
+  filter,
+  search,
+}: SearchParams) => {
+  let data: RecipeSearch[] = [];
+  if (filter === 'ingredient') {
+    data = await getRecipeByIngredient(search);
+  }
+  if (filter === 'instruction') {
+    data = await getRecipeByInstructions(search);
+  }
+  if (filter === 'name') {
+    data = await getRecipeByName(search);
+  }
+  return data;
 };
 
 export const getRecipeById = async (id: string): Promise<RecipeFront> => {
