@@ -5,12 +5,12 @@ import { getIngredientCategories } from '../db/items';
 import { IngredientCat } from '@/types';
 
 type SearchIngredientsProp = {
-  callback: (ingredient: string) => void;
+  callback: (ingredient: IngredientCat) => void;
 };
 
 const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
   const [allIngredients, setAllIngredients] = useState<IngredientCat[]>([]);
-  const [searchResults, setSearchResults] = useState<string[]>([]);
+  const [searchResults, setSearchResults] = useState<IngredientCat[]>([]);
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState(0);
 
@@ -24,8 +24,7 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
     if (search.length > 1) {
       const result = allIngredients
         .filter(({ name }) => name.includes(search.toLowerCase()))
-        .map(i => i.name)
-        .sort((a, b) => a.length - b.length);
+        .sort((a, b) => a.name.length - b.name.length);
       setSearchResults(result);
       setSelected(0);
     }
@@ -66,18 +65,18 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
       </div>
       <ul className="absolute top-10 bg-4 w-full z-1">
         {search.length > 1 &&
-          searchResults.map((name, i) => (
+          searchResults.map((ing, i) => (
             <li
               className={`hover:bg-3 ${i === selected ? 'bg-3' : ''}`}
               key={name + '_search'}
             >
               <p
                 onClick={() => {
-                  callback(name);
+                  callback(ing);
                   setSearch('');
                 }}
               >
-                {name}
+                {ing.name}
               </p>
             </li>
           ))}
