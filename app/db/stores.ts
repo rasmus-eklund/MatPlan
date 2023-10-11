@@ -28,6 +28,21 @@ export const getAllStores = async (): Promise<StoreOrder[]> => {
     },
   });
 };
+export const getStoreById = async (id: string): Promise<StoreOrder> => {
+  return await prisma.store.findUniqueOrThrow({
+    where: { id },
+    select: {
+      name: true,
+      id: true,
+      order: {
+        select: {
+          category: { select: { name: true, id: true } },
+          subcategory: { select: { name: true, id: true } },
+        },
+      },
+    },
+  });
+};
 
 export const addDefaultStore = async () => {
   const userId = await getUser();
