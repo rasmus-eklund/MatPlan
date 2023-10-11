@@ -1,13 +1,4 @@
-const days = [
-  'Måndag',
-  'Tisdag',
-  'Onsdag',
-  'Torsdag',
-  'Fredag',
-  'Lördag',
-  'Söndag',
-  'Obestämd',
-] as const;
+import days from "./app/utils/days";
 
 export type Day = (typeof days)[number];
 
