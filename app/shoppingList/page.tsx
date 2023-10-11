@@ -1,34 +1,31 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import { IngredientCat, ShoppingListItem } from '@/types';
-import {
-  getIngredientCategories,
-  getShoppingList,
-  updateItem,
-} from '../db/items';
+import React, { useEffect, useState } from 'react';
+import { ShoppingListFilter, ShoppingListItem } from '@/types';
+import { getShoppingList, updateItem } from '../db/items';
 import { getAllStores } from '../db/stores';
 import Loading from '../components/Loading';
-import FilterShoppingList from '../components/shoppingList/FilterShoppingList';
+import ShoppingListFilters from '../components/shoppingList/ShoppingListFilters';
+import ShoppingList from '../components/shoppingList/ShoppingList';
 
-const ShoppingList = () => {
+const ShoppingListPage = () => {
   const [items, setItems] = useState<ShoppingListItem[]>([]);
-  const [selectedStore, setSelectedStore] =
-    useState<{ name: string; id: string }[]>();
-  const categories = useRef<IngredientCat[]>();
+  const [filters, setFilters] = useState<ShoppingListFilter>();
 
   useEffect(() => {
-    Promise.all([
-      getAllStores(),
-      getShoppingList(),
-      getIngredientCategories(),
-    ]).then(([allStores, shoppingList, ingredientCategories]) => {
-      setSelectedStore(allStores);
-      setItems(shoppingList);
-      categories.current = ingredientCategories;
-    });
+    Promise.all([getAllStores(), getShoppingList()]).then(
+      ([allStores, shoppingList]) => {
+        setItems(shoppingList);
+        setFilters({
+          group: false,
+          hideRecipe: false,
+          selectedStore: allStores[0].id,
+          stores: allStores,
+        });
+      }
+    );
   }, []);
 
-  const handleCheck = (updatedItems: ShoppingListItem[]) => {
+  const handleCheckItems = (updatedItems: ShoppingListItem[]) => {
     const newItems = [
       ...items.filter(i => !updatedItems.some(item => item.id === i.id)),
       ...updatedItems,
@@ -47,13 +44,15 @@ const ShoppingList = () => {
   };
   return (
     <main className="bg-2 p-5 grow overflow-y-auto">
-      {selectedStore && categories.current ? (
-        <FilterShoppingList
-          stores={selectedStore}
-          items={items}
-          categories={categories.current}
-          onCheck={handleCheck}
-        />
+      {filters && items ? (
+        <div className="bg-3 rounded-md p-3 flex flex-col gap-2">
+          <ShoppingListFilters filters={filters} setFilters={setFilters} />
+          <ShoppingList
+            filters={filters}
+            handleCheckItems={handleCheckItems}
+            items={items}
+          />
+        </div>
       ) : (
         <Loading />
       )}
@@ -61,4 +60,4 @@ const ShoppingList = () => {
   );
 };
 
-export default ShoppingList;
+export default ShoppingListPage;
