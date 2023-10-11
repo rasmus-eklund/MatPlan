@@ -1,4 +1,4 @@
-import days from "./app/utils/days";
+import days from './app/constants/days';
 
 export type Day = (typeof days)[number];
 
@@ -63,17 +63,20 @@ export type ShoppingListItem = {
   quantity: number;
   unit: string;
   checked: boolean;
-  from: string;
+  recipe?: string;
+  subcategoryId: number;
 };
 
 export type ShoppingListItemsGrouped = {
   name: string;
+  subcategoryId: number;
   checked: boolean;
   group: ShoppingListItem[];
 };
 
 export type StoreOrder = {
   name: string;
+  id: string;
   order: {
     category: {
       name: string;
@@ -113,4 +116,6 @@ export type Filter = 'name' | 'ingredient' | 'instruction';
 export type ShoppingListFilter = {
   group: boolean;
   hideRecipe: boolean;
+  selectedStore: string;
+  stores: StoreOrder[]
 };

@@ -7,12 +7,13 @@ import {
   StoreOrder,
 } from '@/types';
 
-
 export const capitalize = (s: string) => {
   return s[0].toUpperCase() + s.slice(1);
 };
 
-export const groupSubcategoryByCategory = (items: StoreOrder): CategoryItem[] => {
+export const groupSubcategoryByCategory = (
+  items: StoreOrder
+): CategoryItem[] => {
   const start: CategoryItem[] = [];
   return items.order.reduce((acc, inputItem) => {
     const foundIndex = acc.findIndex(item => item.id === inputItem.category.id);
@@ -30,25 +31,20 @@ export const groupSubcategoryByCategory = (items: StoreOrder): CategoryItem[] =>
   }, start);
 };
 
-export const sortByName = <T extends { name: string }>(
+export const sortByName = <T extends { name: string; subcategoryId: number }>(
   store: StoreOrder,
-  items: T[],
-  categories: IngredientCat[]
+  items: T[]
 ): T[] => {
   const sortedIngredients = items.sort((a, b) => {
-    const aIndex = categories.find(i => i.name === a.name)!.subcategoryId;
-    const bIndex = categories.find(i => i.name === b.name)!.subcategoryId;
     return (
-      store.order.map(i => i.subcategory.id).indexOf(aIndex) -
-      store.order.map(i => i.subcategory.id).indexOf(bIndex)
+      store.order.map(i => i.subcategory.id).indexOf(a.subcategoryId) -
+      store.order.map(i => i.subcategory.id).indexOf(b.subcategoryId)
     );
   });
   return sortedIngredients;
 };
 
-export const sortByChecked = <T extends { checked: boolean }>(
-  items: T[]
-) =>
+export const sortByChecked = <T extends { checked: boolean }>(items: T[]) =>
   items.sort((a, b) => {
     if (a.checked === b.checked) return 0;
     if (a.checked) return 1;
@@ -64,7 +60,12 @@ export const groupShoppingListItems = (
     if (group) {
       group.group.push(item);
     } else {
-      const newGroup = { name: item.name, group: [item], checked: false };
+      const newGroup: ShoppingListItemsGrouped = {
+        name: item.name,
+        group: [item],
+        checked: false,
+        subcategoryId: item.subcategoryId,
+      };
       acc.push(newGroup);
     }
     return acc;

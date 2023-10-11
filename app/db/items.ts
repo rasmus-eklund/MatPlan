@@ -6,19 +6,61 @@ import {
 } from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
+import { Prisma } from '@prisma/client';
+
+type shoppingListItemResponse = {
+  checked: boolean;
+  id: string;
+  name: string;
+  quantity: Prisma.Decimal;
+  unit: string;
+  recipe: {
+    recipe: {
+      name: string;
+    };
+  } | null;
+  ingredient: {
+    subcategoryId: number;
+  };
+};
+
+const toShoppingListItem = (item: shoppingListItemResponse) => {
+  const {
+    ingredient: { subcategoryId },
+    recipe,
+    ...rest
+  } = item;
+  return {
+    ...rest,
+    quantity: Number(item.quantity),
+    recipe: recipe?.recipe.name,
+    subcategoryId,
+  };
+};
 
 export const updateItem = async ({
   checked,
   id,
   quantity,
   unit,
-}: Omit<ShoppingListItem, 'from' | 'name'>): Promise<ShoppingListItem> => {
+}: Omit<
+  ShoppingListItem,
+  'from' | 'name' | 'subcategoryId'
+>): Promise<ShoppingListItem> => {
   const item = await prisma.shoppingListItem.update({
     where: { id },
     data: { checked, quantity, unit },
-    select: { checked: true, id: true, name: true, quantity: true, unit: true },
+    select: {
+      checked: true,
+      id: true,
+      name: true,
+      quantity: true,
+      unit: true,
+      recipe: { select: { recipe: { select: { name: true } } } },
+      ingredient: { select: { subcategoryId: true } },
+    },
   });
-  return { ...item, quantity: Number(item.quantity), from: 'extraItem' };
+  return toShoppingListItem(item);
 };
 
 export const createItem = async (
@@ -27,9 +69,17 @@ export const createItem = async (
   const userId = await getUser();
   const item = await prisma.shoppingListItem.create({
     data: { ...ing, checked: false, userId },
-    select: { checked: true, id: true, name: true, quantity: true, unit: true },
+    select: {
+      checked: true,
+      id: true,
+      name: true,
+      quantity: true,
+      unit: true,
+      recipe: { select: { recipe: { select: { name: true } } } },
+      ingredient: { select: { subcategoryId: true } },
+    },
   });
-  return { ...item, quantity: Number(item.quantity), from: 'extraItem' };
+  return toShoppingListItem(item);
 };
 
 export const deleteItem = async (id: string) =>
@@ -42,16 +92,19 @@ export const deleteItem = async (id: string) =>
 
 export const getShoppingList = async (): Promise<ShoppingListItem[]> => {
   const userId = await getUser();
-  const res = await prisma.shoppingListItem.findMany({
+  const items = await prisma.shoppingListItem.findMany({
     where: { userId },
-    include: { recipe: { select: { recipe: { select: { name: true } } } } },
+    select: {
+      checked: true,
+      id: true,
+      name: true,
+      quantity: true,
+      unit: true,
+      recipe: { select: { recipe: { select: { name: true } } } },
+      ingredient: { select: { subcategoryId: true } },
+    },
   });
-  const items: ShoppingListItem[] = res.map(i => ({
-    ...i,
-    quantity: Number(i.quantity),
-    from: i.recipe ? i.recipe.recipe.name : 'extraItem',
-  }));
-  return items;
+  return items.map(i => toShoppingListItem(i));
 };
 
 export const getIngredientCategories = async (): Promise<IngredientCat[]> =>
