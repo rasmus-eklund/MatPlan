@@ -96,7 +96,7 @@ const RecipeForm: FC<RecipeFormProp> = props => {
                 <EditIngredient
                   ingredient={ing}
                   remove={async () => handleDeleteIngredient(i)}
-                  save={async () => handleUpdateIngredient(ing, i)}
+                  update={async () => handleUpdateIngredient(ing, i)}
                   key={crypto.randomUUID()}
                   editable={true}
                 />
