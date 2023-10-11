@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getStoreById, renameStore, updateStore } from '@/app/db/stores';
 import CategoryItemComponent from '../../components/stores/CategoryItem';
-import { CategoryItem, StoreCategory } from '@/types';
+import { StoreCategory } from '@/types';
 import { groupSubcategoryByCategory } from '@/app/utils/utils';
 import {
   DndContext,
@@ -22,7 +22,9 @@ import Button from '@/app/components/buttons/Button';
 
 type Props = { params: { id: string } };
 const StoreComponent = ({ params: { id } }: Props) => {
-  const [categoryItems, setCategoryItems] = useState<CategoryItemComponent[]>([]);
+  const [categoryItems, setCategoryItems] = useState<CategoryItemComponent[]>(
+    []
+  );
   const [editName, setEditName] = useState(false);
   const [orderEdited, setOrderEdited] = useState(false);
   const [name, setName] = useState('');
@@ -34,7 +36,10 @@ const StoreComponent = ({ params: { id } }: Props) => {
   useEffect(() => {
     getStoreById(id).then(s => {
       setName(s.name);
-      const order = groupSubcategoryByCategory(s).map(i => ({ ...i, id: i.id + 1 }));
+      const order = groupSubcategoryByCategory(s).map(i => ({
+        ...i,
+        id: i.id + 1,
+      }));
       setCategoryItems(order);
       originalOrder.current = order;
     });
