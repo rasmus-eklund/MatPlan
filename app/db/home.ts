@@ -3,18 +3,13 @@ import { Home } from '@/types';
 import { prisma } from './prisma';
 import getUser from './user';
 
-export const removeHome = async (name: string) => {
+export const editHome = async (item: Home, add: boolean) => {
   const userId = await getUser();
-  await prisma.home.delete({ where: { userId, name } });
-};
-
-export const addHome = async (
-  name: string,
-  quantity?: number,
-  unit?: string
-) => {
-  const userId = await getUser();
-  await prisma.home.create({ data: { userId, name, quantity, unit } });
+  if (add) {
+    await prisma.home.create({ data: { userId, ...item } });
+  } else {
+    await prisma.home.delete({ where: { userId, name: item.name } });
+  }
 };
 
 export const getHome = async (): Promise<Home[]> => {
