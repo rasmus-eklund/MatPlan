@@ -12,11 +12,13 @@ export const updateItem = async ({
   id,
   quantity,
   unit,
-}: Omit<ShoppingListItem, 'from' | 'name'>) => {
-  await prisma.shoppingListItem.update({
+}: Omit<ShoppingListItem, 'from' | 'name'>): Promise<ShoppingListItem> => {
+  const item = await prisma.shoppingListItem.update({
     where: { id },
     data: { checked, quantity, unit },
+    select: { checked: true, id: true, name: true, quantity: true, unit: true },
   });
+  return { ...item, quantity: Number(item.quantity), from: 'extraItem' };
 };
 
 export const createItem = async (
@@ -25,15 +27,18 @@ export const createItem = async (
   const userId = await getUser();
   const item = await prisma.shoppingListItem.create({
     data: { ...ing, checked: false, userId },
+    select: { checked: true, id: true, name: true, quantity: true, unit: true },
   });
   return { ...item, quantity: Number(item.quantity), from: 'extraItem' };
 };
 
-export const deleteItem = async (id: string) => {
-  await prisma.shoppingListItem.delete({
-    where: { id },
-  });
-};
+export const deleteItem = async (id: string) =>
+  (
+    await prisma.shoppingListItem.delete({
+      where: { id },
+      select: { id: true },
+    })
+  ).id;
 
 export const getShoppingList = async (): Promise<ShoppingListItem[]> => {
   const userId = await getUser();
