@@ -25,7 +25,7 @@ const FoundRecipes = ({ recipeResult }: Props) => {
             <div className="flex items-center gap-4">
               <DaysDropDown
                 initDay="Obestämd"
-                callback={day => addRecipe(day, r.id, r.portions)}
+                setDay={day => addRecipe(day, r.id, r.portions)}
               />
             </div>
           </li>
