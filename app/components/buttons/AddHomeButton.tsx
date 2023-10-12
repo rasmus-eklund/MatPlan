@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import HomeIcon from "../icons/HomeIcon";
+import durations from "@/app/constants/animationDurations";
 
 type AddHomeButtonProps = {
   home: boolean;
@@ -13,17 +14,17 @@ const AddHomeButton: FC<AddHomeButtonProps> = ({ home, callback }) => {
       setTimeout(() => {
         callback(!home);
         setAnimate((prev) => !prev);
-      }, 300);
+      }, durations.checkHome);
       return !prev;
     });
   };
   return (
     <button disabled={animate} onClick={handleClick}>
       <HomeIcon
-        className={`h-6 ${
+        className={`h-6 hover:scale-110 ${
           home ? "fill-1" : "fill-5"
         } bg-3 rounded-lg p-1 transition-all ${
-          animate && "-translate-y-1 scale-110"
+          animate && "-translate-y-1 scale-125"
         }`}
       />
     </button>

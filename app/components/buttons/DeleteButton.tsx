@@ -1,13 +1,28 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import TrashIcon from "../icons/TrashIcon";
+import durations from "@/app/constants/animationDurations";
 
 type DeleteButtonProps = { callback: () => void };
 
 const DeleteButton: FC<DeleteButtonProps> = ({ callback }) => {
+  const [animate, setAnimate] = useState(false);
+  const handleClick = () => {
+    setAnimate((prev) => {
+      setTimeout(() => {
+        callback();
+        setAnimate((prev) => !prev);
+      }, durations.deleteItem);
+      return !prev;
+    });
+  };
   return (
-    <div className="flex h-6 cursor-pointer" onClick={() => callback()}>
-      <TrashIcon className="fill-1 hover:scale-125" />
-    </div>
+    <button onClick={handleClick}>
+      <TrashIcon
+        className={`fill-1 cursor-pointer h-6 hover:scale-125 transition-all ${
+          animate && "scale-0"
+        }`}
+      />
+    </button>
   );
 };
 
