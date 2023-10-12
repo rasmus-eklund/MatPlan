@@ -61,7 +61,7 @@ const Ingredients = () => {
       quantity: 1,
       unit: 'st',
       checked: false,
-      id: 'placeholder',
+      id: crypto.randomUUID(),
       subcategoryId,
     };
     addItemOptimistic({
