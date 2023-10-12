@@ -24,11 +24,11 @@ const Ingredients = () => {
   const [home, setHome] = useState<Home[]>([]);
   const [optItems, setOptItems] = useOptimistic(items);
   const [optHome, setOptHome] = useOptimistic(home);
-  const optimisticHome = Optimistic({
+  const optiHome = Optimistic({
     setOpt: setOptHome,
     setItems: setHome,
   });
-  const optimisticItem = Optimistic({
+  const optiItem = Optimistic({
     setOpt: setOptItems,
     setItems: setItems,
   });
@@ -46,7 +46,7 @@ const Ingredients = () => {
         <div className="w-1/2">
           <SearchIngredients
             callback={(ing) =>
-              optimisticItem.add({ item: toShopListItem(ing), cb: createItem })
+              optiItem.add({ item: toShopListItem(ing), cb: createItem })
             }
           />
         </div>
@@ -57,9 +57,9 @@ const Ingredients = () => {
               .filter((i) => !i.recipe)
               .map((item) => (
                 <EditIngredient
-                  remove={() => optimisticItem.remove({ item, cb: deleteItem })}
+                  remove={() => optiItem.remove({ item, cb: deleteItem })}
                   update={(ing) =>
-                    optimisticItem.update({
+                    optiItem.update({
                       item: { ...item, ...ing },
                       cb: updateItem,
                     })
@@ -78,9 +78,9 @@ const Ingredients = () => {
               .filter((i) => i.recipe)
               .map((item) => (
                 <EditIngredient
-                  remove={() => optimisticItem.remove({ item, cb: deleteItem })}
+                  remove={() => optiItem.remove({ item, cb: deleteItem })}
                   update={(ing) =>
-                    optimisticItem.update({
+                    optiItem.update({
                       item: { ...item, ...ing },
                       cb: updateItem,
                     })
@@ -93,7 +93,7 @@ const Ingredients = () => {
                     home={isHome(item.name, optHome)}
                     callback={(home) => {
                       home
-                        ? optimisticHome.add({
+                        ? optiHome.add({
                             item: {
                               id: item.name,
                               quantity: null,
@@ -101,7 +101,7 @@ const Ingredients = () => {
                             },
                             cb: addHome,
                           })
-                        : optimisticHome.remove({ item, cb: removeHome });
+                        : optiHome.remove({ item, cb: removeHome });
                     }}
                   />
                 </EditIngredient>
