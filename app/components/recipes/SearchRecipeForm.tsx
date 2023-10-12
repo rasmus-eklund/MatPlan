@@ -1,5 +1,5 @@
-import { Filter, SearchParams } from '@/types';
-import { FC, useState } from 'react';
+import { Filter, SearchParams } from "@/types";
+import { FC, useState } from "react";
 
 type SearchFormProps = {
   handleSearch: ({ search, filter }: SearchParams) => void;
@@ -10,13 +10,13 @@ const SearchRecipeForm: FC<SearchFormProps> = ({
   handleSearch,
   onlySearch = false,
 }) => {
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState<Filter>('name');
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState<Filter>("name");
 
   return (
     <form
       className="flex flex-col gap-2"
-      onSubmit={e => {
+      onSubmit={(e) => {
         e.preventDefault();
         handleSearch({ filter, search });
       }}
@@ -25,13 +25,13 @@ const SearchRecipeForm: FC<SearchFormProps> = ({
       <div className="flex gap-2">
         <input
           className={`bg-4 text-xl px-2 rounded-md h-10 ${
-            onlySearch ? 'w-full' : 'w-2/3'
+            onlySearch ? "w-full" : "w-2/3"
           }`}
           id="search"
           type="text"
           value={search}
-          onChange={e => setSearch(e.target.value)}
-          placeholder={'Sök'}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder={"Sök"}
         />
         {!onlySearch && (
           <select
@@ -39,7 +39,7 @@ const SearchRecipeForm: FC<SearchFormProps> = ({
             name="filter"
             id="filter"
             value={filter}
-            onChange={e => setFilter(e.target.value as Filter)}
+            onChange={(e) => setFilter(e.target.value as Filter)}
           >
             <option value="name">Namn</option>
             <option value="ingredient">Ingredient</option>

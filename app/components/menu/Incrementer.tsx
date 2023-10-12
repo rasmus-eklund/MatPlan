@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
-import PlusIcon from '../icons/PlusIcon';
-import MinusIcon from '../icons/MinusIcon';
+import { FC, useState } from "react";
+import PlusIcon from "../icons/PlusIcon";
+import MinusIcon from "../icons/MinusIcon";
 
 type IncrementerProps = {
   value: number;

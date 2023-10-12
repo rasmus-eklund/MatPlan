@@ -1,9 +1,8 @@
-# MatPlan 
+# MatPlan
 
 ## About MatPlan
+
 MatPlan is a versatile recipe app in Swedish that goes beyond the traditional recipe management. It allows you to plan your meals for the week, create shopping lists, and optimize your grocery shopping. Whether you're a cooking enthusiast or just trying to simplify your meal planning, MatPlan has got you covered!
-
-
 
 ## Table of Contents
 
@@ -49,10 +48,9 @@ Keep track of your preferred stores for grocery shopping in the Butiker section.
 
 To access features, log in to MatPlan using your Google account. Once logged in, you can save your preferences and access your recipes and shopping lists from anywhere.
 
-
 ## License
 
-MatPlan is licensed under the [MIT License](https://opensource.org/licenses/MIT). 
+MatPlan is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 Please see the [LICENSE](LICENSE) file for more details.
 
 ## Credits
@@ -63,4 +61,4 @@ Feel free to contribute, raise issues, or provide feedback to help us improve Ma
 
 ---
 
-*This project was made using Next.js, Tailwind CSS, PostgreSQL/Prisma, deployment made possible via Vercel.*
+_This project was made using Next.js, Tailwind CSS, PostgreSQL/Prisma, deployment made possible via Vercel._

@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import HomeIcon from '../icons/HomeIcon';
+import { FC } from "react";
+import HomeIcon from "../icons/HomeIcon";
 
 type AddHomeButtonProps = {
   home: boolean;
@@ -9,7 +9,7 @@ type AddHomeButtonProps = {
 const AddHomeButton: FC<AddHomeButtonProps> = ({ home, callback }) => {
   return (
     <button onClick={() => callback(!home)}>
-      <HomeIcon className={`h-8 ${home ? 'fill-1' : 'fill-2'}`} />
+      <HomeIcon className={`h-8 ${home ? "fill-1" : "fill-2"}`} />
     </button>
   );
 };

@@ -1,15 +1,15 @@
-'use client';
-import { deleteRecipe, getRecipeById, updateRecipe } from '@/app/db/recipes';
-import { Day, Recipe } from '@/types';
-import { useEffect, useState } from 'react';
+"use client";
+import { deleteRecipe, getRecipeById, updateRecipe } from "@/app/db/recipes";
+import { Day, Recipe } from "@/types";
+import { useEffect, useState } from "react";
 
-import DaysDropDown from '@/app/components/DaysDropDown';
-import { useRouter } from 'next/navigation';
-import ShowRecipe from '@/app/components/ShowRecipe';
-import RecipeForm from '@/app/components/recipes/RecipeForm';
-import { addRecipeToMenu } from '@/app/db/menu';
-import Button from '@/app/components/buttons/Button';
-import Loading from '@/app/components/Loading';
+import DaysDropDown from "@/app/components/DaysDropDown";
+import { useRouter } from "next/navigation";
+import ShowRecipe from "@/app/components/ShowRecipe";
+import RecipeForm from "@/app/components/recipes/RecipeForm";
+import { addRecipeToMenu } from "@/app/db/menu";
+import Button from "@/app/components/buttons/Button";
+import Loading from "@/app/components/Loading";
 
 const Recipe = ({ params }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<Recipe>();
@@ -18,12 +18,12 @@ const Recipe = ({ params }: { params: { id: string } }) => {
   const id = params.id;
 
   useEffect(() => {
-    getRecipeById(id).then(res => setRecipe(res));
+    getRecipeById(id).then((res) => setRecipe(res));
   }, [id]);
 
   const handleDeleteRecipe = () => {
     deleteRecipe(id).then(() => {
-      push('/recipes');
+      push("/recipes");
     });
   };
 
@@ -46,7 +46,9 @@ const Recipe = ({ params }: { params: { id: string } }) => {
             <ShowRecipe recipe={recipe}>
               <DaysDropDown
                 initDay="Obestämd"
-                setDay={day => handleAddToMenu(day, params.id, recipe.portions)}
+                setDay={(day) =>
+                  handleAddToMenu(day, params.id, recipe.portions)
+                }
               />
               <div className="flex gap-4 items-center py-2">
                 <Button name="Ändra" callback={() => setHideForm(false)} />

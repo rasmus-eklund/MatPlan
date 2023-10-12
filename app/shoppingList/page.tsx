@@ -1,11 +1,11 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import { ShoppingListFilter, ShoppingListItem } from '@/types';
-import { getShoppingList, updateItem } from '../db/items';
-import { getAllStores } from '../db/stores';
-import Loading from '../components/Loading';
-import ShoppingListFilters from '../components/shoppingList/ShoppingListFilters';
-import ShoppingList from '../components/shoppingList/ShoppingList';
+"use client";
+import React, { useEffect, useState } from "react";
+import { ShoppingListFilter, ShoppingListItem } from "@/types";
+import { getShoppingList, updateItem } from "../db/items";
+import { getAllStores } from "../db/stores";
+import Loading from "../components/Loading";
+import ShoppingListFilters from "../components/shoppingList/ShoppingListFilters";
+import ShoppingList from "../components/shoppingList/ShoppingList";
 
 const ShoppingListPage = () => {
   const [items, setItems] = useState<ShoppingListItem[]>([]);
@@ -21,25 +21,25 @@ const ShoppingListPage = () => {
           selectedStore: allStores[0].id,
           stores: allStores,
         });
-      }
+      },
     );
   }, []);
 
   const handleCheckItems = (updatedItems: ShoppingListItem[]) => {
     const newItems = [
-      ...items.filter(i => !updatedItems.some(item => item.id === i.id)),
+      ...items.filter((i) => !updatedItems.some((item) => item.id === i.id)),
       ...updatedItems,
     ];
     setItems(newItems);
     Promise.all(
-      updatedItems.map(item =>
+      updatedItems.map((item) =>
         updateItem({
           id: item.id,
           checked: item.checked,
           quantity: item.quantity,
           unit: item.unit,
-        })
-      )
+        }),
+      ),
     );
   };
   return (

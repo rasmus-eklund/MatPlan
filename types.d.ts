@@ -1,4 +1,4 @@
-import days from './app/constants/days';
+import days from "./app/constants/days";
 
 export type Day = (typeof days)[number];
 
@@ -104,7 +104,7 @@ export type SearchParams = {
   filter: Filter;
 };
 
-export type Filter = 'name' | 'ingredient' | 'instruction';
+export type Filter = "name" | "ingredient" | "instruction";
 
 export type ShoppingListFilter = {
   group: boolean;

@@ -1,9 +1,9 @@
-'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import { getStoreById, renameStore, updateStore } from '@/app/db/stores';
-import CategoryItemComponent from '../../components/stores/CategoryItem';
-import { StoreCategory } from '@/types';
-import { groupSubcategoryByCategory } from '@/app/utils/utils';
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+import { getStoreById, renameStore, updateStore } from "@/app/db/stores";
+import CategoryItemComponent from "../../components/stores/CategoryItem";
+import { StoreCategory } from "@/types";
+import { groupSubcategoryByCategory } from "@/app/utils/utils";
 import {
   DndContext,
   DragEndEvent,
@@ -12,31 +12,31 @@ import {
   closestCenter,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   SortableContext,
   arrayMove,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import Button from '@/app/components/buttons/Button';
+} from "@dnd-kit/sortable";
+import Button from "@/app/components/buttons/Button";
 
 type Props = { params: { id: string } };
 const StoreComponent = ({ params: { id } }: Props) => {
   const [categoryItems, setCategoryItems] = useState<CategoryItemComponent[]>(
-    []
+    [],
   );
   const [editName, setEditName] = useState(false);
   const [orderEdited, setOrderEdited] = useState(false);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const touchSensor = useSensor(TouchSensor);
   const mouseSensor = useSensor(MouseSensor);
   const sensors = useSensors(mouseSensor, touchSensor);
   let originalOrder = useRef<CategoryItemComponent[]>();
 
   useEffect(() => {
-    getStoreById(id).then(s => {
+    getStoreById(id).then((s) => {
       setName(s.name);
-      const order = groupSubcategoryByCategory(s).map(i => ({
+      const order = groupSubcategoryByCategory(s).map((i) => ({
         ...i,
         id: i.id + 1,
       }));
@@ -49,9 +49,9 @@ const StoreComponent = ({ params: { id } }: Props) => {
     const { active, over } = event;
     if (over) {
       if (active.id === over.id) return;
-      setCategoryItems(items => {
-        const oldId = items.findIndex(item => item.id === active.id);
-        const newId = items.findIndex(item => item.id === over.id);
+      setCategoryItems((items) => {
+        const oldId = items.findIndex((item) => item.id === active.id);
+        const newId = items.findIndex((item) => item.id === over.id);
         setOrderEdited(true);
         return arrayMove(items, oldId, newId);
       });
@@ -63,11 +63,11 @@ const StoreComponent = ({ params: { id } }: Props) => {
   };
 
   const handleSaveOrder = () => {
-    const data: StoreCategory[] = categoryItems.flatMap(i =>
-      i.subcategories.map(s => ({
+    const data: StoreCategory[] = categoryItems.flatMap((i) =>
+      i.subcategories.map((s) => ({
         categoryId: i.id - 1,
         subcategoryId: s.id,
-      }))
+      })),
     );
     updateStore(id, data).then(() => setOrderEdited(false));
   };
@@ -77,13 +77,13 @@ const StoreComponent = ({ params: { id } }: Props) => {
       <div className="bg-3 rounded-md p-3 flex flex-col gap-2">
         <div className="flex items-center justify-between gap-2">
           {!editName && (
-            <h2 className="text-1 text-xl font-bold">{name || 'loading'}</h2>
+            <h2 className="text-1 text-xl font-bold">{name || "loading"}</h2>
           )}
           {editName && (
             <input
               className="bg-4 rounded-md text-xl font-bold min-w-0"
               value={name}
-              onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             ></input>
           )}
           <div className="flex gap-2">
@@ -108,7 +108,7 @@ const StoreComponent = ({ params: { id } }: Props) => {
                 items={categoryItems}
                 strategy={verticalListSortingStrategy}
               >
-                {categoryItems.map(item => (
+                {categoryItems.map((item) => (
                   <CategoryItemComponent key={item.id} category={item} />
                 ))}
               </SortableContext>

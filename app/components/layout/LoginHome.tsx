@@ -1,5 +1,5 @@
-'use client';
-import { signIn } from 'next-auth/react';
+"use client";
+import { signIn } from "next-auth/react";
 
 export default function Login() {
   return (
@@ -7,7 +7,7 @@ export default function Login() {
       <button
         className="text-end text-4 px-6"
         onClick={() => {
-          signIn('google', { callbackUrl: '/home' });
+          signIn("google", { callbackUrl: "/home" });
         }}
         type="button"
       >

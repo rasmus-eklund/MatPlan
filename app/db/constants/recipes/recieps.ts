@@ -1,4 +1,4 @@
-import { Recipe } from '@/types';
+import { Recipe } from "@/types";
 
 const createDefaultRecipes = (): Recipe[] => {
   const test1 = crypto.randomUUID();
@@ -6,14 +6,14 @@ const createDefaultRecipes = (): Recipe[] => {
   const test3 = crypto.randomUUID();
   const t3 = {
     id: test3,
-    name: 'Test3',
+    name: "Test3",
     portions: 2,
-    instruction: 'Test 3',
+    instruction: "Test 3",
     ingredients: [
       {
-        name: 'apelsin',
+        name: "apelsin",
         quantity: 1,
-        unit: 'st',
+        unit: "st",
         id: crypto.randomUUID(),
         recipeId: test3,
       },
@@ -22,14 +22,14 @@ const createDefaultRecipes = (): Recipe[] => {
   };
   const t2 = {
     id: test2,
-    name: 'Test2',
+    name: "Test2",
     portions: 2,
-    instruction: 'Test 2',
+    instruction: "Test 2",
     ingredients: [
       {
-        name: 'gurka',
+        name: "gurka",
         quantity: 1,
-        unit: 'st',
+        unit: "st",
         id: crypto.randomUUID(),
         recipeId: test2,
       },
@@ -38,14 +38,14 @@ const createDefaultRecipes = (): Recipe[] => {
   };
   const t1: Recipe = {
     id: test1,
-    name: 'Test1',
+    name: "Test1",
     portions: 2,
-    instruction: 'Test 1',
+    instruction: "Test 1",
     ingredients: [
       {
-        name: 'banan',
+        name: "banan",
         quantity: 1,
-        unit: 'st',
+        unit: "st",
         id: crypto.randomUUID(),
         recipeId: test1,
       },

@@ -1,12 +1,8 @@
-'use server';
-import {
-  Home,
-  IngredientCat,
-  ShoppingListItem,
-} from '@/types';
-import { prisma } from './prisma';
-import getUser from './user';
-import { Prisma } from '@prisma/client';
+"use server";
+import { Home, IngredientCat, ShoppingListItem } from "@/types";
+import { prisma } from "./prisma";
+import getUser from "./user";
+import { Prisma } from "@prisma/client";
 
 type shoppingListItemResponse = {
   checked: boolean;
@@ -35,7 +31,7 @@ const select = {
 };
 
 const toShoppingListItem = (
-  item: shoppingListItemResponse
+  item: shoppingListItemResponse,
 ): ShoppingListItem => {
   const {
     ingredient: { subcategoryId },
@@ -57,7 +53,7 @@ export const updateItem = async ({
   unit,
 }: Omit<
   ShoppingListItem,
-  'from' | 'name' | 'subcategoryId'
+  "from" | "name" | "subcategoryId"
 >): Promise<ShoppingListItem> => {
   const item = await prisma.shoppingListItem.update({
     where: { id },
@@ -68,7 +64,7 @@ export const updateItem = async ({
 };
 
 export const createItem = async (
-  item: ShoppingListItem
+  item: ShoppingListItem,
 ): Promise<ShoppingListItem> => {
   const userId = await getUser();
   const data = await prisma.shoppingListItem.create({
@@ -98,7 +94,7 @@ export const getShoppingList = async (): Promise<ShoppingListItem[]> => {
     where: { userId },
     select,
   });
-  return items.map(i => toShoppingListItem(i));
+  return items.map((i) => toShoppingListItem(i));
 };
 
 export const getIngredientCategories = async (): Promise<IngredientCat[]> =>

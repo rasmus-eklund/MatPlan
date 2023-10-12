@@ -1,12 +1,12 @@
-import { ShoppingListFilter, ShoppingListItem } from '@/types';
-import { FC } from 'react';
-import Item from './ShoppingListItem';
+import { ShoppingListFilter, ShoppingListItem } from "@/types";
+import { FC } from "react";
+import Item from "./ShoppingListItem";
 import {
   groupShoppingListItems,
   sortByChecked,
   sortBySubcategory,
-} from '../../utils/utils';
-import ShoppingListItemsGrouped from './ShoppingListItemsGrouped';
+} from "../../utils/utils";
+import ShoppingListItemsGrouped from "./ShoppingListItemsGrouped";
 
 type FilterShoppingListProps = {
   items: ShoppingListItem[];
@@ -20,23 +20,23 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
   handleCheckItems,
 }) => {
   const order = filters.stores.find(
-    store => store.id === filters.selectedStore
+    (store) => store.id === filters.selectedStore,
   );
   if (order)
     return (
       <ul className="flex flex-col bg-2 rounded-md p-2 gap-1">
         {filters.group
-          ? sortByChecked(sortBySubcategory(order, groupShoppingListItems(items))).map(
-              group => (
-                <ShoppingListItemsGrouped
-                  key={group.name}
-                  filter={filters}
-                  group={group}
-                  handleCheckItems={handleCheckItems}
-                />
-              )
-            )
-          : sortByChecked(sortBySubcategory(order, items)).map(item => (
+          ? sortByChecked(
+              sortBySubcategory(order, groupShoppingListItems(items)),
+            ).map((group) => (
+              <ShoppingListItemsGrouped
+                key={group.name}
+                filter={filters}
+                group={group}
+                handleCheckItems={handleCheckItems}
+              />
+            ))
+          : sortByChecked(sortBySubcategory(order, items)).map((item) => (
               <Item
                 key={item.id}
                 item={item}

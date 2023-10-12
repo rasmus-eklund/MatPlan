@@ -1,9 +1,9 @@
-import ProvidersWrapper from './ProvidersWrapper';
-import 'tailwindcss/tailwind.css';
+import ProvidersWrapper from "./ProvidersWrapper";
+import "tailwindcss/tailwind.css";
 
 export const metadata = {
-  title: 'MatPlan',
-  description: 'Handle your shopping and recipes in one place',
+  title: "MatPlan",
+  description: "Handle your shopping and recipes in one place",
 };
 
 export default function RootLayout({

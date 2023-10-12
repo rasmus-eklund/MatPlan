@@ -1,6 +1,6 @@
-import { FC } from 'react';
-import type { Day } from '@/types';
-import days from '../constants/days';
+import { FC } from "react";
+import type { Day } from "@/types";
+import days from "../constants/days";
 
 type DaysDropDownProp = {
   initDay: Day;
@@ -12,7 +12,7 @@ const DaysDropDown: FC<DaysDropDownProp> = ({ setDay, initDay }) => {
     <select
       className="rounded-md text-1 bg-4 py-1 px-2 hover:bg-1 hover:text-4 border-[2px] border-3 cursor-pointer"
       value={initDay}
-      onChange={e => {
+      onChange={(e) => {
         const newDay = e.target.value as Day;
         if (newDay !== initDay) {
           setDay(newDay);

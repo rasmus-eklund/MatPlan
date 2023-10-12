@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { FC, useEffect, useState } from 'react';
-import { getIngredientCategories } from '../db/items';
-import { IngredientCat } from '@/types';
+import { FC, useEffect, useState } from "react";
+import { getIngredientCategories } from "../db/items";
+import { IngredientCat } from "@/types";
 
 type SearchIngredientsProp = {
   callback: (ingredient: IngredientCat) => void;
@@ -11,11 +11,11 @@ type SearchIngredientsProp = {
 const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
   const [allIngredients, setAllIngredients] = useState<IngredientCat[]>([]);
   const [searchResults, setSearchResults] = useState<IngredientCat[]>([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(0);
 
   useEffect(() => {
-    getIngredientCategories().then(ings => {
+    getIngredientCategories().then((ings) => {
       setAllIngredients(ings);
     });
   }, []);
@@ -31,19 +31,19 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
   }, [search, allIngredients]);
 
   const handleEnter = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       if (searchResults.length > 0) {
         callback(searchResults[selected]);
-        setSearch('');
+        setSearch("");
         setSearchResults([]);
       }
     }
     const len = searchResults.length;
-    if (e.key === 'ArrowDown') {
+    if (e.key === "ArrowDown") {
       const target = selected === len - 1 ? len - 1 : selected + 1;
       setSelected(target);
     }
-    if (e.key === 'ArrowUp') {
+    if (e.key === "ArrowUp") {
       const target = selected === 0 ? 0 : selected - 1;
       setSelected(target);
     }
@@ -56,7 +56,7 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
           className="w-full rounded-md px-4 py-2 outline-none bg-4 focus:bg-5"
           type="text"
           value={search}
-          onChange={e => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           placeholder="Lägg till vara..."
           onKeyDown={handleEnter}
           autoFocus={true}
@@ -67,13 +67,13 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
         {search.length > 1 &&
           searchResults.map((ing, i) => (
             <li
-              className={`hover:bg-3 ${i === selected ? 'bg-3' : ''}`}
-              key={ing.name + '_search'}
+              className={`hover:bg-3 ${i === selected ? "bg-3" : ""}`}
+              key={ing.name + "_search"}
             >
               <p
                 onClick={() => {
                   callback(ing);
-                  setSearch('');
+                  setSearch("");
                 }}
               >
                 {ing.name}

@@ -1,10 +1,10 @@
-'use client';
-import { MenuItem } from '@/types';
-import Link from 'next/link';
-import DeleteButton from '../buttons/DeleteButton';
-import DaysDropDown from '../DaysDropDown';
-import Incrementer from './Incrementer';
-import { FC } from 'react';
+"use client";
+import { MenuItem } from "@/types";
+import Link from "next/link";
+import DeleteButton from "../buttons/DeleteButton";
+import DaysDropDown from "../DaysDropDown";
+import Incrementer from "./Incrementer";
+import { FC } from "react";
 
 type MenuItemProps = {
   item: MenuItem;
@@ -28,11 +28,11 @@ const MenuItem: FC<MenuItemProps> = ({
       <div className="flex items-center gap-1">
         <Incrementer
           value={item.portions}
-          callback={value => changePortions({ ...item, portions: value })}
+          callback={(value) => changePortions({ ...item, portions: value })}
         />
         <DaysDropDown
           initDay={day}
-          setDay={newDay => changeDay({ ...item, day: newDay })}
+          setDay={(newDay) => changeDay({ ...item, day: newDay })}
         />
         <DeleteButton callback={() => removeItem(id)} />
       </div>

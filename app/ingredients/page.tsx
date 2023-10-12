@@ -1,12 +1,12 @@
-'use client';
+"use client";
 import {
   useEffect,
   useState,
   experimental_useOptimistic as useOptimistic,
-} from 'react';
-import SearchIngredients from '../components/SearchIngredient';
-import { Home, IngredientCat, ShoppingListItem } from '@/types';
-import EditIngredient from '../components/EditIngredient';
+} from "react";
+import SearchIngredients from "../components/SearchIngredient";
+import { Home, IngredientCat, ShoppingListItem } from "@/types";
+import EditIngredient from "../components/EditIngredient";
 import {
   addHome,
   createItem,
@@ -15,9 +15,14 @@ import {
   getShoppingList,
   removeHome,
   updateItem,
-} from '../db/items';
-import AddHomeButton from '../components/buttons/AddHomeButton';
-import { OptimisticAdd, isHome, OptimisticRemove, OptimisticUpdate } from '../utils/utils';
+} from "../db/items";
+import AddHomeButton from "../components/buttons/AddHomeButton";
+import {
+  OptimisticAdd,
+  isHome,
+  OptimisticRemove,
+  OptimisticUpdate,
+} from "../utils/utils";
 
 const Ingredients = () => {
   const [items, setItems] = useState<ShoppingListItem[]>([]);
@@ -54,7 +59,7 @@ const Ingredients = () => {
     const item: ShoppingListItem = {
       name,
       quantity: 1,
-      unit: 'st',
+      unit: "st",
       checked: false,
       id: crypto.randomUUID(),
       subcategoryId,
@@ -95,11 +100,11 @@ const Ingredients = () => {
           <h2 className="text-3">Extra varor:</h2>
           <ul className="flex flex-col gap-2">
             {optItems
-              .filter(i => !i.recipe)
-              .map(i => (
+              .filter((i) => !i.recipe)
+              .map((i) => (
                 <EditIngredient
                   remove={() => handleDelete(i.id)}
-                  update={ing => handleUpdate({ ...i, ...ing })}
+                  update={(ing) => handleUpdate({ ...i, ...ing })}
                   ingredient={i}
                   key={i.id}
                   editable={true}
@@ -111,18 +116,18 @@ const Ingredients = () => {
           <h2 className="text-3">Recept varor:</h2>
           <ul className="flex flex-col gap-2">
             {optItems
-              .filter(i => i.recipe)
-              .map(i => (
+              .filter((i) => i.recipe)
+              .map((i) => (
                 <EditIngredient
                   remove={() => handleDelete(i.id)}
-                  update={ing => handleUpdate({ ...i, ...ing })}
+                  update={(ing) => handleUpdate({ ...i, ...ing })}
                   ingredient={i}
                   key={i.id}
                   editable={false}
                 >
                   <AddHomeButton
                     home={isHome(i.name, optHome)}
-                    callback={home => {
+                    callback={(home) => {
                       home
                         ? handleAddHome({
                             id: i.name,

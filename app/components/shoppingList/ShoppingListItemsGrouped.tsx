@@ -2,13 +2,13 @@ import {
   ShoppingListFilter,
   ShoppingListItem,
   ShoppingListItemsGrouped,
-} from '@/types';
-import React, { FC, useState } from 'react';
-import Item from './ShoppingListItem';
-import MaximizeIcon from '../icons/MaximizeIcon';
-import MinimizeIcon from '../icons/MinimizeIcon';
-import { capitalize, groupByUnit, sortByChecked } from '../../utils/utils';
-import durations from '@/app/constants/animationDurations';
+} from "@/types";
+import React, { FC, useState } from "react";
+import Item from "./ShoppingListItem";
+import MaximizeIcon from "../icons/MaximizeIcon";
+import MinimizeIcon from "../icons/MinimizeIcon";
+import { capitalize, groupByUnit, sortByChecked } from "../../utils/utils";
+import durations from "@/app/constants/animationDurations";
 
 type ShoppingListItemsGroupedProps = {
   group: ShoppingListItemsGrouped;
@@ -26,8 +26,8 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
   return (
     <li
       className={`flex flex-col bg-3 px-2 rounded-md gap-1 transition-opacity duration-200 ${
-        (group.checked || animate) && 'opacity-50'
-      } ${open && 'py-1'}`}
+        (group.checked || animate) && "opacity-50"
+      } ${open && "py-1"}`}
       key={group.name}
     >
       <div className="flex justify-between items-center">
@@ -39,11 +39,11 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
             checked={group.checked || animate}
             id={`check-group-${group.name}`}
             onChange={() => {
-              setAnimate(prev => {
+              setAnimate((prev) => {
                 setOpen(false);
                 setTimeout(() => {
                   handleCheckItems(
-                    group.group.map(i => ({ ...i, checked: !group.checked }))
+                    group.group.map((i) => ({ ...i, checked: !group.checked })),
                   );
                 }, durations.checkShoppingList);
                 return !prev;
@@ -75,7 +75,7 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
       </div>
       {open && (
         <ul className="flex flex-col gap-1">
-          {sortByChecked(group.group).map(item => (
+          {sortByChecked(group.group).map((item) => (
             <Item
               key={item.id}
               item={item}

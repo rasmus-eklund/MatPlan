@@ -1,38 +1,38 @@
-'use server';
-import { Recipe, RecipeSearch, SearchParams } from '@/types';
-import { prisma } from './prisma';
-import getUser from './user';
+"use server";
+import { Recipe, RecipeSearch, SearchParams } from "@/types";
+import { prisma } from "./prisma";
+import getUser from "./user";
 
 export const getRecipeByName = async (
-  search: string
+  search: string,
 ): Promise<RecipeSearch[]> => {
   const userId = await getUser();
   const res = await prisma.recipe.findMany({
-    where: { userId, name: { contains: search, mode: 'insensitive' } },
+    where: { userId, name: { contains: search, mode: "insensitive" } },
     select: { name: true, id: true, portions: true },
   });
   return res;
 };
 
 export const getRecipeByInstructions = async (
-  search: string
+  search: string,
 ): Promise<RecipeSearch[]> => {
   const userId = await getUser();
   return await prisma.recipe.findMany({
-    where: { userId, instruction: { contains: search, mode: 'insensitive' } },
+    where: { userId, instruction: { contains: search, mode: "insensitive" } },
     select: { name: true, id: true, portions: true },
   });
 };
 
 export const getRecipeByIngredient = async (
-  search: string
+  search: string,
 ): Promise<RecipeSearch[]> => {
   const userId = await getUser();
   return await prisma.recipe.findMany({
     where: {
       userId,
       ingredients: {
-        some: { name: { contains: search, mode: 'insensitive' } },
+        some: { name: { contains: search, mode: "insensitive" } },
       },
     },
     select: { name: true, id: true, portions: true },
@@ -44,13 +44,13 @@ export const SearchRecipeByFilter = async ({
   search,
 }: SearchParams) => {
   let data: RecipeSearch[] = [];
-  if (filter === 'ingredient') {
+  if (filter === "ingredient") {
     data = await getRecipeByIngredient(search);
   }
-  if (filter === 'instruction') {
+  if (filter === "instruction") {
     data = await getRecipeByInstructions(search);
   }
-  if (filter === 'name') {
+  if (filter === "name") {
     data = await getRecipeByName(search);
   }
   return data;
@@ -77,11 +77,11 @@ export const getRecipeById = async (id: string): Promise<Recipe> => {
   const recipe: Recipe = {
     ...rest,
     portions: Number(data.portions),
-    ingredients: data.ingredients.map(i => ({
+    ingredients: data.ingredients.map((i) => ({
       ...i,
       quantity: Number(i.quantity),
     })),
-    children: containers.map(i => i.containedRecipe),
+    children: containers.map((i) => i.containedRecipe),
   };
   return recipe;
 };
@@ -123,7 +123,7 @@ export const getMenuRecipeById = async (menuId: string): Promise<Recipe> => {
   } = data;
   return {
     id,
-    ingredients: shoppingListItem.map(i => ({
+    ingredients: shoppingListItem.map((i) => ({
       ...i,
       recipeId: menuId,
       quantity: Number(i.quantity),
@@ -148,7 +148,7 @@ export const updateRecipe = async (recipe: Recipe) => {
       containers: {
         deleteMany: { containerRecipeId: recipe.id },
         createMany: {
-          data: recipe.children.map(i => ({
+          data: recipe.children.map((i) => ({
             containedRecipeId: i.id,
             portions: i.portions,
           })),
@@ -157,7 +157,7 @@ export const updateRecipe = async (recipe: Recipe) => {
     },
   });
   await prisma.recipe_ingredient.createMany({
-    data: recipe.ingredients.map(i => ({ ...i, recipeId: recipe.id })),
+    data: recipe.ingredients.map((i) => ({ ...i, recipeId: recipe.id })),
   });
   return updatedRecipe.id;
 };
@@ -176,7 +176,7 @@ export const addRecipe = async (recipe: Recipe) => {
       userId,
       ingredients: {
         createMany: {
-          data: ingredients.map(i => ({
+          data: ingredients.map((i) => ({
             name: i.name,
             quantity: i.quantity,
             unit: i.unit,
@@ -193,7 +193,7 @@ export const addRecipe = async (recipe: Recipe) => {
 
 export const addRecipesToContainer = async (
   containedRecipeIds: RecipeSearch[],
-  containerRecipeId: string
+  containerRecipeId: string,
 ) => {
   const data = containedRecipeIds.map(({ id, portions }) => ({
     containerRecipeId,

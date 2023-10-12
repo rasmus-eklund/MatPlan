@@ -1,7 +1,7 @@
-'use server';
-import getUser from './user';
-import { prisma } from './prisma';
-import { StoreOrder, StoreCategory } from '@/types';
+"use server";
+import getUser from "./user";
+import { prisma } from "./prisma";
+import { StoreOrder, StoreCategory } from "@/types";
 
 const generateDefaultStore = async () =>
   await prisma.category.findMany({
@@ -47,11 +47,14 @@ export const getStoreById = async (id: string): Promise<StoreOrder> => {
 export const addDefaultStore = async () => {
   const userId = await getUser();
   const store = await generateDefaultStore();
-  const data: StoreCategory[] = store.flatMap(cat =>
-    cat.subcategory.map(sub => ({ categoryId: cat.id, subcategoryId: sub.id }))
+  const data: StoreCategory[] = store.flatMap((cat) =>
+    cat.subcategory.map((sub) => ({
+      categoryId: cat.id,
+      subcategoryId: sub.id,
+    })),
   );
   await prisma.store.create({
-    data: { name: 'Ny affär', userId, order: { createMany: { data } } },
+    data: { name: "Ny affär", userId, order: { createMany: { data } } },
   });
 };
 

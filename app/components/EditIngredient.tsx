@@ -1,9 +1,9 @@
-import { RecipeIngredientFront } from '@/types';
-import { FC, useState, ReactNode } from 'react';
-import units from '../constants/units';
-import DeleteButton from './buttons/DeleteButton';
-import Button from './buttons/Button';
-import EditButton from './buttons/EditButton';
+import { RecipeIngredientFront } from "@/types";
+import { FC, useState, ReactNode } from "react";
+import units from "../constants/units";
+import DeleteButton from "./buttons/DeleteButton";
+import Button from "./buttons/Button";
+import EditButton from "./buttons/EditButton";
 
 type EditIngredientProp = {
   ingredient: RecipeIngredientFront;
@@ -43,15 +43,15 @@ const EditIngredient: FC<EditIngredientProp> = ({
               className="w-16"
               type="number"
               value={quant}
-              onChange={e => setQuant(Number(e.target.value))}
+              onChange={(e) => setQuant(Number(e.target.value))}
             />
             <select
               id="edit-unit"
               name="unit"
               value={unit}
-              onChange={e => setUnit(e.target.value)}
+              onChange={(e) => setUnit(e.target.value)}
             >
-              {units.map(u => (
+              {units.map((u) => (
                 <option key={u.abr}>{u.abr}</option>
               ))}
             </select>

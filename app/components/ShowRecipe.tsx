@@ -1,8 +1,8 @@
-'use client';
-import { Recipe } from '@/types';
-import { FC } from 'react';
-import Link from 'next/link';
-import { capitalize } from '../utils/utils';
+"use client";
+import { Recipe } from "@/types";
+import { FC } from "react";
+import Link from "next/link";
+import { capitalize } from "../utils/utils";
 
 type ShowRecipeProps = {
   recipe: Recipe;
@@ -39,7 +39,7 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, children }) => {
             <>
               <h2 className="text-4 text-lg">Recept</h2>
               <ul className="bg-3 p-1 rounded-md flex flex-col gap-1">
-                {recipe.children.map(rec => (
+                {recipe.children.map((rec) => (
                   <li className="bg-4 p-1 rounded-md" key={rec.id}>
                     <div className="flex justify-between text-2">
                       <Link className="text-lg" href={`/recipes/${rec.id}`}>

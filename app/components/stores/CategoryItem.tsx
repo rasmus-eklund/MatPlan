@@ -1,11 +1,11 @@
-import { CategoryItem as CategoryItemComponent } from '@/types';
-import { FC, useEffect, useState } from 'react';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import DraggableIcon from '../icons/DraggableIcon';
-import { capitalize } from '../../utils/utils';
-import MinimizeIcon from '../icons/MinimizeIcon';
-import MaximizeIcon from '../icons/MaximizeIcon';
+import { CategoryItem as CategoryItemComponent } from "@/types";
+import { FC, useEffect, useState } from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import DraggableIcon from "../icons/DraggableIcon";
+import { capitalize } from "../../utils/utils";
+import MinimizeIcon from "../icons/MinimizeIcon";
+import MaximizeIcon from "../icons/MaximizeIcon";
 
 type CategoryProps = {
   category: CategoryItemComponent;

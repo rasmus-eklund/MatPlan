@@ -1,15 +1,15 @@
-'use client';
-import Loading from '@/app/components/Loading';
-import ShowRecipe from '@/app/components/ShowRecipe';
-import { getMenuRecipeById } from '@/app/db/recipes';
-import { Recipe } from '@/types';
-import { useEffect, useState } from 'react';
+"use client";
+import Loading from "@/app/components/Loading";
+import ShowRecipe from "@/app/components/ShowRecipe";
+import { getMenuRecipeById } from "@/app/db/recipes";
+import { Recipe } from "@/types";
+import { useEffect, useState } from "react";
 
 const Page = ({ params: { id } }: { params: { id: string } }) => {
   const [recipe, setRecipe] = useState<Recipe>();
 
   useEffect(() => {
-    getMenuRecipeById(id).then(res => setRecipe(res));
+    getMenuRecipeById(id).then((res) => setRecipe(res));
   }, [id]);
 
   return (

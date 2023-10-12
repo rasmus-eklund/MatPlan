@@ -1,5 +1,5 @@
-import { ShoppingListFilter, StoreOrder } from '@/types';
-import { ChangeEvent, FC } from 'react';
+import { ShoppingListFilter, StoreOrder } from "@/types";
+import { ChangeEvent, FC } from "react";
 
 type ShoppingListFiltersProps = {
   filters: ShoppingListFilter;

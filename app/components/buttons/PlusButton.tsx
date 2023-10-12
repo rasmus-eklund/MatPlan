@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import TrashIcon from '../icons/TrashIcon';
+import { FC } from "react";
+import TrashIcon from "../icons/TrashIcon";
 
 type PlusButtonProps = { callback: () => void };
 

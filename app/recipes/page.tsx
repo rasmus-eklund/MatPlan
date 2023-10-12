@@ -1,33 +1,33 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { Recipe, RecipeSearch, SearchParams } from '@/types';
-import SearchRecipeForm from '../components/recipes/SearchRecipeForm';
-import FoundRecipes from '../components/recipes/FoundRecipes';
-import { SearchRecipeByFilter, addRecipe } from '../db/recipes';
+"use client";
+import { useEffect, useState } from "react";
+import { Recipe, RecipeSearch, SearchParams } from "@/types";
+import SearchRecipeForm from "../components/recipes/SearchRecipeForm";
+import FoundRecipes from "../components/recipes/FoundRecipes";
+import { SearchRecipeByFilter, addRecipe } from "../db/recipes";
 import {
   parseAsString,
   parseAsStringEnum,
   useQueryState,
-} from 'next-usequerystate';
-import RecipeForm from '../components/recipes/RecipeForm';
+} from "next-usequerystate";
+import RecipeForm from "../components/recipes/RecipeForm";
 
 enum Filter {
-  name = 'name',
-  ingredients = 'ingredient',
-  instruction = 'instruction',
+  name = "name",
+  ingredients = "ingredient",
+  instruction = "instruction",
 }
 
 const SearchRecipeComponent = () => {
   const [results, setResults] = useState<RecipeSearch[]>([]);
-  const [search, setSearch] = useQueryState('q', parseAsString.withDefault(''));
+  const [search, setSearch] = useQueryState("q", parseAsString.withDefault(""));
   const [filter, setFilter] = useQueryState(
-    'filter',
-    parseAsStringEnum<Filter>(Object.values(Filter)).withDefault(Filter.name)
+    "filter",
+    parseAsStringEnum<Filter>(Object.values(Filter)).withDefault(Filter.name),
   );
   const [formHidden, setFormHidden] = useState(true);
 
   useEffect(() => {
-    SearchRecipeByFilter({ filter, search }).then(res => setResults(res));
+    SearchRecipeByFilter({ filter, search }).then((res) => setResults(res));
   }, [filter, search]);
 
   const handleSearch = async ({ search, filter }: SearchParams) => {
@@ -39,13 +39,13 @@ const SearchRecipeComponent = () => {
   const createNewRecipe = (recipe: Recipe) => {
     addRecipe(recipe)
       .then(() => SearchRecipeByFilter({ search, filter }))
-      .then(res => setResults(res));
+      .then((res) => setResults(res));
     setFormHidden(true);
   };
 
   const emptyRecipe: Recipe = {
-    instruction: 'Instruktion',
-    name: 'Nytt recept',
+    instruction: "Instruktion",
+    name: "Nytt recept",
     portions: 2,
     ingredients: [],
     children: [],

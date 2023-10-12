@@ -1,16 +1,16 @@
-'use client';
-import { useEffect } from 'react';
-import Image from 'next/image';
-import LoginHome from './components/layout/LoginHome';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+"use client";
+import { useEffect } from "react";
+import Image from "next/image";
+import LoginHome from "./components/layout/LoginHome";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Landing() {
   const { data: session } = useSession();
   const { push } = useRouter();
   useEffect(() => {
     if (session) {
-      push('/home');
+      push("/home");
     }
   }, [session, push]);
 
@@ -30,7 +30,7 @@ export default function Landing() {
         layout="fill"
         objectFit="cover"
         objectPosition="center center"
-        style={{ pointerEvents: 'none', opacity: 0.6, zIndex: -1 }}
+        style={{ pointerEvents: "none", opacity: 0.6, zIndex: -1 }}
       />
     </main>
   );

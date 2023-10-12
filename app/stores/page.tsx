@@ -1,9 +1,9 @@
-'use client';
-import { StoreOrder } from '@/types';
-import React, { useEffect, useState } from 'react';
-import { getAllStores, addDefaultStore, removeStore } from '../db/stores';
-import StoreComponent from '../components/stores/StoreItem';
-import PlusIcon from '../components/icons/PlusIcon';
+"use client";
+import { StoreOrder } from "@/types";
+import React, { useEffect, useState } from "react";
+import { getAllStores, addDefaultStore, removeStore } from "../db/stores";
+import StoreComponent from "../components/stores/StoreItem";
+import PlusIcon from "../components/icons/PlusIcon";
 
 const Stores = () => {
   const [stores, setStores] = useState<{ name: string; id: string }[]>([]);
@@ -14,7 +14,7 @@ const Stores = () => {
 
   const handleRemove = async (id: string) => {
     await removeStore(id);
-    setStores(prev => prev.filter(i => i.id !== id));
+    setStores((prev) => prev.filter((i) => i.id !== id));
     if (stores.length === 0) {
       const res = await getAllStores();
       setStores(res);
@@ -29,7 +29,7 @@ const Stores = () => {
   return (
     <main className="bg-2 flex flex-col p-5 gap-4 grow overflow-y-auto">
       <ul className="bg-3 rounded-md flex flex-col gap-2 h-fit p-5">
-        {stores.map(s => (
+        {stores.map((s) => (
           <StoreComponent key={s.id} store={s} callback={handleRemove} />
         ))}
         <li

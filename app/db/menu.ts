@@ -1,19 +1,19 @@
-'use server';
-import { Day, MenuItem } from '@/types';
-import { prisma } from './prisma';
-import getUser from './user';
-import { Prisma } from '@prisma/client';
+"use server";
+import { Day, MenuItem } from "@/types";
+import { prisma } from "./prisma";
+import getUser from "./user";
+import { Prisma } from "@prisma/client";
 
 export const addRecipeToMenu = async (
-  item: Omit<MenuItem, 'name'>
-): Promise<Omit<MenuItem, 'name'>> => {
+  item: Omit<MenuItem, "name">,
+): Promise<Omit<MenuItem, "name">> => {
   const { day, portions, id } = item;
   const userId = await getUser();
   const res = await prisma.recipe_ingredient.findMany({
     where: { recipeId: id },
     select: { id: true, name: true, quantity: true, unit: true },
   });
-  const ingredients = res.map(item => ({
+  const ingredients = res.map((item) => ({
     checked: false,
     ...item,
     userId,
@@ -39,7 +39,7 @@ export const removeMenuItem = async (id: string) => {
 };
 
 export const changeMenuItemPortions = async (
-  item: MenuItem
+  item: MenuItem,
 ): Promise<MenuItem> => {
   const { id, portions } = item;
   const userId = await getUser();
@@ -48,7 +48,7 @@ export const changeMenuItemPortions = async (
     select: { recipe: { select: { portions: true, ingredients: true } } },
   });
   const scale = portions / recipe.portions;
-  const rescaled = recipe.ingredients.map(i => {
+  const rescaled = recipe.ingredients.map((i) => {
     const { recipeId, ...rest } = i;
     return {
       ...rest,
@@ -64,7 +64,7 @@ export const changeMenuItemPortions = async (
       shoppingListItem: {
         deleteMany: { menuId: id },
         createMany: {
-          data: rescaled.map(i => ({
+          data: rescaled.map((i) => ({
             ...i,
             quantity: new Prisma.Decimal(i.quantity.toString()),
           })),
@@ -115,7 +115,7 @@ export const getMenuItems = async (): Promise<MenuItem[]> => {
       recipe: { select: { name: true } },
     },
   });
-  const item: MenuItem[] = data.map(i => {
+  const item: MenuItem[] = data.map((i) => {
     const {
       recipe: { name },
       day,

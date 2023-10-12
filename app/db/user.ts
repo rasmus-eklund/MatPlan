@@ -1,16 +1,16 @@
-'use server';
-import { getServerSession } from 'next-auth';
-import options from '../api/auth/[...nextauth]/options';
-import { prisma } from './prisma';
-import createDefaultRecipes from './constants/recipes/recieps';
+"use server";
+import { getServerSession } from "next-auth";
+import options from "../api/auth/[...nextauth]/options";
+import { prisma } from "./prisma";
+import createDefaultRecipes from "./constants/recipes/recieps";
 
-import { addRecipe } from './recipes';
-import { addDefaultStore } from './stores';
+import { addRecipe } from "./recipes";
+import { addDefaultStore } from "./stores";
 
 const getUser = async () => {
   const session = await getServerSession(options);
   if (!session?.user?.email) {
-    throw new Error('No user');
+    throw new Error("No user");
   }
   return session.user.email;
 };

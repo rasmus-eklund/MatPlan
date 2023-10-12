@@ -1,13 +1,13 @@
-import { ReactNode } from 'react';
-import HomeIcon from '../icons/HomeIcon';
-import RecipeIcon from '../icons/RecipesIcon';
-import ItemsIcon from '../icons/ItemsIcon';
-import ShoppingListIcon from '../icons/ShoppingListIcon';
-import StoreIcon from '../icons/StoreIcon';
-import Link from 'next/link';
+import { ReactNode } from "react";
+import HomeIcon from "../icons/HomeIcon";
+import RecipeIcon from "../icons/RecipesIcon";
+import ItemsIcon from "../icons/ItemsIcon";
+import ShoppingListIcon from "../icons/ShoppingListIcon";
+import StoreIcon from "../icons/StoreIcon";
+import Link from "next/link";
 
 const Navbar = () => {
-  const className = 'fill-4 h-6 md:h-10 hover:scale-110';
+  const className = "fill-4 h-6 md:h-10 hover:scale-110";
   const home = <HomeIcon className={className} />;
   const recipes = <RecipeIcon className={className} />;
   const itemsIcon = <ItemsIcon className={className} />;
@@ -15,11 +15,11 @@ const Navbar = () => {
   const store = <StoreIcon className={className} />;
 
   const items: { name: string; href: string; child: ReactNode }[] = [
-    { name: 'Meny', href: '/menu', child: home },
-    { name: 'Maträtter', href: '/recipes', child: recipes },
-    { name: 'Varor', href: '/ingredients', child: itemsIcon },
-    { name: 'Inköpslista', href: '/shoppingList', child: shoppingList },
-    { name: 'Butik', href: '/stores', child: store },
+    { name: "Meny", href: "/menu", child: home },
+    { name: "Maträtter", href: "/recipes", child: recipes },
+    { name: "Varor", href: "/ingredients", child: itemsIcon },
+    { name: "Inköpslista", href: "/shoppingList", child: shoppingList },
+    { name: "Butik", href: "/stores", child: store },
   ];
 
   return (
