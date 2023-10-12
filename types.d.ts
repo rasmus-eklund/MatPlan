@@ -25,13 +25,6 @@ export type RecipeIngredientFront = {
   name: string;
 };
 
-export type RecipeFront = {
-  name: string;
-  portions: number;
-  instruction: string;
-  ingredients: RecipeIngredientFront[];
-};
-
 export type Recipe_recipe = {
   containerRecipeId: string;
   containedRecipeId: string;
