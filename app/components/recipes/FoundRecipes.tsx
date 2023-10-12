@@ -17,7 +17,7 @@ const FoundRecipes = ({ recipeResult }: Props) => {
       <ul className="flex flex-col gap-2">
         {recipeResult.map(r => (
           <li
-            className="flex justify-between px-2 text-1
+            className="flex justify-between px-2 py-1 text-1
              font-bold bg-4 rounded-md  items-center"
             key={r.id}
           >

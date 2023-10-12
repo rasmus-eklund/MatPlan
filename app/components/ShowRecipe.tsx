@@ -1,5 +1,5 @@
 'use client';
-import { Recipe, RecipeFront } from '@/types';
+import { RecipeFront } from '@/types';
 import { FC, useEffect, useState } from 'react';
 import { getContained } from '../db/recipes';
 import Link from 'next/link';
@@ -9,9 +9,10 @@ type ShowRecipeProps = {
   recipe: RecipeFront;
   id: string;
   scale: number;
+  children?: React.ReactNode;
 };
 
-const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, id, scale }) => {
+const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, id, scale, children }) => {
   const [recipes, setRecipes] = useState<{ name: string; id: string }[]>([]);
 
   useEffect(() => {
@@ -66,6 +67,7 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, id, scale }) => {
             {recipe.instruction}
           </p>
         </div>
+        <div className="flex justify-between items-center">{children}</div>
       </div>
     </section>
   );

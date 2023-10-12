@@ -12,7 +12,7 @@ const DaysDropDown: FC<DaysDropDownProp> = ({ callback, initDay }) => {
 
   return (
     <select
-      className="rounded-md text-1 bg-4 h-10 px-2 hover:bg-3 hover:text-4"
+      className="rounded-md text-1 bg-4 py-1 px-2 hover:bg-1 hover:text-4 border-[2px] border-3 cursor-pointer"
       value={day}
       onChange={e => {
         setDay(e.target.value as Day);

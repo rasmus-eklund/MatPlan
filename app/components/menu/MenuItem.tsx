@@ -42,7 +42,7 @@ const MenuItem: FC<MenuItemProps> = ({ item, update }) => {
       >
         {item.name}
       </Link>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-1">
         <Incrementer
           initialValue={item.portions}
           callback={handleChangePortions}
