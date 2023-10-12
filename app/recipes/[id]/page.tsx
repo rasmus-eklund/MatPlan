@@ -48,28 +48,21 @@ const Recipe = ({ params }: { params: { id: string } }) => {
   return (
     <main className="bg-2 p-5 grow overflow-y-auto">
       {recipe ? (
-        <section className="flex flex-col gap-5 bg-3 p-8 lg: max-w-screen-sm">
+        <section className="flex flex-col rounded-md gap-5 bg-3 p-8 lg: max-w-screen-sm">
           {hideForm ? (
-            <>
-              <ShowRecipe
-                recipe={recipe}
-                id={params.id}
-                scale={recipe.portions}
+            <ShowRecipe recipe={recipe} id={params.id} scale={recipe.portions}>
+              {' '}
+              <DaysDropDown
+                initDay="Obestämd"
+                callback={day =>
+                  handleAddToMenu(day, params.id, recipe.portions)
+                }
               />
-              <div className="flex gap-2 justify-between">
-                <button className="text-"></button>
-                <DaysDropDown
-                  initDay="Obestämd"
-                  callback={day =>
-                    handleAddToMenu(day, params.id, recipe.portions)
-                  }
-                />
-                <div className="flex gap-4 items-center py-2">
-                  <Button name="Ändra" callback={() => setHideForm(false)} />
-                  <Button name="Ta bort" callback={handleDeleteRecipe} />
-                </div>
+              <div className="flex gap-4 items-center py-2">
+                <Button name="Ändra" callback={() => setHideForm(false)} />
+                <Button name="Ta bort" callback={handleDeleteRecipe} />
               </div>
-            </>
+            </ShowRecipe>
           ) : (
             <RecipeForm
               recipe={recipe}
