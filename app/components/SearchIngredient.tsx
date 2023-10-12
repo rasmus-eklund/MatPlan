@@ -68,7 +68,7 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
           searchResults.map((ing, i) => (
             <li
               className={`hover:bg-3 ${i === selected ? 'bg-3' : ''}`}
-              key={name + '_search'}
+              key={ing.name + '_search'}
             >
               <p
                 onClick={() => {
