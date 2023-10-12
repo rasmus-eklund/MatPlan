@@ -2,7 +2,6 @@
 import {
   Home,
   IngredientCat,
-  RecipeIngredientFront,
   ShoppingListItem,
 } from '@/types';
 import { prisma } from './prisma';
