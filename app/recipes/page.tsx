@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { RecipeFront, RecipeSearch, SearchParams } from '@/types';
+import { Recipe, RecipeSearch, SearchParams } from '@/types';
 import SearchRecipeForm from '../components/recipes/SearchRecipeForm';
 import FoundRecipes from '../components/recipes/FoundRecipes';
 import { SearchRecipeByFilter, addRecipe } from '../db/recipes';
@@ -36,18 +36,20 @@ const SearchRecipeComponent = () => {
     setResults(await SearchRecipeByFilter({ search, filter }));
   };
 
-  const createNewRecipe = (recipe: RecipeFront, recipes: RecipeSearch[]) => {
-    addRecipe(recipe, recipes)
+  const createNewRecipe = (recipe: Recipe) => {
+    addRecipe(recipe)
       .then(() => SearchRecipeByFilter({ search, filter }))
       .then(res => setResults(res));
     setFormHidden(true);
   };
 
-  const emptyRecipe: RecipeFront = {
+  const emptyRecipe: Recipe = {
     instruction: 'Instruktion',
     name: 'Nytt recept',
     portions: 2,
     ingredients: [],
+    children: [],
+    id: crypto.randomUUID(),
   };
 
   return (
@@ -59,7 +61,6 @@ const SearchRecipeComponent = () => {
         <div className="flex flex-col gap-5 bg-3 p-8 lg: max-w-screen-sm">
           <RecipeForm
             recipe={emptyRecipe}
-            recipes={[]}
             update={createNewRecipe}
             closeForm={() => setFormHidden(true)}
           />
