@@ -17,12 +17,7 @@ import {
   updateItem,
 } from '../db/items';
 import AddHomeButton from '../components/buttons/AddHomeButton';
-import {
-  addItemOptimistic,
-  isHome,
-  removeItemOptimistic,
-  updateItemOptimistic,
-} from '../utils/utils';
+import { OptimisticAdd, isHome, OptimisticRemove, OptimisticUpdate } from '../utils/utils';
 
 const Ingredients = () => {
   const [items, setItems] = useState<ShoppingListItem[]>([]);
@@ -38,7 +33,7 @@ const Ingredients = () => {
   }, []);
 
   const handleAddHome = (item: Home) => {
-    addItemOptimistic({
+    OptimisticAdd({
       item,
       setOpt: setOptHome,
       setItems: setHome,
@@ -47,7 +42,7 @@ const Ingredients = () => {
   };
 
   const handleRemoveHome = (id: string) => {
-    removeItemOptimistic({
+    OptimisticRemove({
       id,
       setOpt: setOptHome,
       setItems: setHome,
@@ -64,7 +59,7 @@ const Ingredients = () => {
       id: crypto.randomUUID(),
       subcategoryId,
     };
-    addItemOptimistic({
+    OptimisticAdd({
       item,
       setOpt: setOptItems,
       setItems,
@@ -73,7 +68,7 @@ const Ingredients = () => {
   };
 
   const handleUpdate = async (item: ShoppingListItem) => {
-    updateItemOptimistic({
+    OptimisticUpdate({
       item,
       setOpt: setOptItems,
       setItems,
@@ -82,7 +77,7 @@ const Ingredients = () => {
   };
 
   const handleDelete = async (id: string) => {
-    removeItemOptimistic({
+    OptimisticRemove({
       id,
       setOpt: setOptItems,
       setItems,

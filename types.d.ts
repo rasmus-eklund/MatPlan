@@ -113,14 +113,14 @@ export type ShoppingListFilter = {
   stores: StoreOrder[];
 };
 
-export type OptimisticRemove<T> = {
+export type OptimisticRemoveType<T> = {
   id: string;
   setOpt: (action: T[] | ((pendingState: T[]) => T[])) => void;
   setItems: Dispatch<SetStateAction<T[]>>;
   callback: (item: string) => Promise<string>;
 };
 
-export type OptimisticUpdate<T> = {
+export type OptimisticUpdateType<T> = {
   item: T;
   setOpt: (action: T[] | ((pendingState: T[]) => T[])) => void;
   setItems: Dispatch<SetStateAction<T[]>>;

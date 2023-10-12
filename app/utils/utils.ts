@@ -3,13 +3,12 @@ import {
   Day,
   Home,
   MenuItem,
-  OptimisticRemove,
-  OptimisticUpdate,
+  OptimisticRemoveType,
+  OptimisticUpdateType,
   ShoppingListItem,
   ShoppingListItemsGrouped,
   StoreOrder,
 } from '@/types';
-import { Dispatch, SetStateAction } from 'react';
 
 export const capitalize = (s: string) => {
   return s[0].toUpperCase() + s.slice(1);
@@ -112,12 +111,12 @@ export const SortMenuItems = (items: MenuItem[], day: Day) => {
     });
 };
 
-export const updateItemOptimistic = async <T extends { id: string }>({
+export const OptimisticUpdate = async <T extends { id: string }>({
   item,
   setOpt,
   setItems,
   callback,
-}: OptimisticUpdate<T>) => {
+}: OptimisticUpdateType<T>) => {
   setOpt(prev => {
     const oldItems = prev.filter(i => i.id !== item.id);
     return [...oldItems, item];
@@ -129,23 +128,23 @@ export const updateItemOptimistic = async <T extends { id: string }>({
   });
 };
 
-export const removeItemOptimistic = async <T extends { id: string }>({
+export const OptimisticRemove = async <T extends { id: string }>({
   id,
   setItems,
   setOpt,
   callback,
-}: OptimisticRemove<T>) => {
+}: OptimisticRemoveType<T>) => {
   setOpt(prev => prev.filter(i => i.id !== id));
   const removedId = await callback(id);
   setItems((prev: T[]) => prev.filter(i => i.id !== removedId));
 };
 
-export const addItemOptimistic = async <T extends { id: string }>({
+export const OptimisticAdd = async <T extends { id: string }>({
   item,
   setOpt,
   setItems,
   callback,
-}: OptimisticUpdate<T>) => {
+}: OptimisticUpdateType<T>) => {
   setOpt(prev => [...prev, item]);
   const updatedItem = await callback(item);
   setItems((prev: T[]) => [...prev, updatedItem]);

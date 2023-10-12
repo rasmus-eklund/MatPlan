@@ -14,8 +14,8 @@ import {
 import days from '../constants/days';
 import {
   SortMenuItems,
-  removeItemOptimistic,
-  updateItemOptimistic,
+  OptimisticRemove,
+  OptimisticUpdate,
 } from '../utils/utils';
 import MenuItemComponent from '../components/menu/MenuItemComponent';
 
@@ -28,7 +28,7 @@ const Menu = () => {
   }, []);
 
   const handleRemoveItem = async (id: string) => {
-    removeItemOptimistic({
+    OptimisticRemove({
       id,
       setOpt: setOptMenu,
       setItems: setMenu,
@@ -37,7 +37,7 @@ const Menu = () => {
   };
 
   const handleChangeDay = async (item: MenuItem) => {
-    updateItemOptimistic({
+    OptimisticUpdate({
       item,
       setOpt: setOptMenu,
       setItems: setMenu,
@@ -46,7 +46,7 @@ const Menu = () => {
   };
 
   const handleChangePortions = async (item: MenuItem) => {
-    updateItemOptimistic({
+    OptimisticUpdate({
       item,
       setOpt: setOptMenu,
       setItems: setMenu,
