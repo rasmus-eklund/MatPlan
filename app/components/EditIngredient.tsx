@@ -1,55 +1,59 @@
-import { RecipeIngredientFront, Unit } from "@/types";
-import { FC, useState, ReactNode } from "react";
+import { Unit } from "@/types";
+import { useState, ReactNode } from "react";
 import units from "../constants/units";
 import DeleteButton from "./buttons/DeleteButton";
 import Button from "./buttons/Button";
 import EditButton from "./buttons/EditButton";
 
-type EditIngredientProp = {
-  ingredient: RecipeIngredientFront;
-  remove: () => Promise<void>;
-  update: (ingredient: RecipeIngredientFront) => Promise<void>;
+type EditIngredientProp<T> = {
+  ingredientIn: T;
+  remove: (ing: T) => void;
+  update: (ingredient: T) => void;
   editable: boolean;
   children?: ReactNode;
 };
 
-const EditIngredient: FC<EditIngredientProp> = ({
-  ingredient,
+const EditIngredient = <
+  T extends { name: string; quantity: number; unit: Unit },
+>({
+  ingredientIn,
   remove,
   update,
   editable,
   children,
-}) => {
-  const [unit, setUnit] = useState(ingredient.unit);
-  const [quantity, setQuantity] = useState(ingredient.quantity);
+}: EditIngredientProp<T>) => {
+  const [ing, setIng] = useState(ingredientIn);
   const [edit, setEdit] = useState(false);
 
   const handleUpdate = () => {
-    update({
-      name: ingredient.name,
-      quantity,
-      unit,
-    });
+    update(ing);
     setEdit(false);
   };
 
   return (
     <li className="flex justify-between items-center bg-4 text-2 rounded-md px-2 py-1">
-      <p className="grow">{ingredient.name}</p>
+      <p className="grow">{ing.name}</p>
       <div className="flex gap-2 md:gap-4 items-center">
         {edit ? (
           <>
             <input
               className="w-16"
               type="number"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
+              value={ing.quantity}
+              onChange={(e) =>
+                setIng((prev) => ({
+                  ...prev,
+                  quantity: Number(e.target.value),
+                }))
+              }
             />
             <select
               id="edit-unit"
               name="unit"
-              value={unit}
-              onChange={(e) => setUnit(e.target.value as Unit)}
+              value={ing.unit}
+              onChange={(e) =>
+                setIng((prev) => ({ ...prev, unit: e.target.value as Unit }))
+              }
             >
               {units.map((u) => (
                 <option key={u}>{u}</option>
@@ -62,12 +66,12 @@ const EditIngredient: FC<EditIngredientProp> = ({
           </>
         ) : (
           <>
-            <p> {`${quantity} ${unit}`}</p>
+            <p> {`${ing.quantity} ${ing.unit}`}</p>
             {children}
             {editable && (
               <>
                 <EditButton callback={() => setEdit(true)} />
-                <DeleteButton callback={remove} />
+                <DeleteButton callback={() => remove(ing)} />
               </>
             )}
           </>
