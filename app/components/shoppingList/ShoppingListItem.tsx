@@ -12,19 +12,19 @@ type ItemProps = {
 
 const Item: FC<ItemProps> = ({ item, filter, handleCheckItems }) => {
   const { name, quantity, recipe, unit, checked } = item;
-  const [animate, setAnimate] = useState(false);
+  const [animate, setAnimate] = useState(checked);
 
   return (
     <li
       className={`flex justify-between bg-4 text-2 px-2 rounded-md transition-opacity duration-200 ${
-        (checked || animate) && 'opacity-50'
+        (animate) && 'opacity-50'
       }`}
     >
       <div className="flex gap-2">
         <input
           className='cursor-pointer'
           type="checkbox"
-          checked={checked || animate}
+          checked={animate}
           onChange={() => {
             setAnimate(prev => {
               setTimeout(() => {
