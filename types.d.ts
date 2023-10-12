@@ -1,8 +1,10 @@
 import days from "./app/constants/days";
 import units from "./app/constants/units";
+import filterOptions from "./app/constants/searchFilterOptions";
 
 export type Day = (typeof days)[number];
 export type Unit = (typeof units)[number];
+export type Filter = (typeof filterOptions)[number];
 
 export type Recipe = {
   id: string;
@@ -19,18 +21,6 @@ export type RecipeIngredient = {
   quantity: number;
   unit: Unit;
   name: string;
-};
-
-export type RecipeIngredientFront = {
-  quantity: number;
-  unit: Unit;
-  name: string;
-};
-
-export type Recipe_recipe = {
-  containerRecipeId: string;
-  containedRecipeId: string;
-  id: string;
 };
 
 export type RecipeSearch = {
@@ -105,8 +95,6 @@ export type SearchParams = {
   search: string;
   filter: Filter;
 };
-
-export type Filter = "name" | "ingredient" | "instruction";
 
 export type ShoppingListFilter = {
   group: boolean;
