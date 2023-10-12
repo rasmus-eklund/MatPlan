@@ -1,29 +1,42 @@
 'use client';
-import { getMenuItems } from '../db/menu';
-import { Day, MenuItem as MenuItemType } from '@/types';
-import React, { useEffect, useState } from 'react';
-import MenuItem from '../components/menu/MenuItem';
+import {
+  changeMenuItemDay,
+  changeMenuItemPortions,
+  getMenuItems,
+  removeMenuItem,
+} from '../db/menu';
+import { MenuItem } from '@/types';
+import {
+  useEffect,
+  useState,
+  experimental_useOptimistic as useOptimistic,
+} from 'react';
 import days from '../constants/days';
+import {
+  SortMenuItems,
+  removeItemOptimistic,
+  updateItemOptimistic,
+} from '../utils/utils';
+import MenuItemComponent from '../components/menu/MenuItemComponent';
 
 const Menu = () => {
-  const [menu, setMenu] = useState<MenuItemType[]>([]);
+  const [menu, setMenu] = useState<MenuItem[]>([]);
+  const [optMenu, setOptMenu] = useOptimistic(menu);
 
   useEffect(() => {
     getMenuItems().then(data => setMenu(data));
   }, []);
 
-  const update = async () => {
-    setMenu(await getMenuItems());
+  const handleRemoveItem = async (id: string) => {
+    removeItemOptimistic(id, setOptMenu, setMenu, removeMenuItem);
   };
 
-  const toSorted = (items: MenuItemType[], day: Day) => {
-    return items
-      .filter(r => r.day === day)
-      .sort((a, b) => {
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
-        return 0;
-      });
+  const handleChangeDay = async (newItem: MenuItem) => {
+    updateItemOptimistic(newItem, setOptMenu, setMenu, changeMenuItemDay);
+  };
+
+  const handleChangePortions = async (newItem: MenuItem) => {
+    updateItemOptimistic(newItem, setOptMenu, setMenu, changeMenuItemPortions);
   };
 
   return (
@@ -36,8 +49,14 @@ const Menu = () => {
                 {day}
               </h2>
               <ul className="flex flex-col gap-2">
-                {toSorted(menu, day).map(r => (
-                  <MenuItem key={r.id} item={r} update={update} />
+                {SortMenuItems(optMenu, day).map(item => (
+                  <MenuItemComponent
+                    key={item.id}
+                    item={item}
+                    changeDay={handleChangeDay}
+                    changePortions={handleChangePortions}
+                    removeItem={handleRemoveItem}
+                  />
                 ))}
               </ul>
             </li>

@@ -3,15 +3,14 @@ import PlusIcon from '../icons/PlusIcon';
 import MinusIcon from '../icons/MinusIcon';
 
 type IncrementerProps = {
-  initialValue: number;
-  callback: (value: number) => Promise<void>;
+  value: number;
+  callback: (value: number) => void;
 };
 
-const Incrementer: FC<IncrementerProps> = ({ initialValue, callback }) => {
-  const [value, setValue] = useState(initialValue);
+const Incrementer: FC<IncrementerProps> = ({ value, callback }) => {
   const handleChange = (minus: boolean) => {
     const newValue = minus ? Math.max(value - 1, 1) : value + 1;
-    callback(newValue).then(() => setValue(newValue));
+    callback(newValue);
   };
   return (
     <div className="flex items-center p-2 gap-1">

@@ -56,27 +56,84 @@ export const SearchRecipeByFilter = async ({
   return data;
 };
 
-export const getRecipeById = async (id: string): Promise<RecipeFront> => {
+export const getRecipeById = async (id: string): Promise<Recipe> => {
   const userId = await getUser();
   const data = await prisma.recipe.findUniqueOrThrow({
-    where: { id: id, userId },
+    where: { id, userId },
     select: {
       id: true,
       name: true,
       portions: true,
       instruction: true,
       ingredients: true,
+      containers: {
+        select: {
+          containedRecipe: { select: { name: true, id: true, portions: true } },
+        },
+      },
     },
   });
+  const { containers, ...rest } = data;
   const recipe: Recipe = {
-    ...data,
+    ...rest,
     portions: Number(data.portions),
     ingredients: data.ingredients.map(i => ({
       ...i,
       quantity: Number(i.quantity),
     })),
+    children: containers.map(i => i.containedRecipe),
   };
   return recipe;
+};
+
+export const getMenuRecipeById = async (menuId: string): Promise<Recipe> => {
+  const data = await prisma.menu.findUniqueOrThrow({
+    where: { id: menuId },
+    select: {
+      id: true,
+      recipe: {
+        select: {
+          name: true,
+          instruction: true,
+          containers: {
+            select: {
+              containedRecipe: {
+                select: { name: true, id: true, portions: true },
+              },
+            },
+          },
+        },
+      },
+      portions: true,
+
+      shoppingListItem: {
+        select: {
+          id: true,
+          name: true,
+          quantity: true,
+          unit: true,
+        },
+      },
+    },
+  });
+  const {
+    id,
+    portions,
+    recipe: { instruction, name, containers },
+    shoppingListItem,
+  } = data;
+  return {
+    id,
+    ingredients: shoppingListItem.map(i => ({
+      ...i,
+      recipeId: menuId,
+      quantity: Number(i.quantity),
+    })),
+    instruction,
+    name,
+    portions,
+    children: containers.map(i => ({ id, name, portions })),
+  };
 };
 
 export const updateRecipe = async (

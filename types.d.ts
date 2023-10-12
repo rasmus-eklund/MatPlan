@@ -8,6 +8,7 @@ export type Recipe = {
   portions: number;
   instruction: string;
   ingredients: RecipeIngredient[];
+  children: RecipeSearch[];
 };
 
 export type RecipeIngredient = {
@@ -52,7 +53,6 @@ export type IngredientCat = {
 export type MenuItem = {
   id: string;
   name: string;
-  recipeId: string;
   day: Day;
   portions: number;
 };
@@ -117,5 +117,5 @@ export type ShoppingListFilter = {
   group: boolean;
   hideRecipe: boolean;
   selectedStore: string;
-  stores: StoreOrder[]
+  stores: StoreOrder[];
 };

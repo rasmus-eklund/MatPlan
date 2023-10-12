@@ -1,53 +1,45 @@
 'use client';
-import { RecipeFront } from '@/types';
-import { FC, useEffect, useState } from 'react';
-import { getContained } from '../db/recipes';
+import { Recipe } from '@/types';
+import { FC } from 'react';
 import Link from 'next/link';
 import { capitalize } from '../utils/utils';
 
 type ShowRecipeProps = {
-  recipe: RecipeFront;
-  id: string;
-  scale: number;
+  recipe: Recipe;
   children?: React.ReactNode;
 };
 
-const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, id, scale, children }) => {
-  const [recipes, setRecipes] = useState<{ name: string; id: string }[]>([]);
-
-  useEffect(() => {
-    getContained(id).then(res => {
-      setRecipes(res);
-    });
-  }, [id]);
-
+const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, children }) => {
   return (
     <section className="flex flex-col bg-3 rounded-md gap-5">
       <h1 className="text-1 bg-3 text-3xl font-bold">{recipe.name}</h1>
       <div className="rounded-md bg-2 p-2 flex flex-col gap-2">
         <div className="flex justify-between">
           <h2 className="text-4 text-lg">Portioner:</h2>
-          <p className="rounded-md w-10 text-center text-1 bg-3">{scale}</p>
+          <p className="rounded-md w-10 text-center text-1 bg-3">
+            {recipe.portions}
+          </p>
         </div>
         <div className="flex flex-col bg-2 gap-1">
           <h2 className="text-4 text-lg">Ingredienser</h2>
           <ul className="bg-3 p-1 rounded-md flex flex-col gap-1">
-            {recipe.ingredients.map(({ name, quantity, unit }) => (
+            {recipe.ingredients.map(({ name, quantity, unit, id }) => (
               <li className="bg-4 p-1 rounded-md" key={id}>
                 <div className="flex justify-between text-2">
                   <p>{capitalize(name)}</p>
-                  <p>
-                    {(scale / recipe.portions) * quantity} {unit}
-                  </p>
+                  <div className="flex gap-1">
+                    <p>{quantity}</p>
+                    <p> {unit}</p>
+                  </div>
                 </div>
               </li>
             ))}
           </ul>
-          {recipes.length !== 0 && (
+          {recipe.children.length !== 0 && (
             <>
               <h2 className="text-4 text-lg">Recept</h2>
               <ul className="bg-3 p-1 rounded-md flex flex-col gap-1">
-                {recipes.map(rec => (
+                {recipe.children.map(rec => (
                   <li className="bg-4 p-1 rounded-md" key={rec.id}>
                     <div className="flex justify-between text-2">
                       <Link className="text-lg" href={`/recipes/${rec.id}`}>
