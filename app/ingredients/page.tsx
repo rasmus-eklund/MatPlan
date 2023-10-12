@@ -56,7 +56,7 @@ const Ingredients = () => {
             {optItems
               .filter((i) => !i.recipe)
               .map((item) => (
-                <EditIngredient
+                <EditIngredient<ShoppingListItem>
                   remove={() => optiItem.remove({ item, cb: deleteItem })}
                   update={(ing) =>
                     optiItem.update({
@@ -64,7 +64,7 @@ const Ingredients = () => {
                       cb: updateItem,
                     })
                   }
-                  ingredient={item}
+                  ingredientIn={item}
                   key={item.id}
                   editable={true}
                 />
@@ -77,7 +77,7 @@ const Ingredients = () => {
             {optItems
               .filter((i) => i.recipe)
               .map((item) => (
-                <EditIngredient
+                <EditIngredient<ShoppingListItem>
                   remove={() => optiItem.remove({ item, cb: deleteItem })}
                   update={(ing) =>
                     optiItem.update({
@@ -85,7 +85,7 @@ const Ingredients = () => {
                       cb: updateItem,
                     })
                   }
-                  ingredient={item}
+                  ingredientIn={item}
                   key={item.id}
                   editable={false}
                 >
@@ -101,7 +101,10 @@ const Ingredients = () => {
                             },
                             cb: addHome,
                           })
-                        : optiHome.remove({ item, cb: removeHome });
+                        : optiHome.remove({
+                            item: { id: item.name, quantity: null, unit: null },
+                            cb: removeHome,
+                          });
                     }}
                   />
                 </EditIngredient>
