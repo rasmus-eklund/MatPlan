@@ -32,7 +32,7 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
                   key={group.name}
                   filter={filters}
                   group={group}
-                  onCheck={handleCheckItems}
+                  handleCheckItems={handleCheckItems}
                 />
               )
             )
@@ -41,7 +41,7 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
                 key={item.id}
                 item={item}
                 filter={filters}
-                onCheck={handleCheckItems}
+                handleCheckItems={handleCheckItems}
               />
             ))}
       </ul>

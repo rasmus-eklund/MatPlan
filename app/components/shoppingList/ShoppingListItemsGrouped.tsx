@@ -12,13 +12,13 @@ import durations from '@/app/constants/animationDurations';
 
 type ShoppingListItemsGroupedProps = {
   group: ShoppingListItemsGrouped;
-  onCheck: (item: ShoppingListItem[]) => void;
+  handleCheckItems: (item: ShoppingListItem[]) => void;
   filter: ShoppingListFilter;
 };
 
 const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
   group,
-  onCheck,
+  handleCheckItems,
   filter,
 }) => {
   const [open, setOpen] = useState(false);
@@ -33,6 +33,7 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
       <div className="flex justify-between items-center">
         <div className="flex gap-2">
           <input
+            className="cursor-pointer"
             type="checkbox"
             name="checkGroup"
             checked={group.checked || animate}
@@ -41,7 +42,7 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
               setAnimate(prev => {
                 setOpen(false);
                 setTimeout(() => {
-                  onCheck(
+                  handleCheckItems(
                     group.group.map(i => ({ ...i, checked: !group.checked }))
                   );
                 }, durations.checkShoppingList);
@@ -51,27 +52,36 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
           />
           <p className="text-1">{capitalize(group.name)}</p>
         </div>
-        <div className="flex gap-2" onClick={() => setOpen(!open)}>
+        <div className="flex gap-2">
           <ul className="flex gap-1">
             {groupByUnit(group.group).map((i, index, arr) => (
-              <li className="flex gap-1 text-1" key={i.unit}>
+              <li className="flex gap-1 text-1 select-none" key={i.unit}>
                 <p>{i.quantity}</p>
                 <p>{i.unit}</p>
                 {index < arr.length - 1 && <span>, </span>}
               </li>
             ))}
           </ul>
-          {open ? (
-            <MinimizeIcon className="h-6 fill-1 hover:scale-110" />
-          ) : (
-            <MaximizeIcon className="h-6 fill-1 hover:scale-110" />
+          {group.group.length !== 1 && (
+            <div className="cursor-pointer" onClick={() => setOpen(!open)}>
+              {open ? (
+                <MinimizeIcon className="h-6 fill-1 hover:scale-125" />
+              ) : (
+                <MaximizeIcon className="h-6 fill-1 hover:scale-125" />
+              )}
+            </div>
           )}
         </div>
       </div>
       {open && (
         <ul className="flex flex-col gap-1">
           {sortByChecked(group.group).map(item => (
-            <Item key={item.id} item={item} filter={filter} onCheck={onCheck} />
+            <Item
+              key={item.id}
+              item={item}
+              filter={filter}
+              handleCheckItems={handleCheckItems}
+            />
           ))}
         </ul>
       )}

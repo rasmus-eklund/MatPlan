@@ -1,15 +1,16 @@
 'use client';
 import durations from '@/app/constants/animationDurations';
+import { capitalize } from '@/app/utils/utils';
 import { ShoppingListFilter, ShoppingListItem } from '@/types';
 import { FC, useState } from 'react';
 
 type ItemProps = {
   item: ShoppingListItem;
   filter: ShoppingListFilter;
-  onCheck: (item: ShoppingListItem[]) => void;
+  handleCheckItems: (item: ShoppingListItem[]) => void;
 };
 
-const Item: FC<ItemProps> = ({ item, filter, onCheck }) => {
+const Item: FC<ItemProps> = ({ item, filter, handleCheckItems }) => {
   const { name, quantity, recipe, unit, checked } = item;
   const [animate, setAnimate] = useState(false);
 
@@ -21,21 +22,22 @@ const Item: FC<ItemProps> = ({ item, filter, onCheck }) => {
     >
       <div className="flex gap-2">
         <input
+          className='cursor-pointer'
           type="checkbox"
           checked={checked || animate}
           onChange={() => {
             setAnimate(prev => {
               setTimeout(() => {
-                onCheck([{ ...item, checked: !checked }]);
+                handleCheckItems([{ ...item, checked: !checked }]);
               }, durations.checkShoppingList);
               return !prev;
             });
           }}
         />
-        <p className="text-left">{name}</p>
+        <p className='select-none'>{capitalize(name)}</p>
       </div>
-      <div className={`flex gap-2 justify-between ${recipe && 'w-1/4'}`}>
-        <div className="flex gap-2">
+      <div className={`flex gap-2 justify-between ${!filter.hideRecipe && recipe && 'w-1/4'}`}>
+        <div className="flex gap-2 select-none">
           <p>{quantity}</p>
           <p>{unit}</p>
         </div>
