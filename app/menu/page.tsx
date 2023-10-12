@@ -28,15 +28,30 @@ const Menu = () => {
   }, []);
 
   const handleRemoveItem = async (id: string) => {
-    removeItemOptimistic(id, setOptMenu, setMenu, removeMenuItem);
+    removeItemOptimistic({
+      id,
+      setOpt: setOptMenu,
+      setItems: setMenu,
+      callback: removeMenuItem,
+    });
   };
 
-  const handleChangeDay = async (newItem: MenuItem) => {
-    updateItemOptimistic(newItem, setOptMenu, setMenu, changeMenuItemDay);
+  const handleChangeDay = async (item: MenuItem) => {
+    updateItemOptimistic({
+      item,
+      setOpt: setOptMenu,
+      setItems: setMenu,
+      callback: changeMenuItemDay,
+    });
   };
 
-  const handleChangePortions = async (newItem: MenuItem) => {
-    updateItemOptimistic(newItem, setOptMenu, setMenu, changeMenuItemPortions);
+  const handleChangePortions = async (item: MenuItem) => {
+    updateItemOptimistic({
+      item,
+      setOpt: setOptMenu,
+      setItems: setMenu,
+      callback: changeMenuItemPortions,
+    });
   };
 
   return (
