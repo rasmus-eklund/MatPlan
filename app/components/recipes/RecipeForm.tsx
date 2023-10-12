@@ -1,8 +1,8 @@
 'use client';
 import {
   IngredientCat,
-  RecipeFront,
-  RecipeIngredientFront,
+  Recipe,
+  RecipeIngredient,
   RecipeSearch,
   SearchParams,
 } from '@/types';
@@ -15,42 +15,50 @@ import Button from '../buttons/Button';
 import { SearchRecipeByFilter } from '@/app/db/recipes';
 
 type RecipeFormProp = {
-  recipe: RecipeFront;
-  recipes: RecipeSearch[];
-  update: (recipe: RecipeFront, recipes: RecipeSearch[]) => void;
+  recipe: Recipe;
+  update: (recipe: Recipe) => void;
   closeForm: () => void;
 };
 
-const RecipeForm: FC<RecipeFormProp> = props => {
-  const [recipe, setRecipe] = useState<RecipeFront>(props.recipe);
-  const [connectedRecipes, setConnectedRecipes] = useState<RecipeSearch[]>(
-    props.recipes
-  );
+const RecipeForm: FC<RecipeFormProp> = ({
+  recipe: incomingRecipe,
+  update,
+  closeForm,
+}) => {
+  const [recipe, setRecipe] = useState<Recipe>(incomingRecipe);
   const [recipeSearchResult, setRecipeSearchResult] = useState<RecipeSearch[]>(
     []
   );
 
   const handleUpdateRecipe = async () => {
-    props.update(recipe, connectedRecipes);
+    update(recipe);
   };
 
   const handleAddIngredient = (ing: IngredientCat) => {
-    const ingredient = { name: ing.name, quantity: 1, unit: 'st' };
-    setRecipe({ ...recipe, ingredients: [...recipe.ingredients, ingredient] });
+    const ingredient: RecipeIngredient = {
+      name: ing.name,
+      quantity: 1,
+      unit: 'st',
+      id: crypto.randomUUID(),
+      recipeId: recipe.id,
+    };
+    setRecipe(prev => ({
+      ...prev,
+      ingredients: [...recipe.ingredients, ingredient],
+    }));
   };
 
-  const handleDeleteIngredient = (i: number) => {
-    setRecipe({
-      ...recipe,
-      ingredients: recipe.ingredients.filter((_, index) => index !== i),
-    });
+  const handleDeleteIngredient = (id: string) => {
+    setRecipe(prev => ({
+      ...prev,
+      ingredients: prev.ingredients.filter(ing => ing.id !== id),
+    }));
   };
 
-  const handleUpdateIngredient = (ing: RecipeIngredientFront, i: number) => {
+  const handleUpdateIngredient = (ing: RecipeIngredient) => {
     setRecipe(prev => {
-      const newIngsredients = prev.ingredients;
-      newIngsredients[i] = ing;
-      return { ...prev, ingredients: newIngsredients };
+      const oldIngs = prev.ingredients.filter(i => i.id !== ing.id);
+      return { ...prev, ingredients: [...oldIngs, ing] };
     });
   };
 
@@ -61,11 +69,14 @@ const RecipeForm: FC<RecipeFormProp> = props => {
   };
 
   const handleAddRecipe = (recipe: RecipeSearch) => {
-    setConnectedRecipes([...connectedRecipes, recipe]);
+    setRecipe(prev => ({ ...prev, children: [...prev.children, recipe] }));
   };
 
   const handleRemoveRecipe = (id: string) => {
-    setConnectedRecipes(connectedRecipes.filter(r => r.id !== id));
+    setRecipe(prev => ({
+      ...prev,
+      children: prev.children.filter(r => r.id !== id),
+    }));
   };
 
   return (
@@ -74,7 +85,7 @@ const RecipeForm: FC<RecipeFormProp> = props => {
         className="text-1 bg-3 text-3xl font-bold"
         type="text"
         value={recipe.name}
-        onChange={e => setRecipe({ ...recipe, name: e.target.value })}
+        onChange={e => setRecipe(prev => ({ ...prev, name: e.target.value }))}
       />
       <div className="rounded-md bg-2 p-4 flex flex-col gap-2">
         <div className="flex justify-between">
@@ -84,7 +95,10 @@ const RecipeForm: FC<RecipeFormProp> = props => {
             type="number"
             value={recipe.portions}
             onChange={e =>
-              setRecipe({ ...recipe, portions: Number(e.target.value) })
+              setRecipe(prev => ({
+                ...prev,
+                portions: Number(e.target.value),
+              }))
             }
           />
         </div>
@@ -93,12 +107,12 @@ const RecipeForm: FC<RecipeFormProp> = props => {
           <div className="bg-3 p-2 rounded-md">
             <SearchIngredients callback={handleAddIngredient} />
             <ul className="flex flex-col gap-1 py-2">
-              {recipe.ingredients.map((ing, i) => (
+              {recipe.ingredients.map(ing => (
                 <EditIngredient
                   ingredient={ing}
-                  remove={async () => handleDeleteIngredient(i)}
-                  update={async () => handleUpdateIngredient(ing, i)}
-                  key={crypto.randomUUID()}
+                  remove={async () => handleDeleteIngredient(ing.id)}
+                  update={async () => handleUpdateIngredient(ing)}
+                  key={ing.id}
                   editable={true}
                 />
               ))}
@@ -111,7 +125,7 @@ const RecipeForm: FC<RecipeFormProp> = props => {
             className="bg-3 text-1 rounded-md p-2"
             value={recipe.instruction}
             onChange={e =>
-              setRecipe({ ...recipe, instruction: e.target.value })
+              setRecipe(prev => ({ ...prev, instruction: e.target.value }))
             }
           />
         </div>
@@ -134,7 +148,7 @@ const RecipeForm: FC<RecipeFormProp> = props => {
               ))}
             </ul>
             <ul className="flex flex-col gap-1 py-2">
-              {connectedRecipes.map(rec => (
+              {recipe.children.map(rec => (
                 <li
                   key={rec.id + 'contained'}
                   className="flex px-2 text-1 font-bold bg-4 rounded-md items-center justify-between"
@@ -149,7 +163,7 @@ const RecipeForm: FC<RecipeFormProp> = props => {
       </div>
       <div className="self-end flex gap-2">
         <Button name="Spara" callback={handleUpdateRecipe} />
-        <Button name="Stäng" callback={props.closeForm} />
+        <Button name="Stäng" callback={closeForm} />
       </div>
     </section>
   );
