@@ -1,6 +1,8 @@
 import days from "./app/constants/days";
+import units from "./app/constants/units";
 
 export type Day = (typeof days)[number];
+export type Unit = (typeof units)[number];
 
 export type Recipe = {
   id: string;
@@ -15,13 +17,13 @@ export type RecipeIngredient = {
   id: string;
   recipeId: string;
   quantity: number;
-  unit: string;
+  unit: Unit;
   name: string;
 };
 
 export type RecipeIngredientFront = {
   quantity: number;
-  unit: string;
+  unit: Unit;
   name: string;
 };
 
@@ -54,7 +56,7 @@ export type ShoppingListItem = {
   id: string;
   name: string;
   quantity: number;
-  unit: string;
+  unit: Unit;
   checked: boolean;
   recipe?: string;
   subcategoryId: number;
@@ -96,7 +98,7 @@ export type CategoryItem = {
 export type Home = {
   id: string;
   quantity: number?;
-  unit: string?;
+  unit: Unit?;
 };
 
 export type SearchParams = {

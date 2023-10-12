@@ -1,5 +1,5 @@
 "use server";
-import { Home, IngredientCat, ShoppingListItem } from "@/types";
+import { Home, IngredientCat, ShoppingListItem, Unit } from "@/types";
 import { prisma } from "./prisma";
 import getUser from "./user";
 import { Prisma } from "@prisma/client";
@@ -36,15 +36,32 @@ const toShoppingListItem = (
   const {
     ingredient: { subcategoryId },
     recipe,
+    unit,
+    quantity,
     ...rest
   } = item;
   return {
     ...rest,
-    quantity: Number(item.quantity),
+    unit: unit as Unit,
+    quantity: Number(quantity),
     recipe: recipe?.recipe.name,
     subcategoryId,
   };
 };
+
+const toHomeItem = ({
+  name,
+  quantity,
+  unit,
+}: {
+  name: string;
+  quantity: Prisma.Decimal | null;
+  unit: string | null;
+}): Home => ({
+  id: name,
+  quantity: quantity ? Number(quantity) : null,
+  unit: unit as Unit,
+});
 
 export const updateItem = async ({
   checked,
@@ -103,33 +120,28 @@ export const getIngredientCategories = async (): Promise<IngredientCat[]> =>
   });
 
 export const addHome = async (item: Home): Promise<Home> => {
-  console.log(item);
   const userId = await getUser();
-  const { name, quantity, unit } = await prisma.home.create({
+  const data = await prisma.home.create({
     data: { name: item.id, userId },
     select: { name: true, quantity: true, unit: true },
   });
-  return { id: name, quantity: quantity ? Number(quantity) : null, unit };
+  return toHomeItem(data);
 };
 
 export const removeHome = async ({ id }: Home): Promise<Home> => {
   const userId = await getUser();
-  const { name, quantity, unit } = await prisma.home.delete({
+  const data = await prisma.home.delete({
     where: { userId, name: id },
     select: { name: true, quantity: true, unit: true },
   });
-  return { id: name, quantity: quantity ? Number(quantity) : null, unit };
+  return toHomeItem(data);
 };
 
 export const getHome = async (): Promise<Home[]> => {
   const userId = await getUser();
-  const data = await prisma.home.findMany({
+  const datas = await prisma.home.findMany({
     where: { userId },
     select: { name: true, quantity: true, unit: true },
   });
-  return data.map(({ name, quantity, unit }) => ({
-    id: name,
-    quantity: quantity ? Number(quantity) : null,
-    unit,
-  }));
+  return datas.map((data) => toHomeItem(data));
 };

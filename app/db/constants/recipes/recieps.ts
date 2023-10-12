@@ -4,7 +4,7 @@ const createDefaultRecipes = (): Recipe[] => {
   const test1 = crypto.randomUUID();
   const test2 = crypto.randomUUID();
   const test3 = crypto.randomUUID();
-  const t3 = {
+  const t3: Recipe = {
     id: test3,
     name: "Test3",
     portions: 2,
@@ -20,7 +20,7 @@ const createDefaultRecipes = (): Recipe[] => {
     ],
     children: [],
   };
-  const t2 = {
+  const t2: Recipe = {
     id: test2,
     name: "Test2",
     portions: 2,

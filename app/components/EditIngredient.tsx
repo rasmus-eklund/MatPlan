@@ -1,4 +1,4 @@
-import { RecipeIngredientFront } from "@/types";
+import { RecipeIngredientFront, Unit } from "@/types";
 import { FC, useState, ReactNode } from "react";
 import units from "../constants/units";
 import DeleteButton from "./buttons/DeleteButton";
@@ -21,14 +21,14 @@ const EditIngredient: FC<EditIngredientProp> = ({
   children,
 }) => {
   const [unit, setUnit] = useState(ingredient.unit);
-  const [quant, setQuant] = useState(ingredient.quantity);
+  const [quantity, setQuantity] = useState(ingredient.quantity);
   const [edit, setEdit] = useState(false);
 
   const handleUpdate = () => {
     update({
       name: ingredient.name,
-      quantity: quant,
-      unit: unit,
+      quantity,
+      unit,
     });
     setEdit(false);
   };
@@ -42,17 +42,17 @@ const EditIngredient: FC<EditIngredientProp> = ({
             <input
               className="w-16"
               type="number"
-              value={quant}
-              onChange={(e) => setQuant(Number(e.target.value))}
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
             />
             <select
               id="edit-unit"
               name="unit"
               value={unit}
-              onChange={(e) => setUnit(e.target.value)}
+              onChange={(e) => setUnit(e.target.value as Unit)}
             >
               {units.map((u) => (
-                <option key={u.abr}>{u.abr}</option>
+                <option key={u}>{u}</option>
               ))}
             </select>
             <div className="flex gap-2 justify-self-end">
@@ -62,7 +62,7 @@ const EditIngredient: FC<EditIngredientProp> = ({
           </>
         ) : (
           <>
-            <p> {`${quant} ${unit}`}</p>
+            <p> {`${quantity} ${unit}`}</p>
             {children}
             {editable && (
               <>

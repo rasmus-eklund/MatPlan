@@ -1,5 +1,5 @@
 "use server";
-import { Recipe, RecipeSearch, SearchParams } from "@/types";
+import { Recipe, RecipeSearch, SearchParams, Unit } from "@/types";
 import { prisma } from "./prisma";
 import getUser from "./user";
 
@@ -80,6 +80,7 @@ export const getRecipeById = async (id: string): Promise<Recipe> => {
     ingredients: data.ingredients.map((i) => ({
       ...i,
       quantity: Number(i.quantity),
+      unit: i.unit as Unit,
     })),
     children: containers.map((i) => i.containedRecipe),
   };
@@ -125,6 +126,7 @@ export const getMenuRecipeById = async (menuId: string): Promise<Recipe> => {
     id,
     ingredients: shoppingListItem.map((i) => ({
       ...i,
+      unit: i.unit as Unit,
       recipeId: menuId,
       quantity: Number(i.quantity),
     })),
