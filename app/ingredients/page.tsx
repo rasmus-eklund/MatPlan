@@ -7,47 +7,56 @@ import {
 import SearchIngredients from '../components/SearchIngredient';
 import { Home, IngredientCat, ShoppingListItem } from '@/types';
 import EditIngredient from '../components/EditIngredient';
-import { editHome, getHome } from '../db/home';
 import {
+  addHome,
   createItem,
   deleteItem,
+  getHome,
   getShoppingList,
+  removeHome,
   updateItem,
 } from '../db/items';
 import AddHomeButton from '../components/buttons/AddHomeButton';
-import { isHome } from '../utils/utils';
-
-type Items = { items: ShoppingListItem[]; home: Home[] };
+import {
+  addItemOptimistic,
+  isHome,
+  removeItemOptimistic,
+  updateItemOptimistic,
+} from '../utils/utils';
 
 const Ingredients = () => {
-  const [items, setItems] = useState<Items>({ items: [], home: [] });
-  const [optimisticItems, setOptimisticItems] = useOptimistic(items);
+  const [items, setItems] = useState<ShoppingListItem[]>([]);
+  const [home, setHome] = useState<Home[]>([]);
+  const [optItems, setOptItems] = useOptimistic(items);
+  const [optHome, setOptHome] = useOptimistic(home);
 
   useEffect(() => {
-    Promise.all([getShoppingList(), getHome()]).then(([newItems, newHome]) => {
-      setItems(({ items, home }) => ({
-        items: [...items, ...newItems],
-        home: [...home, ...newHome],
-      }));
+    Promise.all([getShoppingList(), getHome()]).then(([items, home]) => {
+      setItems(items);
+      setHome(home);
     });
   }, []);
 
-  const handleHome = async (check: boolean, name: string) => {
-    setOptimisticItems(({ items, home }) =>
-      check
-        ? { items, home: [...home, { name, quantity: null, unit: null }] }
-        : { items, home: home.filter(i => i.name !== name) }
-    );
-    await editHome({ name, quantity: null, unit: null }, check);
-    setItems(({ items, home }) =>
-      check
-        ? { items, home: [...home, { name, quantity: null, unit: null }] }
-        : { items, home: home.filter(i => i.name !== name) }
-    );
+  const handleAddHome = (item: Home) => {
+    addItemOptimistic({
+      item,
+      setOpt: setOptHome,
+      setItems: setHome,
+      callback: addHome,
+    });
+  };
+
+  const handleRemoveHome = (id: string) => {
+    removeItemOptimistic({
+      id,
+      setOpt: setOptHome,
+      setItems: setHome,
+      callback: removeHome,
+    });
   };
 
   const addIngredient = async ({ name, subcategoryId }: IngredientCat) => {
-    const newItem: ShoppingListItem = {
+    const item: ShoppingListItem = {
       name,
       quantity: 1,
       unit: 'st',
@@ -55,42 +64,30 @@ const Ingredients = () => {
       id: 'placeholder',
       subcategoryId,
     };
-    setOptimisticItems(({ items, home }) => ({
-      items: [...items, { ...newItem, checked: false, id: 'placeholder' }],
-      home,
-    }));
-    const ing = await createItem({
-      name: newItem.name,
-      quantity: newItem.quantity,
-      unit: newItem.unit,
+    addItemOptimistic({
+      item,
+      setOpt: setOptItems,
+      setItems,
+      callback: createItem,
     });
-    setItems(({ items, home }) => ({ items: [...items, ing], home }));
   };
 
-  const handleUpdate = async (ing: ShoppingListItem) => {
-    setOptimisticItems(({ items, home }) => {
-      const index = items.findIndex(item => item.id === ing.id);
-      items[index] = ing;
-      return { items, home };
-    });
-    const updatedItem = await updateItem(ing);
-    setItems(({ items, home }) => {
-      const index = items.findIndex(item => item.id === ing.id);
-      items[index] = updatedItem;
-      return { items, home };
+  const handleUpdate = async (item: ShoppingListItem) => {
+    updateItemOptimistic({
+      item,
+      setOpt: setOptItems,
+      setItems,
+      callback: updateItem,
     });
   };
 
   const handleDelete = async (id: string) => {
-    setOptimisticItems(({ items, home }) => ({
-      items: items.filter(i => i.id !== id),
-      home,
-    }));
-    const deletedId = await deleteItem(id);
-    setItems(({ items, home }) => ({
-      items: items.filter(i => i.id !== deletedId),
-      home,
-    }));
+    removeItemOptimistic({
+      id,
+      setOpt: setOptItems,
+      setItems,
+      callback: deleteItem,
+    });
   };
 
   return (
@@ -102,7 +99,7 @@ const Ingredients = () => {
         <div className="bg-2 p-3 rounded-md">
           <h2 className="text-3">Extra varor:</h2>
           <ul className="flex flex-col gap-2">
-            {optimisticItems.items
+            {optItems
               .filter(i => !i.recipe)
               .map(i => (
                 <EditIngredient
@@ -118,7 +115,7 @@ const Ingredients = () => {
         <div className="bg-2 p-3 rounded-md">
           <h2 className="text-3">Recept varor:</h2>
           <ul className="flex flex-col gap-2">
-            {optimisticItems.items
+            {optItems
               .filter(i => i.recipe)
               .map(i => (
                 <EditIngredient
@@ -129,8 +126,16 @@ const Ingredients = () => {
                   editable={false}
                 >
                   <AddHomeButton
-                    home={isHome(i.name, items.home)}
-                    callback={home => handleHome(home, i.name)}
+                    home={isHome(i.name, optHome)}
+                    callback={home => {
+                      home
+                        ? handleAddHome({
+                            id: i.name,
+                            quantity: null,
+                            unit: null,
+                          })
+                        : handleRemoveHome(i.name);
+                    }}
                   />
                 </EditIngredient>
               ))}
