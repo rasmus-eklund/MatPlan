@@ -1,12 +1,7 @@
 'use client';
-import {
-  deleteRecipe,
-  getContained,
-  getRecipeById,
-  updateRecipe,
-} from '@/app/db/recipes';
-import { Day, RecipeFront, RecipeSearch } from '@/types';
-import React, { useEffect, useState } from 'react';
+import { deleteRecipe, getRecipeById, updateRecipe } from '@/app/db/recipes';
+import { Day, Recipe } from '@/types';
+import { useEffect, useState } from 'react';
 
 import DaysDropDown from '@/app/components/DaysDropDown';
 import { useRouter } from 'next/navigation';
@@ -17,15 +12,13 @@ import Button from '@/app/components/buttons/Button';
 import Loading from '@/app/components/Loading';
 
 const Recipe = ({ params }: { params: { id: string } }) => {
-  const [recipe, setRecipe] = useState<RecipeFront>();
-  const [recipes, setRecipes] = useState<RecipeSearch[]>([]);
+  const [recipe, setRecipe] = useState<Recipe>();
   const [hideForm, setHideForm] = useState(true);
   const { push } = useRouter();
   const id = params.id;
 
   useEffect(() => {
     getRecipeById(id).then(res => setRecipe(res));
-    getContained(id).then(res => setRecipes(res));
   }, [id]);
 
   const handleDeleteRecipe = () => {
@@ -34,8 +27,8 @@ const Recipe = ({ params }: { params: { id: string } }) => {
     });
   };
 
-  const handleUpdate = (recipe: RecipeFront, recipes: RecipeSearch[]) => {
-    updateRecipe(recipe, recipes, params.id).then(() => {
+  const handleUpdate = (recipe: Recipe) => {
+    updateRecipe(recipe).then(() => {
       setHideForm(true);
       setRecipe(recipe);
     });
@@ -50,13 +43,10 @@ const Recipe = ({ params }: { params: { id: string } }) => {
       {recipe ? (
         <section className="flex flex-col rounded-md gap-5 bg-3 p-8 lg: max-w-screen-sm">
           {hideForm ? (
-            <ShowRecipe recipe={recipe} id={params.id} scale={recipe.portions}>
-              {' '}
+            <ShowRecipe recipe={recipe}>
               <DaysDropDown
                 initDay="Obestämd"
-                callback={day =>
-                  handleAddToMenu(day, params.id, recipe.portions)
-                }
+                setDay={day => handleAddToMenu(day, params.id, recipe.portions)}
               />
               <div className="flex gap-4 items-center py-2">
                 <Button name="Ändra" callback={() => setHideForm(false)} />
@@ -66,7 +56,6 @@ const Recipe = ({ params }: { params: { id: string } }) => {
           ) : (
             <RecipeForm
               recipe={recipe}
-              recipes={recipes}
               update={handleUpdate}
               closeForm={() => setHideForm(true)}
             />
