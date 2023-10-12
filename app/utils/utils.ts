@@ -2,9 +2,10 @@ import {
   CategoryItem,
   Day,
   Home,
+  IngredientCat,
   MenuItem,
-  OptimisticRemoveType,
-  OptimisticUpdateType,
+  OptimisticMethod,
+  OptimisticType,
   ShoppingListItem,
   ShoppingListItemsGrouped,
   StoreOrder,
@@ -113,41 +114,44 @@ export const SortMenuItems = (items: MenuItem[], day: Day) => {
     });
 };
 
-export const OptimisticUpdate = async <T extends { id: string }>({
-  item,
+export const Optimistic = <T extends { id: string }>({
   setOpt,
   setItems,
-  callback,
-}: OptimisticUpdateType<T>) => {
-  setOpt((prev) => {
-    const oldItems = prev.filter((i) => i.id !== item.id);
-    return [...oldItems, item];
-  });
-  const updatedItem = await callback(item);
-  setItems((prev: T[]) => {
-    const oldItems = prev.filter((i) => i.id !== item.id);
-    return [...oldItems, updatedItem];
-  });
+}: OptimisticType<T>) => {
+  const add = async ({ item, cb }: OptimisticMethod<T>) => {
+    setOpt((prev) => [...prev, item]);
+    const updatedItem = await cb(item);
+    setItems((prev: T[]) => [...prev, updatedItem]);
+  };
+  const remove = async ({ item, cb }: OptimisticMethod<T>) => {
+    setOpt((prev) => prev.filter((i) => i.id !== item.id));
+    const removedItem = await cb(item);
+    setItems((prev: T[]) => prev.filter((i) => i.id !== removedItem.id));
+  };
+  const update = async ({ item, cb }: OptimisticMethod<T>) => {
+    setOpt((prev) => {
+      const oldItems = prev.filter((i) => i.id !== item.id);
+      return [...oldItems, item];
+    });
+    const updatedItem = await cb(item);
+    setItems((prev: T[]) => {
+      const oldItems = prev.filter((i) => i.id !== item.id);
+      return [...oldItems, updatedItem];
+    });
+  };
+  return { add, remove, update };
 };
 
-export const OptimisticRemove = async <T extends { id: string }>({
-  id,
-  setItems,
-  setOpt,
-  callback,
-}: OptimisticRemoveType<T>) => {
-  setOpt((prev) => prev.filter((i) => i.id !== id));
-  const removedId = await callback(id);
-  setItems((prev: T[]) => prev.filter((i) => i.id !== removedId));
-};
-
-export const OptimisticAdd = async <T extends { id: string }>({
-  item,
-  setOpt,
-  setItems,
-  callback,
-}: OptimisticUpdateType<T>) => {
-  setOpt((prev) => [...prev, item]);
-  const updatedItem = await callback(item);
-  setItems((prev: T[]) => [...prev, updatedItem]);
+export const toShopListItem = ({
+  name,
+  subcategoryId,
+}: IngredientCat): ShoppingListItem => {
+  return {
+    name,
+    subcategoryId,
+    quantity: 1,
+    unit: "st",
+    checked: false,
+    id: crypto.randomUUID(),
+  };
 };

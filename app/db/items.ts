@@ -80,13 +80,13 @@ export const createItem = async (
   return toShoppingListItem(data);
 };
 
-export const deleteItem = async (id: string) =>
-  (
-    await prisma.shoppingListItem.delete({
-      where: { id },
-      select: { id: true },
-    })
-  ).id;
+export const deleteItem = async ({ id }: ShoppingListItem) => {
+  const data = await prisma.shoppingListItem.delete({
+    where: { id },
+    select,
+  });
+  return toShoppingListItem(data);
+};
 
 export const getShoppingList = async (): Promise<ShoppingListItem[]> => {
   const userId = await getUser();
@@ -112,13 +112,13 @@ export const addHome = async (item: Home): Promise<Home> => {
   return { id: name, quantity: quantity ? Number(quantity) : null, unit };
 };
 
-export const removeHome = async (id: string): Promise<string> => {
+export const removeHome = async ({ id }: Home): Promise<Home> => {
   const userId = await getUser();
-  const data = await prisma.home.delete({
+  const { name, quantity, unit } = await prisma.home.delete({
     where: { userId, name: id },
-    select: { name: true },
+    select: { name: true, quantity: true, unit: true },
   });
-  return data.name;
+  return { id: name, quantity: quantity ? Number(quantity) : null, unit };
 };
 
 export const getHome = async (): Promise<Home[]> => {

@@ -32,10 +32,13 @@ export const addRecipeToMenu = async (
   return { day: data.day as Day, id: data.id, portions: data.portions };
 };
 
-export const removeMenuItem = async (id: string) => {
+export const removeMenuItem = async (item: MenuItem): Promise<MenuItem> => {
   const userId = await getUser();
-  const data = await prisma.menu.delete({ where: { id, userId } });
-  return data.id;
+  const data = await prisma.menu.delete({
+    where: { id: item.id, userId },
+    select: { id: true, day: true, portions: true },
+  });
+  return { ...data, name: item.name, day: data.day as Day };
 };
 
 export const changeMenuItemPortions = async (

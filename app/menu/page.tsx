@@ -12,47 +12,17 @@ import {
   experimental_useOptimistic as useOptimistic,
 } from "react";
 import days from "../constants/days";
-import {
-  SortMenuItems,
-  OptimisticRemove,
-  OptimisticUpdate,
-} from "../utils/utils";
+import { SortMenuItems, Optimistic } from "../utils/utils";
 import MenuItemComponent from "../components/menu/MenuItemComponent";
 
 const Menu = () => {
   const [menu, setMenu] = useState<MenuItem[]>([]);
   const [optMenu, setOptMenu] = useOptimistic(menu);
+  const opti = Optimistic({ setItems: setMenu, setOpt: setOptMenu });
 
   useEffect(() => {
     getMenuItems().then((data) => setMenu(data));
   }, []);
-
-  const handleRemoveItem = async (id: string) => {
-    OptimisticRemove({
-      id,
-      setOpt: setOptMenu,
-      setItems: setMenu,
-      callback: removeMenuItem,
-    });
-  };
-
-  const handleChangeDay = async (item: MenuItem) => {
-    OptimisticUpdate({
-      item,
-      setOpt: setOptMenu,
-      setItems: setMenu,
-      callback: changeMenuItemDay,
-    });
-  };
-
-  const handleChangePortions = async (item: MenuItem) => {
-    OptimisticUpdate({
-      item,
-      setOpt: setOptMenu,
-      setItems: setMenu,
-      callback: changeMenuItemPortions,
-    });
-  };
 
   return (
     <>
@@ -68,9 +38,15 @@ const Menu = () => {
                   <MenuItemComponent
                     key={item.id}
                     item={item}
-                    changeDay={handleChangeDay}
-                    changePortions={handleChangePortions}
-                    removeItem={handleRemoveItem}
+                    changeDay={(item) =>
+                      opti.update({ item, cb: changeMenuItemDay })
+                    }
+                    changePortions={(item) =>
+                      opti.update({ item, cb: changeMenuItemPortions })
+                    }
+                    removeItem={(item) =>
+                      opti.remove({ item, cb: removeMenuItem })
+                    }
                   />
                 ))}
               </ul>

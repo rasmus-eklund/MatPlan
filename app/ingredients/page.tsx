@@ -5,7 +5,7 @@ import {
   experimental_useOptimistic as useOptimistic,
 } from "react";
 import SearchIngredients from "../components/SearchIngredient";
-import { Home, IngredientCat, ShoppingListItem } from "@/types";
+import { Home, ShoppingListItem } from "@/types";
 import EditIngredient from "../components/EditIngredient";
 import {
   addHome,
@@ -17,18 +17,21 @@ import {
   updateItem,
 } from "../db/items";
 import AddHomeButton from "../components/buttons/AddHomeButton";
-import {
-  OptimisticAdd,
-  isHome,
-  OptimisticRemove,
-  OptimisticUpdate,
-} from "../utils/utils";
+import { isHome, Optimistic, toShopListItem } from "../utils/utils";
 
 const Ingredients = () => {
   const [items, setItems] = useState<ShoppingListItem[]>([]);
   const [home, setHome] = useState<Home[]>([]);
   const [optItems, setOptItems] = useOptimistic(items);
   const [optHome, setOptHome] = useOptimistic(home);
+  const optimisticHome = Optimistic({
+    setOpt: setOptHome,
+    setItems: setHome,
+  });
+  const optimisticItem = Optimistic({
+    setOpt: setOptItems,
+    setItems: setItems,
+  });
 
   useEffect(() => {
     Promise.all([getShoppingList(), getHome()]).then(([items, home]) => {
@@ -37,76 +40,32 @@ const Ingredients = () => {
     });
   }, []);
 
-  const handleAddHome = (item: Home) => {
-    OptimisticAdd({
-      item,
-      setOpt: setOptHome,
-      setItems: setHome,
-      callback: addHome,
-    });
-  };
-
-  const handleRemoveHome = (id: string) => {
-    OptimisticRemove({
-      id,
-      setOpt: setOptHome,
-      setItems: setHome,
-      callback: removeHome,
-    });
-  };
-
-  const addIngredient = async ({ name, subcategoryId }: IngredientCat) => {
-    const item: ShoppingListItem = {
-      name,
-      quantity: 1,
-      unit: "st",
-      checked: false,
-      id: crypto.randomUUID(),
-      subcategoryId,
-    };
-    OptimisticAdd({
-      item,
-      setOpt: setOptItems,
-      setItems,
-      callback: createItem,
-    });
-  };
-
-  const handleUpdate = async (item: ShoppingListItem) => {
-    OptimisticUpdate({
-      item,
-      setOpt: setOptItems,
-      setItems,
-      callback: updateItem,
-    });
-  };
-
-  const handleDelete = async (id: string) => {
-    OptimisticRemove({
-      id,
-      setOpt: setOptItems,
-      setItems,
-      callback: deleteItem,
-    });
-  };
-
   return (
     <main className="bg-2 p-5 grow overflow-y-auto">
       <div className="bg-3 p-5 rounded-md flex flex-col gap-3">
         <div className="w-1/2">
-          <SearchIngredients callback={addIngredient} />
+          <SearchIngredients
+            callback={(ing) =>
+              optimisticItem.add({ item: toShopListItem(ing), cb: createItem })
+            }
+          />
         </div>
         <div className="bg-2 p-3 rounded-md">
           <h2 className="text-3">Extra varor:</h2>
           <ul className="flex flex-col gap-2">
             {optItems
               .filter((i) => !i.recipe)
-              .map((i) => (
+              .map((item) => (
                 <EditIngredient
-                  remove={() => handleDelete(i.id)}
-                  update={(ing) => handleUpdate({ ...i, ...ing })}
-                  ingredient={i}
-                  key={i.id}
+                  remove={() => optimisticItem.remove({ item, cb: deleteItem })}
+                  update={(ing) =>
+                    optimisticItem.update({
+                      item: { ...item, ...ing },
+                      cb: updateItem,
+                    })
+                  }
+                  ingredient={item}
+                  key={item.id}
                   editable={true}
                 />
               ))}
@@ -117,24 +76,32 @@ const Ingredients = () => {
           <ul className="flex flex-col gap-2">
             {optItems
               .filter((i) => i.recipe)
-              .map((i) => (
+              .map((item) => (
                 <EditIngredient
-                  remove={() => handleDelete(i.id)}
-                  update={(ing) => handleUpdate({ ...i, ...ing })}
-                  ingredient={i}
-                  key={i.id}
+                  remove={() => optimisticItem.remove({ item, cb: deleteItem })}
+                  update={(ing) =>
+                    optimisticItem.update({
+                      item: { ...item, ...ing },
+                      cb: updateItem,
+                    })
+                  }
+                  ingredient={item}
+                  key={item.id}
                   editable={false}
                 >
                   <AddHomeButton
-                    home={isHome(i.name, optHome)}
+                    home={isHome(item.name, optHome)}
                     callback={(home) => {
                       home
-                        ? handleAddHome({
-                            id: i.name,
-                            quantity: null,
-                            unit: null,
+                        ? optimisticHome.add({
+                            item: {
+                              id: item.name,
+                              quantity: null,
+                              unit: null,
+                            },
+                            cb: addHome,
                           })
-                        : handleRemoveHome(i.name);
+                        : optimisticHome.remove({ item, cb: removeHome });
                     }}
                   />
                 </EditIngredient>

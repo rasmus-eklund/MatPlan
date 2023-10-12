@@ -10,7 +10,7 @@ type MenuItemProps = {
   item: MenuItem;
   changePortions: (item: MenuItem) => void;
   changeDay: (item: MenuItem) => void;
-  removeItem: (id: string) => void;
+  removeItem: (item: MenuItem) => void;
 };
 
 const MenuItem: FC<MenuItemProps> = ({
@@ -34,7 +34,7 @@ const MenuItem: FC<MenuItemProps> = ({
           initDay={day}
           setDay={(newDay) => changeDay({ ...item, day: newDay })}
         />
-        <DeleteButton callback={() => removeItem(id)} />
+        <DeleteButton callback={() => removeItem(item)} />
       </div>
     </li>
   );
