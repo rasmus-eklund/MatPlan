@@ -1,11 +1,13 @@
 import {
   CategoryItem,
+  Day,
   Home,
-  IngredientCat,
+  MenuItem,
   ShoppingListItem,
   ShoppingListItemsGrouped,
   StoreOrder,
 } from '@/types';
+import { Dispatch, SetStateAction } from 'react';
 
 export const capitalize = (s: string) => {
   return s[0].toUpperCase() + s.slice(1);
@@ -31,7 +33,9 @@ export const groupSubcategoryByCategory = (
   }, start);
 };
 
-export const sortBySubcategory = <T extends { name: string; subcategoryId: number }>(
+export const sortBySubcategory = <
+  T extends { name: string; subcategoryId: number }
+>(
   store: StoreOrder,
   items: T[]
 ): T[] => {
@@ -94,4 +98,42 @@ export const isHome = (name: string, items: Home[]) => {
   if (home) {
   }
   return home;
+};
+
+export const SortMenuItems = (items: MenuItem[], day: Day) => {
+  return items
+    .filter(r => r.day === day)
+    .sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    });
+};
+
+export const updateItemOptimistic = async <T extends { id: string }>(
+  item: T,
+  setOpt: (action: T[] | ((pendingState: T[]) => T[])) => void,
+  setItems: Dispatch<SetStateAction<T[]>>,
+  callback: (item: T) => Promise<T>
+) => {
+  setOpt(prev => {
+    const oldItems = prev.filter(i => i.id !== item.id);
+    return [...oldItems, item];
+  });
+  const updatedItem = await callback(item);
+  setItems(prev => {
+    const oldItems = prev.filter(i => i.id !== item.id);
+    return [...oldItems, updatedItem];
+  });
+};
+
+export const removeItemOptimistic = async <T extends { id: string }>(
+  id: string,
+  setOpt: (action: T[] | ((pendingState: T[]) => T[])) => void,
+  setItems: Dispatch<SetStateAction<T[]>>,
+  callback: (item: string) => Promise<string>
+) => {
+  setOpt(prev => prev.filter(i => i.id !== id));
+  const removedId = await callback(id);
+  setItems(prev => prev.filter(i => i.id !== removedId));
 };
