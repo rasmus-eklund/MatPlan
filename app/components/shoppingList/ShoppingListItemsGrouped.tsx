@@ -27,10 +27,10 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
     <li
       className={`flex flex-col bg-3 px-2 rounded-md gap-1 transition-opacity duration-200 ${
         (group.checked || animate) && "opacity-50"
-      } ${open && "py-1"}`}
+      } ${open && "pb-2"}`}
       key={group.name}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between h-7 items-center">
         <div className="flex gap-2">
           <input
             className="cursor-pointer"
@@ -50,7 +50,7 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
               });
             }}
           />
-          <p className="text-1">{capitalize(group.name)}</p>
+          <p className="text-1 font-bold">{capitalize(group.name)}</p>
         </div>
         <div className="flex gap-2">
           <ul className="flex gap-1">

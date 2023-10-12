@@ -12,44 +12,39 @@ type ItemProps = {
 
 const Item: FC<ItemProps> = ({ item, filter, handleCheckItems }) => {
   const { name, quantity, recipe, unit, checked } = item;
-  const [animate, setAnimate] = useState(checked);
+  const [animate, setAnimate] = useState(false);
 
   return (
     <li
-      className={`flex justify-between bg-4 text-2 px-2 rounded-md transition-opacity duration-200 ${
-        animate && "opacity-50"
-      }`}
+      className={`flex items-center justify-between h-7 gap-2 bg-4 text-2 px-2 rounded-md transition-all duration-300 ${
+        checked && "opacity-50"
+      } ${animate && "opacity-0"}`}
     >
       <div className="flex gap-2">
         <input
           className="cursor-pointer"
           type="checkbox"
-          checked={animate}
+          checked={checked}
           onChange={() => {
             setAnimate((prev) => {
               setTimeout(() => {
                 handleCheckItems([{ ...item, checked: !checked }]);
+                setAnimate((prev) => !prev);
               }, durations.checkShoppingList);
               return !prev;
             });
           }}
         />
-        <p className="select-none">{capitalize(name)}</p>
+        <p className="select-none font-bold">{capitalize(name)}</p>
       </div>
-      <div
-        className={`flex gap-2 justify-between ${
-          !filter.hideRecipe && recipe && "w-1/4"
-        }`}
-      >
-        <div className="flex gap-2 select-none">
-          <p>{quantity}</p>
-          <p>{unit}</p>
-        </div>
-        {!filter.hideRecipe && recipe && (
-          <p className="overflow-hidden whitespace-nowrap overflow-ellipsis">
-            {recipe}
-          </p>
-        )}
+      {!filter.hideRecipe && recipe && (
+        <p className="grow overflow-hidden whitespace-nowrap overflow-ellipsis">
+          {recipe}
+        </p>
+      )}
+      <div className="flex gap-2 select-none">
+        <p>{quantity}</p>
+        <p>{unit}</p>
       </div>
     </li>
   );
