@@ -101,7 +101,7 @@ export type CategoryItem = {
 };
 
 export type Home = {
-  name: string;
+  id: string;
   quantity: number?;
   unit: string?;
 };
@@ -118,4 +118,18 @@ export type ShoppingListFilter = {
   hideRecipe: boolean;
   selectedStore: string;
   stores: StoreOrder[];
+};
+
+export type OptimisticRemove<T> = {
+  id: string;
+  setOpt: (action: T[] | ((pendingState: T[]) => T[])) => void;
+  setItems: Dispatch<SetStateAction<T[]>>;
+  callback: (item: string) => Promise<string>;
+};
+
+export type OptimisticUpdate<T> = {
+  item: T;
+  setOpt: (action: T[] | ((pendingState: T[]) => T[])) => void;
+  setItems: Dispatch<SetStateAction<T[]>>;
+  callback: (item: T) => Promise<T>;
 };
