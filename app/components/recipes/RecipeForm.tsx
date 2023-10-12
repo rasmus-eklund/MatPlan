@@ -30,10 +30,6 @@ const RecipeForm: FC<RecipeFormProp> = ({
     [],
   );
 
-  const handleUpdateRecipe = async () => {
-    update(recipe);
-  };
-
   const handleAddIngredient = (ing: IngredientCat) => {
     const ingredient: RecipeIngredient = {
       name: ing.name,
@@ -48,10 +44,10 @@ const RecipeForm: FC<RecipeFormProp> = ({
     }));
   };
 
-  const handleDeleteIngredient = (id: string) => {
+  const handleDeleteIngredient = (ing: RecipeIngredient) => {
     setRecipe((prev) => ({
       ...prev,
-      ingredients: prev.ingredients.filter((ing) => ing.id !== id),
+      ingredients: prev.ingredients.filter((i) => i.id !== ing.id),
     }));
   };
 
@@ -110,10 +106,10 @@ const RecipeForm: FC<RecipeFormProp> = ({
             <SearchIngredients callback={handleAddIngredient} />
             <ul className="flex flex-col gap-1 py-2">
               {recipe.ingredients.map((ing) => (
-                <EditIngredient
-                  ingredient={ing}
-                  remove={async () => handleDeleteIngredient(ing.id)}
-                  update={async () => handleUpdateIngredient(ing)}
+                <EditIngredient<RecipeIngredient>
+                  ingredientIn={ing}
+                  remove={handleDeleteIngredient}
+                  update={handleUpdateIngredient}
                   key={ing.id}
                   editable={true}
                 />
@@ -164,7 +160,7 @@ const RecipeForm: FC<RecipeFormProp> = ({
         </div>
       </div>
       <div className="self-end flex gap-2">
-        <Button name="Spara" callback={handleUpdateRecipe} />
+        <Button name="Spara" callback={() => update(recipe)} />
         <Button name="Stäng" callback={closeForm} />
       </div>
     </section>
