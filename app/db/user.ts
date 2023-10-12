@@ -2,9 +2,9 @@
 import { getServerSession } from 'next-auth';
 import options from '../api/auth/[...nextauth]/options';
 import { prisma } from './prisma';
-import defaultRecipes from './constants/recipes/recieps';
+import createDefaultRecipes from './constants/recipes/recieps';
 
-import { addRecipesToContainer, addRecipe } from './recipes';
+import { addRecipe } from './recipes';
 import { addDefaultStore } from './stores';
 
 const getUser = async () => {
@@ -26,26 +26,10 @@ export const checkNewUser = async () => {
 };
 
 export const addDefaultRecipes = async () => {
-  const test3 = await addRecipe(
-    defaultRecipes.find(i => i.name === 'Test3')!,
-    []
-  );
-  const test2 = await addRecipe(
-    defaultRecipes.find(i => i.name === 'Test2')!,
-    []
-  );
-  const test1 = await addRecipe(
-    defaultRecipes.find(i => i.name === 'Test1')!,
-    []
-  );
-  await addRecipesToContainer(
-    [{ id: test2, name: 'Test2', portions: 2 }],
-    test1
-  );
-  await addRecipesToContainer(
-    [{ id: test3, name: 'Test3', portions: 2 }],
-    test2
-  );
+  const recipes = createDefaultRecipes();
+  for (const recipe of recipes) {
+    await addRecipe(recipe);
+  }
 };
 
 export default getUser;
