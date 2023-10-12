@@ -1,4 +1,6 @@
 import { FC, useState } from 'react';
+import PlusIcon from '../icons/PlusIcon';
+import MinusIcon from '../icons/MinusIcon';
 
 type IncrementerProps = {
   initialValue: number;
@@ -13,18 +15,12 @@ const Incrementer: FC<IncrementerProps> = ({ initialValue, callback }) => {
   };
   return (
     <div className="flex items-center p-2 gap-1">
-      <button
-        onClick={() => handleChange(true)}
-        className="rounded-full bg-3 w-6 h-6"
-      >
-        -
+      <button onClick={() => handleChange(true)}>
+        <MinusIcon className="h-6 fill-1 hover:fill-2" />
       </button>
       <p className="text-lg">{value}</p>
-      <button
-        onClick={() => handleChange(false)}
-        className="rounded-full bg-3 w-6 h-6"
-      >
-        +
+      <button onClick={() => handleChange(false)}>
+        <PlusIcon className="h-6 fill-1 hover:fill-2" />
       </button>
     </div>
   );
