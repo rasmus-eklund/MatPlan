@@ -3,6 +3,8 @@ import {
   Day,
   Home,
   MenuItem,
+  OptimisticRemove,
+  OptimisticUpdate,
   ShoppingListItem,
   ShoppingListItemsGrouped,
   StoreOrder,
@@ -94,7 +96,7 @@ export const groupByUnit = (items: ShoppingListItem[]) => {
 };
 
 export const isHome = (name: string, items: Home[]) => {
-  const home = Boolean(items.some(n => n.name === name));
+  const home = Boolean(items.some(n => n.id === name));
   if (home) {
   }
   return home;
@@ -110,30 +112,41 @@ export const SortMenuItems = (items: MenuItem[], day: Day) => {
     });
 };
 
-export const updateItemOptimistic = async <T extends { id: string }>(
-  item: T,
-  setOpt: (action: T[] | ((pendingState: T[]) => T[])) => void,
-  setItems: Dispatch<SetStateAction<T[]>>,
-  callback: (item: T) => Promise<T>
-) => {
+export const updateItemOptimistic = async <T extends { id: string }>({
+  item,
+  setOpt,
+  setItems,
+  callback,
+}: OptimisticUpdate<T>) => {
   setOpt(prev => {
     const oldItems = prev.filter(i => i.id !== item.id);
     return [...oldItems, item];
   });
   const updatedItem = await callback(item);
-  setItems(prev => {
+  setItems((prev: T[]) => {
     const oldItems = prev.filter(i => i.id !== item.id);
     return [...oldItems, updatedItem];
   });
 };
 
-export const removeItemOptimistic = async <T extends { id: string }>(
-  id: string,
-  setOpt: (action: T[] | ((pendingState: T[]) => T[])) => void,
-  setItems: Dispatch<SetStateAction<T[]>>,
-  callback: (item: string) => Promise<string>
-) => {
+export const removeItemOptimistic = async <T extends { id: string }>({
+  id,
+  setItems,
+  setOpt,
+  callback,
+}: OptimisticRemove<T>) => {
   setOpt(prev => prev.filter(i => i.id !== id));
   const removedId = await callback(id);
-  setItems(prev => prev.filter(i => i.id !== removedId));
+  setItems((prev: T[]) => prev.filter(i => i.id !== removedId));
+};
+
+export const addItemOptimistic = async <T extends { id: string }>({
+  item,
+  setOpt,
+  setItems,
+  callback,
+}: OptimisticUpdate<T>) => {
+  setOpt(prev => [...prev, item]);
+  const updatedItem = await callback(item);
+  setItems((prev: T[]) => [...prev, updatedItem]);
 };
