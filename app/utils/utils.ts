@@ -31,7 +31,7 @@ export const groupSubcategoryByCategory = (
   }, start);
 };
 
-export const sortByName = <T extends { name: string; subcategoryId: number }>(
+export const sortBySubcategory = <T extends { name: string; subcategoryId: number }>(
   store: StoreOrder,
   items: T[]
 ): T[] => {

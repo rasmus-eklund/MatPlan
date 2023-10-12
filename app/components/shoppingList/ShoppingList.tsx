@@ -4,7 +4,7 @@ import Item from './ShoppingListItem';
 import {
   groupShoppingListItems,
   sortByChecked,
-  sortByName,
+  sortBySubcategory,
 } from '../../utils/utils';
 import ShoppingListItemsGrouped from './ShoppingListItemsGrouped';
 
@@ -26,7 +26,7 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
     return (
       <ul className="flex flex-col bg-2 rounded-md p-2 gap-1">
         {filters.group
-          ? sortByChecked(sortByName(order, groupShoppingListItems(items))).map(
+          ? sortByChecked(sortBySubcategory(order, groupShoppingListItems(items))).map(
               group => (
                 <ShoppingListItemsGrouped
                   key={group.name}
@@ -36,7 +36,7 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
                 />
               )
             )
-          : sortByChecked(sortByName(order, items)).map(item => (
+          : sortByChecked(sortBySubcategory(order, items)).map(item => (
               <Item
                 key={item.id}
                 item={item}
