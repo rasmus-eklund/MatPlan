@@ -1,7 +1,7 @@
 import { Day, RecipeSearch } from "@/types";
 import Link from "next/link";
 import DaysDropDown from "../DaysDropDown";
-import { addRecipeToMenu } from "../../db/menu";
+import { addRecipeToMenu } from "../../server-side/menu";
 
 type Props = {
   recipeResult: RecipeSearch[];

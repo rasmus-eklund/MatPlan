@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { getStoreById, renameStore, updateStore } from "@/app/db/stores";
+import { getStoreById, renameStore, updateStore } from "@/app/server-side/stores";
 import CategoryItemComponent from "../../components/stores/CategoryItem";
 import { StoreCategory } from "@/types";
 import { groupSubcategoryByCategory } from "@/app/utils/utils";

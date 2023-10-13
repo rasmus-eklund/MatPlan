@@ -12,7 +12,7 @@ import EditIngredient from "@/app/components/EditIngredient";
 import SearchRecipeForm from "./SearchRecipeForm";
 import DeleteButton from "../buttons/DeleteButton";
 import Button from "../buttons/Button";
-import { SearchRecipeByFilter } from "@/app/db/recipes";
+import { SearchRecipeByFilter } from "@/app/server-side/recipes";
 
 type RecipeFormProp = {
   recipe: Recipe;

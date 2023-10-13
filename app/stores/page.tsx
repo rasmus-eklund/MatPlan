@@ -1,7 +1,7 @@
 "use client";
 import { StoreOrder } from "@/types";
 import React, { useEffect, useState } from "react";
-import { getAllStores, addDefaultStore, removeStore } from "../db/stores";
+import { getAllStores, addDefaultStore, removeStore } from "../server-side/stores";
 import StoreComponent from "../components/stores/StoreItem";
 import PlusIcon from "../components/icons/PlusIcon";
 

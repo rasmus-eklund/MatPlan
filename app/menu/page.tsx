@@ -4,7 +4,7 @@ import {
   changeMenuItemPortions,
   getMenuItems,
   removeMenuItem,
-} from "../db/menu";
+} from "../server-side/menu";
 import { MenuItem } from "@/types";
 import {
   useEffect,

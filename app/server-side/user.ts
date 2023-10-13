@@ -2,7 +2,7 @@
 import { getServerSession } from "next-auth";
 import options from "../api/auth/[...nextauth]/options";
 import { prisma } from "./prisma";
-import createDefaultRecipes from "./constants/recipes/recieps";
+import createDefaultRecipes from "../constants/recieps";
 
 import { addRecipe } from "./recipes";
 import { addDefaultStore } from "./stores";

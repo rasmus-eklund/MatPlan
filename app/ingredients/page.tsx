@@ -15,7 +15,7 @@ import {
   getShoppingList,
   removeHome,
   updateItem,
-} from "../db/items";
+} from "../server-side/items";
 import AddHomeButton from "../components/buttons/AddHomeButton";
 import { isHome, Optimistic, toShopListItem } from "../utils/utils";
 

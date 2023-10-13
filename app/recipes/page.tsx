@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Recipe, RecipeSearch, SearchParams } from "@/types";
 import SearchRecipeForm from "../components/recipes/SearchRecipeForm";
 import FoundRecipes from "../components/recipes/FoundRecipes";
-import { SearchRecipeByFilter, addRecipe } from "../db/recipes";
+import { SearchRecipeByFilter, addRecipe } from "../server-side/recipes";
 import {
   parseAsString,
   parseAsStringEnum,

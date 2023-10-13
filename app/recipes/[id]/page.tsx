@@ -1,5 +1,5 @@
 "use client";
-import { deleteRecipe, getRecipeById, updateRecipe } from "@/app/db/recipes";
+import { deleteRecipe, getRecipeById, updateRecipe } from "@/app/server-side/recipes";
 import { Day, Recipe } from "@/types";
 import { useEffect, useState } from "react";
 
@@ -7,7 +7,7 @@ import DaysDropDown from "@/app/components/DaysDropDown";
 import { useRouter } from "next/navigation";
 import ShowRecipe from "@/app/components/ShowRecipe";
 import RecipeForm from "@/app/components/recipes/RecipeForm";
-import { addRecipeToMenu } from "@/app/db/menu";
+import { addRecipeToMenu } from "@/app/server-side/menu";
 import Button from "@/app/components/buttons/Button";
 import Loading from "@/app/components/Loading";
 

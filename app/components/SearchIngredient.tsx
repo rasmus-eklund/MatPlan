@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { getIngredientCategories } from "../db/items";
+import { getIngredientCategories } from "../server-side/items";
 import { IngredientCat } from "@/types";
 
 type SearchIngredientsProp = {

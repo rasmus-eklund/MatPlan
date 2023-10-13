@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { checkNewUser } from "../db/user";
+import { checkNewUser } from "../server-side/user";
 import { useRouter } from "next/navigation";
 import Loading from "../components/Loading";
 

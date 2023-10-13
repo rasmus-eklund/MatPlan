@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ShoppingListFilter, ShoppingListItem } from "@/types";
-import { getShoppingList, updateItem } from "../db/items";
-import { getAllStores } from "../db/stores";
+import { getShoppingList, updateItem } from "../server-side/items";
+import { getAllStores } from "../server-side/stores";
 import Loading from "../components/Loading";
 import ShoppingListFilters from "../components/shoppingList/ShoppingListFilters";
 import ShoppingList from "../components/shoppingList/ShoppingList";
