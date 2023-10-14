@@ -1,18 +1,10 @@
 "use client";
-import {
-  IngredientCat,
-  Recipe,
-  RecipeIngredient,
-  RecipeSearch,
-  SearchParams,
-} from "@/types";
+import { IngredientCat, Recipe, RecipeIngredient, RecipeSearch } from "@/types";
 import { FC, useState } from "react";
 import SearchIngredients from "@/app/components/SearchIngredient";
 import EditIngredient from "@/app/components/EditIngredient";
-import SearchRecipeForm from "./SearchRecipeForm";
-import DeleteButton from "../buttons/DeleteButton";
 import Button from "../buttons/Button";
-import { SearchRecipeByFilter } from "@/app/server-side/recipes";
+import RecipeInsideRecipeForm from "./RecipeInsideRecipeForm";
 
 type RecipeFormProp = {
   recipe: Recipe;
@@ -26,9 +18,6 @@ const RecipeForm: FC<RecipeFormProp> = ({
   closeForm,
 }) => {
   const [recipe, setRecipe] = useState<Recipe>(incomingRecipe);
-  const [recipeSearchResult, setRecipeSearchResult] = useState<RecipeSearch[]>(
-    [],
-  );
 
   const handleAddIngredient = (ing: IngredientCat) => {
     const ingredient: RecipeIngredient = {
@@ -58,12 +47,6 @@ const RecipeForm: FC<RecipeFormProp> = ({
     });
   };
 
-  const handleSearchRecipe = (params: SearchParams) => {
-    SearchRecipeByFilter(params).then((res) => {
-      setRecipeSearchResult(res);
-    });
-  };
-
   const handleAddRecipe = (recipe: RecipeSearch) => {
     setRecipe((prev) => ({ ...prev, children: [...prev.children, recipe] }));
   };
@@ -73,6 +56,13 @@ const RecipeForm: FC<RecipeFormProp> = ({
       ...prev,
       children: prev.children.filter((r) => r.id !== id),
     }));
+  };
+
+  const handleUpdatePortions = (item: RecipeSearch) => {
+    setRecipe((prev) => {
+      const oldItems = prev.children.filter((i) => i.id !== item.id);
+      return { ...prev, children: [...oldItems, item] };
+    });
   };
 
   return (
@@ -85,9 +75,9 @@ const RecipeForm: FC<RecipeFormProp> = ({
           setRecipe((prev) => ({ ...prev, name: e.target.value }))
         }
       />
-      <div className="rounded-md bg-2 p-4 flex flex-col gap-2">
+      <div className="rounded-md bg-2 p-2 flex flex-col gap-2">
         <div className="flex justify-between">
-          <h2 className="text-4 text-lg">Portioner</h2>
+          <h2 className="text-4 text-md">Portioner</h2>
           <input
             className="rounded-md w-10 text-center text-1 bg-3"
             type="number"
@@ -127,37 +117,12 @@ const RecipeForm: FC<RecipeFormProp> = ({
             }
           />
         </div>
-        <div className="flex flex-col">
-          <h2 className="text-4 text-lg">Recept</h2>
-          <div className="flex flex-col gap-2 bg-3 p-2 rounded-md">
-            <SearchRecipeForm
-              handleSearch={handleSearchRecipe}
-              onlySearch={true}
-            />
-            <ul className="flex flex-col gap-2">
-              {recipeSearchResult.map((r) => (
-                <li
-                  onClick={() => handleAddRecipe(r)}
-                  className="flex px-2 text-1 font-bold bg-4 rounded-md cursor-pointer items-center hover:bg-1 hover:text-4"
-                  key={r.id + "searchResult"}
-                >
-                  <p>{r.name}</p>
-                </li>
-              ))}
-            </ul>
-            <ul className="flex flex-col gap-1 py-2">
-              {recipe.children.map((rec) => (
-                <li
-                  key={rec.id + "contained"}
-                  className="flex px-2 text-1 font-bold bg-4 rounded-md items-center justify-between"
-                >
-                  <p>{rec.name}</p>
-                  <DeleteButton callback={() => handleRemoveRecipe(rec.id)} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <RecipeInsideRecipeForm
+          recipes={recipe.children}
+          handleAddRecipe={handleAddRecipe}
+          handleRemoveRecipe={handleRemoveRecipe}
+          handleUpdatePortions={handleUpdatePortions}
+        />
       </div>
       <div className="self-end flex gap-2">
         <Button name="Spara" callback={() => update(recipe)} />

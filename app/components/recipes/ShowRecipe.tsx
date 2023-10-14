@@ -2,7 +2,7 @@
 import { Recipe } from "@/types";
 import { FC } from "react";
 import Link from "next/link";
-import { capitalize } from "../utils/utils";
+import { capitalize } from "../../utils/utils";
 
 type ShowRecipeProps = {
   recipe: Recipe;
@@ -45,7 +45,7 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, children }) => {
                       <Link className="text-lg" href={`/recipes/${rec.id}`}>
                         {rec.name}
                       </Link>
-                      <p className="text-1">FIX Portioner</p>
+                      <p className="text-1">{rec.portions} Portioner</p>
                     </div>
                   </li>
                 ))}

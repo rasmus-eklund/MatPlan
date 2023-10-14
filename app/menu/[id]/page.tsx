@@ -1,6 +1,6 @@
 "use client";
 import Loading from "@/app/components/Loading";
-import ShowRecipe from "@/app/components/ShowRecipe";
+import ShowRecipe from "@/app/components/recipes/ShowRecipe";
 import { getMenuRecipeById } from "@/app/server-side/recipes";
 import { Recipe } from "@/types";
 import { useEffect, useState } from "react";

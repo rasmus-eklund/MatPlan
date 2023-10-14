@@ -2,7 +2,7 @@ import { Filter, SearchParams } from "@/types";
 import { FC, useState } from "react";
 
 type SearchFormProps = {
-  handleSearch: ({ search, filter }: SearchParams) => void;
+  handleSearch: ({ search, filter }: SearchParams) => boolean;
   onlySearch: boolean;
 };
 
@@ -13,12 +13,18 @@ const SearchRecipeForm: FC<SearchFormProps> = ({
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<Filter>("name");
 
+  const handleReset = (reset: boolean) => {
+    if (reset) {
+      setSearch("");
+    }
+  };
+
   return (
     <form
       className="flex flex-col gap-2"
       onSubmit={(e) => {
         e.preventDefault();
-        handleSearch({ filter, search });
+        handleReset(handleSearch({ filter, search }));
       }}
       action=""
     >
