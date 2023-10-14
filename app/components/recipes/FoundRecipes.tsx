@@ -1,15 +1,16 @@
-import { Day, RecipeSearch } from "@/types";
+import { RecipeSearch } from "@/types";
 import Link from "next/link";
-import DaysDropDown from "../DaysDropDown";
 import { addRecipeToMenu } from "../../server-side/menu";
+import { getRecipeById } from "@/app/server-side/recipes";
+import Button from "../buttons/Button";
 
 type Props = {
   recipeResult: RecipeSearch[];
 };
 
 const FoundRecipes = ({ recipeResult }: Props) => {
-  const addRecipe = (day: Day, id: string, portions: number) => {
-    addRecipeToMenu({ day, id, portions });
+  const addRecipe = ({ id }: RecipeSearch) => {
+    getRecipeById(id).then((rec) => addRecipeToMenu(rec, "Obestämd"));
   };
   return (
     <section className="flex flex-col bg-3 p-2 gap-2 rounded-md">
@@ -23,10 +24,7 @@ const FoundRecipes = ({ recipeResult }: Props) => {
           >
             <Link href={`/recipes/${r.id}`}>{r.name}</Link>
             <div className="flex items-center gap-4">
-              <DaysDropDown
-                initDay="Obestämd"
-                setDay={(day) => addRecipe(day, r.id, r.portions)}
-              />
+              <Button name="Lägg till" callback={() => addRecipe(r)} />
             </div>
           </li>
         ))}
