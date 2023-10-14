@@ -30,10 +30,11 @@ const SearchRecipeComponent = () => {
     SearchRecipeByFilter({ filter, search }).then((res) => setResults(res));
   }, [filter, search]);
 
-  const handleSearch = async ({ search, filter }: SearchParams) => {
+  const handleSearch = ({ search, filter }: SearchParams) => {
     setSearch(search);
     setFilter(filter as Filter);
-    setResults(await SearchRecipeByFilter({ search, filter }));
+    SearchRecipeByFilter({ search, filter }).then((res) => setResults(res));
+    return false;
   };
 
   const createNewRecipe = (recipe: Recipe) => {
@@ -53,12 +54,12 @@ const SearchRecipeComponent = () => {
   };
 
   return (
-    <main className="p-4 bg-2 flex flex-col gap-2 grow overflow-y-auto">
+    <main className="p-2 md:p-4 bg-2 flex flex-col gap-2 grow overflow-y-auto">
       {formHidden && (
         <SearchRecipeForm handleSearch={handleSearch} onlySearch={false} />
       )}
       {!formHidden && (
-        <div className="flex flex-col gap-5 bg-3 p-8 lg: max-w-screen-sm">
+        <div className="flex flex-col gap-5 bg-3 p-2">
           <RecipeForm
             recipe={emptyRecipe}
             update={createNewRecipe}
