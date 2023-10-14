@@ -1,31 +1,35 @@
 "use server";
-import { Day, MenuItem } from "@/types";
+import { Day, MenuItem, Recipe, RecipeSearch } from "@/types";
 import { prisma } from "./prisma";
 import getUser from "./user";
-import { Prisma } from "@prisma/client";
+import { getAllContained, getRecipeIngredientsRescaled } from "./utils";
+import { getMenuRecipeById } from "./recipes";
 
-export const addRecipeToMenu = async (
-  item: Omit<MenuItem, "name">,
-): Promise<Omit<MenuItem, "name">> => {
-  const { day, portions, id } = item;
+export const addRecipeToMenu = async (recipe: Recipe, day: Day) => {
   const userId = await getUser();
-  const res = await prisma.recipe_ingredient.findMany({
-    where: { recipeId: id },
-    select: { id: true, name: true, quantity: true, unit: true },
-  });
-  const ingredients = res.map((item) => ({
-    checked: false,
-    ...item,
-    userId,
-  }));
+  const allContained = await getAllContained({ ids: [], item: recipe });
+  const ingredientsNested = await Promise.all(
+    allContained.map((i) => getRecipeIngredientsRescaled(i.id, i.portions)),
+  );
+
   const data = await prisma.menu.create({
     data: {
-      recipeId: id,
+      recipeId: recipe.id,
       userId,
-      portions,
+      portions: recipe.portions,
       day,
       shoppingListItem: {
-        createMany: { data: ingredients },
+        createMany: {
+          data: ingredientsNested
+            .flat()
+            .map(({ checked, name, quantity, unit }) => ({
+              checked,
+              name,
+              quantity,
+              unit,
+              userId,
+            })),
+        },
       },
     },
   });
@@ -44,49 +48,41 @@ export const removeMenuItem = async (item: MenuItem): Promise<MenuItem> => {
 export const changeMenuItemPortions = async (
   item: MenuItem,
 ): Promise<MenuItem> => {
-  const { id, portions } = item;
+  const { id, portions, day } = item;
   const userId = await getUser();
-  const { recipe } = await prisma.menu.findUniqueOrThrow({
-    where: { id },
-    select: { recipe: { select: { portions: true, ingredients: true } } },
-  });
+  const recipe = await getMenuRecipeById(id);
+  const allContained = await getAllContained({ ids: [], item: recipe });
   const scale = portions / recipe.portions;
-  const rescaled = recipe.ingredients.map((i) => {
-    const { recipeId, ...rest } = i;
-    return {
-      ...rest,
-      quantity: Number(rest.quantity) * scale,
-      userId,
-      checked: false,
-    };
-  });
+  const AllContainedRescaled: RecipeSearch[] = allContained.map((item) => ({
+    ...item,
+    portions: item.portions * scale,
+  }));
+  const ingredientsNested = await Promise.all(
+    AllContainedRescaled.map((i) =>
+      getRecipeIngredientsRescaled(i.id, i.portions),
+    ),
+  );
   const data = await prisma.menu.update({
     where: { id },
     data: {
-      portions,
+      portions: portions,
       shoppingListItem: {
         deleteMany: { menuId: id },
         createMany: {
-          data: rescaled.map((i) => ({
-            ...i,
-            quantity: new Prisma.Decimal(i.quantity.toString()),
-          })),
+          data: ingredientsNested
+            .flat()
+            .map(({ checked, name, quantity, unit }) => ({
+              checked,
+              name,
+              quantity,
+              unit,
+              userId,
+            })),
         },
       },
     },
-    select: {
-      id: true,
-      day: true,
-      portions: true,
-      recipe: { select: { name: true } },
-    },
   });
-  const {
-    recipe: { name },
-    day,
-    ...rest
-  } = data;
-  return { ...rest, day: day as Day, name };
+  return { day, id: data.id, portions: data.portions, name: recipe.name };
 };
 
 export const changeMenuItemDay = async ({

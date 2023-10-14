@@ -91,11 +91,13 @@ export const getMenuRecipeById = async (menuId: string): Promise<Recipe> => {
   const data = await prisma.menu.findUniqueOrThrow({
     where: { id: menuId },
     select: {
-      id: true,
       recipe: {
         select: {
+          id: true,
           name: true,
           instruction: true,
+          portions: true,
+          ingredients: true,
           containers: {
             select: {
               containedRecipe: {
@@ -105,26 +107,14 @@ export const getMenuRecipeById = async (menuId: string): Promise<Recipe> => {
           },
         },
       },
-      portions: true,
-      shoppingListItem: {
-        select: {
-          id: true,
-          name: true,
-          quantity: true,
-          unit: true,
-        },
-      },
     },
   });
   const {
-    id,
-    portions,
-    recipe: { instruction, name, containers },
-    shoppingListItem,
+    recipe: { instruction, name, containers, id, ingredients, portions },
   } = data;
   return {
     id,
-    ingredients: shoppingListItem.map((i) => ({
+    ingredients: ingredients.map((i) => ({
       ...i,
       unit: i.unit as Unit,
       recipeId: menuId,

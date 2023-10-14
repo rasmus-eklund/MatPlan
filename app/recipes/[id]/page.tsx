@@ -1,11 +1,15 @@
 "use client";
-import { deleteRecipe, getRecipeById, updateRecipe } from "@/app/server-side/recipes";
+import {
+  deleteRecipe,
+  getRecipeById,
+  updateRecipe,
+} from "@/app/server-side/recipes";
 import { Day, Recipe } from "@/types";
 import { useEffect, useState } from "react";
 
 import DaysDropDown from "@/app/components/DaysDropDown";
 import { useRouter } from "next/navigation";
-import ShowRecipe from "@/app/components/ShowRecipe";
+import ShowRecipe from "@/app/components/recipes/ShowRecipe";
 import RecipeForm from "@/app/components/recipes/RecipeForm";
 import { addRecipeToMenu } from "@/app/server-side/menu";
 import Button from "@/app/components/buttons/Button";
@@ -34,8 +38,8 @@ const Recipe = ({ params }: { params: { id: string } }) => {
     });
   };
 
-  const handleAddToMenu = (day: Day, id: string, portions: number) => {
-    addRecipeToMenu({ day, id, portions });
+  const handleAddToMenu = (recipe: Recipe, day: Day) => {
+    addRecipeToMenu(recipe, day);
   };
 
   return (
@@ -46,9 +50,7 @@ const Recipe = ({ params }: { params: { id: string } }) => {
             <ShowRecipe recipe={recipe}>
               <DaysDropDown
                 initDay="Obestämd"
-                setDay={(day) =>
-                  handleAddToMenu(day, params.id, recipe.portions)
-                }
+                setDay={(day) => handleAddToMenu(recipe, day)}
               />
               <div className="flex gap-4 items-center py-2">
                 <Button name="Ändra" callback={() => setHideForm(false)} />
