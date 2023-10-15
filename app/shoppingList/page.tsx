@@ -49,30 +49,32 @@ const ShoppingListPage = () => {
   };
 
   return (
-    <main className="bg-2 p-5 grow flex flex-col gap-5 overflow-y-auto">
+    <>
       {filters && items && home ? (
-        <>
+        <div className="flex flex-col gap-2">
           <ShoppingListFilters filters={filters} setFilters={setFilters} />
-          <ShoppingList
-            filters={filters}
-            handleCheckItems={handleCheckItems}
-            items={home ? items.filter((i) => !isHome(i.name, home)) : items}
-          />
-          {home.length !== 0 && (
-            <>
-              <h2 className="text-1 text-lg">Varor hemma</h2>
-              <ShoppingList
-                filters={filters}
-                items={items.filter((i) => isHome(i.name, home))}
-                handleCheckItems={handleCheckItems}
-              />
-            </>
-          )}
-        </>
+          <div className="rounded-md bg-c5 p-2 flex flex-col gap-2">
+            <ShoppingList
+              filters={filters}
+              handleCheckItems={handleCheckItems}
+              items={home ? items.filter((i) => !isHome(i.name, home)) : items}
+            />
+            {home.length !== 0 && (
+              <>
+                <h2 className="text-1 text-lg">Varor hemma</h2>
+                <ShoppingList
+                  filters={filters}
+                  items={items.filter((i) => isHome(i.name, home))}
+                  handleCheckItems={handleCheckItems}
+                />
+              </>
+            )}
+          </div>
+        </div>
       ) : (
         <Loading />
       )}
-    </main>
+    </>
   );
 };
 

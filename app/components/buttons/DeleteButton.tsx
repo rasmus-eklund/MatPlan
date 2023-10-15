@@ -18,7 +18,7 @@ const DeleteButton: FC<DeleteButtonProps> = ({ callback }) => {
   return (
     <button onClick={handleClick}>
       <TrashIcon
-        className={`fill-1 cursor-pointer h-6 hover:scale-125 transition-all ease-in-out ${
+        className={`fill-c4 cursor-pointer h-6 hover:scale-125 hover:fill-c5 transition-all ease-in-out ${
           animate && "scale-0"
         }`}
       />

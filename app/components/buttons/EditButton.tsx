@@ -6,7 +6,7 @@ type EditButtonProps = { callback: () => void };
 const EditButton: FC<EditButtonProps> = ({ callback }) => {
   return (
     <div className="flex h-6 cursor-pointer" onClick={() => callback()}>
-      <EditIcon className="fill-1 hover:scale-125 transition-all" />
+      <EditIcon className="fill-c4 hover:scale-125 hover:fill-c5 transition-all" />
     </div>
   );
 };

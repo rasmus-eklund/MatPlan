@@ -13,7 +13,7 @@ export default function Landing() {
   }, [push]);
 
   return (
-    <main className="bg-2 grow flex justify-center items-center">
+    <main className="bg-c4 grow flex justify-center items-center">
       <Loading />
     </main>
   );

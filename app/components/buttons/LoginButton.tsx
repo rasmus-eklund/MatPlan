@@ -8,7 +8,7 @@ const LoginButton = () => {
     return (
       <div className="flex flex-row font-semibold mr-2">
         <button
-          className="text-end text-4 mr-4"
+          className="text-end text-c2 mr-4"
           onClick={async () => await signOut({ callbackUrl: "/" })}
           type="button"
         >
@@ -20,7 +20,7 @@ const LoginButton = () => {
   } else {
     return (
       <button
-        className="text-center text-4 mr-4"
+        className="text-center text-c2 mr-4"
         onClick={() => {
           signIn("google", { callbackUrl: "/menu" });
         }}

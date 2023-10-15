@@ -12,13 +12,7 @@ const Page = ({ params: { id } }: { params: { id: string } }) => {
     getMenuRecipeById(id).then((res) => setRecipe(res));
   }, [id]);
 
-  return (
-    <main className="bg-2 p-5 grow overflow-y-auto">
-      <section className="flex flex-col gap-5 bg-3 p-8 lg: max-w-screen-sm">
-        {recipe ? <ShowRecipe recipe={recipe} /> : <Loading />}
-      </section>
-    </main>
-  );
+  return <>{recipe ? <ShowRecipe recipe={recipe} /> : <Loading />}</>;
 };
 
 export default Page;

@@ -1,7 +1,10 @@
 "use client";
-import { StoreOrder } from "@/types";
-import React, { useEffect, useState } from "react";
-import { getAllStores, addDefaultStore, removeStore } from "../server-side/stores";
+import { useEffect, useState } from "react";
+import {
+  getAllStores,
+  addDefaultStore,
+  removeStore,
+} from "../server-side/stores";
 import StoreComponent from "../components/stores/StoreItem";
 import PlusIcon from "../components/icons/PlusIcon";
 
@@ -27,20 +30,21 @@ const Stores = () => {
   };
 
   return (
-    <main className="bg-2 flex flex-col p-5 gap-4 grow overflow-y-auto">
-      <ul className="bg-3 rounded-md flex flex-col gap-2 h-fit p-5">
+    <div className="bg-c3 rounded-md flex flex-col gap-2 p-3">
+      <h2 className="text-xl text-c5">Butiker</h2>
+      <ul className="flex flex-col gap-2">
         {stores.map((s) => (
           <StoreComponent key={s.id} store={s} callback={handleRemove} />
         ))}
         <li
           onClick={handleAddStore}
-          className="bg-4 p-2 h-10 rounded-md flex gap-2 items-center text-2 text-xl hover:bg-2 hover:text-1 group cursor-pointer"
+          className="bg-c2 p-2 h-10 rounded-md flex gap-2 items-center text-c4 text-xl hover:bg-c4 hover:text-c5 group cursor-pointer"
         >
           <PlusIcon className="h-6 w-6 fill-2 group-hover:fill-3" />
           <p>Lägg till ny affär</p>
         </li>
       </ul>
-    </main>
+    </div>
   );
 };
 

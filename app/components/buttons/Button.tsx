@@ -20,7 +20,7 @@ const Button: FC<ButtonProps> = ({ name, callback }) => {
   return (
     <button
       disabled={animate}
-      className={`bg-4 text-1 px-2 border-[2px] border-4 rounded-md cursor-pointer hover:bg-1 hover:text-4 transition-all ${
+      className={`bg-c2 text-c5 px-2 border-2 border-c2 rounded-md cursor-pointer hover:bg-c5 hover:text-c2 transition-all ${
         animate && "scale-110"
       }`}
       onClick={handleClick}

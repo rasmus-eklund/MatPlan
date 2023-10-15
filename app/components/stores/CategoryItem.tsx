@@ -37,22 +37,22 @@ const CategoryItemComponent: FC<CategoryProps> = ({
     <li
       ref={setNodeRef}
       style={style}
-      className="flex flex-col gap-2 rounded-md bg-2 px-2 py-1"
+      className="flex flex-col gap-2 rounded-md bg-c4 px-2 py-1"
     >
       <div className="flex justify-between items-center">
         <div className="flex gap-2">
           <div ref={setActivatorNodeRef} {...attributes} {...listeners}>
-            <DraggableIcon className="w-8 fill-3" />
+            <DraggableIcon className="w-8 fill-c3" />
           </div>
-          <h3 className="text-xl font-bold text-4 select-none">
+          <h3 className="text-xl font-bold text-c2 select-none">
             {capitalize(name)}
           </h3>
         </div>
         <div onClick={() => setOpen(!open)}>
           {open ? (
-            <MinimizeIcon className="h-8 fill-4 hover:scale-110" />
+            <MinimizeIcon className="h-8 fill-c2 hover:scale-110" />
           ) : (
-            <MaximizeIcon className="h-8 fill-4 hover:scale-110" />
+            <MaximizeIcon className="h-8 fill-c2 hover:scale-110" />
           )}
         </div>
       </div>
@@ -61,9 +61,9 @@ const CategoryItemComponent: FC<CategoryProps> = ({
           {subcategories.map(({ name, id }) => (
             <li
               key={name + id}
-              className="flex justify-between rounded-md font-semibold bg-3 px-2 py-1"
+              className="flex justify-between rounded-md font-semibold bg-c3 px-2 py-1"
             >
-              <p className="text-1 select-none">{capitalize(name)}</p>
+              <p className="text-c5 select-none">{capitalize(name)}</p>
             </li>
           ))}
         </ul>

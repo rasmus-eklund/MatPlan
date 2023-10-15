@@ -12,8 +12,8 @@ type StoreItemProps = {
 
 const StoreItem: FC<StoreItemProps> = ({ store: { id, name }, callback }) => {
   return (
-    <li className="bg-4 p-2 rounded-md flex justify-between items-center h-10">
-      <Link className="text-2 text-xl" href={`/stores/${id}`}>
+    <li className="bg-c2 p-2 rounded-md flex justify-between items-center h-10">
+      <Link className="text-c5 text-xl hover:text-c3" href={`/stores/${id}`}>
         {name}
       </Link>
       <DeleteButton callback={() => callback(id)} />

@@ -15,11 +15,11 @@ const Incrementer: FC<IncrementerProps> = ({ value, callback }) => {
   return (
     <div className="flex items-center p-2 gap-1">
       <button onClick={() => handleChange(true)}>
-        <MinusIcon className="h-6 fill-1 hover:fill-2" />
+        <MinusIcon className="h-6 fill-c5 hover:fill-c4" />
       </button>
       <p className="text-lg">{value}</p>
       <button onClick={() => handleChange(false)}>
-        <PlusIcon className="h-6 fill-1 hover:fill-2" />
+        <PlusIcon className="h-6 fill-c5 hover:fill-c4" />
       </button>
     </div>
   );

@@ -23,7 +23,7 @@ const ShoppingListFilters: FC<ShoppingListFiltersProps> = ({
   return (
     <form className="flex justify-between">
       <select
-        className="bg-4 rounded-md px-2 text-2 font-bold"
+        className="bg-c2 rounded-md px-2 text-c4 font-bold"
         name="store"
         id="store_select"
         value={filters.selectedStore}
@@ -44,7 +44,7 @@ const ShoppingListFilters: FC<ShoppingListFiltersProps> = ({
             name="group_check"
             id="group_check"
           />
-          <label className="text-1" htmlFor="group_check">
+          <label className="text-c5" htmlFor="group_check">
             Gruppera
           </label>
         </div>
@@ -56,7 +56,7 @@ const ShoppingListFilters: FC<ShoppingListFiltersProps> = ({
             name="recipe_check"
             id="recipe_check"
           />
-          <label className="text-1" htmlFor="recipe_check">
+          <label className="text-c5" htmlFor="recipe_check">
             Dölj ursprung
           </label>
         </div>

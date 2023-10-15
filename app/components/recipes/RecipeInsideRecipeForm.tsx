@@ -38,8 +38,8 @@ const RecipeInsideRecipeForm: FC<RecipeInsideRecipeFormProps> = ({
 
   return (
     <div className="flex flex-col">
-      <h2 className="text-4 text-lg">Recept</h2>
-      <div className="flex flex-col gap-2 bg-3 p-2 rounded-md">
+      <h2 className="text-c2 text-lg">Recept</h2>
+      <div className="flex flex-col gap-2 bg-c3 p-2 rounded-md">
         <SearchRecipeForm handleSearch={handleSearchRecipe} onlySearch={true} />
         {recipeSearchResult.length !== 0 && (
           <ul className="flex flex-col gap-2 bg-2 p-2 rounded-md">
@@ -48,7 +48,7 @@ const RecipeInsideRecipeForm: FC<RecipeInsideRecipeFormProps> = ({
               .map((r) => (
                 <li
                   onClick={() => handleAddSearchItem(r)}
-                  className="flex px-2 text-1 font-bold bg-4 rounded-md cursor-pointer items-center justify-between hover:bg-1 hover:text-4 group"
+                  className="flex px-2 text-c5 font-bold bg-c2 rounded-md cursor-pointer items-center justify-between hover:bg-c5 hover:text-c2 group"
                   key={r.id + "searchResult"}
                 >
                   <p className="overflow-hidden whitespace-nowrap overflow-ellipsis text-sm md:text-base">
@@ -56,7 +56,7 @@ const RecipeInsideRecipeForm: FC<RecipeInsideRecipeFormProps> = ({
                   </p>
                   <div className="flex gap-2 items-center shrink-0">
                     <p className="text-sm md:text-base">{r.portions} Port</p>
-                    <PlusIcon className="fill-1 h-5 group-hover:fill-4" />
+                    <PlusIcon className="fill-c5 h-5 group-hover:fill-c2" />
                   </div>
                 </li>
               ))}
@@ -96,7 +96,7 @@ const RecipeItem: FC<RecipeItemProps> = ({
   return (
     <li
       key={id + "contained"}
-      className="flex px-2 h-8 text-1 font-bold bg-4 rounded-md items-center justify-between"
+      className="flex px-2 h-8 text-c5 font-bold bg-c2 rounded-md items-center justify-between"
     >
       <p>{name}</p>
       <div className="flex gap-2">

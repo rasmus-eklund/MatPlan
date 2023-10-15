@@ -53,21 +53,20 @@ const SearchIngredients: FC<SearchIngredientsProp> = ({ callback }) => {
     <section className="flex flex-col relative align-middle">
       <div className="flex items-center">
         <input
-          className="w-full rounded-md px-4 py-2 outline-none bg-4 focus:bg-5"
+          className="w-full rounded-md px-4 py-2 outline-none bg-c2 focus:bg-c1"
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Lägg till vara..."
           onKeyDown={handleEnter}
-          autoFocus={true}
           autoComplete="off"
         />
       </div>
-      <ul className="absolute top-10 bg-4 w-full z-1">
+      <ul className="absolute top-10 bg-c2 w-full">
         {search.length > 1 &&
           searchResults.map((ing, i) => (
             <li
-              className={`hover:bg-3 ${i === selected ? "bg-3" : ""}`}
+              className={`hover:bg-c3 ${i === selected ? "bg-c3" : ""}`}
               key={ing.name + "_search"}
             >
               <p

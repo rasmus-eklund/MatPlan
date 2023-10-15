@@ -7,11 +7,11 @@ module.exports = {
   ],
   theme: {
     colors: {
-      1: "#27374D",
-      2: "#526D82",
-      3: "#9DB2BF",
-      4: "#DDE6ED",
-      5: "#FFF",
+      "c5": "#27374D",
+      "c4": "#526D82",
+      "c3": "#9DB2BF",
+      "c2": "#DDE6ED",
+      "c1": "#FFF",
     },
     extend: {
       backgroundImage: {

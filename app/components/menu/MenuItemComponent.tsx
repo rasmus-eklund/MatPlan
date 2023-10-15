@@ -21,7 +21,7 @@ const MenuItem: FC<MenuItemProps> = ({
 }) => {
   const { id, name, day } = item;
   return (
-    <li className="flex flex-col md:flex-row items-center justify-between bg-4 rounded-md px-2 gap-2 font-bold text-1">
+    <li className="flex flex-col md:flex-row items-center justify-between bg-c2 rounded-md px-2 gap-2 font-bold text-c5">
       <Link href={`/menu/${id}`} className="text-lg self-start md:self-center">
         {name}
       </Link>

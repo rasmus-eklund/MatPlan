@@ -10,6 +10,7 @@ import {
   useQueryState,
 } from "next-usequerystate";
 import RecipeForm from "../components/recipes/RecipeForm";
+import Loading from "../components/Loading";
 
 enum Filter {
   name = "name",
@@ -18,7 +19,7 @@ enum Filter {
 }
 
 const SearchRecipeComponent = () => {
-  const [results, setResults] = useState<RecipeSearch[]>([]);
+  const [results, setResults] = useState<RecipeSearch[]>();
   const [search, setSearch] = useQueryState("q", parseAsString.withDefault(""));
   const [filter, setFilter] = useQueryState(
     "filter",
@@ -54,12 +55,12 @@ const SearchRecipeComponent = () => {
   };
 
   return (
-    <main className="p-2 md:p-4 bg-2 flex flex-col gap-2 grow overflow-y-auto">
+    <div className="flex flex-col gap-2">
       {formHidden && (
         <SearchRecipeForm handleSearch={handleSearch} onlySearch={false} />
       )}
       {!formHidden && (
-        <div className="flex flex-col gap-5 bg-3 p-2">
+        <div className="flex flex-col gap-5 bg-c3 p-2">
           <RecipeForm
             recipe={emptyRecipe}
             update={createNewRecipe}
@@ -71,14 +72,14 @@ const SearchRecipeComponent = () => {
         <>
           <button
             onClick={() => setFormHidden(!formHidden)}
-            className="bg-4 rounded-md text-xl h-10 px-6"
+            className="bg-c2 rounded-md text-xl h-10 px-6"
           >
             Nytt recept
           </button>
-          <FoundRecipes recipeResult={results} />
+          {results ? <FoundRecipes recipeResult={results} /> : <Loading />}
         </>
       )}
-    </main>
+    </div>
   );
 };
 

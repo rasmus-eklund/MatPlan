@@ -66,20 +66,20 @@ const RecipeForm: FC<RecipeFormProp> = ({
   };
 
   return (
-    <section className="flex flex-col rounded-md bg-3 gap-5">
+    <section className="flex flex-col rounded-md bg-c3 gap-5 p-5">
       <input
-        className="text-1 bg-3 text-3xl font-bold"
+        className="text-c5 bg-c3 text-3xl font-bold"
         type="text"
         value={recipe.name}
         onChange={(e) =>
           setRecipe((prev) => ({ ...prev, name: e.target.value }))
         }
       />
-      <div className="rounded-md bg-2 p-2 flex flex-col gap-2">
+      <div className="rounded-md bg-c4 p-2 flex flex-col gap-2">
         <div className="flex justify-between">
-          <h2 className="text-4 text-md">Portioner</h2>
+          <h2 className="text-c2 text-md">Portioner</h2>
           <input
-            className="rounded-md w-10 text-center text-1 bg-3"
+            className="rounded-md w-10 text-center text-c5 bg-c3"
             type="number"
             value={recipe.portions}
             onChange={(e) =>
@@ -90,9 +90,9 @@ const RecipeForm: FC<RecipeFormProp> = ({
             }
           />
         </div>
-        <div className="flex flex-col bg-2">
-          <h2 className="text-4 text-lg">Ingredienser</h2>
-          <div className="bg-3 p-2 rounded-md">
+        <div className="flex flex-col bg-c4">
+          <h2 className="text-c2 text-lg">Ingredienser</h2>
+          <div className="bg-c3 p-2 rounded-md">
             <SearchIngredients callback={handleAddIngredient} />
             <ul className="flex flex-col gap-1 py-2">
               {recipe.ingredients.map((ing) => (
@@ -108,9 +108,9 @@ const RecipeForm: FC<RecipeFormProp> = ({
           </div>
         </div>
         <div className="flex flex-col">
-          <h2 className="text-4 text-lg">Instruktion</h2>
+          <h2 className="text-c2 text-lg">Instruktion</h2>
           <textarea
-            className="bg-3 text-1 rounded-md p-2"
+            className="bg-c3 text-c5 rounded-md p-2"
             value={recipe.instruction}
             onChange={(e) =>
               setRecipe((prev) => ({ ...prev, instruction: e.target.value }))

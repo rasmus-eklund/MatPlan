@@ -14,23 +14,30 @@ import {
 import days from "../constants/days";
 import { SortMenuItems, Optimistic } from "../utils/utils";
 import MenuItemComponent from "../components/menu/MenuItemComponent";
+import Loading from "../components/Loading";
 
 const Menu = () => {
   const [menu, setMenu] = useState<MenuItem[]>([]);
   const [optMenu, setOptMenu] = useOptimistic(menu);
+  const [loading, setLoading] = useState(true);
   const opti = Optimistic({ setItems: setMenu, setOpt: setOptMenu });
 
   useEffect(() => {
-    getMenuItems().then((data) => setMenu(data));
+    getMenuItems().then((data) => {
+      setMenu(data);
+      setLoading(false);
+    });
   }, []);
 
   return (
     <>
-      <main className="flex flex-col bg-2 p-6 grow overflow-y-auto">
-        <ul className=" flex flex-col gap-2">
+      {loading ? (
+        <Loading />
+      ) : (
+        <ul className="flex flex-col gap-2">
           {days.map((day) => (
-            <li key={day} className="bg-3 p-2 rounded-md flex flex-col">
-              <h2 className="text-3xl text-1 font-bold p-2 rounded-md">
+            <li key={day} className="bg-c3 p-2 rounded-md flex flex-col">
+              <h2 className="text-3xl text-c5 font-bold p-2 rounded-md">
                 {day}
               </h2>
               <ul className="flex flex-col gap-2">
@@ -53,7 +60,7 @@ const Menu = () => {
             </li>
           ))}
         </ul>
-      </main>
+      )}
     </>
   );
 };

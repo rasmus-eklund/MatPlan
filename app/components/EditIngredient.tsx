@@ -4,6 +4,9 @@ import units from "../constants/units";
 import DeleteButton from "./buttons/DeleteButton";
 import Button from "./buttons/Button";
 import EditButton from "./buttons/EditButton";
+import { capitalize } from "../utils/utils";
+import SaveButton from "./buttons/SaveButton";
+import CloseButton from "./buttons/CloseButton";
 
 type EditIngredientProp<T> = {
   ingredientIn: T;
@@ -31,9 +34,9 @@ const EditIngredient = <
   };
 
   return (
-    <li className="flex justify-between items-center bg-4 text-2 rounded-md px-2 py-1">
-      <p className="grow">{ing.name}</p>
-      <div className="flex gap-2 md:gap-4 items-center">
+    <li className="flex justify-between items-center bg-c2 text-c4 rounded-md px-2 py-1">
+      <p className="grow">{capitalize(ing.name)}</p>
+      <div className="flex gap-2 items-center">
         {edit ? (
           <>
             <input
@@ -60,8 +63,8 @@ const EditIngredient = <
               ))}
             </select>
             <div className="flex gap-2 justify-self-end">
-              <Button name="Avbryt" callback={() => setEdit(false)} />
-              <Button name="Spara" callback={handleUpdate} />
+              <CloseButton callback={() => setEdit(false)} />
+              <SaveButton callback={handleUpdate} />
             </div>
           </>
         ) : (

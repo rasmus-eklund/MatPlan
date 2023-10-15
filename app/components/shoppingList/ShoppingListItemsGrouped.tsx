@@ -31,7 +31,7 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
     />
   ) : (
     <li
-      className={`flex flex-col bg-3 rounded-md transition-opacity duration-200 ${
+      className={`flex flex-col bg-c3 rounded-md transition-opacity duration-200 ${
         (group.checked || animate) && "opacity-50"
       }`}
       key={group.name}
@@ -56,7 +56,7 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
               });
             }}
           />
-          <p className="text-1 font-bold">{capitalize(group.name)}</p>
+          <p className="text-c5 font-bold">{capitalize(group.name)}</p>
         </div>
         <div className="flex gap-1">
           <ul className="flex gap-1">
@@ -70,15 +70,15 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
           </ul>
           <div className="cursor-pointer" onClick={() => setOpen(!open)}>
             {open ? (
-              <MinimizeIcon className="h-6 fill-1 hover:scale-125" />
+              <MinimizeIcon className="h-6 fill-c5 hover:scale-125" />
             ) : (
-              <MaximizeIcon className="h-6 fill-1 hover:scale-125" />
+              <MaximizeIcon className="h-6 fill-c5 hover:scale-125" />
             )}
           </div>
         </div>
       </div>
       {open && (
-        <ul className="flex flex-col gap-1 bg-1 p-2 rounded-b-md">
+        <ul className="flex flex-col gap-1 bg-c5 p-2 rounded-b-md">
           {sortByChecked(group.group).map((item) => (
             <Item
               key={item.id}

@@ -1,6 +1,10 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { getStoreById, renameStore, updateStore } from "@/app/server-side/stores";
+import {
+  getStoreById,
+  renameStore,
+  updateStore,
+} from "@/app/server-side/stores";
 import CategoryItemComponent from "../../components/stores/CategoryItem";
 import { StoreCategory } from "@/types";
 import { groupSubcategoryByCategory } from "@/app/utils/utils";
@@ -73,49 +77,47 @@ const StoreComponent = ({ params: { id } }: Props) => {
   };
 
   return (
-    <main className="bg-2 p-5 grow overflow-y-auto">
-      <div className="bg-3 rounded-md p-3 flex flex-col gap-2">
-        <div className="flex items-center justify-between gap-2">
-          {!editName && (
-            <h2 className="text-1 text-xl font-bold">{name || "loading"}</h2>
-          )}
-          {editName && (
-            <input
-              className="bg-4 rounded-md text-xl font-bold min-w-0"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            ></input>
-          )}
-          <div className="flex gap-2">
-            {editName ? (
-              <>
-                <Button name="Spara" callback={handleRenameStore} />
-                <Button name="Avbryt" callback={() => setEditName(false)} />
-              </>
-            ) : (
-              <Button name="Ändra" callback={() => setEditName(true)} />
-            )}
-          </div>
-        </div>
-        {categoryItems && (
-          <ul className="flex flex-col gap-2 bg-3 rounded-md">
-            <DndContext
-              collisionDetection={closestCenter}
-              onDragEnd={onDragEnd}
-              sensors={sensors}
-            >
-              <SortableContext
-                items={categoryItems}
-                strategy={verticalListSortingStrategy}
-              >
-                {categoryItems.map((item) => (
-                  <CategoryItemComponent key={item.id} category={item} />
-                ))}
-              </SortableContext>
-            </DndContext>
-          </ul>
+    <div className="bg-c3 rounded-md p-3 flex flex-col gap-2">
+      <div className="flex items-center justify-between gap-2">
+        {!editName && (
+          <h2 className="text-c5 text-xl font-bold">{name || "loading"}</h2>
         )}
+        {editName && (
+          <input
+            className="bg-c2 rounded-md text-xl font-bold min-w-0"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></input>
+        )}
+        <div className="flex gap-2">
+          {editName ? (
+            <>
+              <Button name="Spara" callback={handleRenameStore} />
+              <Button name="Avbryt" callback={() => setEditName(false)} />
+            </>
+          ) : (
+            <Button name="Ändra" callback={() => setEditName(true)} />
+          )}
+        </div>
       </div>
+      {categoryItems && (
+        <ul className="flex flex-col gap-2 bg-c3 rounded-md">
+          <DndContext
+            collisionDetection={closestCenter}
+            onDragEnd={onDragEnd}
+            sensors={sensors}
+          >
+            <SortableContext
+              items={categoryItems}
+              strategy={verticalListSortingStrategy}
+            >
+              {categoryItems.map((item) => (
+                <CategoryItemComponent key={item.id} category={item} />
+              ))}
+            </SortableContext>
+          </DndContext>
+        </ul>
+      )}
       {orderEdited && (
         <div className="flex items-center gap-4 justify-end absolute bottom-8 left-0 w-full px-10">
           <Button name="Spara" callback={handleSaveOrder} />
@@ -128,7 +130,7 @@ const StoreComponent = ({ params: { id } }: Props) => {
           />
         </div>
       )}
-    </main>
+    </div>
   );
 };
 

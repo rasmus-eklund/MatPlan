@@ -43,9 +43,9 @@ const Recipe = ({ params }: { params: { id: string } }) => {
   };
 
   return (
-    <main className="bg-2 p-5 grow overflow-y-auto">
+    <>
       {recipe ? (
-        <section className="flex flex-col rounded-md gap-5 bg-3 p-8 lg: max-w-screen-sm">
+        <div className="flex flex-col rounded-md gap-5 lg: max-w-screen-sm">
           {hideForm ? (
             <ShowRecipe recipe={recipe}>
               <DaysDropDown
@@ -64,11 +64,11 @@ const Recipe = ({ params }: { params: { id: string } }) => {
               closeForm={() => setHideForm(true)}
             />
           )}
-        </section>
+        </div>
       ) : (
         <Loading />
       )}
-    </main>
+    </>
   );
 };
 

@@ -26,11 +26,10 @@ const SearchRecipeForm: FC<SearchFormProps> = ({
         e.preventDefault();
         handleReset(handleSearch({ filter, search }));
       }}
-      action=""
     >
       <div className="flex gap-2">
         <input
-          className={`bg-4 text-xl px-2 rounded-md h-10 ${
+          className={`bg-c2 text-xl px-2 rounded-md h-10 ${
             onlySearch ? "w-full" : "w-2/3"
           }`}
           id="search"
@@ -41,7 +40,7 @@ const SearchRecipeForm: FC<SearchFormProps> = ({
         />
         {!onlySearch && (
           <select
-            className="rounded-md bg-4 text-xl h-10 px-2 w-1/3"
+            className="rounded-md bg-c2 text-xl h-10 px-2 w-1/3"
             name="filter"
             id="filter"
             value={filter}
@@ -54,7 +53,7 @@ const SearchRecipeForm: FC<SearchFormProps> = ({
         )}
       </div>
       {!onlySearch && (
-        <button type="submit" className="bg-4 rounded-md text-xl h-10 px-6">
+        <button type="submit" className="bg-c2 rounded-md text-xl h-10 px-6">
           Sök
         </button>
       )}

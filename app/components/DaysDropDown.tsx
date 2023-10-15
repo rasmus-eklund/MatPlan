@@ -10,7 +10,7 @@ type DaysDropDownProp = {
 const DaysDropDown: FC<DaysDropDownProp> = ({ setDay, initDay }) => {
   return (
     <select
-      className="rounded-md text-1 bg-4 py-1 px-2 hover:bg-1 hover:text-4 border-[2px] border-3 cursor-pointer"
+      className="rounded-md text-c5 bg-c2 py-1 px-2 hover:bg-c5 hover:text-c2 border-2 border-c3 cursor-pointer"
       value={initDay}
       onChange={(e) => {
         const newDay = e.target.value as Day;
