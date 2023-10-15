@@ -21,8 +21,8 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
 }) => {
   const order = filters.stores.find(
     (store) => store.id === filters.selectedStore,
-  );
-  if (order)
+  )!;
+  if (items.length !== 0) {
     return (
       <ul className="flex flex-col bg-2 rounded-md p-2 gap-1">
         {filters.group
@@ -46,6 +46,7 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
             ))}
       </ul>
     );
+  }
 };
 
 export default FilterShoppingList;

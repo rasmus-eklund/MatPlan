@@ -1,19 +1,21 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ShoppingListFilter, ShoppingListItem } from "@/types";
-import { getShoppingList, updateItem } from "../server-side/items";
+import { Home, ShoppingListFilter, ShoppingListItem } from "@/types";
+import { getHome, getShoppingList, updateItem } from "../server-side/items";
 import { getAllStores } from "../server-side/stores";
 import Loading from "../components/Loading";
 import ShoppingListFilters from "../components/shoppingList/ShoppingListFilters";
 import ShoppingList from "../components/shoppingList/ShoppingList";
+import { isHome } from "../utils/utils";
 
 const ShoppingListPage = () => {
   const [items, setItems] = useState<ShoppingListItem[]>();
+  const [home, setHome] = useState<Home[]>();
   const [filters, setFilters] = useState<ShoppingListFilter>();
 
   useEffect(() => {
-    Promise.all([getAllStores(), getShoppingList()]).then(
-      ([allStores, shoppingList]) => {
+    Promise.all([getAllStores(), getShoppingList(), getHome()]).then(
+      ([allStores, shoppingList, homeItems]) => {
         setItems(shoppingList);
         setFilters({
           group: false,
@@ -21,6 +23,7 @@ const ShoppingListPage = () => {
           selectedStore: allStores[0].id,
           stores: allStores,
         });
+        setHome(homeItems);
       },
     );
   }, []);
@@ -44,16 +47,27 @@ const ShoppingListPage = () => {
       );
     }
   };
+
   return (
     <main className="bg-2 p-5 grow overflow-y-auto">
-      {filters && items ? (
+      {filters && items && home ? (
         <div className="bg-3 rounded-md p-3 flex flex-col gap-2">
           <ShoppingListFilters filters={filters} setFilters={setFilters} />
           <ShoppingList
             filters={filters}
             handleCheckItems={handleCheckItems}
-            items={items}
+            items={home ? items.filter((i) => !isHome(i.name, home)) : items}
           />
+          {home.length !== 0 && (
+            <>
+              <h2 className="text-1 text-lg">Varor hemma</h2>
+              <ShoppingList
+                filters={filters}
+                items={items.filter((i) => isHome(i.name, home))}
+                handleCheckItems={handleCheckItems}
+              />
+            </>
+          )}
         </div>
       ) : (
         <Loading />
