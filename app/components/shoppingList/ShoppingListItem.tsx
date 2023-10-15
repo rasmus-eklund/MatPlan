@@ -16,7 +16,7 @@ const Item: FC<ItemProps> = ({ item, filter, handleCheckItems }) => {
 
   return (
     <li
-      className={`flex items-center justify-between h-7 gap-2 bg-4 text-2 px-2 rounded-md transition-all duration-300 ${
+      className={`flex items-center justify-between py-1 gap-2 bg-3 text-1 px-2 rounded-md transition-all duration-300 ${
         checked && "opacity-50"
       } ${animate && "opacity-0"}`}
     >

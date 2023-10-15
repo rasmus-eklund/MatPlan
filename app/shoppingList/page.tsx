@@ -49,9 +49,9 @@ const ShoppingListPage = () => {
   };
 
   return (
-    <main className="bg-2 p-5 grow overflow-y-auto">
+    <main className="bg-2 p-5 grow flex flex-col gap-5 overflow-y-auto">
       {filters && items && home ? (
-        <div className="bg-3 rounded-md p-3 flex flex-col gap-2">
+        <>
           <ShoppingListFilters filters={filters} setFilters={setFilters} />
           <ShoppingList
             filters={filters}
@@ -68,7 +68,7 @@ const ShoppingListPage = () => {
               />
             </>
           )}
-        </div>
+        </>
       ) : (
         <Loading />
       )}

@@ -24,7 +24,7 @@ const FilterShoppingList: FC<FilterShoppingListProps> = ({
   )!;
   if (items.length !== 0) {
     return (
-      <ul className="flex flex-col bg-2 rounded-md p-2 gap-1">
+      <ul className="flex flex-col rounded-md gap-1">
         {filters.group
           ? sortByChecked(
               sortBySubcategory(order, groupShoppingListItems(items)),
