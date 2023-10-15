@@ -8,7 +8,7 @@ import ShoppingListFilters from "../components/shoppingList/ShoppingListFilters"
 import ShoppingList from "../components/shoppingList/ShoppingList";
 
 const ShoppingListPage = () => {
-  const [items, setItems] = useState<ShoppingListItem[]>([]);
+  const [items, setItems] = useState<ShoppingListItem[]>();
   const [filters, setFilters] = useState<ShoppingListFilter>();
 
   useEffect(() => {
@@ -26,21 +26,23 @@ const ShoppingListPage = () => {
   }, []);
 
   const handleCheckItems = (updatedItems: ShoppingListItem[]) => {
-    const newItems = [
-      ...items.filter((i) => !updatedItems.some((item) => item.id === i.id)),
-      ...updatedItems,
-    ];
-    setItems(newItems);
-    Promise.all(
-      updatedItems.map((item) =>
-        updateItem({
-          id: item.id,
-          checked: item.checked,
-          quantity: item.quantity,
-          unit: item.unit,
-        }),
-      ),
-    );
+    if (items) {
+      const newItems = [
+        ...items.filter((i) => !updatedItems.some((item) => item.id === i.id)),
+        ...updatedItems,
+      ];
+      setItems(newItems);
+      Promise.all(
+        updatedItems.map((item) =>
+          updateItem({
+            id: item.id,
+            checked: item.checked,
+            quantity: item.quantity,
+            unit: item.unit,
+          }),
+        ),
+      );
+    }
   };
   return (
     <main className="bg-2 p-5 grow overflow-y-auto">
