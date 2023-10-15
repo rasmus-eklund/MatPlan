@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   getStoreById,
   renameStore,
@@ -43,6 +43,10 @@ const StoreComponent = ({ params: { id } }: Props) => {
       const order = groupSubcategoryByCategory(s).map((i) => ({
         ...i,
         id: i.id + 1,
+        subcategories: i.subcategories.map((item) => ({
+          ...item,
+          id: item.id + 1,
+        })),
       }));
       setCategoryItems(order);
       originalOrder.current = order;
@@ -51,13 +55,14 @@ const StoreComponent = ({ params: { id } }: Props) => {
 
   const onDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    if (over) {
-      if (active.id === over.id) return;
+    if (over && active.id !== over.id) {
       setCategoryItems((items) => {
-        const oldId = items.findIndex((item) => item.id === active.id);
-        const newId = items.findIndex((item) => item.id === over.id);
         setOrderEdited(true);
-        return arrayMove(items, oldId, newId);
+        return arrayMove(
+          items,
+          items.findIndex((item) => item.id === active.id),
+          items.findIndex((item) => item.id === over.id),
+        );
       });
     }
   };
@@ -70,7 +75,7 @@ const StoreComponent = ({ params: { id } }: Props) => {
     const data: StoreCategory[] = categoryItems.flatMap((i) =>
       i.subcategories.map((s) => ({
         categoryId: i.id - 1,
-        subcategoryId: s.id,
+        subcategoryId: s.id - 1,
       })),
     );
     updateStore(id, data).then(() => setOrderEdited(false));
@@ -112,7 +117,12 @@ const StoreComponent = ({ params: { id } }: Props) => {
               strategy={verticalListSortingStrategy}
             >
               {categoryItems.map((item) => (
-                <CategoryItemComponent key={item.id} category={item} />
+                <CategoryItemComponent
+                  key={item.id}
+                  category={item}
+                  setCategoryItems={setCategoryItems}
+                  setOrderEdited={setOrderEdited}
+                />
               ))}
             </SortableContext>
           </DndContext>

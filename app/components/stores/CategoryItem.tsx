@@ -1,18 +1,36 @@
-import { CategoryItem as CategoryItemComponent } from "@/types";
-import { FC, useEffect, useState } from "react";
-import { useSortable } from "@dnd-kit/sortable";
+import { CategoryItem, CategoryItem as CategoryItemComponent } from "@/types";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import {
+  SortableContext,
+  arrayMove,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import DraggableIcon from "../icons/DraggableIcon";
 import { capitalize } from "../../utils/utils";
 import MinimizeIcon from "../icons/MinimizeIcon";
 import MaximizeIcon from "../icons/MaximizeIcon";
+import {
+  DndContext,
+  DragEndEvent,
+  MouseSensor,
+  TouchSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 
-type CategoryProps = {
+type CategoryItemComponentProps = {
   category: CategoryItemComponent;
+  setCategoryItems: Dispatch<SetStateAction<CategoryItem[]>>;
+  setOrderEdited: (value: boolean) => void;
 };
 
-const CategoryItemComponent: FC<CategoryProps> = ({
+const CategoryItemComponent: FC<CategoryItemComponentProps> = ({
   category: { id, name, subcategories },
+  setCategoryItems,
+  setOrderEdited,
 }) => {
   const [open, setOpen] = useState(false);
   const {
@@ -29,9 +47,30 @@ const CategoryItemComponent: FC<CategoryProps> = ({
     setOpen(false);
   }, [isDragging]);
 
+  const touchSensor = useSensor(TouchSensor);
+  const mouseSensor = useSensor(MouseSensor);
+  const sensors = useSensors(mouseSensor, touchSensor);
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
+  };
+
+  const onDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      setCategoryItems((items) => {
+        const subArrayIndex = items.findIndex((item) => item.id === id);
+        const newSubcategories = arrayMove(
+          subcategories,
+          subcategories.findIndex((item) => item.id === active.id),
+          subcategories.findIndex((item) => item.id === over.id),
+        );
+        const newItems = [...items];
+        newItems[subArrayIndex].subcategories = newSubcategories;
+        setOrderEdited(true);
+        return newItems;
+      });
+    }
   };
   return (
     <li
@@ -58,16 +97,52 @@ const CategoryItemComponent: FC<CategoryProps> = ({
       </div>
       {open && (
         <ul className="flex flex-col gap-1">
-          {subcategories.map(({ name, id }) => (
-            <li
-              key={name + id}
-              className="flex justify-between rounded-md font-semibold bg-c3 px-2 py-1"
+          <DndContext
+            collisionDetection={closestCenter}
+            onDragEnd={onDragEnd}
+            sensors={sensors}
+          >
+            <SortableContext
+              items={subcategories}
+              strategy={verticalListSortingStrategy}
             >
-              <p className="text-c5 select-none">{capitalize(name)}</p>
-            </li>
-          ))}
+              {subcategories.map((subcat) => (
+                <SubcategoryItem subcat={subcat} key={subcat.id} />
+              ))}
+            </SortableContext>
+          </DndContext>
         </ul>
       )}
+    </li>
+  );
+};
+
+type SubcategoryItemProps = { subcat: { name: string; id: number } };
+const SubcategoryItem: FC<SubcategoryItemProps> = ({
+  subcat: { id, name },
+}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    setActivatorNodeRef,
+  } = useSortable({ id });
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
+  };
+  return (
+    <li
+      ref={setNodeRef}
+      style={style}
+      className="flex rounded-md items-center font-semibold bg-c3 px-2 py-1 gap-2"
+    >
+      <div ref={setActivatorNodeRef} {...attributes} {...listeners}>
+        <DraggableIcon className="w-8 fill-c5" />
+      </div>
+      <p className="text-c5 select-none">{capitalize(name)}</p>
     </li>
   );
 };
