@@ -61,7 +61,7 @@ const ShoppingListItemsGrouped: FC<ShoppingListItemsGroupedProps> = ({
         <div className="flex gap-1">
           <ul className="flex gap-1">
             {groupByUnit(group.group).map((i, index, arr) => (
-              <li className="flex gap-1 text-1 select-none" key={i.unit}>
+              <li className="flex gap-1 text-c5 select-none" key={i.unit}>
                 <p>{i.quantity}</p>
                 <p>{i.unit}</p>
                 {index < arr.length - 1 && <span>, </span>}

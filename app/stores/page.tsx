@@ -40,7 +40,7 @@ const Stores = () => {
           onClick={handleAddStore}
           className="bg-c2 p-2 h-10 rounded-md flex gap-2 items-center text-c4 text-xl hover:bg-c4 hover:text-c5 group cursor-pointer"
         >
-          <PlusIcon className="h-6 w-6 fill-2 group-hover:fill-3" />
+          <PlusIcon className="h-6 w-6 fill-c4 group-hover:fill-c3" />
           <p>Lägg till ny affär</p>
         </li>
       </ul>
