@@ -37,7 +37,7 @@ const ShowRecipe: FC<ShowRecipeProps> = ({ recipe, children }) => {
           </ul>
           {recipe.children.length !== 0 && (
             <>
-              <h2 className="text-c2 text-lg">Recept</h2>
+              <h2 className="text-c2 text-lg">Länkade recept</h2>
               <ul className="bg-c3 p-1 rounded-md flex flex-col gap-1">
                 {recipe.children.map((rec) => (
                   <li className="bg-c2 p-1 rounded-md" key={rec.id}>

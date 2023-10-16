@@ -45,12 +45,12 @@ const Recipe = ({ params }: { params: { id: string } }) => {
   return (
     <>
       {recipe ? (
-        <div className="flex flex-col rounded-md gap-5 lg: max-w-screen-sm">
+        <div className="flex flex-col rounded-md gap-5">
           {hideForm ? (
             <ShowRecipe recipe={recipe}>
-              <DaysDropDown
-                initDay="Obestämd"
-                setDay={(day) => handleAddToMenu(recipe, day)}
+              <Button
+                name="Lägg till meny"
+                callback={() => handleAddToMenu(recipe, "Obestämd")}
               />
               <div className="flex gap-4 items-center py-2">
                 <Button name="Ändra" callback={() => setHideForm(false)} />

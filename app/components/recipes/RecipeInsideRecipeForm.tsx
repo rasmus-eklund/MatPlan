@@ -42,7 +42,7 @@ const RecipeInsideRecipeForm: FC<RecipeInsideRecipeFormProps> = ({
       <div className="flex flex-col gap-2 bg-c3 p-2 rounded-md">
         <SearchRecipeForm handleSearch={handleSearchRecipe} onlySearch={true} />
         {recipeSearchResult.length !== 0 && (
-          <ul className="flex flex-col gap-2 bg-2 p-2 rounded-md">
+          <ul className="flex flex-col gap-2 bg-c4 p-2 rounded-md">
             {recipeSearchResult
               .filter((i) => !recipes.some((r) => r.id === i.id))
               .map((r) => (
