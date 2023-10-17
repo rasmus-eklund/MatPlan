@@ -112,3 +112,21 @@ export type OptimisticMethod<T> = {
   item: T;
   cb: (item: T) => Promise<T>;
 };
+
+export type Category = {
+  id: number;
+  name: string;
+};
+
+export type Subcategory = {
+  id: number;
+  name: string;
+  categoryId: number;
+};
+
+export type IngredientFilter = {
+  search: string;
+  category: number;
+  subcategory: number;
+  asc: boolean;
+};
