@@ -1,10 +1,10 @@
 import { FC } from "react";
 
-type MinimizeIconProps = {
+type UpIconProps = {
   className: string;
 };
 
-const MinimizeIcon: FC<MinimizeIconProps> = ({ className }) => {
+const UpIcon: FC<UpIconProps> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -16,4 +16,4 @@ const MinimizeIcon: FC<MinimizeIconProps> = ({ className }) => {
   );
 };
 
-export default MinimizeIcon;
+export default UpIcon;

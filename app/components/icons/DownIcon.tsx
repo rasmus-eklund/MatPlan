@@ -1,10 +1,10 @@
 import { FC } from "react";
 
-type MaximizeIconProps = {
+type DownIconProps = {
   className: string;
 };
 
-const MaximizeIcon: FC<MaximizeIconProps> = ({ className }) => {
+const DownIcon: FC<DownIconProps> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -16,4 +16,4 @@ const MaximizeIcon: FC<MaximizeIconProps> = ({ className }) => {
   );
 };
 
-export default MaximizeIcon;
+export default DownIcon;

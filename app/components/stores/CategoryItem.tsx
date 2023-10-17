@@ -9,8 +9,8 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import DraggableIcon from "../icons/DraggableIcon";
 import { capitalize } from "../../utils/utils";
-import MinimizeIcon from "../icons/MinimizeIcon";
-import MaximizeIcon from "../icons/MaximizeIcon";
+import UpIcon from "../icons/UpIcon";
+import DownIcon from "../icons/DownIcon";
 import {
   DndContext,
   DragEndEvent,
@@ -89,9 +89,9 @@ const CategoryItemComponent: FC<CategoryItemComponentProps> = ({
         </div>
         <div onClick={() => setOpen(!open)}>
           {open ? (
-            <MinimizeIcon className="h-8 fill-c2 hover:scale-110" />
+            <UpIcon className="h-8 fill-c2 hover:scale-110" />
           ) : (
-            <MaximizeIcon className="h-8 fill-c2 hover:scale-110" />
+            <DownIcon className="h-8 fill-c2 hover:scale-110" />
           )}
         </div>
       </div>
