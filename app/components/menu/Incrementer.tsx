@@ -13,13 +13,13 @@ const Incrementer: FC<IncrementerProps> = ({ value, callback }) => {
     callback(newValue);
   };
   return (
-    <div className="flex items-center p-2 gap-1">
+    <div className="flex items-center p-2 gap-1 select-none">
       <button onClick={() => handleChange(true)}>
-        <MinusIcon className="h-6 fill-c5 hover:fill-c4" />
+        <MinusIcon className="h-6 fill-c5 md:hover:fill-c4" />
       </button>
       <p className="text-lg">{value}</p>
       <button onClick={() => handleChange(false)}>
-        <PlusIcon className="h-6 fill-c5 hover:fill-c4" />
+        <PlusIcon className="h-6 fill-c5 md:hover:fill-c4" />
       </button>
     </div>
   );

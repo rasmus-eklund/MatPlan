@@ -16,7 +16,7 @@ export default function Landing() {
 
   return (
     <>
-      <div className="flex flex-col items-center bg-c3/60 z-10 p-10 gap-5">
+      <div className="flex flex-col items-center bg-c1/50 z-10 p-10 gap-5 rounded-3xl">
         <h1 className="font-bold text-2xl text-center text-c5">
           Välkommen till MatPlan!
         </h1>
@@ -33,6 +33,8 @@ export default function Landing() {
         className="h-full w-full"
         src="/bgimage_sm.jpg"
         alt="background image"
+        placeholder="blur"
+        blurDataURL="/bgimage_sm.jpg"
         layout="fill"
         objectFit="cover"
       />

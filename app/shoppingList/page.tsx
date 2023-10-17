@@ -61,7 +61,7 @@ const ShoppingListPage = () => {
             />
             {home.length !== 0 && (
               <>
-                <h2 className="text-c5 text-lg">Varor hemma</h2>
+                <h2 className="text-c3 text-lg">Varor hemma</h2>
                 <ShoppingList
                   filters={filters}
                   items={items.filter((i) => isHome(i.name, home))}

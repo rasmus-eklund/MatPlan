@@ -22,8 +22,8 @@ const FoundRecipes = ({ recipeResult }: Props) => {
              font-bold bg-c2 rounded-md items-center"
             key={r.id}
           >
-            <Link href={`/recipes/${r.id}`}>{r.name}</Link>
-            <div className="flex items-center gap-4">
+            <Link className="overflow-hidden text-ellipsis whitespace-nowrap" href={`/recipes/${r.id}`}>{r.name}</Link>
+            <div className="flex items-center gap-4 shrink-0">
               <Button name="Lägg till" callback={() => addRecipe(r)} />
             </div>
           </li>

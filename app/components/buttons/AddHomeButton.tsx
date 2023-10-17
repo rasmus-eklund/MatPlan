@@ -21,8 +21,8 @@ const AddHomeButton: FC<AddHomeButtonProps> = ({ home, callback }) => {
   return (
     <button disabled={animate} onClick={handleClick}>
       <HomeIcon
-        className={`h-6 hover:scale-110 hover:fill-c5 ${
-          home ? "fill-c5 hover:fill-c1" : "fill-c1"
+        className={`h-6 hover:scale-110 ${
+          home ? "fill-c5 md:hover:fill-c1" : "fill-c1 md:hover:fill-c5"
         } bg-c3 rounded-lg p-1 transition-all ${
           animate && "-translate-y-1 scale-125"
         }`}

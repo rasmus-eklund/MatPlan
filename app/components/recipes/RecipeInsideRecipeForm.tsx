@@ -5,7 +5,8 @@ import { SearchRecipeByFilter } from "@/app/server-side/recipes";
 import DeleteButton from "../buttons/DeleteButton";
 import PlusIcon from "../icons/PlusIcon";
 import EditButton from "../buttons/EditButton";
-import Button from "../buttons/Button";
+import SaveButton from "../buttons/SaveButton";
+import CloseButton from "../buttons/CloseButton";
 
 type RecipeInsideRecipeFormProps = {
   recipes: RecipeSearch[];
@@ -108,12 +109,12 @@ const RecipeItem: FC<RecipeItemProps> = ({
               value={value}
               onChange={(e) => setValue(Number(e.target.value))}
             />
-            <Button name="Spara" callback={handleSave} />
-            <Button name="Avbryt" callback={() => setEdit(false)} />
+            <SaveButton callback={handleSave} />
+            <CloseButton callback={() => setEdit(false)} />
           </>
         ) : (
           <>
-            <p>{portions} Portioner</p>
+            <p>{portions} port</p>
             <EditButton callback={() => setEdit(true)} />
             <DeleteButton callback={() => handleRemoveRecipe(id)} />
           </>

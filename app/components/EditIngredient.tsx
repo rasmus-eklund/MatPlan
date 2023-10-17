@@ -34,13 +34,13 @@ const EditIngredient = <
   };
 
   return (
-    <li className="flex justify-between items-center bg-c2 text-c4 rounded-md px-2 py-1">
+    <li className="flex justify-between items-center bg-c2 text-c4 text-sm rounded-md px-2 py-1">
       <p className="grow">{capitalize(ing.name)}</p>
       <div className="flex gap-2 items-center">
         {edit ? (
           <>
             <input
-              className="w-16"
+              className="min-w-0 w-10"
               type="number"
               value={ing.quantity}
               onChange={(e) =>
@@ -52,6 +52,7 @@ const EditIngredient = <
             />
             <select
               id="edit-unit"
+              className="text-xs"
               name="unit"
               value={ing.unit}
               onChange={(e) =>

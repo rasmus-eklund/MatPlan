@@ -37,7 +37,7 @@ const Menu = () => {
         <ul className="flex flex-col gap-2">
           {days.map((day) => (
             <li key={day} className="bg-c3 p-2 rounded-md flex flex-col">
-              <h2 className="text-3xl text-c5 font-bold p-2 rounded-md">
+              <h2 className="text-xl text-c5 font-bold p-2 rounded-md">
                 {day}
               </h2>
               <ul className="flex flex-col gap-2">

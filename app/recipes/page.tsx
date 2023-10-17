@@ -60,13 +60,11 @@ const SearchRecipeComponent = () => {
         <SearchRecipeForm handleSearch={handleSearch} onlySearch={false} />
       )}
       {!formHidden && (
-        <div className="flex flex-col gap-5 bg-c3 p-2">
-          <RecipeForm
-            recipe={emptyRecipe}
-            update={createNewRecipe}
-            closeForm={() => setFormHidden(true)}
-          />
-        </div>
+        <RecipeForm
+          recipe={emptyRecipe}
+          update={createNewRecipe}
+          closeForm={() => setFormHidden(true)}
+        />
       )}
       {formHidden && (
         <>

@@ -68,7 +68,7 @@ const RecipeForm: FC<RecipeFormProp> = ({
   return (
     <section className="flex flex-col rounded-md bg-c3 gap-5 p-5">
       <input
-        className="text-c5 bg-c3 text-3xl font-bold"
+        className="text-c5 bg-c3 text-2xl font-bold"
         type="text"
         value={recipe.name}
         onChange={(e) =>

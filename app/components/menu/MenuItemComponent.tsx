@@ -21,11 +21,11 @@ const MenuItem: FC<MenuItemProps> = ({
 }) => {
   const { id, name, day } = item;
   return (
-    <li className="flex flex-col md:flex-row items-center justify-between bg-c2 rounded-md px-2 gap-2 font-bold text-c5">
-      <Link href={`/menu/${id}`} className="text-lg self-start md:self-center">
+    <li className="flex flex-col md:flex-row md:items-center md:justify-between bg-c2 rounded-md px-2 gap-2 font-bold text-c5">
+      <Link href={`/menu/${id}`} className="self-start md:self-center">
         {name}
       </Link>
-      <div className="flex items-center gap-1">
+      <div className="flex justify-between items-center gap-1">
         <Incrementer
           value={item.portions}
           callback={(value) => changePortions({ ...item, portions: value })}
