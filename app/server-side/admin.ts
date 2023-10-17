@@ -1,5 +1,4 @@
 "use server";
-
 import { Category, IngredientCat, Subcategory } from "@/types";
 import { prisma } from "./prisma";
 
@@ -22,4 +21,23 @@ export const addIngredient = async ({
     data: { name, categoryId, subcategoryId },
   });
   return data;
+};
+
+export const deleteIngredient = async (name: string) => {
+  const response: IngredientCat = await prisma.ingredient.delete({
+    where: { name },
+  });
+  return response;
+};
+
+export const updateIngredient = async ({
+  name,
+  categoryId,
+  subcategoryId,
+}: IngredientCat) => {
+  const response: IngredientCat = await prisma.ingredient.update({
+    where: { name },
+    data: { categoryId, subcategoryId },
+  });
+  return response;
 };

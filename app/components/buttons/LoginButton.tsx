@@ -22,7 +22,7 @@ const LoginButton = () => {
       <button
         className="text-center text-c2 mr-4"
         onClick={() => {
-          signIn("google", { callbackUrl: "/menu" });
+          signIn("google", { callbackUrl: "/home" });
         }}
         type="button"
       >
