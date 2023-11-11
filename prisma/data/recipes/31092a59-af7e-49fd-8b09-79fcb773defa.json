@@ -1,0 +1,48 @@
+{
+  "id": "31092a59-af7e-49fd-8b09-79fcb773defa",
+  "name": "Mor annas sås",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "majonnäs"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "creme fraiche"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "äpplen"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "dill"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "kapris"
+    },
+    {
+      "quantity": 0.25,
+      "unit": "tsk",
+      "name": "lök"
+    },
+    {
+      "quantity": 1,
+      "unit": "krm",
+      "name": "salt"
+    },
+    {
+      "quantity": 1,
+      "unit": "krm",
+      "name": "peppar"
+    }
+  ],
+  "instruction": "Instruktion"
+}

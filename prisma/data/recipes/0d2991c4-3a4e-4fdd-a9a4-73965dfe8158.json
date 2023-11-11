@@ -1,0 +1,43 @@
+{
+  "id": "0d2991c4-3a4e-4fdd-a9a4-73965dfe8158",
+  "name": "Kycklingbiffar med äppel och curry aioli",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "kycklingfärs"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 4,
+      "unit": "msk",
+      "name": "ströbröd"
+    },
+    {
+      "quantity": 1,
+      "unit": "dl",
+      "name": "vatten"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "salt"
+    },
+    {
+      "quantity": 2,
+      "unit": "krm",
+      "name": "vitpeppar"
+    },
+    {
+      "quantity": 4,
+      "unit": "rec",
+      "name": "äppel och curry aioli"
+    }
+  ],
+  "instruction": "Instruktion"
+}

@@ -1,0 +1,63 @@
+{
+  "id": "bb984c61-bcf4-46ea-ba22-c19b67bc7b31",
+  "name": "Panerad torsk med kall sås",
+  "portions": 6,
+  "ingredients": [
+    {
+      "quantity": 1200,
+      "unit": "g",
+      "name": "frusen torsk"
+    },
+    {
+      "quantity": 3,
+      "unit": "dl",
+      "name": "gräddfil"
+    },
+    {
+      "quantity": 1,
+      "unit": "dl",
+      "name": "fil"
+    },
+    {
+      "quantity": 1,
+      "unit": "dl",
+      "name": "majonnäs"
+    },
+    {
+      "quantity": 1,
+      "unit": "dl",
+      "name": "bostongurka"
+    },
+    {
+      "quantity": 1,
+      "unit": "pkt",
+      "name": "frusen dill"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "citron"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "salt"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "socker"
+    },
+    {
+      "quantity": 12,
+      "unit": "st",
+      "name": "potatis"
+    },
+    {
+      "quantity": 600,
+      "unit": "g",
+      "name": "frusna ärtor"
+    }
+  ],
+  "instruction": "instruktion"
+}

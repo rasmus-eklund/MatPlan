@@ -1,0 +1,63 @@
+{
+  "id": "2e60424f-1442-4ecf-a13a-0e237127a1d0",
+  "name": "Valnöt och linssallad",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 450,
+      "unit": "g",
+      "name": "sötpotatis"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "rödlök"
+    },
+    {
+      "quantity": 20,
+      "unit": "g",
+      "name": "valnötter"
+    },
+    {
+      "quantity": 1,
+      "unit": "pkt",
+      "name": "gröna linser"
+    },
+    {
+      "quantity": 2,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "citron"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "apelsin"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "spenat"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "persilja"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "senap"
+    },
+    {
+      "quantity": 75,
+      "unit": "g",
+      "name": "salladsost"
+    }
+  ],
+  "instruction": "1. Rosta sötpotatis:\nUgnen 220c/200c varmluft.\nSkär sötpotatis 2 cm stora bitar och rödlök i 2cm klyftor. Rosta i ugn med salt, peppar och olja i ca 20-25 min.\n2. Förbered grönsaker:\nHacka valnötter, skölj linserna, finhacka vitlök.\nRiv citronzest och skär citron i klyftor.\nHacka apelsin, spenat och persilja.\n3. Senapsdressing:\nBlanda senap, citronjuice, olivolja ohc lite vatten. Krydda med salt och peppar.\n4. Rosta valnötter\n5. Stek grönsaker.\nStek linser, vitlök ohc citronzest.\n6. Blanda allt och servera."
+}

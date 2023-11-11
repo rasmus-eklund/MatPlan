@@ -1,0 +1,83 @@
+{
+  "id": "1b485e40-0b86-459a-bfad-626d6647e584",
+  "name": "Korean-style tortillas",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "chili"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "ingefära"
+    },
+    {
+      "quantity": 1,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lime"
+    },
+    {
+      "quantity": 2,
+      "unit": "tsk",
+      "name": "socker"
+    },
+    {
+      "quantity": 2,
+      "unit": "msk",
+      "name": "sojasås"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "olja"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "gurka"
+    },
+    {
+      "quantity": 2,
+      "unit": "tsk",
+      "name": "vitvinsvinäger"
+    },
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "köttfärs"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "morot"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "spetskål"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "färsk koriander"
+    },
+    {
+      "quantity": 2,
+      "unit": "rec",
+      "name": "chapati"
+    },
+    {
+      "quantity": 1,
+      "unit": "dl",
+      "name": "creme fraiche"
+    }
+  ],
+  "instruction": "1. Gör sås:\nHacka chili, ingefära och vitlök. Blanda med socker, sojasås, olja och limejuice.\n2. Pickla gurka:\nRiv gurka i breda remsor. Blanda med vitvinsvinäger, socker och salt.\n3. Stek köttfärs och rör i sås.\n4. Sallad:\nRiv morot och finstrimla spetskål. Blanda med lite salt. Hacka koriander.\n5. Servera."
+}

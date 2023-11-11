@@ -1,0 +1,68 @@
+{
+  "id": "99d41086-e509-4a65-8cb9-4d56583a21d6",
+  "name": "Karregryta med äpple och plomon",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "kg",
+      "name": "fläskkarre"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 150,
+      "unit": "g",
+      "name": "katrinplommon"
+    },
+    {
+      "quantity": 3,
+      "unit": "st",
+      "name": "lagerblad"
+    },
+    {
+      "quantity": 1,
+      "unit": "krm",
+      "name": "vitpepparkorn"
+    },
+    {
+      "quantity": 2,
+      "unit": "krm",
+      "name": "svartpepparkorn"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "nötbuljongtärning"
+    },
+    {
+      "quantity": 30,
+      "unit": "g",
+      "name": "äppelcidervinäger"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "l",
+      "name": "vatten"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "äpple"
+    },
+    {
+      "quantity": 3,
+      "unit": "dl",
+      "name": "grädde"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "soja"
+    }
+  ],
+  "instruction": "Skär köttet i 2 cm stora bitar.\nSkala och skär löken i klyftor.\nStek löken i en stor gryta. \nStek samtidigt köttet i rostfri stålstekpanna.\nTillsätt katrinplommon, lagerblad, papparkorn, fond, vinäger och vatten.\nLåt koka up och sjud med lock ca 40 min, tills köttet är mört.\nKoka potatis.\nTillsätt äppelklyftor, grädde och soja, koka 5 min."
+}

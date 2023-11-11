@@ -1,0 +1,43 @@
+{
+  "id": "035bb2d3-a99f-4106-8cea-3f781768b316",
+  "name": "Thailändsk currykyckling",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 5,
+      "unit": "st",
+      "name": "kycklinglårfile"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "paprika"
+    },
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "kokosmjölk"
+    },
+    {
+      "quantity": 250,
+      "unit": "g",
+      "name": "champinjoner"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "currypasta"
+    },
+    {
+      "quantity": 2,
+      "unit": "port",
+      "name": "ris"
+    }
+  ],
+  "instruction": "Instruktion"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "8255a45c-42c9-498f-b935-556a339f6099",
+  "name": "Salsiccasås med pasta",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "pkt",
+      "name": "salsicca"
+    },
+    {
+      "quantity": 3,
+      "unit": "st",
+      "name": "tomat"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "spaghetti"
+    }
+  ],
+  "instruction": "Skiva korven i små bitar. Hacka lök och tomat. Stek allt och koka pasta."
+}

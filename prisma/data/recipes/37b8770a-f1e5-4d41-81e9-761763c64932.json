@@ -1,0 +1,63 @@
+{
+  "id": "37b8770a-f1e5-4d41-81e9-761763c64932",
+  "name": "Indisk currykyckling",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 3,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 1.5,
+      "unit": "tsk",
+      "name": "ingefära"
+    },
+    {
+      "quantity": 1.5,
+      "unit": "msk",
+      "name": "koriander"
+    },
+    {
+      "quantity": 2,
+      "unit": "tsk",
+      "name": "spiskummin"
+    },
+    {
+      "quantity": 1,
+      "unit": "krm",
+      "name": "kanel"
+    },
+    {
+      "quantity": 2,
+      "unit": "msk",
+      "name": "curry"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "dl",
+      "name": "sweet chilisås"
+    },
+    {
+      "quantity": 2.5,
+      "unit": "dl",
+      "name": "creme fraiche"
+    },
+    {
+      "quantity": 2,
+      "unit": "rec",
+      "name": "chapati"
+    },
+    {
+      "quantity": 4,
+      "unit": "st",
+      "name": "kycklinglårfile"
+    }
+  ],
+  "instruction": "Instruktion"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "5b2d0304-5553-4424-9ff5-618cde587056",
+  "name": "Stekt lax med mor annas sås",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "laxfile"
+    },
+    {
+      "quantity": 4,
+      "unit": "st",
+      "name": "potatis"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "citron"
+    },
+    {
+      "quantity": 1,
+      "unit": "rec",
+      "name": "Mor Annas sås"
+    }
+  ],
+  "instruction": "Instruktion"
+}

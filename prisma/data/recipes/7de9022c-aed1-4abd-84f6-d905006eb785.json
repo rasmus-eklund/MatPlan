@@ -1,0 +1,58 @@
+{
+  "id": "7de9022c-aed1-4abd-84f6-d905006eb785",
+  "name": "Kycklinggryta med curry",
+  "portions": 6,
+  "ingredients": [
+    {
+      "quantity": 700,
+      "unit": "g",
+      "name": "kycklingfile"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "paprika"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 3,
+      "unit": "msk",
+      "name": "curry"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "paprikapulver"
+    },
+    {
+      "quantity": 5,
+      "unit": "dl",
+      "name": "grädde"
+    },
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "creme fraiche"
+    },
+    {
+      "quantity": 2,
+      "unit": "msk",
+      "name": "apelsinjuice"
+    },
+    {
+      "quantity": 2,
+      "unit": "msk",
+      "name": "soja"
+    },
+    {
+      "quantity": 2,
+      "unit": "krm",
+      "name": "svartpeppar"
+    }
+  ],
+  "instruction": "1. Skär kycklingfiléerna i bitar.\n2. Skölj, kärna ur och skär paprikan i bitar.\n3. Skala och skär löken i klyftor.\n4. Bryn kycklingen i smör i en stor gryta.\n5. Tillsätt paprika, lök, curry och paprikapulver och låt fräsa cirka 3 minuter.\n6. Tillsätt vispgrädde, crème fraiche, apelsinjuice, soja och peppar. Låt bli varmt och se till att kycklingen är genomstekt. Servera!"
+}

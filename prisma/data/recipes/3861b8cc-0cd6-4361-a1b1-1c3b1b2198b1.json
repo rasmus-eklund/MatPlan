@@ -1,0 +1,53 @@
+{
+  "id": "3861b8cc-0cd6-4361-a1b1-1c3b1b2198b1",
+  "name": "Torsk med äggsås",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "frusen torsk"
+    },
+    {
+      "quantity": 4,
+      "unit": "st",
+      "name": "potatis"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "ägg"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "morot"
+    },
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "mjölk"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "smör"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "vetemjöl"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "fiskbuljongtärning"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "frusen persilja"
+    }
+  ],
+  "instruction": "instruktion\n"
+}

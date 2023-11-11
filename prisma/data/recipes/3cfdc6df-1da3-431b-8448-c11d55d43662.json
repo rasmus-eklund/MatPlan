@@ -1,0 +1,23 @@
+{
+  "id": "3cfdc6df-1da3-431b-8448-c11d55d43662",
+  "name": "Kopytka med champinjonsås och fläskkotletter",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "fläskkotlett"
+    },
+    {
+      "quantity": 2,
+      "unit": "rec",
+      "name": "kopytka"
+    },
+    {
+      "quantity": 2,
+      "unit": "rec",
+      "name": "champinjonsås"
+    }
+  ],
+  "instruction": "instruktion"
+}

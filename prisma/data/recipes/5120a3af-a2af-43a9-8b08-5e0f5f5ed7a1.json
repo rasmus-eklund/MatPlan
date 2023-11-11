@@ -1,0 +1,43 @@
+{
+  "id": "5120a3af-a2af-43a9-8b08-5e0f5f5ed7a1",
+  "name": "Flygande jakob",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "kycklingfile"
+    },
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "grädde"
+    },
+    {
+      "quantity": 140,
+      "unit": "g",
+      "name": "bacon"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "banan"
+    },
+    {
+      "quantity": 1,
+      "unit": "dl",
+      "name": "chilisås"
+    },
+    {
+      "quantity": 4,
+      "unit": "port",
+      "name": "ris"
+    },
+    {
+      "quantity": 1,
+      "unit": "dl",
+      "name": "jordnötter"
+    }
+  ],
+  "instruction": "Koka ris. Sätt på ugnen 200 grader. Stek kyckling och bacon.\nBlanda grädde och chilisås. Smaka av med salt och peppar.\nLägg kyckling och bacon i ugnsform. Häll på grädden och chilisåsen.\nSkiva banan och lägg uppepå. Baka i ugn ca 20 min.\nLägg på nötter efter 10 min i ungen."
+}

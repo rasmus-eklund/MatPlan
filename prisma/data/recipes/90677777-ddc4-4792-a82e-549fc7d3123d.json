@@ -1,0 +1,23 @@
+{
+  "id": "90677777-ddc4-4792-a82e-549fc7d3123d",
+  "name": "Pajdeg",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 125,
+      "unit": "g",
+      "name": "smör"
+    },
+    {
+      "quantity": 180,
+      "unit": "g",
+      "name": "mjöl"
+    },
+    {
+      "quantity": 1.5,
+      "unit": "msk",
+      "name": "vatten"
+    }
+  ],
+  "instruction": "Kör mjöl och smör i en matberedare med mixerfuntion.\nTillsätt vatten och forma till en deg. Låt vila i\nkylskåpet ca 30 min. Kavla ut och lägg i pajform.\nNagga med gaffel och förgrädda pajskalet i 200 grader\ni ca 10 min beroende på tjocklek."
+}

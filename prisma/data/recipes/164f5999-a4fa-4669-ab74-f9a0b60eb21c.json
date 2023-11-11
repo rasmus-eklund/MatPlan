@@ -1,0 +1,43 @@
+{
+  "id": "164f5999-a4fa-4669-ab74-f9a0b60eb21c",
+  "name": "Burritos",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "blandfärs"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "riven ost"
+    },
+    {
+      "quantity": 2,
+      "unit": "rec",
+      "name": "chapati"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "burritokrydda"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "tacosås"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "paprika"
+    }
+  ],
+  "instruction": "instruktion"
+}

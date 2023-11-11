@@ -1,0 +1,43 @@
+{
+  "id": "5809a45c-06cb-44ee-abde-511df17fa79a",
+  "name": "Varm smörgåstårta",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "pkt",
+      "name": "hönökaka"
+    },
+    {
+      "quantity": 140,
+      "unit": "g",
+      "name": "bacon"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "purjolök"
+    },
+    {
+      "quantity": 150,
+      "unit": "g",
+      "name": "champinjoner"
+    },
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "creme fraiche"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "tomat"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "riven ost"
+    }
+  ],
+  "instruction": "1. Ugnen på 200 grader.\n2. Hacka och stek bacon, purjolök och champinjoner. Blanda med creme fraiche. Salt och peppar.\n3. Lägg fyllningen på brödet och lägg skivad tomat överst med ost på.\n4. Baka 10 min."
+}

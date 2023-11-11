@@ -1,0 +1,38 @@
+{
+  "id": "aaa17c75-91a6-4906-bac8-f5c53eeda11d",
+  "name": "Chokladglass",
+  "portions": 6,
+  "ingredients": [
+    {
+      "quantity": 80,
+      "unit": "g",
+      "name": "socker"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "grädde"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "mjölk"
+    },
+    {
+      "quantity": 85,
+      "unit": "g",
+      "name": "äggula"
+    },
+    {
+      "quantity": 100,
+      "unit": "g",
+      "name": "mörk choklad"
+    },
+    {
+      "quantity": 3,
+      "unit": "g",
+      "name": "salt"
+    }
+  ],
+  "instruction": "Som med all glass, börja alltid med glassbasen. Förbered gärna glassbasen dagen innan så att den får gå ner i temperatur och smakerna utvecklas och förbättras om glassbasen får vila över natten. Dock så går det att göra glass av glassbasen redan samma dag, se bara till att kyla ner basen väl innan du kör den i glassmaskinen.\n1. Väg alla ingredienser och ha äggulorna i en separat bunke.\n2. Koka upp socker, grädde och mjölk.\n3. Häll över ca. hälften av vätskan över äggulorna och vispa väl.\n4. Häll tillbaka vätskan med äggulorna i kastrullen och tillsätt chokladen. Blanda väl och värm vätskan till 84 grader. Vispa hela tiden! \n5. Ta av kastrullen från plätten och tillsätt saltet. Låt svalna över natten i kylskåpet eller i vattenbad. Det är viktigt att glassbasen håller 4-8 grader innan du kör den i glassmaskinen.\n6. Kör glassen i glassmaskinen enligt instruktionerna till glassmaskinen."
+}

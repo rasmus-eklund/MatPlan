@@ -1,0 +1,53 @@
+{
+  "id": "a093efa8-5a59-4b06-9546-b4c7279a9abb",
+  "name": "Chili con carne",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "blandfärs"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "paprika"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "chili"
+    },
+    {
+      "quantity": 1,
+      "unit": "pkt",
+      "name": "tomatkross"
+    },
+    {
+      "quantity": 1,
+      "unit": "pkt",
+      "name": "baked beans"
+    },
+    {
+      "quantity": 2,
+      "unit": "msk",
+      "name": "tomatpure"
+    },
+    {
+      "quantity": 4,
+      "unit": "rec",
+      "name": "chapati"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "salt"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "tsk",
+      "name": "peppar"
+    }
+  ],
+  "instruction": "Instruktion"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "2c96ed95-70cb-4c5c-a8d3-892050024b08",
+  "name": "Köttbullar med gräddsås och potatis",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 4,
+      "unit": "rec",
+      "name": "gräddsås"
+    },
+    {
+      "quantity": 4,
+      "unit": "rec",
+      "name": "köttbullar"
+    },
+    {
+      "quantity": 8,
+      "unit": "st",
+      "name": "potatis"
+    }
+  ],
+  "instruction": "Gör köttbullar, koka potatis, gör gräddsås."
+}

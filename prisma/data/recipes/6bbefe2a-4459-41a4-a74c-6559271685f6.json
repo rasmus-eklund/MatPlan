@@ -1,0 +1,68 @@
+{
+  "id": "6bbefe2a-4459-41a4-a74c-6559271685f6",
+  "name": "Hamburgerbröd",
+  "portions": 1,
+  "ingredients": [
+    {
+      "quantity": 2.5,
+      "unit": "g",
+      "name": "mjöl"
+    },
+    {
+      "quantity": 3.375,
+      "unit": "g",
+      "name": "vatten"
+    },
+    {
+      "quantity": 7.5,
+      "unit": "g",
+      "name": "mjölk"
+    },
+    {
+      "quantity": 15,
+      "unit": "g",
+      "name": "mjölk"
+    },
+    {
+      "quantity": 3.375,
+      "unit": "g",
+      "name": "jäst"
+    },
+    {
+      "quantity": 40,
+      "unit": "g",
+      "name": "mjöl"
+    },
+    {
+      "quantity": 0.875,
+      "unit": "g",
+      "name": "salt"
+    },
+    {
+      "quantity": 4.375,
+      "unit": "g",
+      "name": "socker"
+    },
+    {
+      "quantity": 0.125,
+      "unit": "st",
+      "name": "ägg"
+    },
+    {
+      "quantity": 0.125,
+      "unit": "st",
+      "name": "äggula"
+    },
+    {
+      "quantity": 5.25,
+      "unit": "g",
+      "name": "smör"
+    },
+    {
+      "quantity": 0.1,
+      "unit": "st",
+      "name": "ägg"
+    }
+  ],
+  "instruction": "Ta fram smör.\nBlanda mjöl, vatten och mjölk. Gelatinisera i kastrull.\nLägg till mjölk och rör tills det blir svalt nog att lägga i jästen.\nBlanda de andra ingredienserna och häll i vätskan.\nKnåda och låt vila 10 min. Blanda i smör. Forma bollar och låt jäsa tills luftiga.\nPensla med ägg och mjölkblandning och ev sesamfrön.\nBaka i 190 grader ca 10 min"
+}

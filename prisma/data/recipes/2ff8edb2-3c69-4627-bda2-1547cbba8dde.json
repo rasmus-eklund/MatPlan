@@ -1,0 +1,43 @@
+{
+  "id": "2ff8edb2-3c69-4627-bda2-1547cbba8dde",
+  "name": "Pastagratäng med kyckling",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 3,
+      "unit": "st",
+      "name": "kycklingfiler"
+    },
+    {
+      "quantity": 250,
+      "unit": "g",
+      "name": "champinjoner"
+    },
+    {
+      "quantity": 1,
+      "unit": "dl",
+      "name": "sweet chilisås"
+    },
+    {
+      "quantity": 2.5,
+      "unit": "dl",
+      "name": "grädde"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "purjolök"
+    },
+    {
+      "quantity": 300,
+      "unit": "g",
+      "name": "makaroner"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "ost"
+    }
+  ],
+  "instruction": "Instruktion"
+}

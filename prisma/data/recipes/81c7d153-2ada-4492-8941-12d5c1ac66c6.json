@@ -1,0 +1,53 @@
+{
+  "id": "81c7d153-2ada-4492-8941-12d5c1ac66c6",
+  "name": "Tacogratäng",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "blandfärs"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "philadelphia"
+    },
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "creme fraiche"
+    },
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "tomatkross"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "paprika"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "purjolök"
+    },
+    {
+      "quantity": 1,
+      "unit": "rec",
+      "name": "tacokrydda"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "gratängost"
+    }
+  ],
+  "instruction": "Philadelfia ost och cremé fraiche i botten.\nstek färsen. salt och peppar och tacokrydda i färs.\nhäll färsen på kladdet. häll på tomatkross på kladd.\npå me paprika, lök och purjolök. sist ost.\n15 min i 200 grader. serveras med äckliga tacochips \neller för mig som inte gillar äckligt får franska.\n"
+}

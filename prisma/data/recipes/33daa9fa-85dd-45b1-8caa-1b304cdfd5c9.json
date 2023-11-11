@@ -1,0 +1,33 @@
+{
+  "id": "33daa9fa-85dd-45b1-8caa-1b304cdfd5c9",
+  "name": "Chapati",
+  "portions": 1,
+  "ingredients": [
+    {
+      "quantity": 90,
+      "unit": "g",
+      "name": "mjöl"
+    },
+    {
+      "quantity": 50,
+      "unit": "g",
+      "name": "vatten"
+    },
+    {
+      "quantity": 7.5,
+      "unit": "g",
+      "name": "olja"
+    },
+    {
+      "quantity": 2,
+      "unit": "g",
+      "name": "socker"
+    },
+    {
+      "quantity": 1.8,
+      "unit": "g",
+      "name": "salt"
+    }
+  ],
+  "instruction": "Blanda alla ingredienser med maskin.\nForma bollar och låt vila minst 20 min."
+}

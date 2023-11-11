@@ -1,0 +1,78 @@
+{
+  "id": "c2c9790c-615c-40ff-a303-73801967494a",
+  "name": "Krispig kajunkyckling",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 900,
+      "unit": "g",
+      "name": "sötpotatis"
+    },
+    {
+      "quantity": 4,
+      "unit": "msk",
+      "name": "smör"
+    },
+    {
+      "quantity": 4,
+      "unit": "msk",
+      "name": "mjölk"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "tsk",
+      "name": "salt"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lime"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "morot"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "bladpersilja"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "cajunkrydda"
+    },
+    {
+      "quantity": 75,
+      "unit": "g",
+      "name": "ströbröd"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "tsk",
+      "name": "salt"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "ägg"
+    },
+    {
+      "quantity": 600,
+      "unit": "g",
+      "name": "kycklingbröstfile"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "äpple"
+    },
+    {
+      "quantity": 300,
+      "unit": "g",
+      "name": "salladsmix"
+    }
+  ],
+  "instruction": "instruktion"
+}

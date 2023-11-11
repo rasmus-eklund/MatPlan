@@ -1,0 +1,58 @@
+{
+  "id": "758f3713-ee5d-401b-a8a9-835e23c12813",
+  "name": "Kålpudding",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "blandfärs"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "spetskål"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "dl",
+      "name": "ströbröd"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "ägg"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "dl",
+      "name": "mjölk"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "sirap"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "soja"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "mjöl"
+    },
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "grädde"
+    }
+  ],
+  "instruction": "instruktion"
+}

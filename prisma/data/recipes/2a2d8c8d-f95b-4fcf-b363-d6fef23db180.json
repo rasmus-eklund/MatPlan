@@ -1,0 +1,48 @@
+{
+  "id": "2a2d8c8d-f95b-4fcf-b363-d6fef23db180",
+  "name": "Bakad kyckling med tomater",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "kycklingklubba"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "tomat"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "rödlök"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "dl",
+      "name": "olja"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "dl",
+      "name": "balsamvinäger"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "salt"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "tsk",
+      "name": "peppar"
+    },
+    {
+      "quantity": 4,
+      "unit": "st",
+      "name": "potatis"
+    }
+  ],
+  "instruction": "Klyfta potatis och lök. Skiva tomat i tjocka skivor.\nOlja in, salta och peppra. Lägg i botten av en ugnsform. Olja in, salta och peppra kycklingklubba. Lägg på galler över potatisen. Baka i varmluft 220 g i ca 30 min. Häll i balsamvinäger. Baka ca 10 min till.\n"
+}

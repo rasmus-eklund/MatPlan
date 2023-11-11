@@ -1,0 +1,33 @@
+{
+  "id": "1fe7a7af-106f-48be-ae58-937769bb8e75",
+  "name": "Bacon och spaghetti",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 280,
+      "unit": "g",
+      "name": "bacon"
+    },
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "plommontomater"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "spaghetti"
+    },
+    {
+      "quantity": 100,
+      "unit": "g",
+      "name": "gratängost"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "oregano"
+    }
+  ],
+  "instruction": "Sätt ugnen på 200 grader. Skölj tomater. Lägg bacon i en ugnssäker form. Baka tills klar. Koka spaghetti och riv ost. Lägg spaghetti, ost och tomater på baconen. Krydda med salt, peppar och origano. Baka tills osten och tomaterna fått lite färg."
+}

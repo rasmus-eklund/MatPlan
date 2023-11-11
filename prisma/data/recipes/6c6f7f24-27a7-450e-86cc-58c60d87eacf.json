@@ -1,0 +1,28 @@
+{
+  "id": "6c6f7f24-27a7-450e-86cc-58c60d87eacf",
+  "name": "Köttbullar",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "fläskfärs"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "köttbuljongtärning"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "tsk",
+      "name": "peppar"
+    }
+  ],
+  "instruction": "Finhacka löken och blanda med fläskfärsen.\nLös buljongtärningen i lite vatten och blanda i färsen.\nBlanda i peppar."
+}

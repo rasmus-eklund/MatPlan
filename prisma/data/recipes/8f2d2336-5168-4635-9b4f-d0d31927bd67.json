@@ -1,0 +1,28 @@
+{
+  "id": "8f2d2336-5168-4635-9b4f-d0d31927bd67",
+  "name": "Äppel och curry aioli",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 4,
+      "unit": "msk",
+      "name": "majonnäs"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "äpple"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "curry"
+    }
+  ],
+  "instruction": "Instruktion"
+}

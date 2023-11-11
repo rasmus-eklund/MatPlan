@@ -1,0 +1,33 @@
+{
+  "id": "cfffbf8d-b227-4ef6-937a-d40db313d5fb",
+  "name": "Pyzy",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 1.5,
+      "unit": "kg",
+      "name": "potatis"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 600,
+      "unit": "g",
+      "name": "potatismjöl"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "ägg"
+    },
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "fläskfärs"
+    }
+  ],
+  "instruction": "instruktion"
+}

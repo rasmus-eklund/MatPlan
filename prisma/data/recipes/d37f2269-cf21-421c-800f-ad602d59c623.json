@@ -1,0 +1,38 @@
+{
+  "id": "d37f2269-cf21-421c-800f-ad602d59c623",
+  "name": "Knyten",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 4,
+      "unit": "st",
+      "name": "potatis"
+    },
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "falukorv"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "grön ärtor"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "purjolök"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "morot"
+    },
+    {
+      "quantity": 2,
+      "unit": "msk",
+      "name": "senap"
+    }
+  ],
+  "instruction": "Instruktion"
+}

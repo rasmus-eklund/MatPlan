@@ -1,0 +1,38 @@
+{
+  "id": "72940d3d-989e-49d0-917b-0ac7c4053491",
+  "name": "Gurksallad",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "gurka"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "dl",
+      "name": "gräddfil"
+    },
+    {
+      "quantity": 0.25,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 1,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "krm",
+      "name": "salt"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "krm",
+      "name": "peppar"
+    }
+  ],
+  "instruction": "Skiva gurkan. Blanda alla ingredienser."
+}

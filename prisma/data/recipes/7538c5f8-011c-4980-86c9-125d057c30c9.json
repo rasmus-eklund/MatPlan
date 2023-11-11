@@ -1,0 +1,38 @@
+{
+  "id": "7538c5f8-011c-4980-86c9-125d057c30c9",
+  "name": "Pizzadeg",
+  "portions": 1,
+  "ingredients": [
+    {
+      "quantity": 150,
+      "unit": "g",
+      "name": "mjöl"
+    },
+    {
+      "quantity": 105,
+      "unit": "g",
+      "name": "vatten"
+    },
+    {
+      "quantity": 7.5,
+      "unit": "g",
+      "name": "olja"
+    },
+    {
+      "quantity": 5,
+      "unit": "g",
+      "name": "socker"
+    },
+    {
+      "quantity": 4.5,
+      "unit": "g",
+      "name": "salt"
+    },
+    {
+      "quantity": 1,
+      "unit": "g",
+      "name": "jäst"
+    }
+  ],
+  "instruction": "Blanda alla ingredienser. Forma bollar och jäs i kylskåp."
+}

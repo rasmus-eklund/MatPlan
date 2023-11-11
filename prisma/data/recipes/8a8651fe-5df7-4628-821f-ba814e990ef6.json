@@ -1,0 +1,53 @@
+{
+  "id": "8a8651fe-5df7-4628-821f-ba814e990ef6",
+  "name": "Grillspett med fläskkare",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 4,
+      "unit": "st",
+      "name": "fläskkare"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 250,
+      "unit": "g",
+      "name": "champinjoner"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "paprika"
+    },
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "potatissallad"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "soja"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "srirachasås"
+    },
+    {
+      "quantity": 2,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "honung"
+    }
+  ],
+  "instruction": "Instruktion"
+}

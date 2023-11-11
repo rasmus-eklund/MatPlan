@@ -1,0 +1,43 @@
+{
+  "id": "3cfa48f2-0459-4b5b-ac6b-8fbbf25f9ceb",
+  "name": "Tacokrydda",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 2,
+      "unit": "msk",
+      "name": "paprikapulver"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "lökpulver"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "vitlökspulver"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "spiskummin"
+    },
+    {
+      "quantity": 1,
+      "unit": "krm",
+      "name": "cayennepeppar"
+    },
+    {
+      "quantity": 1,
+      "unit": "krm",
+      "name": "chilipulver"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "oregano"
+    }
+  ],
+  "instruction": "Blanda allt. Lagom till 500g köttfärs."
+}

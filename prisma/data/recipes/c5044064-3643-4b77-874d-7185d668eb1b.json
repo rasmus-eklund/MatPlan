@@ -1,0 +1,43 @@
+{
+  "id": "c5044064-3643-4b77-874d-7185d668eb1b",
+  "name": "Gräddsås",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 50,
+      "unit": "g",
+      "name": "smör"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "vetemjöl"
+    },
+    {
+      "quantity": 3,
+      "unit": "dl",
+      "name": "grädde"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "köttbuljongtärning"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "soja"
+    },
+    {
+      "quantity": 2,
+      "unit": "tsk",
+      "name": "worcestershiresås"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "örtkrydda"
+    }
+  ],
+  "instruction": "Smält smör i en kastrull och fortsätt fräsa under ständig omrörning tills det är gyllenbrunt och doftar nötigt.\nVispa ner mjöl och lite av grädden till en tjock stuvning. Tillsätt resterande grädde, lite i taget, under vispning. Tillsätt örtkryddor (och ev steksky).\nLåt sjuda på låg värme minst 10 min men gärna längre. Rör då och då. Tillsätt smulad buljongtärning, soja, och worcestersås. Låt koka ytterligare 5 min. Smaka av med salt och peppar.\n"
+}

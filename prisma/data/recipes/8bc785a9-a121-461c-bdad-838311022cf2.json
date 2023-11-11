@@ -1,0 +1,28 @@
+{
+  "id": "8bc785a9-a121-461c-bdad-838311022cf2",
+  "name": "Kopytka",
+  "portions": 1,
+  "ingredients": [
+    {
+      "quantity": 182,
+      "unit": "g",
+      "name": "potatis"
+    },
+    {
+      "quantity": 50,
+      "unit": "g",
+      "name": "mjöl"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "ägg"
+    },
+    {
+      "quantity": 0.25,
+      "unit": "krm",
+      "name": "salt"
+    }
+  ],
+  "instruction": "Instruktion"
+}

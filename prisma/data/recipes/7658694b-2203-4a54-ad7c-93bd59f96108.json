@@ -1,0 +1,28 @@
+{
+  "id": "7658694b-2203-4a54-ad7c-93bd59f96108",
+  "name": "Isterband",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "isterband"
+    },
+    {
+      "quantity": 4,
+      "unit": "st",
+      "name": "potatis"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "dill"
+    },
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "grädde"
+    }
+  ],
+  "instruction": "Instruktion"
+}

@@ -1,0 +1,63 @@
+{
+  "id": "fda7085d-3315-4727-b1bf-30dca6a38d0a",
+  "name": "Köttfärspaj",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 4,
+      "unit": "rec",
+      "name": "Pajdeg"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "champinjoner"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "paprika"
+    },
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "blandfärs"
+    },
+    {
+      "quantity": 2,
+      "unit": "tsk",
+      "name": "tomatpure"
+    },
+    {
+      "quantity": 2,
+      "unit": "msk",
+      "name": "vetemjöl"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "salt"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "timjan"
+    },
+    {
+      "quantity": 2.5,
+      "unit": "dl",
+      "name": "vatten"
+    },
+    {
+      "quantity": 100,
+      "unit": "g",
+      "name": "riven ost"
+    }
+  ],
+  "instruction": "Skala och hacka lök, skiva champinjonerna och skär paprikan i små bitar. Stek lök, champinjoner och paprika tills vätskan kokat bort och allt är genomstekt. Lägg åt sidan. Stek köttfärsen och tillsätt salt. Tillsätt vetemjöl, rör sedan runt så att köttfärsen suger upp mjölet. Tillsätt tomatpuré och timjan. Häll på vattnet. Rör om och låt koka upp, sänk värmen och koka på svag värme ca 5 minuter. Rör ihop med löken, svampen och paprikan. Smaka av och tillsätt ev. mer salt. Häll röran i pajskalet, strö över riven ost. Grädda i 200°C i mitten av ugnen i ca 30 minuter."
+}

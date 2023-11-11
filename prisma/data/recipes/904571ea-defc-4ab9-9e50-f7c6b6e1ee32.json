@@ -1,0 +1,73 @@
+{
+  "id": "904571ea-defc-4ab9-9e50-f7c6b6e1ee32",
+  "name": "Asiatisk kyckling med vitlöksris och jordnötter",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 150,
+      "unit": "g",
+      "name": "basmatiris"
+    },
+    {
+      "quantity": 300,
+      "unit": "g",
+      "name": "vatten"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "ingefära"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lime"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "chili"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "salladslök"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "morot"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "zucchini"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "honung"
+    },
+    {
+      "quantity": 2,
+      "unit": "tsk",
+      "name": "sojasås"
+    },
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "kycklinglårfile"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "jordnötter"
+    }
+  ],
+  "instruction": "1. Koka vitlöksris:\nFräs hackad vitlök i smör och olja. Tillsätt ris och vatten.\n2. Hacka grönsaker:\nRiv limezest och dela lime i klyftor. Skiva chili och salladslök. Stava morot. Skär zucchini i tunna halvmånar.\n3. Blanda marinad:\nBlanda ingefära, chili, honunug, sojasås, limezest, limejuice och olivolja.\n4. Stek kyckling med hälften av salladslöken. Flytta sedan till en skål.\n5. Fräs grönsaker:\nStek morot och zucchini tills mjuka. Tillsätt skålen och marinaden.\n6. Servera med salladslök och jordnötter."
+}

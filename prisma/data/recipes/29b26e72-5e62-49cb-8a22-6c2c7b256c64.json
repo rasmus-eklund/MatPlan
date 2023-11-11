@@ -1,0 +1,58 @@
+{
+  "id": "29b26e72-5e62-49cb-8a22-6c2c7b256c64",
+  "name": "Fläskytterfile i gräddsås",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 800,
+      "unit": "g",
+      "name": "potatis"
+    },
+    {
+      "quantity": 600,
+      "unit": "g",
+      "name": "fläskytterfile"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "vitlöksflörter"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "basilika"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "äpple"
+    },
+    {
+      "quantity": 100,
+      "unit": "g",
+      "name": "salladsmix"
+    },
+    {
+      "quantity": 2,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "grädde"
+    },
+    {
+      "quantity": 40,
+      "unit": "g",
+      "name": "valnötter"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "kycklingbuljongtärning"
+    }
+  ],
+  "instruction": "instruktion"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "57ab3e2b-20f1-4e35-ab0a-74340c9b0dd1",
+  "name": "Test1",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "rec",
+      "name": "test2"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "ananas"
+    }
+  ],
+  "instruction": "Testa så alla kopplade recept läggs till."
+}

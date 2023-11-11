@@ -1,0 +1,93 @@
+{
+  "id": "a469df10-7ebb-4b55-9e9a-70165d4609e2",
+  "name": "Halloumi hot potgryta",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "rapsolja"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "morot"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "palsternacka"
+    },
+    {
+      "quantity": 1.5,
+      "unit": "dl",
+      "name": "röda linser"
+    },
+    {
+      "quantity": 1.5,
+      "unit": "dl",
+      "name": "gröna linser"
+    },
+    {
+      "quantity": 150,
+      "unit": "g",
+      "name": "sötpotatis"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "röd currypasta"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "buljongtärning"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "salt"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "tsk",
+      "name": "färsk ingefära"
+    },
+    {
+      "quantity": 1,
+      "unit": "krm",
+      "name": "chiliflakes"
+    },
+    {
+      "quantity": 1,
+      "unit": "krm",
+      "name": "spiskummin"
+    },
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "kokosmjölk"
+    },
+    {
+      "quantity": 150,
+      "unit": "g",
+      "name": "broccoli"
+    },
+    {
+      "quantity": 100,
+      "unit": "g",
+      "name": "halloumiost"
+    }
+  ],
+  "instruction": "1. Häll i oljan i en gryta och tillsätt lök, morot, palsternacka och vitlök. Tillsätt 1,5 dl vatten. Låt koka i 10 minuter.\n2. Mixa grovt med stavmixer. Lägg i röda och gröna linser samt sötpotatis.\n3. Tillsätt buljong, röd currypasta, ingefära samt alla kryddor. Häll på kokosmjölk och låt koka ihop till en gryta.\n4. Red av grytan för önskad konsistens. Smaka eventuellt av grytan med mer kryddor efter önskad smak.\n5. Toppa med tärnad halloumi och hackad mynta. Servera grytan med kokt basmatiris och kokt broccoli."
+}

@@ -1,0 +1,33 @@
+{
+  "id": "52d49241-e5a5-409f-9a3c-5cc69e41d79c",
+  "name": "Champinjonsås",
+  "portions": 1,
+  "ingredients": [
+    {
+      "quantity": 125,
+      "unit": "g",
+      "name": "champinjoner"
+    },
+    {
+      "quantity": 1,
+      "unit": "dl",
+      "name": "grädde"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 0.25,
+      "unit": "msk",
+      "name": "mjöl"
+    },
+    {
+      "quantity": 0.25,
+      "unit": "msk",
+      "name": "smör"
+    }
+  ],
+  "instruction": "Instruktion"
+}

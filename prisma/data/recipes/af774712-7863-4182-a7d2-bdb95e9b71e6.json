@@ -1,0 +1,43 @@
+{
+  "id": "af774712-7863-4182-a7d2-bdb95e9b71e6",
+  "name": "Hamburgare",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "nötfärs"
+    },
+    {
+      "quantity": 4,
+      "unit": "rec",
+      "name": "hamburgerbröd"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "tomat"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "inlagda jalapenos"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "ketchup"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "bbq sås"
+    }
+  ],
+  "instruction": "Instruktion"
+}

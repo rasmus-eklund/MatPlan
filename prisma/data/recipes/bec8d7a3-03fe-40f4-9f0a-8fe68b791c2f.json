@@ -1,0 +1,33 @@
+{
+  "id": "bec8d7a3-03fe-40f4-9f0a-8fe68b791c2f",
+  "name": "Hirssoppa",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 250,
+      "unit": "g",
+      "name": "potatis"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "morot"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "kycklinglårfile"
+    },
+    {
+      "quantity": 50,
+      "unit": "g",
+      "name": "hirs"
+    }
+  ],
+  "instruction": "Instruktion"
+}

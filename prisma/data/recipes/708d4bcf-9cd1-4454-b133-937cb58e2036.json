@@ -1,0 +1,48 @@
+{
+  "id": "708d4bcf-9cd1-4454-b133-937cb58e2036",
+  "name": "Mormors kyckling",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "kycklingfile"
+    },
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "creme fraiche"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "honung"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "soja"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "kycklingbuljong"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "citron"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "persilja"
+    },
+    {
+      "quantity": 2,
+      "unit": "port",
+      "name": "ris"
+    }
+  ],
+  "instruction": "instruktion"
+}

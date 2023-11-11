@@ -1,0 +1,13 @@
+{
+  "id": "4bbd1749-4ca0-460a-9909-da1a8165655e",
+  "name": "Test3",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "citron"
+    }
+  ],
+  "instruction": "instruktion"
+}

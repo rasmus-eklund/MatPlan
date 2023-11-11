@@ -1,0 +1,38 @@
+{
+  "id": "6cebb887-7642-4957-800e-54c6fc1d3451",
+  "name": "Raggmunk med fläsk",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 120,
+      "unit": "g",
+      "name": "vetemjöl"
+    },
+    {
+      "quantity": 4,
+      "unit": "dl",
+      "name": "mjölk"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "ägg"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "tsk",
+      "name": "salt"
+    },
+    {
+      "quantity": 900,
+      "unit": "g",
+      "name": "potatis"
+    },
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "rimmat bogfläsk"
+    }
+  ],
+  "instruction": "Blanda mjölk, mjöl, ägg och salt.\nSkala och riv potatis. Krama ur vätskan och blanda ned i smeten.\nStek raggmunk och fläsk."
+}

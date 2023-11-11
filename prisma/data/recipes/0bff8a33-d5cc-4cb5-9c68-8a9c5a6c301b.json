@@ -1,0 +1,43 @@
+{
+  "id": "0bff8a33-d5cc-4cb5-9c68-8a9c5a6c301b",
+  "name": "Torskgratäng med champinjonstuvning",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "torskfile"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "ost"
+    },
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "grädde"
+    },
+    {
+      "quantity": 250,
+      "unit": "g",
+      "name": "champinjoner"
+    },
+    {
+      "quantity": 4,
+      "unit": "st",
+      "name": "potatis"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "tomat"
+    }
+  ],
+  "instruction": "Instruktion"
+}

@@ -1,0 +1,53 @@
+{
+  "id": "b0a8f38d-392b-446b-b9da-d912a6e356bf",
+  "name": "Citronstekt lax med sesamrostad potatis",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "potatis"
+    },
+    {
+      "quantity": 10,
+      "unit": "g",
+      "name": "sesamfrön"
+    },
+    {
+      "quantity": 1,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "dill"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "citron"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "dl",
+      "name": "vatten"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "st",
+      "name": "grönsaksbuljongtärning"
+    },
+    {
+      "quantity": 250,
+      "unit": "g",
+      "name": "broccoli"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "frusen laxfile"
+    }
+  ],
+  "instruction": "Instruktion"
+}

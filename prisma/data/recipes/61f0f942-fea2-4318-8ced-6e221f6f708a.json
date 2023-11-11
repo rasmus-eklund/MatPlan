@@ -1,0 +1,48 @@
+{
+  "id": "61f0f942-fea2-4318-8ced-6e221f6f708a",
+  "name": "Spaghetti med köttfärsås",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "blandfärs"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "morot"
+    },
+    {
+      "quantity": 2,
+      "unit": "pkt",
+      "name": "tomatkross"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "inlagd jalapeno"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "oregano"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "tomatpure"
+    },
+    {
+      "quantity": 400,
+      "unit": "g",
+      "name": "spaghetti"
+    }
+  ],
+  "instruction": "Instruktion"
+}

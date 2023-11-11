@@ -1,0 +1,33 @@
+{
+  "id": "47c55729-5744-4593-bc0e-ae40344b5709",
+  "name": "Kycklingpytt med vitlökssås",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 4,
+      "unit": "st",
+      "name": "potatis"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "kycklingbröstfile"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "morot"
+    },
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 2,
+      "unit": "rec",
+      "name": "vitlökssås"
+    }
+  ],
+  "instruction": "Sätt ugnen på 220 grader. Förbered grönsaker och stoppa i ugnen.\nGör sås och stek kyckling."
+}

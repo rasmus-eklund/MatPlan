@@ -1,0 +1,73 @@
+{
+  "id": "8a847d3c-1ef2-441a-9dd7-55556f0c3589",
+  "name": "Lasagne",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 2,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 2,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "blandfärs"
+    },
+    {
+      "quantity": 4,
+      "unit": "msk",
+      "name": "tomatpure"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "timjan"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "rosmarin"
+    },
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "tomatkross"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "köttbuljong"
+    },
+    {
+      "quantity": 9,
+      "unit": "st",
+      "name": "lasagneplattor"
+    },
+    {
+      "quantity": 6,
+      "unit": "msk",
+      "name": "smör"
+    },
+    {
+      "quantity": 43,
+      "unit": "g",
+      "name": "vetemjöl"
+    },
+    {
+      "quantity": 0.8,
+      "unit": "l",
+      "name": "mjölk"
+    },
+    {
+      "quantity": 200,
+      "unit": "g",
+      "name": "riven ost"
+    }
+  ],
+  "instruction": "Sätt ugnen på 175 grader.\nSkala och hacka lök och vitlök. Fräs färs, lök och vitlök i oljan i en stekpanna. Tillsätt tomatpuré som får fräsa med i färsen. Krydda med timjan och rosmarin. Tillsätt krossade tomater och buljongtärning låt det koka ca 10 minuter. Smaka av med salt och peppar.\nSås: Smält smör och rör ner mjölet. Späd med mjölken under vispning. Låt såsen koka ca 5 minuter. Smaka av med salt och peppar.\nVarva sås, lasagneplattor och köttfärssåsen i en ugnssäker form. Avsluta med sås och ost.\nSätt in lasagnen mitt i ugnen ca 40 minuter."
+}

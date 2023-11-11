@@ -1,0 +1,53 @@
+{
+  "id": "8b31dba7-c041-48c2-8a99-47b77898482f",
+  "name": "Ärtsoppa",
+  "portions": 4,
+  "ingredients": [
+    {
+      "quantity": 500,
+      "unit": "g",
+      "name": "gula ärter"
+    },
+    {
+      "quantity": 1.5,
+      "unit": "l",
+      "name": "vatten"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lök"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "morot"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "torkad mejram"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "torkad timjan"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "lagerblad"
+    },
+    {
+      "quantity": 3,
+      "unit": "st",
+      "name": "kryddpeppar"
+    },
+    {
+      "quantity": 250,
+      "unit": "g",
+      "name": "rimmat sidfläsk"
+    }
+  ],
+  "instruction": "1. Lägg ärtorna i blöt över natten övertäckta i en stor kastrull eller skål.\n2. Häll av och lägg i en stor kastrull, tillsätt vatten och börja koka.\n3. Skiva eller hacka lök och tillsätt den. Skala och tärna morot och tillsätt.\n4. Lägg i fläsk, lagerblad och kryddpeppar.\n5. Koka ärtsoppan under lock i 1,5 timmar på medelvärme - rör om då och då. När soppan kokat så mosa till ärtorna med en potatisstöt eller slev och smaka på ärtorna så att de är mjuka och som du vill ha dem. Tjocknar soppan inte så koka på låg värme med lock - upp till 3,5 timmar funkar - låt den stå och puttra bara. Rör då och då. Blir ärtsoppan för tjock tillsätter du lite mer vatten.\n6. Ta upp fläsk och skär i kuber och lägg tillbaks.\n7. Smaka av och koka upp ärtsoppan med kryddor som timjan, vitpeppar, mejram och salt. Köttbuljong eller grönsaksbuljong kan man också smaksätta med - dock sparsamt.\n8. Servera ärtsoppan med senap. Grovkornig söt senap tycker jag är godast."
+}

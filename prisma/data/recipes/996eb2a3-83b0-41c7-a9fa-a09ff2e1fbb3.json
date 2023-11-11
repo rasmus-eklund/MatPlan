@@ -1,0 +1,53 @@
+{
+  "id": "996eb2a3-83b0-41c7-a9fa-a09ff2e1fbb3",
+  "name": "Mammans salladslunch",
+  "portions": 3,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "paprika"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "rödlök"
+    },
+    {
+      "quantity": 1,
+      "unit": "pkt",
+      "name": "bönmix"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "citron"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "kycklingbröstfile"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "olja"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "pumpafrön"
+    },
+    {
+      "quantity": 1,
+      "unit": "tsk",
+      "name": "solrosfrön"
+    },
+    {
+      "quantity": 1,
+      "unit": "st",
+      "name": "tomat"
+    }
+  ],
+  "instruction": "Instruktion"
+}

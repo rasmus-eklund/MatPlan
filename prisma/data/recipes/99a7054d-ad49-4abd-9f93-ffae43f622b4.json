@@ -1,0 +1,28 @@
+{
+  "id": "99a7054d-ad49-4abd-9f93-ffae43f622b4",
+  "name": "Vitlökssås",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 2,
+      "unit": "dl",
+      "name": "creme fraiche"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "dl",
+      "name": "majonnäs"
+    },
+    {
+      "quantity": 2,
+      "unit": "klyfta",
+      "name": "vitlök"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "honung"
+    }
+  ],
+  "instruction": "1. Hacka vitlöksklyftorna och blanda ihop alla ingredienser.\n2. Salta och peppra efter behag.\n3. Såsen blir godare av att stå och dra sig en stund i kylen innan servering."
+}

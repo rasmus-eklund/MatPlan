@@ -1,0 +1,33 @@
+{
+  "id": "f1d03a5e-90e6-493e-a59d-3ddfd87c3426",
+  "name": "Potatissallad",
+  "portions": 2,
+  "ingredients": [
+    {
+      "quantity": 1,
+      "unit": "dl",
+      "name": "yoghurt"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "majonnäs"
+    },
+    {
+      "quantity": 4,
+      "unit": "st",
+      "name": "potatis"
+    },
+    {
+      "quantity": 1,
+      "unit": "msk",
+      "name": "dill"
+    },
+    {
+      "quantity": 1,
+      "unit": "klyfta",
+      "name": "vitlök"
+    }
+  ],
+  "instruction": "Instruktion"
+}
